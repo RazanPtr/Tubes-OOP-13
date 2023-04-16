@@ -3,12 +3,16 @@ public class Furniture extends Object implements PurchasableObject{
     private int length;
     private int width;
     private int price;
+    private int x;
+    private int y;
 
-    public Furniture(String nama, int length, int width, int price){
+    public Furniture(String nama, int length, int width, int price, int x, int y){
         this.nama = nama;
         this.length = length;
         this.width = width;
         this.price = price;
+        this.x = x;
+        this.y = y;
     }
 
     public String getNama(){
