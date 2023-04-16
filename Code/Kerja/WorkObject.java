@@ -1,11 +1,9 @@
 import java.util.Random;
 
 public class WorkObject {
-    private String name;
     private Job job;
 
-    public WorkObject(String name) {
-        this.name = name;
+    public WorkObject() {
         this.job = getRandomJob();
     }
 
@@ -21,10 +19,6 @@ public class WorkObject {
         Random rand = new Random();
         int index = rand.nextInt(jobs.length);
         return jobs[index];
-    }
-
-    public String getName() {
-        return name;
     }
 
     public Job getJob() {
