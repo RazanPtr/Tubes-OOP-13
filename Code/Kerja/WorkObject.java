@@ -9,11 +9,11 @@ public class WorkObject {
 
     private Job getRandomJob() {
         Job[] jobs = {
-            new Job("Programmer", 50),
-            new Job("Teacher", 30),
-            new Job("Doctor", 100),
-            new Job("Chef", 25),
-            new Job("Artist", 40)
+            new Job("Badut Sulap", 15),
+            new Job("Koki", 30),
+            new Job("Polisi", 100),
+            new Job("Programmer", 40),
+            new Job("Dokter", 45)
         };
 
         Random rand = new Random();
