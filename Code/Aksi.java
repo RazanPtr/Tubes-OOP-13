@@ -1,26 +1,41 @@
-public abstract class Aksi {
-    private String nama;
-    private Sim playedSim;
-    private int durasi;
+public interface Aksi {
+    public void kerja(int durasi);
 
-    public Aksi(String namaAksi, Sim playedSim, int durasi){
-        this.nama = namaAksi;
-        this.playedSim = playedSim;
-        this.durasi = durasi;
-        playedSim.setStatus(namaAksi);
-    }
-
-    public Sim getSim(){
-        return playedSim;
-    }
+    public void olahraga(int durasi);
     
-    public String getNamaAksi(){
-        return nama;
-    }
+    public void tidur(int durasi);
 
-    public int getDurasi(){
-        return durasi;
-    }
+    public void makan(int durasi);
 
-    public abstract void efek();
+    public void memasak(int durasi);
+
+    public void berkunjung(int durasi);
+
+    public void buangAir(int durasi);
+
+    public void upgradeRumah(Lokasi lokSimRuang, int durasi);
+
+    public void beliBarang(int durasi);
+
+    public void pindahRuangan();
+
+    public void karaoke(int durasi);
+
+    public void melukis(int durasi);
+
+    public void simpanBarang();
+
+    public void pindahBarang();
+
+    public void sholat(int durasi);
+
+    public void mandi(int durasi);
+
+    public void nontonNetflix(int durasi);
+
+    public void lihatInventory();
+    
+    public void pasangBarang();
+
+    public void lihatWaktu();
 }
