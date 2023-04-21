@@ -1,24 +1,24 @@
 public class Sim implements Aksi{
     private String namaLengkap;
-    //private Pekerjaan pekerjaan;
+    private WorkObject pekerjaan;
     private int uang;
     //private Inventory inventory;
     private String status;
-    //private Rumah rumah;
+    private Rumah rumah;
     private Lokasi lokSimRumah;
     private Lokasi lokSimRuang;
     Kesejahteraan kesejahteraan;
 
     public Sim(String name, int x, int y){
         this.namaLengkap = name;
-        //pekerjaan = new Pekerjaan();
+        pekerjaan = new WorkObject();
         uang = 100;
         //inventory = new Inventory();
         kesejahteraan = new Kesejahteraan();
         status = null;
-        //rumah = new Rumah();
+        rumah = new Rumah(x, y);
         //buat ruangan kamar barunya di Rumah.java ??
-        lokSimRuang = new Lokasi(1,1); // ini awalnya pasti di kamar,, tp lokasinya (1,1) kah
+        lokSimRuang = new Lokasi(0,0); // ini awalnya pasti di kamar,, tp lokasinya (0,0) kah
         lokSimRumah = new Lokasi(x, y); //ini lokasi awal rumahnya input dari pengguna kan?!
     }
 
@@ -50,14 +50,26 @@ public class Sim implements Aksi{
         this.status = status;
     }
 
-    // public Pekerjaan getPekerjaan(){
-    //     return pekerjaan;
-    // }
+    public WorkObject getPekerjaan(){
+         return pekerjaan;
+    }
 
-    // public void setPekerjaan(Pekerjaan p){
-    //     this.pekerjaan = p;
-    // }
+    public void setPekerjaan(WorkObject p){
+        this.pekerjaan = p;
+    }
 
+    public Lokasi getLokSimRumah(){
+        return lokSimRumah;
+    }
+
+    public Lokasi getLokRuang(){
+        return lokSimRuang;
+    }
+    
+    public Rumah getRumah(){
+        return rumah;
+    }
+    
     public void kerja(int durasi){
     //implementasi kerja
     }
@@ -147,6 +159,7 @@ public class Sim implements Aksi{
         private int kekenyangan;
         private int kesehatan;
         private boolean isMati;
+        private String statusMati;
 
         public Kesejahteraan() {
             mood = 80;
@@ -168,18 +181,44 @@ public class Sim implements Aksi{
 
         public void updateKesehatan(int kesehatan){
             this.kesehatan += kesehatan;
+            if(this.kesehatan > 100){
+                this.kesehatan = 100;
+            }  else if(this.mood <= 0){
+                isMati = true;
+                statusMati = "Sim mati karena sakit :<";
+            }
         }
 
         public void updateKekenyangan(int kekenyangan){
             this.kekenyangan += kekenyangan;
+            if(this.kekenyangan > 100){
+                this.kekenyangan = 100;
+            }  else if(this.mood <= 0){
+                isMati = true;
+                statusMati = "Sim mati karena kelaparan :<";
+            }
         }
 
         public void updateMood(int mood){
             this.mood += mood;
+            if(this.mood > 100){
+                this.mood = 100;
+            } else if(this.mood <= 0){
+                isMati = true;
+                statusMati = "Sim mati karena mengalami depresi :<";
+            }
         }
 
         public boolean getIsMati(){
             return isMati;
+        }
+
+        public String getStatusMati(){
+            return statusMati;
+        }
+
+        public void setStatusMati(String s){
+            this.statusMati = s;
         }
 
         public void displayKesejahteraan(){
