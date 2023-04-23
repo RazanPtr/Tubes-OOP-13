@@ -7,13 +7,13 @@ public class Furniture extends Object implements PurchasableObject{
     private int y;
 
     public Furniture(String nama, int length, int width, int price, int x, int y){
-        this.nama = nama;
+        this.nama = nama; //ini namanya disuper gasi
         this.length = length;
         this.width = width;
         this.price = price;
         this.x = x;
         this.y = y;
-    }
+    } 
 
     public String getNama(){
         return nama;
