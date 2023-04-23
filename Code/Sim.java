@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Sim implements Aksi{
     private String namaLengkap;
     private WorkObject pekerjaan;
@@ -71,7 +73,9 @@ public class Sim implements Aksi{
     }
     
     public void kerja(int durasi){
-    //implementasi kerja
+        this.setStatus("kerja");
+        kesejahteraan.updateKekenyangan((-10)*(durasi/30));
+        kesejahteraan.updateMood((-10)*(durasi/30));
     }
 
     public void olahraga(int durasi){
@@ -106,8 +110,16 @@ public class Sim implements Aksi{
     //implementasi upgradeRumah
     }
 
-    public void beliBarang(int durasi){
-    //implementasi beliBarang
+    public void beliBarang(){
+        Random rand = new Random();
+        int waktuPengiriman = rand.nextInt(1.5) * 30;
+        System.out.println("Barang akan tiba dalam " + waktuPengiriman + " detik.");
+        try {
+            Thread.sleep(waktuPengiriman * 1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Barang telah masuk ke dalam inventory.");
     }
 
     public void pindahRuangan(){
