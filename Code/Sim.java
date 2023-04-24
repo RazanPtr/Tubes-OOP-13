@@ -135,6 +135,7 @@ public class Sim implements Aksi{
         System.out.println("Barang akan tiba dalam " + waktuPengiriman + " detik.");
         try {
             Thread.sleep(waktuPengiriman * 1000);
+            this.inventory.addItem(ob,kuantitas);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
