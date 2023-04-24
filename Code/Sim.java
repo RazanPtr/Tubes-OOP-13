@@ -114,10 +114,15 @@ public class Sim implements Aksi{
 
     public void buangAir(int durasi){
         //implementasi buangAir
+        kesejahteraan.updateKekenyangan((-20)*(durasi/10));
+        kesejahteraan.updateMood((10)*(durasi/10));
     }
 
     public void tidakBuangAir(){
         //implementasi tidak buangAir
+        kesejahteraan.updateKesehatan(-5);
+        kesejahteraan.updateMood(-5);
+
     }
 
     public void upgradeRumah(Lokasi lokSimRumah, Lokasi lokSimRuangan, String nama, int x, int y){
