@@ -6,7 +6,7 @@ public class BahanMakanan extends ObjectSim implements PurchasableObject{
     public BahanMakanan(String nama, int price, int kekenyangan){
         super(nama);
         this.price = price;
-        this.kekenyangan = kekenyangan;
+        this.kekenyangan = tingkatKenyang;
     } 
 
     public String getNama(){
