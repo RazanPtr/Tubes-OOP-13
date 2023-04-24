@@ -4,7 +4,7 @@ public class Sim implements Aksi{
     private String namaLengkap;
     private WorkObject pekerjaan;
     private int uang;
-    //private Inventory inventory;
+    private Inventory <Object> inventory;
     private String status;
     //private Rumah rumah;
     private Lokasi lokSimRumah;
@@ -164,7 +164,7 @@ public class Sim implements Aksi{
         if(ob instanceof Furniture){
             this.setStatus("simpan barang");
             rumah.searchRoom(lok).getObjects().remove(ob);
-            //inventory.addItem(ob, 1);
+            Inventory.addItem(ob, 1);
         }
     }
 
@@ -197,6 +197,8 @@ public class Sim implements Aksi{
 
     public void lihatInventory(){
     //implementasi lihat Inventory
+        inventory.showInventory();
+        
     }
 
     public void pasangBarang(Lokasi lokRuang, ObjectSim ob, Lokasi lokBarang){
