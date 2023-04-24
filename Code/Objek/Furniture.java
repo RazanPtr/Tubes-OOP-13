@@ -7,7 +7,7 @@ public class Furniture extends ObjectSim implements PurchasableObject{
     private int y;
 
     public Furniture(String nama, int length, int width, int price, int x, int y){
-        this.nama = nama; //ini namanya disuper gasi
+        super(nama);
         this.length = length;
         this.width = width;
         this.price = price;
