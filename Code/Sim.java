@@ -202,8 +202,9 @@ public class Sim implements Aksi{
         
     }
 
-    public void pasangBarang(Lokasi lokRuang, ObjectSim ob, Lokasi lokBarang){
+    public void pasangBarang(Lokasi lokRuang, ObjectSim ob, Lokasi lokBarang, String posisi){
     //implementasi pasangBarang
+        
     }
 
     public void lihatWaktu(){
