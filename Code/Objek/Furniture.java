@@ -1,4 +1,4 @@
-public class Furniture extends Object implements PurchasableObject{
+public class Furniture extends ObjectSim implements PurchasableObject{
     private String nama;
     private int length;
     private int width;
