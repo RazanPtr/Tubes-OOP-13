@@ -20,5 +20,4 @@ public class BahanMakanan extends ObjectSim implements PurchasableObject{
     public int getTingkatKenyang(){
         return tingkatKenyang;
     }
-
 }
