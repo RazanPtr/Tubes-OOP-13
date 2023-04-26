@@ -101,16 +101,49 @@ public class Sim implements Aksi{
         kesejahteraan.updateMood(-5);
     }
 
-    public void makan(int durasi, ObjectSim ob){
-    //implementasi makan
-    }
+    public void makan(Masakan makanan) {
+        if (inventory.containsItem(makanan)) {
+            int tingkatKenyang = makanan.getTingkatKenyang();
+            kesejahteraan.updateKekenyangan(tingkatKenyang);
+            inventory.removeItem(makanan, 1);
+            System.out.println(namaLengkap + " telah makan " + makanan.getNama());
+        } else {
+            System.out.println("Makanan tidak ada di dalam inventory.");
+        }
+    }    
 
-    public void memasak(ObjectSim ob){
-    //implementasi memasak
-    }
+    public void memasak(Masakan makanan) {
+        boolean bahanTersedia = true;
+        for (BahanMakanan bahan : makanan.getBahan()) {
+            if (!inventory.containsItem(bahan)) {
+                bahanTersedia = false;
+                break;
+            }
+        }
 
-    public void berkunjung(int durasi){
-    //implementasi berkunjung
+        if (bahanTersedia) {
+            for (BahanMakanan bahan : makanan.getBahan()) {
+                inventory.removeItem(bahan, 1);
+            }
+            int waktuMemasak = (int) (1.5 * makanan.getTingkatKenyang());
+            kesejahteraan.updateMood(10);
+            inventory.addItem(makanan, 1);
+            System.out.println(namaLengkap + " telah memasak " + makanan.getNama());
+        } else {
+            System.out.println("Bahan makanan tidak cukup untuk memasak " + makanan.getNama());
+        }
+    }    
+
+    public void berkunjung(Sim simTeman) {
+        double jarak = Math.sqrt(Math.pow((lokSimRumah.getX() - simTeman.getLokSimRumah().getX()), 2) +
+                                 Math.pow((lokSimRumah.getY() - simTeman.getLokSimRumah().getY()), 2));
+        int waktuKunjungan = (int) jarak;
+        System.out.println(namaLengkap + " menghabiskan waktu " + waktuKunjungan + " detik untuk berkunjung ke rumah " + simTeman.getNamaLengkap());
+        int durasiKunjungan;
+        for (int i = 0; i < durasiKunjungan; i += 30) {
+            kesejahteraan.updateMood(10);
+            kesejahteraan.updateKekenyangan(-10);
+        }
     }
 
     public void buangAir(int durasi){
