@@ -3,16 +3,26 @@ public class Furniture extends ObjectSim implements PurchasableObject{
     private int length;
     private int width;
     private int price;
+    private Lokasi lokDiRuangan;
 
     public Furniture(String nama, int length, int width, int price){
         super(nama);
         this.length = length;
         this.width = width;
         this.price = price;
+        lokDiRuangan = null;
     } 
 
     public String getNama(){
         return nama;
+    }
+
+    public Lokasi getLokDiRuangan() {
+        return lokDiRuangan;
+    }
+
+    public void setLokDiRuangan(Lokasi lok) {
+        lokDiRuangan = lok;
     }
 
     public int getLength(){

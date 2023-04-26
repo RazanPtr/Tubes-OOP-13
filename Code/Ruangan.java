@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.*;
 
 public class Ruangan {
@@ -6,14 +5,24 @@ public class Ruangan {
     private static int width = 6;
     private static int length = 6;
     private ArrayList<ObjectSim> objects;
-    private Lokasi lokRuangan;
     private boolean grid[][];
+    private Ruangan up;
+    private Ruangan down;
+    private Ruangan left;
+    private Ruangan right;
 
-    public Ruangan(String nama, int x, int y){
+    public Ruangan(String nama){
         this.nama = nama;
         this.objects = new ArrayList<ObjectSim>();
         this.grid = new boolean[width][length];
-        lokRuangan = new Lokasi(x, y);
+        up = null;
+        down = null;
+        left = null;
+        right = null;
+    }
+
+    public void changeNama(String nama) {
+        this.nama = nama;
     }
 
     public Ruangan getRuangan(){
@@ -27,44 +36,57 @@ public class Ruangan {
         this.nama = nama;
     }
 
-    public Lokasi getLokRuangan(){
-        return lokRuangan;
-    }
-
-    // 
-    public boolean isSekitar(Lokasi lok){
-        if((lok.getX() == lokRuangan.getX()-1 || lok.getX() == lokRuangan.getX() + 1) && lok.getY() == lokRuangan.getY()){
-            return true;
-        } else if((lok.getY() == lokRuangan.getY()-1 || lok.getY() == lokRuangan.getY() + 1) && lok.getX() == lokRuangan.getX()){
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     public ArrayList<ObjectSim> getObjects(){
         return objects;
     }
 
-    public boolean placeObject(Lokasi lok, ObjectSim ob){
-        if(canPlaceObj(lok, ob)){
-            Furniture f = (Furniture) ob;
-            int wOb = f.getWidth();
-            int lOb = f.getLength();
-            for(int i = lok.getX(); i < lok.getX() + lOb; i++){
-                for(int j = lok.getY(); j < lok.getY() + wOb; j++){
-                    grid[j][i] = true;
+    public Ruangan getUp() {
+        return up;
+    }
+
+    public Ruangan getDown() {
+        return down;
+    }
+
+    public Ruangan getLeft() {
+        return left;
+    }
+
+    public Ruangan getRight() {
+        return right;
+    }
+
+    public void setUp(Ruangan ruang) {
+        up = ruang;
+    }
+
+    public void setDown(Ruangan ruang) {
+        down = ruang;
+    }
+
+    public void setLeft(Ruangan ruang) {
+        left = ruang;
+    }
+
+    public void setRight(Ruangan ruang) {
+        right = ruang;
+    }
+
+    public void placeObject(Lokasi lok, Furniture obj){
+        if (canPlaceObj(lok, obj)) {
+            // Tandai seluruh sel yang ditempati dengan True
+            for (int i = lok.getX(); i < lok.getX() + obj.getLength(); i++) {
+                for (int j = lok.getY(); j < lok.getY() + obj.getWidth(); j++) {
+                    grid[i][j] = true;
                 }
             }
-            objects.add(ob);
-            System.out.println(ob.getNama() + " berhasil dipasang");
-            return true;
-            
+        
+            // Set posisi objek
+            obj.setLokDiRuangan(lok);
         } else {
-            //System.out.println(ob.getNama());
-            System.out.println("Tidak bisa memasang " + ob.getNama() + " pada lokasi tersebut");
-            return false;
+            System.out.println("Barang tidak dapat diletakkan disitu!");
         }
+        
     }
 
     public void rotateObj(ObjectSim ob){
@@ -76,28 +98,22 @@ public class Ruangan {
         }
     }
 
-    public boolean canPlaceObj(Lokasi lok, Object ob){
-        if(ob instanceof Furniture){
-            Furniture f = (Furniture) ob;
-            int wOb = f.getWidth();
-            int lOb = f.getLength();
-            
-            if(lok.getX() < 6 && lok.getY() < 6 && lok.getX() + lOb <= 6 && lok.getY() + wOb <= 6){
-                for(int i = lok.getX(); i < lok.getX() + lOb; i++){
-                    for(int j = lok.getY(); j < lok.getY() + wOb; j++){
-                        if(grid[j][i]){
-                            return false;
-                        }
-                    }
-                }
-                return true;
-            } else {
-                System.out.println("Lokasi yang dipilih tidak valid karena melebihi ukuran ruangan");
-                return false;
-            }
-        } else {
+    public boolean canPlaceObj(Lokasi lok, Furniture obj){
+        // Periksa apakah ukuran objek cukup di ruangan
+        if (lok.getX() + obj.getLength() > length || lok.getY() + obj.getWidth() > width) {
             return false;
         }
+
+        // Periksa apakah sel yang akan ditempati objek kosong
+        for (int i = lok.getX(); i < lok.getX() + obj.getLength(); i++) {
+            for (int j = lok.getY(); j <lok.getY() + obj.getWidth(); j++) {
+                if (grid[i][j]) {
+                    return false;
+                }
+            }
+        }
+
+        return true; // Aman untuk diletakkan
     }
 
     public void displayRuangan(){
