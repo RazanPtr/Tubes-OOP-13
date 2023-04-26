@@ -6,7 +6,7 @@ public class Sim implements Aksi{
     private int uang;
     private Inventory <Object> inventory;
     private String status;
-    //private Rumah rumah;
+    private Rumah rumah;
     private Lokasi lokSimRumah;
     private Lokasi lokSimRuang;
     Kesejahteraan kesejahteraan;
@@ -139,7 +139,7 @@ public class Sim implements Aksi{
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println("Barang telah masuk ke dalam inventory.");
+        System.out.println("Barang telah masuk ke dalam inventory.");}
 
     public void pindahRuangan(Lokasi lok){
     //implementasi pindahRuangan
@@ -165,7 +165,7 @@ public class Sim implements Aksi{
         if(ob instanceof Furniture){
             this.setStatus("simpan barang");
             rumah.searchRoom(lok).getObjects().remove(ob);
-            Inventory.addItem(ob, 1);
+            inventory.addItem(ob, 1);
         }
     }
 
@@ -202,8 +202,20 @@ public class Sim implements Aksi{
         
     }
 
-    public void pasangBarang(Lokasi lokRuang, ObjectSim ob, Lokasi lokBarang, String posisi){
+    public void pasangBarang(Lokasi lokRuang, ObjectSim ob, Lokasi lokBarang){
     //implementasi pasangBarang
+        this.setStatus("memasang barang");
+        boolean can = rumah.searchRoom(lokRuang).placeObject(ob, lokBarang);
+        if(can){
+            rumah.searchRoom(lokRuang).getObjects().add(ob);
+            inventory.addItem(ob, -1);
+        }
+        else{
+            System.out.println("Tidak dapat memasang barang di lokasi tersebut.");
+        }
+        
+    
+        
         
     }
 
