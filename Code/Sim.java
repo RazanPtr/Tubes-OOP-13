@@ -9,7 +9,7 @@ public class Sim implements Aksi{
     private String status;
     private Rumah rumah;
     private Lokasi lokSimRumah;
-    private Lokasi lokSimRuang;
+    private Ruangan lokSimRuang;
     private Time time;
     private Time waktuKerja;
     Kesejahteraan kesejahteraan;
@@ -67,7 +67,7 @@ public class Sim implements Aksi{
         return lokSimRumah;
     }
 
-    public Lokasi getLokRuang(){
+    public Ruangan getLokRuang(){
         return lokSimRuang;
     }
     
@@ -143,8 +143,8 @@ public class Sim implements Aksi{
 
     }
 
-    public void upgradeRumah(Lokasi lokSimRumah, Lokasi lokSimRuangan, String nama, int x, int y){
-    //implementasi upgradeRumah
+    public void upgradeRumah(){
+        rumah.addRuangan(lokSimRuang);
     }
 
     public void beliBarang(int durasi, ObjectSim ob, int kuantitas){
