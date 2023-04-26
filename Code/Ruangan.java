@@ -72,7 +72,7 @@ public class Ruangan {
             Furniture f = (Furniture) ob;
             int temp = f.getWidth();
             f.setWidth(f.getLength());
-            f.setlength(temp);
+            f.setLength(temp);
         }
     }
 
