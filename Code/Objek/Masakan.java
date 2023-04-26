@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Masakan {
+public class Masakan extends ObjectSim  {
     private String nama;
     private ArrayList<BahanMakanan> bahan;
     private int tingkatKenyang;
