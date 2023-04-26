@@ -101,6 +101,7 @@ public class Sim implements Aksi{
         kesejahteraan.updateMood(-5);
     }
 
+    //ges buat makan, masak, berkunjung aku ganti parameternya krn aku bingung.. tp ntar aku coba lg
     public void makan(Masakan makanan) {
         if (inventory.containsItem(makanan)) {
             int tingkatKenyang = makanan.getTingkatKenyang();
@@ -110,7 +111,7 @@ public class Sim implements Aksi{
         } else {
             System.out.println("Makanan tidak ada di dalam inventory.");
         }
-    }    
+    }
 
     public void memasak(Masakan makanan) {
         boolean bahanTersedia = true;
