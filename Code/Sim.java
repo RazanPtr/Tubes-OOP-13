@@ -101,50 +101,31 @@ public class Sim implements Aksi{
         kesejahteraan.updateMood(-5);
     }
 
-    //ges buat makan, masak, berkunjung aku ganti parameternya krn aku bingung.. tp ntar aku coba lg
-    public void makan(Masakan makanan) {
-        if (inventory.containsItem(makanan)) {
-            int tingkatKenyang = makanan.getTingkatKenyang();
-            kesejahteraan.updateKekenyangan(tingkatKenyang);
-            inventory.removeItem(makanan, 1);
-            System.out.println(namaLengkap + " telah makan " + makanan.getNama());
-        } else {
-            System.out.println("Makanan tidak ada di dalam inventory.");
+    public void makan(int durasi, ObjectSim ob){
+        //implementasi makan
+        if(ob instanceof BahanMakanan) {
+            BahanMakanan makanan = (BahanMakanan) ob;
+            kesejahteraan.updateKekenyangan(makanan.getTingkatKenyang() * (durasi / 30));
         }
     }
 
-    public void memasak(Masakan makanan) {
-        boolean bahanTersedia = true;
-        for (BahanMakanan bahan : makanan.getBahan()) {
-            if (!inventory.containsItem(bahan)) {
-                bahanTersedia = false;
-                break;
-            }
+    public void memasak(ObjectSim ob){
+        //implementasi memasak
+        if(ob instanceof Masakan) {
+            Masakan masakan = (Masakan) ob;
+            kesejahteraan.updateMood(10 * masakan.getTingkatKenyang() / masakan.getBahan().size());
         }
+    }
+    
+    // ges ini yg berkunjung aku tambahin lokasiTujuan krn bingung kalo parameternya durasi doang
+    public void berkunjung(int durasi, Lokasi lokasiTujuan) {
+        double waktuKunjungan = Math.sqrt(Math.pow(lokasiTujuan.getX() - lokSimRumah.getX(), 2)
+                + Math.pow(lokasiTujuan.getY() - lokSimRumah.getY(), 2));
 
-        if (bahanTersedia) {
-            for (BahanMakanan bahan : makanan.getBahan()) {
-                inventory.removeItem(bahan, 1);
-            }
-            int waktuMemasak = (int) (1.5 * makanan.getTingkatKenyang());
-            kesejahteraan.updateMood(10);
-            inventory.addItem(makanan, 1);
-            System.out.println(namaLengkap + " telah memasak " + makanan.getNama());
-        } else {
-            System.out.println("Bahan makanan tidak cukup untuk memasak " + makanan.getNama());
-        }
-    }    
+        durasi += waktuKunjungan;
 
-    public void berkunjung(Sim simTeman) {
-        double jarak = Math.sqrt(Math.pow((lokSimRumah.getX() - simTeman.getLokSimRumah().getX()), 2) +
-                                 Math.pow((lokSimRumah.getY() - simTeman.getLokSimRumah().getY()), 2));
-        int waktuKunjungan = (int) jarak;
-        System.out.println(namaLengkap + " menghabiskan waktu " + waktuKunjungan + " detik untuk berkunjung ke rumah " + simTeman.getNamaLengkap());
-        int durasiKunjungan;
-        for (int i = 0; i < durasiKunjungan; i += 30) {
-            kesejahteraan.updateMood(10);
-            kesejahteraan.updateKekenyangan(-10);
-        }
+        kesejahteraan.updateMood(10 * (durasi / 30));
+        kesejahteraan.updateKekenyangan(-10 * (durasi / 30));
     }
 
     public void buangAir(int durasi){
