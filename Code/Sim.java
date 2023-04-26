@@ -1,10 +1,11 @@
 import java.util.Random;
+import java.util.*;
 
 public class Sim implements Aksi{
     private String namaLengkap;
     private WorkObject pekerjaan;
     private int uang;
-    private Inventory <Object> inventory;
+    private Inventory<ObjectSim> inventory;
     private String status;
     private Rumah rumah;
     private Lokasi lokSimRumah;
