@@ -266,13 +266,13 @@ public class Sim implements Aksi{
     public void pasangBarang(Lokasi lokRuang, ObjectSim ob, Lokasi lokBarang){
     //implementasi pasangBarang
         this.setStatus("memasang barang");
-        boolean can = rumah.searchRoom(lokRuang).placeObject(ob, lokBarang);
+        boolean can = rumah.searchRoom(lokRuang).canPlaceObj(ob, lokBarang);
         if(can){
             rumah.searchRoom(lokRuang).getObjects().add(ob);
             inventory.addItem(ob, -1);
         }
         else{
-            System.out.println("Tidak dapat memasang barang di lokasi tersebut.");
+            System.out.println("Tidak dapat memasang barang di lokasi tersebut. Coba rotate barang atau pindahkan ke ruangan lain.");
         }
         
     
