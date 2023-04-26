@@ -131,7 +131,7 @@ public class Sim implements Aksi{
 
     public void beliBarang(int durasi, ObjectSim ob, int kuantitas){
         Random rand = new Random();
-        int waktuPengiriman = rand.nextInt(1.5) * 30;
+        int waktuPengiriman = rand.nextInt(2) * 30;
         System.out.println("Barang akan tiba dalam " + waktuPengiriman + " detik.");
         try {
             Thread.sleep(waktuPengiriman * 1000);
