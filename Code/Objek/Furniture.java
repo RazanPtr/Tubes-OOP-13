@@ -19,8 +19,16 @@ public class Furniture extends ObjectSim implements PurchasableObject{
         return length;
     }
 
+    public void setLength(int length){
+        this.length = length;
+    }
+
     public int getWidth(){
         return width;
+    }
+
+    public void setWidth(int width){
+        this.width = width;
     }
 
     public int getPrice(){

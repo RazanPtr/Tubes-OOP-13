@@ -1,5 +1,5 @@
-public class Wortel extends BahanMakanan{
-    public Wortel(){
-        super("Wortel", 3, 2);
+public class Bayam extends BahanMakanan{
+    public Bayam(){
+        super("Bayam", 3, 2);
     }
 }
