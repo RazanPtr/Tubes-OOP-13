@@ -128,22 +128,41 @@ public class Sim implements Aksi{
     }
 
     public void makan(int durasi, ObjectSim ob){
-        //implementasi makan
-        if(ob instanceof BahanMakanan) { // ini instanceof Masakan gasii? teruss samaa kurang kondisional apakah masakannya ada di dalem inventory apa ngga
-            BahanMakanan makanan = (BahanMakanan) ob;
-            kesejahteraan.updateKekenyangan(makanan.getTingkatKenyang() * (durasi / 30));
+    //implementasi makan
+        if(ob instanceof Masakan){   
+            Masakan m = (Masakan) ob; 
+            if(inventory.getItems().containsKey(m)){
+                this.setStatus("Makan");
+                inventory.removeItem(m, 1);
+                kesejahteraan.updateKekenyangan((m.getTingkatKenyang())*(durasi/30));
+            }
         }
     }
 
-    public void memasak(ObjectSim ob){
-        //implementasi memasak
-        if(ob instanceof Masakan) { // yang ini di cek list bahan masakan di makanan itu instanceof bahanMasakan apa bukan(??) trus dicek di inventory jugaa
-            Masakan masakan = (Masakan) ob;
-            kesejahteraan.updateMood(10 * masakan.getTingkatKenyang() / masakan.getBahan().size());
+    public void memasak(ObjectSim ob){ 
+    //implementasi memasak
+        if(ob instanceof Masakan){
+            Masakan m = (Masakan) ob;
+            ArrayList<BahanMakanan> listResep = new ArrayList<BahanMakanan>(m.getResep());
+            boolean bisa = true;
+            for(BahanMakanan bm : listResep){
+                if(!inventory.getItems().containsKey(bm)){
+                    bisa = false;
+                }
+            }
+            if(bisa){
+                this.setStatus("memasak");
+                for(BahanMakanan bm : listResep){
+                    inventory.removeItem(ob, 1);
+                    uang -= bm.getPrice();
+                }
+                inventory.addItem(ob, 1);
+                kesejahteraan.updateMood(10);
+                //double durasiMasak = (1.5) * m.getTingkatKenyang();
+            }
         }
     }
     
-    // ges ini yg berkunjung aku tambahin lokasiTujuan krn bingung kalo parameternya durasi doang
     public void berkunjung(int durasi, Lokasi lokasiTujuan) { // perlu cek rumah yang dituju tuh ada di world (dalem perumahan) apa ngga gasi(??)
         double waktuKunjungan = Math.sqrt(Math.pow(lokasiTujuan.getX() - lokSimRumah.getX(), 2)
                 + Math.pow(lokasiTujuan.getY() - lokSimRumah.getY(), 2));
