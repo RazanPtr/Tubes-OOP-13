@@ -1,5 +1,4 @@
 import java.util.Random;
-import Objek.ObjectSim;
 
 public class Sim implements Aksi{
     private String namaLengkap;
