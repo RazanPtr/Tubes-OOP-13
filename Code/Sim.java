@@ -13,7 +13,8 @@ public class Sim implements Aksi{
     private Lokasi lokSimRumah;
     private Ruangan lokSimRuang;
     private Time time;
-    private Time waktuKerja;
+    private int awalKerja;
+    private int lamaKerja;
     private int durasiTidur;
     Kesejahteraan kesejahteraan;
 
@@ -79,6 +80,7 @@ public class Sim implements Aksi{
     }
 
     public void kerja(int durasi){
+        awalKerja = time.getTimeInSec();
         if(durasi <= 0){
             throw new IOException("durasi harus lebih dari 0 detik");
         }
@@ -264,8 +266,14 @@ public class Sim implements Aksi{
         time.CetakWaktu();
     }
 
-    public void gantiPekerjaan(WorkObject w, int durasiKerja){
-    //implementasi ganti pekerjaan
+    public void gantiPekerjaan(WorkObject w){
+        lamaKerja = time.getTimeInSec()-awalKerja;
+        if(lamaKerja > 12*60 && uang >= (1/2*w.getJob().getPayRate())){    
+            setPekerjaan(w);
+            uang -= 1/2*w.getJob().getPayRate();
+        } else{
+            System.out.println("Lama bekerja belum 1 hari atau uang tidak mencukupi!");
+        }
     }
 
     public void displayInfo(){
