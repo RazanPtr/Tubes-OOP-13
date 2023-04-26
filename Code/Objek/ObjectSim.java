@@ -3,4 +3,7 @@ public abstract class ObjectSim {
 	public Object (String nama) {
 		this.nama = nama;
 	}
+	public String getNama() {
+		return nama;
+	}
 }
