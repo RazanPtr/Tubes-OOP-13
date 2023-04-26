@@ -10,6 +10,8 @@ public class Sim implements Aksi{
     private Rumah rumah;
     private Lokasi lokSimRumah;
     private Lokasi lokSimRuang;
+    private Time time;
+    private Time waktuKerja;
     Kesejahteraan kesejahteraan;
 
     public Sim(String name, int x, int y){
@@ -237,6 +239,7 @@ public class Sim implements Aksi{
 
     public void lihatWaktu(){
     //implementasi lihatWaktu
+        time.CetakWaktu();
     }
 
     public void gantiPekerjaan(WorkObject w, int durasiKerja){
