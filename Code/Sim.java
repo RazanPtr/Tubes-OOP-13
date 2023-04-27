@@ -146,7 +146,7 @@ public class Sim implements Aksi{
             ArrayList<BahanMakanan> listResep = new ArrayList<BahanMakanan>(m.getResep());
             boolean bisa = true;
             for(BahanMakanan bm : listResep){
-                if(!inventory.getItems().containsKey(bm)){
+                if(!inventory.getItem().containsKey(bm)){
                     bisa = false;
                 }
             }
