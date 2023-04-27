@@ -25,7 +25,7 @@ public class Sim implements Aksi{
         inventory = new Inventory<ObjectSim>();
         kesejahteraan = new Kesejahteraan();
         status = null;
-        rumah = new Rumah();
+        rumah = new Rumah(x,y);
         //buat ruangan kamar barunya di Rumah.java ??
         lokSimRuang = new Lokasi(0,0); // ini awalnya pasti di kamar,, perlu method buat get ruangan Kamar dari Rumah
         lokSimRumah = new Lokasi(x, y); //ini lokasi awal rumahnya input dari pengguna kan?!
