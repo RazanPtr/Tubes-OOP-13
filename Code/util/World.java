@@ -40,4 +40,21 @@ public class World {
         int remainingSquares = totalSquares - occupiedSquares;
         return remainingSquares;
     }
+
+    public void addRumah(Rumah r){
+        perumahan.add(r);
+    }
+
+    public boolean isRumahAvailable(int lokX, int lokY){
+        for(Rumah rumah : perumahan){
+            if(lokX == rumah.getLokRumah().getX() && lokY == rumah.getLokRumah().getY()){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public ArrayList<Rumah> getPerumahan(){
+        return perumahan;
+    }
 }
