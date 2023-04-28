@@ -1,4 +1,6 @@
+package util;
 import java.util.*;
+import objek.*;
 
 public class Ruangan {
     private String nama;

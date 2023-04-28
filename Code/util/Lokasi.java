@@ -1,3 +1,4 @@
+package util;
 public class Lokasi {
     private int x;
     private int y;

@@ -1,3 +1,5 @@
+package objek;
+
 public class NasiKari extends Masakan{
     
     public NasiKari(){

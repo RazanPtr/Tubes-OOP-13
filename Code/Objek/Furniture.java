@@ -1,3 +1,6 @@
+package objek;
+import util.Lokasi;
+
 public class Furniture extends ObjectSim implements PurchasableObject{
     private String nama;
     private int length;

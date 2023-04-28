@@ -1,3 +1,6 @@
+package util;
+import objek.*;
+
 public interface Aksi {
     public void kerja(int durasi);
 

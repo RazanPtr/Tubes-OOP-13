@@ -1,7 +1,7 @@
+package util;
 import java.util.Random;
 import java.util.*;
-import java.io.IOException;
-import java.lang.Exception;
+import objek.*;
 
 public class Sim implements Aksi{
     private String namaLengkap;

@@ -1,3 +1,5 @@
+package objek;
+
 public class TumisSayur extends Masakan{
     
     public TumisSayur(){

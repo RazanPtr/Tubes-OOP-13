@@ -1,3 +1,4 @@
+package util;
 public class Job {
     private String title;
     private int payRate;

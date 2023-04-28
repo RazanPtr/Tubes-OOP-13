@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import util.*;
+import objek.*;
 import java.util.*;
 
 public class Main {
@@ -12,7 +14,7 @@ public class Main {
         boolean finished = false;
         System.out.println(op);
         if(op.equals("Start Game")&& (!started)){
-            World w = new World();
+            World w = World.getInstance();
             System.out.print("Permainan dimulai\nSiapa nama simmu? ");
             String namaLengkap = scan.nextLine();
             System.out.print("Tentukan lokasi rumah Sim (x, y): ");
@@ -46,7 +48,7 @@ public class Main {
                     String namaRbaru = scan.next();
                     int tempx = scan.nextInt();
                     int tempy = scan.nextInt();
-                    currentSim.upgradeRumah(currentSim.getLokSimRumah(), currentSim.getLokRuang(), namaRbaru, tempx, tempy);
+                    currentSim.upgradeRumah();
                 }
             } else if(o.equals("Move Room")){
                 //ini harus didalem rumahnya apa gimana
@@ -69,7 +71,7 @@ public class Main {
                     System.out.println("Sim tersebut belum terdaftar pada permainan Simplicity");
                 }
             } else if(o.equals("List Object")){
-                Ruangan temp = currentSim.getRumah().searchRoom(currentSim.getLokRuang());
+                Ruangan temp = currentSim.getRumah().getRoom(currentSim.getLokRuang().getNamaRuangan());
                 int i = 1;
                 System.out.println("Berikut merupakan daftar objek di dalam ruangan");
                 for(ObjectSim ob : temp.getObjects()){

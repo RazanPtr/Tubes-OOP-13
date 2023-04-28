@@ -1,3 +1,5 @@
+package objek;
+
 public class SusuKacang extends Masakan{
     
     public SusuKacang(){
