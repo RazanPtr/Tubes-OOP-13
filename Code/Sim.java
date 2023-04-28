@@ -1,5 +1,7 @@
 import java.util.Random;
 import java.util.*;
+import java.io.IOException;
+import java.lang.Exception;
 
 public class Sim implements Aksi{
     private String namaLengkap;
@@ -11,19 +13,21 @@ public class Sim implements Aksi{
     private Lokasi lokSimRumah;
     private Ruangan lokSimRuang;
     private Time time;
-    private Time waktuKerja;
+    private int awalKerja;
+    private int lamaKerja;
+    private int durasiTidur;
     Kesejahteraan kesejahteraan;
 
     public Sim(String name, int x, int y){
         this.namaLengkap = name;
         pekerjaan = new WorkObject();
         uang = 100;
-        //inventory = new Inventory();
+        inventory = new Inventory<ObjectSim>();
         kesejahteraan = new Kesejahteraan();
         status = null;
-        //rumah = new Rumah();
+        rumah = new Rumah(x,y);
         //buat ruangan kamar barunya di Rumah.java ??
-        lokSimRuang = new Lokasi(0,0); // ini awalnya pasti di kamar,, tp lokasinya (0, 0) kah
+        lokSimRuang = new Lokasi(0,0); // ini awalnya pasti di kamar,, perlu method buat get ruangan Kamar dari Rumah
         lokSimRumah = new Lokasi(x, y); //ini lokasi awal rumahnya input dari pengguna kan?!
     }
 
@@ -76,26 +80,46 @@ public class Sim implements Aksi{
     }
 
     public void kerja(int durasi){
+        awalKerja = time.getTimeInSec();
+        if(durasi <= 0){
+            throw new IOException("durasi harus lebih dari 0 detik");
+        }
+        if(durasi %120 != 120){
+            throw new IOException("durasi kerja harus kelipatan 120 detik");
+        }
         this.setStatus("kerja");
         kesejahteraan.updateKekenyangan((-10)*(durasi/30));
         kesejahteraan.updateMood((-10)*(durasi/30));
+        if(durasi >= (4*60)){
+            this.uang += getPekerjaan().getJob().getPayRate();
+        }
     }
 
     public void olahraga(int durasi){
-       //implementasi olahraga
-       this.setStatus("olahraga");
-       kesejahteraan.updateKesehatan(5*(durasi/20));
-       kesejahteraan.updateKekenyangan((-5)*(durasi/20));
-       kesejahteraan.updateMood(10*(durasi/20));
+        if(durasi <= 0){
+            throw new IOException("durasi harus lebih dari 0 detik");
+        }
+        if(durasi % 20 != 0){
+            throw new IOException("durasi olahraga harus kelipatan 20 detik");
+        }
+        this.setStatus("olahraga");
+        kesejahteraan.updateKesehatan(5*(durasi/20));
+        kesejahteraan.updateKekenyangan((-5)*(durasi/20));
+        kesejahteraan.updateMood(10*(durasi/20));
     }
 
     public void tidur(int durasi){
     //implementasi tidur
-        if(durasi >= 3*60){
-            this.setStatus("tidur");
-            kesejahteraan.updateKesehatan(20*(durasi/(4*60)));
-            kesejahteraan.updateMood(30*(durasi/(4*60)));
+        if(durasi <= 0){
+            throw new IOException("durasi harus lebih dari 0 detik");
         }
+        this.setStatus("tidur");
+        durasiTidur += durasi;
+    }
+
+    public void efekTidur(int durasi){
+        kesejahteraan.updateKesehatan(20*(durasi/(4*60)));
+        kesejahteraan.updateMood(30*(durasi/(4*60)));
     }
 
     public void tidaktidur(){
@@ -104,23 +128,42 @@ public class Sim implements Aksi{
     }
 
     public void makan(int durasi, ObjectSim ob){
-        //implementasi makan
-        if(ob instanceof BahanMakanan) {
-            BahanMakanan makanan = (BahanMakanan) ob;
-            kesejahteraan.updateKekenyangan(makanan.getTingkatKenyang() * (durasi / 30));
+    //implementasi makan
+        if(ob instanceof Masakan){   
+            Masakan m = (Masakan) ob; 
+            if(inventory.getItems().containsKey(m)){
+                this.setStatus("Makan");
+                inventory.removeItem(m, 1);
+                kesejahteraan.updateKekenyangan((m.getTingkatKenyang())*(durasi/30));
+            }
         }
     }
 
-    public void memasak(ObjectSim ob){
-        //implementasi memasak
-        if(ob instanceof Masakan) {
-            Masakan masakan = (Masakan) ob;
-            kesejahteraan.updateMood(10 * masakan.getTingkatKenyang() / masakan.getBahan().size());
+    public void memasak(ObjectSim ob){ 
+    //implementasi memasak
+        if(ob instanceof Masakan){
+            Masakan m = (Masakan) ob;
+            ArrayList<BahanMakanan> listResep = new ArrayList<BahanMakanan>(m.getResep());
+            boolean bisa = true;
+            for(BahanMakanan bm : listResep){
+                if(!inventory.getItem().containsKey(bm)){
+                    bisa = false;
+                }
+            }
+            if(bisa){
+                this.setStatus("memasak");
+                for(BahanMakanan bm : listResep){
+                    inventory.removeItem(ob, 1);
+                    uang -= bm.getPrice();
+                }
+                inventory.addItem(ob, 1);
+                kesejahteraan.updateMood(10);
+                //double durasiMasak = (1.5) * m.getTingkatKenyang();
+            }
         }
     }
     
-    // ges ini yg berkunjung aku tambahin lokasiTujuan krn bingung kalo parameternya durasi doang
-    public void berkunjung(int durasi, Lokasi lokasiTujuan) {
+    public void berkunjung(int durasi, Lokasi lokasiTujuan) { // perlu cek rumah yang dituju tuh ada di world (dalem perumahan) apa ngga gasi(??)
         double waktuKunjungan = Math.sqrt(Math.pow(lokasiTujuan.getX() - lokSimRumah.getX(), 2)
                 + Math.pow(lokasiTujuan.getY() - lokSimRumah.getY(), 2));
 
@@ -223,13 +266,13 @@ public class Sim implements Aksi{
     public void pasangBarang(Lokasi lokRuang, ObjectSim ob, Lokasi lokBarang){
     //implementasi pasangBarang
         this.setStatus("memasang barang");
-        boolean can = rumah.searchRoom(lokRuang).placeObject(ob, lokBarang);
+        boolean can = rumah.searchRoom(lokRuang).canPlaceObj(ob, lokBarang);
         if(can){
             rumah.searchRoom(lokRuang).getObjects().add(ob);
             inventory.addItem(ob, -1);
         }
         else{
-            System.out.println("Tidak dapat memasang barang di lokasi tersebut.");
+            System.out.println("Tidak dapat memasang barang di lokasi tersebut. Coba rotate barang atau pindahkan ke ruangan lain.");
         }
         
     
@@ -242,8 +285,14 @@ public class Sim implements Aksi{
         time.CetakWaktu();
     }
 
-    public void gantiPekerjaan(WorkObject w, int durasiKerja){
-    //implementasi ganti pekerjaan
+    public void gantiPekerjaan(WorkObject w){
+        lamaKerja = time.getTimeInSec()-awalKerja;
+        if(lamaKerja > 12*60 && uang >= (1/2*w.getJob().getPayRate())){    
+            setPekerjaan(w);
+            uang -= 1/2*w.getJob().getPayRate();
+        } else{
+            System.out.println("Lama bekerja belum 1 hari atau uang tidak mencukupi!");
+        }
     }
 
     public void displayInfo(){

@@ -9,7 +9,7 @@ public interface Aksi {
 
     public void memasak(ObjectSim ob);
 
-    public void berkunjung(int durasi);
+    public void berkunjung(int durasi, Lokasi lokasiTujuan);
 
     public void buangAir(int durasi);
 
