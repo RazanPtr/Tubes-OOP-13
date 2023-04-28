@@ -13,7 +13,7 @@ public interface Aksi {
 
     public void buangAir(int durasi);
 
-    public void upgradeRumah(Lokasi lokSimRumah, Lokasi lokSimRuangan, String nama, int x, int y);
+    public void upgradeRumah();
 
     public void beliBarang(int durasi, ObjectSim ob, int kuantitas);
 
@@ -23,9 +23,9 @@ public interface Aksi {
 
     public void melukis(int durasi);
 
-    public void simpanBarang(Lokasi lok, ObjectSim ob);
+    public void simpanBarang(String lok, ObjectSim ob);
 
-    public void pindahBarang(Lokasi lokAwal, ObjectSim ob, Lokasi lokAkhir, Lokasi lokRuang);
+    public void pindahBarang(String lokAwal, ObjectSim ob, Lokasi lokAkhir, String lokRuang);
 
     public void sholat(int durasi);
 
@@ -35,7 +35,7 @@ public interface Aksi {
 
     public void lihatInventory();
     
-    public void pasangBarang(Lokasi lokRuang, ObjectSim ob, Lokasi lokBarang);
+    public void pasangBarang(String lokRuang, ObjectSim ob, Lokasi lokBarang);
 
     public void lihatWaktu();
 }

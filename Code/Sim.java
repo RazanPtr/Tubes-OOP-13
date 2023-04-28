@@ -219,16 +219,18 @@ public class Sim implements Aksi{
         kesejahteraan.updateKekenyangan(5*(durasi/20));
     }
 
-    public void simpanBarang(Lokasi lok, ObjectSim ob){
+    public void simpanBarang(String lok, ObjectSim ob){
     //implementasi simpanBarang
         if(ob instanceof Furniture){
             this.setStatus("simpan barang");
-            rumah.searchRoom(lok).getObjects().remove(ob);
+            if(rumah.getRoom(lok) != null){
+                rumah.getRoom(lok).getObjects().remove(ob);
+            }
             inventory.addItem(ob, 1);
         }
     }
 
-    public void pindahBarang(Lokasi lokAwal, ObjectSim ob, Lokasi lokAkhir, Lokasi lokRuang){
+    public void pindahBarang(String lokAwal, ObjectSim ob, Lokasi lokAkhir, String lokRuang){
     //implementasi pindhBarang
         simpanBarang(lokAwal, ob);
         pasangBarang(lokRuang, ob, lokAkhir);
@@ -261,19 +263,20 @@ public class Sim implements Aksi{
         
     }
 
-    public void pasangBarang(Lokasi lokRuang, ObjectSim ob, Lokasi lokBarang){
+    public void pasangBarang(String lokRuang, ObjectSim ob, Lokasi lokBarang){
     //implementasi pasangBarang
         this.setStatus("memasang barang");
-        boolean can = rumah.searchRoom(lokRuang).canPlaceObj(ob, lokBarang);
-        if(can){
-            rumah.searchRoom(lokRuang).getObjects().add(ob);
-            inventory.addItem(ob, -1);
+        if(ob instanceof Furniture){
+            Furniture f = (Furniture) ob;
+            boolean can = rumah.getRoom(lokRuang).canPlaceObj(lokBarang, f);
+            if(can){
+                rumah.getRoom(lokRuang).getObjects().add(ob);
+                inventory.addItem(ob, -1);
+            }
+            else{
+                System.out.println("Tidak dapat memasang barang di lokasi tersebut. Coba rotate barang atau pindahkan ke ruangan lain.");
+            }
         }
-        else{
-            System.out.println("Tidak dapat memasang barang di lokasi tersebut. Coba rotate barang atau pindahkan ke ruangan lain.");
-        }
-        
-    
         
         
     }
