@@ -220,7 +220,7 @@ public class Sim implements Aksi{
         this.setStatus("karaoke");
         kesejahteraan.updateMood(10*(durasi/30));
         kesejahteraan.updateKekenyangan((-10)*(durasi/30));
-        System.out.println("baby shark duduruddudu");
+        System.out.println("baby shark dudurudduduuu");
     }
 
     public void melukis(int durasi){
