@@ -221,16 +221,46 @@ public class Sim implements Aksi{
     }
 
     public void beliBarang(int durasi, ObjectSim ob, int kuantitas){
-        Random rand = new Random();
-        int waktuPengiriman = rand.nextInt(2) * 30;
-        System.out.println("Barang akan tiba dalam " + waktuPengiriman + " detik.");
-        try {
-            Thread.sleep(waktuPengiriman * 1000);
-            this.inventory.addItem(ob,kuantitas);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        if(ob instanceof Furniture){
+            Furniture obj = (Furniture) ob;
+            if(uang-obj.getPrice()*kuantitas>=0){
+                uang-=obj.getPrice()*kuantitas;
+                Random rand = new Random();
+                int waktuPengiriman = rand.nextInt(4) * 30;
+                System.out.println("Barang akan tiba dalam " + waktuPengiriman + " detik.");
+                try {
+                    Thread.sleep(waktuPengiriman * 1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                System.out.println("Barang telah masuk ke dalam inventory.");
+                }
+            else{
+                System.out.println("Uang sim tidak cukup untuk membeli barang");
+            }
+            }
+        else if(ob instanceof BahanMakanan){
+            BahanMakanan obj = (BahanMakanan) ob;
+            if(uang-obj.getPrice()*kuantitas>=0){
+                uang-=obj.getPrice()*kuantitas;
+                 Random rand = new Random();
+                int waktuPengiriman = rand.nextInt(4) * 30;
+                System.out.println("Barang akan tiba dalam " + waktuPengiriman + " detik.");
+                try {
+                    Thread.sleep(waktuPengiriman * 1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                System.out.println("Barang telah masuk ke dalam inventory.");
+                }
+            else{
+                System.out.println("Uang sim tidak cukup untuk membeli barang");
+                }
+            }
+        else{
+            System.out.println("Barang tersebut tidak bisa dibeli");
         }
-        System.out.println("Barang telah masuk ke dalam inventory.");}
+        }
 
     public void pindahRuangan(Lokasi lok){
     //implementasi pindahRuangan
