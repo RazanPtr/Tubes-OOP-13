@@ -40,9 +40,9 @@ public class Main {
                 System.out.println("Selamat datang di permainan Simplicity!");
                 System.out.println("permainan ini merupakan permainan karakter virtual yaitu Sim yang dapat anda jalankan kegiatannya.");
                 System.out.println("Terdapat beberapa command yang dapat Anda berikan sebelum permainan :");
-                System.out.println("1. Start Game       : command yang dapat Anda gunakan untuk memulai permainan");
-                System.out.println("2. Help             : command yang dapat memberikan Anda bantuan dan petunjuk terkait permainan");
-                System.out.println("3. Exit             : command yang dapat Anda gunakan untuk keluar dari permainan");
+                System.out.println("1. Start Game       : memulai permainan");
+                System.out.println("2. Help             : bantuan dan petunjuk terkait permainan");
+                System.out.println("3. Exit             : keluar dari permainan");
             } else if(op.equals("Exit")){
                 System.out.println("Game akan berakhir.. Terimakasih telah bermain!! ^^");
                 finished = true;
@@ -60,6 +60,18 @@ public class Main {
             } else if(o.equals("Help")){
                 System.out.println("permainan ini merupakan permainan karakter virtual yaitu Sim yang dapat anda jalankan kegiatannya.");
                 System.out.println("Terdapat beberapa command yang dapat Anda berikan setelah memulai permainan :");
+                System.out.println("1.  View Sim Info            : Melihat informasi kondisi Sim saat ini");
+                System.out.println("2.  View Current Location    : Informasi posisi Sim saat ini");
+                System.out.println("3.  View Inventory           : Melihat isi inventory milik Sim");
+                System.out.println("4.  Upgrade House            : Melakukan perbaikan rumah, yaitu menambah ruangan");
+                System.out.println("5.  Move Room                : Berpindah menuju ruangan lain");
+                System.out.println("6.  Edit Room                : Melakukan perubahan terhadap ruangan saat ini");
+                System.out.println("7.  Add Sim                  : Menciptakan karakter Sim baru");
+                System.out.println("8.  Change Sim               : Mengganti Sim yang dimainkan");
+                System.out.println("9.  List Object              : Menampilkan daftar Objek di dalam ruangan");
+                System.out.println("10. Go To Object             : Sim berjalan menuju objek");
+                System.out.println("11. Action                   : Melakukan aksi pada suatu objek");
+                System.out.println("12. Exit                     : Keluar dari permainan");
             } else if(o.equals("Exit")){
                 finished = true;
             } else if(o.equals("View Current Location")){
@@ -89,7 +101,6 @@ public class Main {
                 int opsi = scan.nextInt();
                 if(opsi == 1){
                     System.out.println("Barang apa yang ingin anda beli?");
-
                     currentSim.beliBarang(opsi, null, opsi);
                 } else if(opsi == 2){
 
