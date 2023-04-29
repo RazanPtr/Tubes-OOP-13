@@ -5,6 +5,7 @@ public class World {
     private int panjang;
     private int lebar;
     private ArrayList<Rumah> perumahan;
+    private Time t;
     
     //Penerapan Singleton Pattern
     private static World instance = null;
@@ -13,6 +14,7 @@ public class World {
         panjang = 64;
         lebar = 64;
         perumahan = new ArrayList<Rumah>();
+        t = new Time();
     }
 
     public static World getInstance() {
@@ -56,5 +58,14 @@ public class World {
 
     public ArrayList<Rumah> getPerumahan(){
         return perumahan;
+    }
+
+    public Rumah getRumah(Lokasi lok){
+        for(Rumah rumah : perumahan){
+            if(lok == rumah.getLokRumah()){
+                return rumah;
+            }
+        }
+        return null;
     }
 }

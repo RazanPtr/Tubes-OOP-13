@@ -17,6 +17,7 @@ public class Sim implements Aksi{
     private int awalKerja;
     private int lamaKerja;
     private int durasiTidur;
+    private boolean sudahTidur;
     Kesejahteraan kesejahteraan;
 
     public Sim(String name, int x, int y){
@@ -30,6 +31,8 @@ public class Sim implements Aksi{
         curObject = null;
         lokSimRuang = rumah.getRoom("Kamar"); 
         lokSimRumah = new Lokasi(x, y); //ini lokasi awal rumahnya input dari pengguna kan?!
+        durasiTidur = 0;
+        sudahTidur = false;
     }
 
     public String getNamaLengkap(){
@@ -89,6 +92,14 @@ public class Sim implements Aksi{
         return rumah;
     }
 
+    public void setLokSimRumah(Lokasi lok){
+        this.lokSimRumah = lok;
+    }
+
+    public void setLokSimRuang(Ruangan r){
+        this.lokSimRuang = r;
+    }
+
     public void kerja(int durasi){
         awalKerja = time.getTimeInSec();
         if(durasi <= 0){
@@ -124,14 +135,24 @@ public class Sim implements Aksi{
         }
         this.setStatus("tidur");
         durasiTidur += durasi;
+        checkTidur();
     }
 
-    public void efekTidur(int durasi){
-        kesejahteraan.updateKesehatan(20*(durasi/(4*60)));
-        kesejahteraan.updateMood(30*(durasi/(4*60)));
+    public void checkTidur(){
+        if(durasiTidur >= (4*60)){
+            kesejahteraan.updateKesehatan(20*(durasiTidur/(4*60)));
+            kesejahteraan.updateMood(30*(durasiTidur/(4*60)));
+            durasiTidur -= (durasiTidur/(4*60));
+            sudahTidur = true;
+        } 
     }
 
-    public void tidaktidur(){
+    public void resetHarian(){
+        durasiTidur = 0;
+        sudahTidur = false;
+    }
+
+    public void tidakTidur(){
         kesejahteraan.updateKesehatan(-5);
         kesejahteraan.updateMood(-5);
     }
