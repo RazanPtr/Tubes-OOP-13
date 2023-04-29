@@ -86,7 +86,7 @@ public class Ruangan {
             // Set posisi objek
             obj.setLokDiRuangan(lok);
         } else {
-            System.out.println("Barang tidak dapat diletakkan disitu!");
+            System.out.println("Barang tidak dapat diletakkan disitu");
         }
         
     }
