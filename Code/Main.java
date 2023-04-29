@@ -133,7 +133,7 @@ public class Main {
                     System.out.println("1. Aksi Aktif");
                     System.out.println("2. Aksi Pasif (Time-Consuming)");
                     System.out.println("3. Aksi Instan");
-                    System.out.println("4. Tutup Menu Aksi!");
+                    System.out.println("4. Tutup Menu Aksi");
                     int opsi = sc.nextInt();
                     if (opsi==4) {
                         closed = true;
