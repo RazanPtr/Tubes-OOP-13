@@ -26,6 +26,9 @@ public class Main {
                     System.out.print("y: ");
                     int lokRy = scan.nextInt();
                     //int lokRy = 2;
+                    String temp = scan.nextLine();
+                    System.out.println(lokRx);
+                    System.out.println(lokRy);
                     if(w.isRumahAvailable(lokRx, lokRy)){
                         rumahValid = true;
                         Sim s = new Sim(namaLengkap, lokRx, lokRy);
@@ -104,11 +107,9 @@ public class Main {
 
             } else if(o.equals("Action")){
                 System.out.println("pilih aksi yang dapat dilakukan oleh benda");
+            } else {
+                System.out.println("command tersebut tidak tersedia");
             }
-            System.out.println("tes2");
-                // } else {
-            //     System.out.println("command tersebut tidak tersedia");
-            // }
         }
 
         // World w = new World();
