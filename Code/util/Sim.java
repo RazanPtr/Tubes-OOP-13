@@ -225,7 +225,7 @@ public class Sim implements Aksi{
 
     public void melukis(int durasi){
     //implementasi untuk melukis
-        this.setStatus("Melukis!");
+        this.setStatus("Melukis");
         kesejahteraan.updateMood(5*(durasi/20));
         kesejahteraan.updateKekenyangan(5*(durasi/20));
     }

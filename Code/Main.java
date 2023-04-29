@@ -138,7 +138,7 @@ public class Main {
                     if (opsi==4) {
                         closed = true;
                     } else if (opsi<1 || opsi>4) {
-                        System.out.println("Mohon masukkan opsi yang valid!");
+                        System.out.println("Mohon masukkan opsi yang valid");
                     } else {
                         if (opsi==1) {
                             //kode aksi aktif
