@@ -1,3 +1,4 @@
+package objek;
 import java.util.ArrayList;
 
 public class Masakan extends ObjectSim{

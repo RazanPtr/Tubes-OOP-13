@@ -1,3 +1,5 @@
+package objek;
+
 public class Bistik extends Masakan{
     
     public Bistik(){

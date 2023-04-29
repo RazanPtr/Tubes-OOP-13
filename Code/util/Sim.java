@@ -1,7 +1,7 @@
+package util;
 import java.util.Random;
 import java.util.*;
-import java.io.IOException;
-import java.lang.Exception;
+import objek.*;
 
 public class Sim implements Aksi{
     private String namaLengkap;
@@ -26,8 +26,7 @@ public class Sim implements Aksi{
         kesejahteraan = new Kesejahteraan();
         status = null;
         rumah = new Rumah(x,y);
-        //buat ruangan kamar barunya di Rumah.java ??
-        lokSimRuang = new Lokasi(0,0); // ini awalnya pasti di kamar,, perlu method buat get ruangan Kamar dari Rumah
+        lokSimRuang = rumah.getRoom("Kamar"); 
         lokSimRumah = new Lokasi(x, y); //ini lokasi awal rumahnya input dari pengguna kan?!
     }
 
@@ -82,10 +81,10 @@ public class Sim implements Aksi{
     public void kerja(int durasi){
         awalKerja = time.getTimeInSec();
         if(durasi <= 0){
-            throw new IOException("durasi harus lebih dari 0 detik");
+            throw new IllegalArgumentException("durasi harus lebih dari 0 detik");
         }
         if(durasi %120 != 120){
-            throw new IOException("durasi kerja harus kelipatan 120 detik");
+            throw new IllegalArgumentException("durasi kerja harus kelipatan 120 detik");
         }
         this.setStatus("kerja");
         kesejahteraan.updateKekenyangan((-10)*(durasi/30));
@@ -97,10 +96,10 @@ public class Sim implements Aksi{
 
     public void olahraga(int durasi){
         if(durasi <= 0){
-            throw new IOException("durasi harus lebih dari 0 detik");
+            throw new IllegalArgumentException("durasi harus lebih dari 0 detik");
         }
         if(durasi % 20 != 0){
-            throw new IOException("durasi olahraga harus kelipatan 20 detik");
+            throw new IllegalArgumentException("durasi harus lebih dari 0 detik");
         }
         this.setStatus("olahraga");
         kesejahteraan.updateKesehatan(5*(durasi/20));
@@ -109,9 +108,8 @@ public class Sim implements Aksi{
     }
 
     public void tidur(int durasi){
-    //implementasi tidur
         if(durasi <= 0){
-            throw new IOException("durasi harus lebih dari 0 detik");
+            throw new IllegalArgumentException("durasi harus lebih dari 0 detik");
         }
         this.setStatus("tidur");
         durasiTidur += durasi;
@@ -131,7 +129,7 @@ public class Sim implements Aksi{
     //implementasi makan
         if(ob instanceof Masakan){   
             Masakan m = (Masakan) ob; 
-            if(inventory.getItems().containsKey(m)){
+            if(inventory.getItem().contains(m)){
                 this.setStatus("Makan");
                 inventory.removeItem(m, 1);
                 kesejahteraan.updateKekenyangan((m.getTingkatKenyang())*(durasi/30));
@@ -143,10 +141,10 @@ public class Sim implements Aksi{
     //implementasi memasak
         if(ob instanceof Masakan){
             Masakan m = (Masakan) ob;
-            ArrayList<BahanMakanan> listResep = new ArrayList<BahanMakanan>(m.getResep());
+            ArrayList<BahanMakanan> listResep = new ArrayList<BahanMakanan>(m.getBahan());
             boolean bisa = true;
             for(BahanMakanan bm : listResep){
-                if(!inventory.getItem().containsKey(bm)){
+                if(!inventory.getItem().contains(bm)){
                     bisa = false;
                 }
             }
@@ -221,16 +219,18 @@ public class Sim implements Aksi{
         kesejahteraan.updateKekenyangan(5*(durasi/20));
     }
 
-    public void simpanBarang(Lokasi lok, ObjectSim ob){
+    public void simpanBarang(String lok, ObjectSim ob){
     //implementasi simpanBarang
         if(ob instanceof Furniture){
             this.setStatus("simpan barang");
-            rumah.searchRoom(lok).getObjects().remove(ob);
+            if(rumah.getRoom(lok) != null){
+                rumah.getRoom(lok).getObjects().remove(ob);
+            }
             inventory.addItem(ob, 1);
         }
     }
 
-    public void pindahBarang(Lokasi lokAwal, ObjectSim ob, Lokasi lokAkhir, Lokasi lokRuang){
+    public void pindahBarang(String lokAwal, ObjectSim ob, Lokasi lokAkhir, String lokRuang){
     //implementasi pindhBarang
         simpanBarang(lokAwal, ob);
         pasangBarang(lokRuang, ob, lokAkhir);
@@ -263,19 +263,20 @@ public class Sim implements Aksi{
         
     }
 
-    public void pasangBarang(Lokasi lokRuang, ObjectSim ob, Lokasi lokBarang){
+    public void pasangBarang(String lokRuang, ObjectSim ob, Lokasi lokBarang){
     //implementasi pasangBarang
         this.setStatus("memasang barang");
-        boolean can = rumah.searchRoom(lokRuang).canPlaceObj(ob, lokBarang);
-        if(can){
-            rumah.searchRoom(lokRuang).getObjects().add(ob);
-            inventory.addItem(ob, -1);
+        if(ob instanceof Furniture){
+            Furniture f = (Furniture) ob;
+            boolean can = rumah.getRoom(lokRuang).canPlaceObj(lokBarang, f);
+            if(can){
+                rumah.getRoom(lokRuang).getObjects().add(ob);
+                inventory.addItem(ob, -1);
+            }
+            else{
+                System.out.println("Tidak dapat memasang barang di lokasi tersebut. Coba rotate barang atau pindahkan ke ruangan lain.");
+            }
         }
-        else{
-            System.out.println("Tidak dapat memasang barang di lokasi tersebut. Coba rotate barang atau pindahkan ke ruangan lain.");
-        }
-        
-    
         
         
     }

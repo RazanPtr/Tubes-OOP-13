@@ -1,3 +1,5 @@
+package objek;
+
 public class BahanMakanan extends ObjectSim implements PurchasableObject{
     private String nama;
     private int price;
