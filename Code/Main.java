@@ -19,10 +19,13 @@ public class Main {
                 String namaLengkap = scan.nextLine();
                 boolean rumahValid = false;
                 while(!rumahValid){
-                    System.out.print("Tentukan lokasi rumah Sim (x, y)\nx: ");
+                    System.out.println("Tentukan lokasi rumah Sim (x, y)");
+                    System.out.print("x: ");
                     int lokRx = scan.nextInt();
+                    //int lokRx = 3;
                     System.out.print("y: ");
                     int lokRy = scan.nextInt();
+                    //int lokRy = 2;
                     if(w.isRumahAvailable(lokRx, lokRy)){
                         rumahValid = true;
                         Sim s = new Sim(namaLengkap, lokRx, lokRy);
@@ -50,7 +53,8 @@ public class Main {
         
         while(started && (!finished)){
             System.out.print(">> ");
-            String o = scan.nextLine();
+            String o;
+            o = scan.nextLine();
             if(o.equals("View Sim Info")){
                 currentSim.displayInfo();
             } else if(o.equals("Help")){
@@ -100,9 +104,11 @@ public class Main {
 
             } else if(o.equals("Action")){
                 System.out.println("pilih aksi yang dapat dilakukan oleh benda");
-            } else {
-                System.out.println("command tersebut tidak tersedia");
             }
+            System.out.println("tes2");
+                // } else {
+            //     System.out.println("command tersebut tidak tersedia");
+            // }
         }
 
         // World w = new World();
