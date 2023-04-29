@@ -81,6 +81,14 @@ public class Sim implements Aksi{
         return rumah;
     }
 
+    public void setLokSimRumah(Lokasi lok){
+        this.lokSimRumah = lok;
+    }
+
+    public void setLokSimRuang(Ruangan r){
+        this.lokSimRuang = r;
+    }
+
     public void kerja(int durasi){
         awalKerja = time.getTimeInSec();
         if(durasi <= 0){
