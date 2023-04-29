@@ -17,6 +17,7 @@ public class Main {
                 World w = World.getInstance();
                 System.out.print("Permainan dimulai!! Selamat bermain^^\nSiapa nama simmu? ");
                 String namaLengkap = scan.nextLine();
+            
                 boolean rumahValid = false;
                 while(!rumahValid){
                     System.out.println("Tentukan lokasi rumah Sim (x, y)");
@@ -104,14 +105,17 @@ public class Main {
                     i++;
                 }
             } else if(o.equals("Go To Object")){
+                System.out.println("Pilih objek yang ingin didatangi!");
+                currentSim.getLokRuang().displayObjects();
 
             } else if(o.equals("Action")){
-                System.out.println("pilih aksi yang dapat dilakukan oleh benda");
+                System.out.println("Halo! Apa yang ingin kamu lakukan?");
+                System.out.println("Aksi");
             } else {
                 System.out.println("command tersebut tidak tersedia");
             }
         }
-
+        
         // World w = new World();
         // System.out.print("Permainan dimulai\nSiapa nama simmu? ");
         // String namaLengkap = scan.nextLine();

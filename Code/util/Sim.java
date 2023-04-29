@@ -12,6 +12,7 @@ public class Sim implements Aksi{
     private Rumah rumah;
     private Lokasi lokSimRumah;
     private Ruangan lokSimRuang;
+    private ObjectSim curObject;
     private Time time;
     private int awalKerja;
     private int lamaKerja;
@@ -26,6 +27,7 @@ public class Sim implements Aksi{
         kesejahteraan = new Kesejahteraan();
         status = null;
         rumah = new Rumah(x,y);
+        curObject = null;
         lokSimRuang = rumah.getRoom("Kamar"); 
         lokSimRumah = new Lokasi(x, y); //ini lokasi awal rumahnya input dari pengguna kan?!
     }

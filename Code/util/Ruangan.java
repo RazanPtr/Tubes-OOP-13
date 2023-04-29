@@ -15,7 +15,7 @@ public class Ruangan {
 
     public Ruangan(String nama){
         this.nama = nama;
-        this.objects = new ArrayList<ObjectSim>();
+        this.objects = new ArrayList<>();
         this.grid = new boolean[width][length];
         up = null;
         down = null;
@@ -134,6 +134,16 @@ public class Ruangan {
                 }
             }
             System.out.print("\n-------------------------\n");
+        }
+    }
+
+    public void displayObjects() {
+        System.out.println("Berikut adalah objek-objek yang terletak di ruangan ini:");
+        int i = 1;
+        for (ObjectSim obj : objects) {
+            System.out.println(i+".");
+            System.out.println(obj.getNama());
+            i++;
         }
     }
 }
