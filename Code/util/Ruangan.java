@@ -137,7 +137,7 @@ public class Ruangan {
         }
     }
 
-    public void displayObjects() {
+    public int displayObjects() {
         System.out.println("Berikut adalah objek-objek yang terletak di ruangan ini:");
         int i = 1;
         for (ObjectSim obj : objects) {

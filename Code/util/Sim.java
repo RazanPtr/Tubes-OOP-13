@@ -36,6 +36,7 @@ public class Sim implements Aksi{
         return namaLengkap;
     }
 
+
     public void setNamalengkap(String namaLengkap){
         this.namaLengkap = namaLengkap;
     }
@@ -74,6 +75,14 @@ public class Sim implements Aksi{
 
     public Ruangan getLokRuang(){
         return lokSimRuang;
+    }
+
+    public void setCurObject(ObjectSim obj) {
+        curObject = obj;
+    }
+
+    public ObjectSim getCurObject(ObjectSim obj) {
+        return curObject;
     }
     
     public Rumah getRumah(){

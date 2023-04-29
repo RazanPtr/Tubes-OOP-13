@@ -105,14 +105,52 @@ public class Main {
                     i++;
                 }
             } else if(o.equals("Go To Object")){
-                System.out.println("Pilih objek yang ingin didatangi!");
-                currentSim.getLokRuang().displayObjects();
-
+                int temp = currentSim.getLokRuang().displayObjects();
+                if (temp==1) {
+                    System.out.println("Tidak ada barang di ruangan ini!");
+                } else {
+                    Boolean valid1 = false;
+                    while (!valid1) {
+                        System.out.println("Pilih objek yang ingin didatangi!");
+                        System.out.println("Masukkan angka sesuai objek yang dipilih: ");
+                        int choice = sc.nextInt();
+                        if (choice >= 1 && choice < temp) {
+                            ObjectSim objTemp = currentSim.getLokRuang().getObjects().get(choice-1);
+                            currentSim.setCurObject(objTemp);
+                            System.out.println("Berhasil pindah ke Object " + objTemp.getNama());
+                            //Bantuin set kode buat tampilin aksi si objek dong ges
+                            valid1 = true;
+                        } else {
+                            System.out.println("Opsi tidak valid!");
+                            System.out.println("");
+                        }
+                    }
+                }
             } else if(o.equals("Action")){
-                System.out.println("Halo! Apa yang ingin kamu lakukan?");
-                System.out.println("Aksi");
+                Boolean closed = false;
+                while (!closed) {
+                    System.out.println("Halo! Apa yang ingin kamu lakukan?");
+                    System.out.println("1. Aksi Aktif");
+                    System.out.println("2. Aksi Pasif (Time-Consuming)");
+                    System.out.println("3. Aksi Instan");
+                    System.out.println("4. Tutup Menu Aksi");
+                    int opsi = sc.nextInt();
+                    if (opsi==4) {
+                        closed = true;
+                    } else if (opsi<1 || opsi>4) {
+                        System.out.println("Mohon masukkan opsi valid!");
+                    } else {
+                        if (opsi==1) {
+                            //kode aksi aktif
+                        } else if (opsi==2) {
+                            //kode aksi pasif
+                        } else {
+                            //kode aksi instan
+                        }
+                    }
+                }
             } else {
-                System.out.println("command tersebut tidak tersedia");
+                System.out.println("Command tersebut tidak tersedia");
             }
         }
         
