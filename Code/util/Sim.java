@@ -262,6 +262,7 @@ public class Sim implements Aksi{
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                inventory.addItem(ob, kuantitas);
                 System.out.println("Barang telah masuk ke dalam inventory.");
                 }
             else{
@@ -351,7 +352,6 @@ public class Sim implements Aksi{
     public void lihatInventory(){
     //implementasi lihat Inventory
         inventory.showInventory();
-        
     }
 
     public void pasangBarang(String lokRuang, ObjectSim ob, Lokasi lokBarang){
@@ -361,7 +361,7 @@ public class Sim implements Aksi{
             Furniture f = (Furniture) ob;
             boolean can = rumah.getRoom(lokRuang).canPlaceObj(lokBarang, f);
             if(can){
-                rumah.getRoom(lokRuang).getObjects().add(ob);
+                rumah.getRoom(lokRuang).getObjects().add(f);
                 inventory.addItem(ob, -1);
             }
             else{

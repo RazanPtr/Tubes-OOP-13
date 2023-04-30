@@ -43,11 +43,28 @@ public class Inventory<T> {
     }
 
     public void showInventory(){
-        System.out.println("Inventory: ");
-        Set <T> keys = items.keySet();
-        for (T key : keys){
-            int quantity = items.get(key);
-            System.out.println(key + ": " + quantity);
+        System.out.println("Berikut merupakan isi inventory yang dimiliki oleh Sim");
+        System.out.println("+-----------------+---------------+");
+        System.out.println("|   Nama Barang   |   Kuantitas   |");
+        System.out.println("+-----------------+---------------+");
+        if(items.keySet().size()>0){
+            for(T t : items.keySet()){
+                System.out.print("|" + t.getClass().getSimpleName());
+                for(int i = 0; i < (17-t.getClass().getSimpleName().length()); i++){
+                    System.out.print(" ");
+                }
+                System.out.print("|");
+                System.out.print(items.get(t));
+                for(int i = 0; i < (15-items.get(t).toString().length()); i++){
+                    System.out.print(" ");
+                }
+                System.out.println("|");
+            }
+            System.out.println("+---------------------------------+");
+        } else {
+            System.out.println("|        -        |       -       |");
+            System.out.println("+-----------------+---------------+");
+            System.out.println("inventorymu kosong saat ini");
         }
     }
 }

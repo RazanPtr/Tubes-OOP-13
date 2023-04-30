@@ -6,7 +6,7 @@ public class Ruangan {
     private String nama;
     private static int width = 6;
     private static int length = 6;
-    private ArrayList<ObjectSim> objects;
+    private ArrayList<Furniture> objects;
     private boolean grid[][];
     private Ruangan up;
     private Ruangan down;
@@ -38,7 +38,7 @@ public class Ruangan {
         this.nama = nama;
     }
 
-    public ArrayList<ObjectSim> getObjects(){
+    public ArrayList<Furniture> getObjects(){
         return objects;
     }
 
@@ -84,6 +84,7 @@ public class Ruangan {
             }
         
             // Set posisi objek
+            objects.add(obj);
             obj.setLokDiRuangan(lok);
         } else {
             System.out.println("Barang tidak dapat diletakkan disitu");
