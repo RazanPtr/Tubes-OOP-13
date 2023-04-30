@@ -1,5 +1,6 @@
 package util;
 import java.util.*;
+import objek.*;
 
 public class Rumah {
     private ArrayList<Ruangan> rooms;
@@ -9,6 +10,11 @@ public class Rumah {
         this.rooms = new ArrayList<Ruangan>();
         this.lokRumah = new Lokasi(x, y);
         rooms.add(new Ruangan("Kamar")); // initially add a room
+        getRoom("Kamar").placeObject(new Lokasi(0, 0), new KasurSingle());
+        getRoom("Kamar").placeObject(new Lokasi(0, 1), new Toilet());
+        getRoom("Kamar").placeObject(new Lokasi(4, 0), new KomporGas());
+        getRoom("Kamar").placeObject(new Lokasi(5, 1), new Jam());
+        getRoom("Kamar").placeObject(new Lokasi(0, 3), new MejaKursi());
     }
     
     public int getArea() {

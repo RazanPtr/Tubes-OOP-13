@@ -61,12 +61,13 @@ public class World {
     }
 
     public Rumah getRumah(Lokasi lok){
+        Rumah x = null;
         for(Rumah rumah : perumahan){
             if(lok == rumah.getLokRumah()){
-                return rumah;
+                x = rumah;
             }
         }
-        return null;
+        return x;
     }
 
     public Time getTime(){

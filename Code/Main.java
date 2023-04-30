@@ -146,7 +146,10 @@ public class Main {
                     System.out.println("Sim tersebut belum terdaftar pada permainan Simplicity");
                 }
             } else if(o.equals("List Object")){
-                Ruangan temp = currentSim.getRumah().getRoom(currentSim.getLokRuang().getNamaRuangan());
+                System.out.println(currentSim.getLokSimRumah().getX() + "," + currentSim.getLokSimRumah().getY());
+                System.out.println(currentSim.getRumah().getLokRumah().getX() + ","+currentSim.getRumah().getLokRumah().getY());
+                Ruangan temp = w.getRumah(currentSim.getLokSimRumah()).getRoom(currentSim.getLokRuang().getNamaRuangan());//currentSim.getRumah().getRoom(currentSim.getLokRuang().getNamaRuangan());
+                temp.displayRuangan();
                 int i = 1;
                 System.out.println("Berikut merupakan daftar objek di dalam ruangan");
                 for(ObjectSim ob : temp.getObjects()){

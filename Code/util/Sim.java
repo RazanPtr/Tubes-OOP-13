@@ -30,7 +30,7 @@ public class Sim implements Aksi{
         rumah = new Rumah(x,y);
         curObject = null;
         lokSimRuang = rumah.getRoom("Kamar"); 
-        lokSimRumah = new Lokasi(x, y); //ini lokasi awal rumahnya input dari pengguna kan?!
+        lokSimRumah = rumah.getLokRumah(); //ini lokasi awal rumahnya input dari pengguna kan?!
         durasiTidur = 0;
         sudahTidur = false;
     }
@@ -108,6 +108,11 @@ public class Sim implements Aksi{
         if(durasi %120 != 120){
             throw new IllegalArgumentException("durasi kerja harus kelipatan 120 detik");
         }
+        try {
+            Thread.sleep(durasi * 1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         this.setStatus("kerja");
         kesejahteraan.updateKekenyangan((-10)*(durasi/30));
         kesejahteraan.updateMood((-10)*(durasi/30));
@@ -123,6 +128,11 @@ public class Sim implements Aksi{
         if(durasi % 20 != 0){
             throw new IllegalArgumentException("durasi harus lebih dari 0 detik");
         }
+        try {
+            Thread.sleep(durasi * 1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         this.setStatus("olahraga");
         kesejahteraan.updateKesehatan(5*(durasi/20));
         kesejahteraan.updateKekenyangan((-5)*(durasi/20));
@@ -132,6 +142,11 @@ public class Sim implements Aksi{
     public void tidur(int durasi){
         if(durasi <= 0){
             throw new IllegalArgumentException("durasi harus lebih dari 0 detik");
+        }
+        try {
+            Thread.sleep(durasi * 1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
         this.setStatus("tidur");
         durasiTidur += durasi;
@@ -145,6 +160,10 @@ public class Sim implements Aksi{
             durasiTidur -= (durasiTidur/(4*60));
             sudahTidur = true;
         } 
+    }
+
+    public boolean getTidur(){
+        return sudahTidur;
     }
 
     public void resetHarian(){
@@ -162,6 +181,11 @@ public class Sim implements Aksi{
         if(ob instanceof Masakan){   
             Masakan m = (Masakan) ob; 
             if(inventory.getItem().contains(m)){
+                try {
+                    Thread.sleep(durasi * 1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 this.setStatus("Makan");
                 inventory.removeItem(m, 1);
                 kesejahteraan.updateKekenyangan((m.getTingkatKenyang())*(durasi/30));
@@ -182,6 +206,11 @@ public class Sim implements Aksi{
             }
             if(bisa){
                 this.setStatus("memasak");
+                try {
+                    Thread.sleep((3/2)*m.getTingkatKenyang()* 1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 for(BahanMakanan bm : listResep){
                     inventory.removeItem(ob, 1);
                     uang -= bm.getPrice();
