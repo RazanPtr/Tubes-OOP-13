@@ -308,13 +308,13 @@ public class Sim implements Aksi{
                                             isItemInDelivery = true;
                                             System.out.println("\nAnda telah membeli " + ((ObjectSim) object).getNama() + " dengan harga " + object.getPrice() + ".");
                                             System.out.println("Mohon menunggu selama " + (float) timeRemainingDelivery / 60000 + " menit...");
-                                            AksiSleep(activeDuration);
+                                            time.AksiSleep(activeDuration);
                                             int timeTemp = getTimeRemainingDelivery();
                                             timeRemainingDelivery -= activeDuration;
                                             if (timeRemainingDelivery < activeDuration) {
                                                 time.AksiSleep(timeTemp);
                                                 setUang(getUang()-object.getPrice() * amount);
-                                                Inventory.addItem((ObjectSim) object, amount);
+                                                inventory.addItem((ObjectSim) object, amount);
                                                 System.out.println("\nItem anda sudah masuk ke inventory!");
                                                 System.out.println("Anda memiliki uang sebanyak " + getUang() + ".");
                                                 System.out.println();
@@ -340,13 +340,13 @@ public class Sim implements Aksi{
                                 System.out.println("Anda masih memiliki barang yang sedang dikirim, silahkan menunggu");
                                 System.out.println("Mohon menunggu selama " + (float) timeRemainingDelivery / 60000 + " menit...");
                                 System.out.println("###BARANG SEDANG DIKIRIM###\n");
-                                AksiSleep(activeDuration);
+                                time.AksiSleep(activeDuration);
                                 int timeTemp = getTimeRemainingDelivery();
                                 timeRemainingDelivery -= activeDuration;
                                 if (timeRemainingDelivery < activeDuration) {
                                     time.AksiSleep(timeTemp);
                                     setUang(getUang()-object.getPrice() * amount);
-                                    Inventory.addItem((ObjectSim) object, amount);
+                                    inventory.addItem((ObjectSim) object, amount);
                                     System.out.println("\nItem anda sudah masuk ke inventory!");
                                     System.out.println("Anda memiliki uang sebanyak " + getUang() + ".");
                                     System.out.println();

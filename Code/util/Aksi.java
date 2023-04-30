@@ -18,7 +18,7 @@ public interface Aksi {
 
     public void upgradeRumah();
 
-    public void beliBarang(Map<String, PurchasableObject> objectMap, String itemName, int amount);
+    public void beliBarang(Map<String, PurchasableObject> objectMap, String itemName, int amount) throws negativeParameterException, invalidMultitudeNumber;
 
     public void pindahRuangan(Lokasi lok);
 
