@@ -127,7 +127,7 @@ public class Ruangan {
                 if(j == 0){
                     System.out.print("|");
                 }
-                if(grid[i][j]){
+                if(grid[j][i]){
                     System.out.print(" X |");
                 } else {
                     System.out.print(" V |");
