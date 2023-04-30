@@ -18,6 +18,8 @@ public class Sim implements Aksi{
     private int lamaKerja;
     private int durasiTidur;
     private boolean sudahTidur;
+    private boolean sudahMakan;
+    private boolean sudahBuangAir;
     Kesejahteraan kesejahteraan;
 
     public Sim(String name, int x, int y){
@@ -162,6 +164,8 @@ public class Sim implements Aksi{
     public void resetHarian(){
         durasiTidur = 0;
         sudahTidur = false;
+        sudahBuangAir = false;
+        sudahMakan = false;
     }
 
     public void tidakTidur(){
@@ -178,6 +182,7 @@ public class Sim implements Aksi{
                 this.setStatus("Makan");
                 inventory.removeItem(m, 1);
                 kesejahteraan.updateKekenyangan((m.getTingkatKenyang())*(durasi/30));
+                sudahMakan = true;
             }
         }
     }
@@ -222,11 +227,23 @@ public class Sim implements Aksi{
         kesejahteraan.updateKekenyangan(-10 * (durasi / 30));
     }
 
+    //public void 
+
     public void buangAir(int durasi){
         //implementasi buangAir
-        time.AksiSleep(durasi);
-        kesejahteraan.updateKekenyangan((-20)*(durasi/10));
-        kesejahteraan.updateMood((10)*(durasi/10));
+        if(durasi <= 0){
+            throw new IllegalArgumentException("durasi harus lebih dari 0 detik");
+        }
+        if(sudahMakan){
+            time.AksiSleep(durasi);
+            kesejahteraan.updateKekenyangan((-20)*(durasi/10));
+            kesejahteraan.updateMood((10)*(durasi/10));
+            sudahBuangAir = true;
+        }
+        else{
+            System.out.println("Sim belum makan pada hari ini");
+        }
+            
     }
 
     public void tidakBuangAir(){
