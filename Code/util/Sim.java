@@ -498,6 +498,10 @@ public class Sim implements Aksi{
         System.out.println("Jumlah uang saat ini  :" + uang);
     }
 
+    public Kesejahteraan getKesejahteraan(){
+        return kesejahteraan;
+    }
+
     public class Kesejahteraan {
         private int mood;
         private int kekenyangan;
