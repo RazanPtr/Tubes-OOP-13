@@ -1,11 +1,17 @@
 package objek;
 
-public abstract class ObjectSim {
+public class ObjectSim {
 	private String nama;
 	public ObjectSim(String nama) {
 		this.nama = nama;
 	}
-	public String getNama() {
-		return nama;
-	}
+	//setter
+    public void setNama(String nama){
+        this.nama = nama;
+    }
+    
+    //getter
+    public String getNama(){
+        return nama;
+    }
 }

@@ -22,6 +22,9 @@ public class Sim implements Aksi{
     private boolean sudahTidur;
     private boolean sudahMakan;
     private boolean sudahBuangAir;
+    private int activeDuration;
+    private int timeRemainingDelivery;
+    private boolean isItemInDelivery = false;
     Kesejahteraan kesejahteraan;
 
     public Sim(String name, int x, int y){
@@ -107,6 +110,14 @@ public class Sim implements Aksi{
 
     public void setLokSimRuang(Ruangan r){
         this.lokSimRuang = r;
+    }
+
+    public int getTimeRemainingDelivery() { 
+        return timeRemainingDelivery;
+    }
+
+    public boolean getIsItemInDelivery() { 
+        return isItemInDelivery;
     }
 
     public void kerja(int durasi){
@@ -278,40 +289,95 @@ public class Sim implements Aksi{
         rumah.addRuangan(lokSimRuang);
     }
 
-    public void beliBarang(int durasi, ObjectSim ob, int kuantitas){
-        if(ob instanceof Furniture){
-            Furniture obj = (Furniture) ob;
-            if(uang-obj.getPrice()*kuantitas>=0){
-                uang-=obj.getPrice()*kuantitas;
-                Random rand = new Random();
-                int waktuPengiriman = rand.nextInt(3/2) * 30;
-                System.out.println("Barang akan tiba dalam " + waktuPengiriman + " detik.");
-                time.AksiSleep(durasi);
-                inventory.addItem(ob, kuantitas);
-                System.out.println("Barang telah masuk ke dalam inventory.");
-                }
-            else{
-                System.out.println("Uang sim tidak cukup untuk membeli barang");
+    public synchronized void beliBarang(Map<String, PurchasableObject> objectMap, String itemName, int amount) throws negativeParameterException, invalidMultitudeNumber {
+        if (amount < 0) {
+            throw new negativeParameterException(amount);
+        } else if (amount == 0) {
+            throw new invalidMultitudeNumber(amount);
+        } else {
+            PurchasableObject object = objectMap.get(itemName);
+
+            if (object != null) {
+                Thread thread = new Thread(new Runnable() {
+                    public synchronized void run(){
+
+                        if (object.getPrice() * amount <= getUang() && !getIsItemInDelivery()) {
+                            timeRemainingDelivery = new Random().nextInt(1, 5) * 30 * 1000;
+                                    try {
+                                            timeRemainingDelivery = new Random().nextInt(1, 5) * 30 * 1000;
+                                            isItemInDelivery = true;
+                                            System.out.println("\nAnda telah membeli " + ((ObjectSim) object).getType() + " dengan harga " + object.getPrice() + ".");
+                                            System.out.println("Mohon menunggu selama " + (float) timeRemainingDelivery / 60000 + " menit...");
+                                            AksiSleep(activeDuration);
+                                            int timeTemp = getTimeRemainingDelivery();
+                                            timeRemainingDelivery -= activeDuration;
+                                            if (timeRemainingDelivery < activeDuration) {
+                                                AksiSleep(timeTemp);
+                                                setUang(getUang()-object.getPrice() * amount);
+                                                Inventory.addItem((ObjectSim) object, amount);
+                                                System.out.println("\nItem anda sudah masuk ke inventory!");
+                                                System.out.println("Anda memiliki uang sebanyak " + getSimMoney() + ".");
+                                                System.out.println();
+                                                isItemInDelivery = false;
+                                            } 
+                                            else {
+                                                try{beliBarang(objectMap, itemName, amount);}
+                                                catch(negativeParameterException n){
+                                                    System.out.println(n.getMessage());
+                                                }
+                                                catch(invalidMultitudeNumber i){
+                                                    System.out.println(i.getMessage());
+                                                }
+                                            } 
+                                    }
+                                    catch (InterruptedException e) {
+                                        System.out.println(e.getMessage());
+                                    }
+                        }
+                        else if(object.getPrice() * amount <= getUang() && getIsItemInDelivery()){
+                            try {
+                                System.out.println("\n\n###BARANG SEDANG DIKIRIM###");
+                                System.out.println("Anda masih memiliki barang yang sedang dikirim, silahkan menunggu");
+                                System.out.println("Mohon menunggu selama " + (float) timeRemainingDelivery / 60000 + " menit...");
+                                System.out.println("###BARANG SEDANG DIKIRIM###\n");
+                                AksiSleep(activeDuration);
+                                int timeTemp = getTimeRemainingDelivery();
+                                timeRemainingDelivery -= activeDuration;
+                                if (timeRemainingDelivery < activeDuration) {
+                                    AksiSleep(timeTemp);
+                                    setUang(getUang()-object.getPrice() * amount);
+                                    Inventory.addItem((SimplicityObject) object, amount);
+                                    System.out.println("\nItem anda sudah masuk ke inventory!");
+                                    System.out.println("Anda memiliki uang sebanyak " + getSimMoney() + ".");
+                                    System.out.println();
+                                    isItemInDelivery = false;
+                                } 
+                                else {
+                                    try{beliBarang(objectMap, itemName, amount);}
+                                    catch(negativeParameterException n){
+                                        System.out.println(n.getMessage());
+                                    }
+                                    catch(invalidMultitudeNumber i){
+                                        System.out.println(i.getMessage());
+                                    }
+                                } 
+                            }
+                            catch (InterruptedException e) {
+                                System.out.println(e.getMessage());
+                            }
+                        }
+                        else {
+                            System.out.println("Uang Anda tidak cukup untuk membeli " + ((ObjectSim) object).getType());
+                        }
+                    }
+                });
+
+            thread.start();   
+            } else {
+                System.out.println("Item tidak ditemukan!");
             }
-            }
-        else if(ob instanceof BahanMakanan){
-            BahanMakanan obj = (BahanMakanan) ob;
-            if(uang-obj.getPrice()*kuantitas>=0){
-                uang-=obj.getPrice()*kuantitas;
-                 Random rand = new Random();
-                int waktuPengiriman = rand.nextInt(3/2) * 30;
-                System.out.println("Barang akan tiba dalam " + waktuPengiriman + " detik.");
-                time.AksiSleep(durasi);
-                System.out.println("Barang telah masuk ke dalam inventory.");
-                }
-            else{
-                System.out.println("Uang sim tidak cukup untuk membeli barang");
-                }
-            }
-        else{
-            System.out.println("Barang tersebut tidak bisa dibeli");
         }
-        }
+    }
 
     public void pindahRuangan(Lokasi lok){
     //implementasi pindahRuangan
