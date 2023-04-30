@@ -72,5 +72,15 @@ public class Time {
     public void CetakSisaWaktu(){
         System.out.println("Sisa waktu hari ini adalah " + getSisaMenit() + " menit dan " + getSisaDetik() + " detik");
     }
+
+    public void AksiSleep(int duration) {
+        try {
+            Thread.sleep(duration*1000);
+            updateTime(duration);
+        }
+        catch(Exception e) {
+            Thread.interrupted();
+        }
+    }
     
 }
