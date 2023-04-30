@@ -12,6 +12,25 @@ public class Main {
         boolean finished = false;
         World w = null;
         while(!started && !finished){
+            //Main Menu
+            String title =  
+"░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n" +
+"░           ░   ░░░░   ░         ░░░░░░░░░      ░░░   ░   ░░░░░░░   ░        ░░░   ░░░░░░░░   ░░░░░   ░░░░   ░           ░   ░░░░░░   \n" +
+"▒▒▒▒▒   ▒▒▒▒▒   ▒▒▒▒   ▒   ▒▒▒▒▒▒▒▒▒▒▒▒▒   ▒▒▒▒   ▒   ▒  ▒   ▒▒▒    ▒   ▒▒▒▒   ▒   ▒▒▒▒▒▒▒▒   ▒▒   ▒▒▒   ▒   ▒▒▒▒▒   ▒▒▒▒▒▒   ▒▒▒▒   ▒\n" +
+"▒▒▒▒▒   ▒▒▒▒▒   ▒▒▒▒   ▒   ▒▒▒▒▒▒▒▒▒▒▒▒▒▒   ▒▒▒▒▒▒▒   ▒   ▒   ▒ ▒   ▒   ▒▒▒▒   ▒   ▒▒▒▒▒▒▒▒   ▒   ▒▒▒▒▒▒▒▒   ▒▒▒▒▒   ▒▒▒▒▒▒▒   ▒   ▒▒▒\n" +
+"▓▓▓▓▓   ▓▓▓▓▓          ▓       ▓▓▓▓▓▓▓▓▓▓▓▓   ▓▓▓▓▓   ▓   ▓▓   ▓▓   ▓        ▓▓▓   ▓▓▓▓▓▓▓▓   ▓   ▓▓▓▓▓▓▓▓   ▓▓▓▓▓   ▓▓▓▓▓▓▓▓▓   ▓▓▓▓▓\n" +
+"▓▓▓▓▓   ▓▓▓▓▓   ▓▓▓▓   ▓   ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓   ▓▓   ▓   ▓▓▓  ▓▓   ▓   ▓▓▓▓▓▓▓▓   ▓▓▓▓▓▓▓▓   ▓   ▓▓▓▓▓▓▓▓   ▓▓▓▓▓   ▓▓▓▓▓▓▓▓▓   ▓▓▓▓▓\n" +
+"▓▓▓▓▓   ▓▓▓▓▓   ▓▓▓▓   ▓   ▓▓▓▓▓▓▓▓▓▓▓▓▓   ▓▓▓▓   ▓   ▓   ▓▓▓▓▓▓▓   ▓   ▓▓▓▓▓▓▓▓   ▓▓▓▓▓▓▓▓   ▓▓   ▓▓▓   ▓   ▓▓▓▓▓   ▓▓▓▓▓▓▓▓▓   ▓▓▓▓▓\n" +
+"█████   █████   ████   █         █████████      ███   █   ███████   █   ████████          █   ████     ███   █████   █████████   █████\n" +
+"██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████\n";
+                             
+            System.out.println(title);
+            System.out.println("Selamat datang di permainan The Simplicity!");
+                System.out.println("Permainan ini merupakan permainan karakter virtual yaitu Sim yang dapat anda jalankan kegiatannya.");
+                System.out.println("Terdapat beberapa command yang dapat Anda berikan sebelum permainan :");
+                System.out.println("1. Start Game       : memulai permainan");
+                System.out.println("2. Help             : bantuan dan petunjuk terkait permainan");
+                System.out.println("3. Exit             : keluar dari permainan\n");
             System.out.print(">> ");
             String op = scan.nextLine();
             if(op.equals("Start Game")){
@@ -222,3 +241,4 @@ public class Main {
         // s.lihatInventory();
     }
 }
+
