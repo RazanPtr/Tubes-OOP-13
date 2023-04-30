@@ -10,6 +10,8 @@ public class Rumah {
         this.rooms = new ArrayList<Ruangan>();
         this.lokRumah = new Lokasi(x, y);
         rooms.add(new Ruangan("Kamar")); // initially add a room
+
+        //ini buat trial List Object
         getRoom("Kamar").placeObject(new Lokasi(0, 0), new KasurSingle());
         getRoom("Kamar").placeObject(new Lokasi(0, 1), new Toilet());
         getRoom("Kamar").placeObject(new Lokasi(4, 0), new KomporGas());

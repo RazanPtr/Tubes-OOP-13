@@ -33,6 +33,11 @@ public class Sim implements Aksi{
         lokSimRumah = rumah.getLokRumah(); //ini lokasi awal rumahnya input dari pengguna kan?!
         durasiTidur = 0;
         sudahTidur = false;
+        inventory.addItem(new KasurSingle(), 1);
+        inventory.addItem(new Toilet(), 1);
+        inventory.addItem(new KomporGas(), 1);
+        inventory.addItem(new Jam(), 1);
+        inventory.addItem(new MejaKursi(), 1);
     }
 
     public String getNamaLengkap(){
