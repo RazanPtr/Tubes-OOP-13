@@ -125,8 +125,6 @@ public class Main {
                         pemain.add(s);
                         w.addRumah(s.getRumah());
                         System.out.println("Sim telah berhasil dibuat!");
-                    } else {
-                        System.out.println("Lokasi tersebut telah terisi oleh rumah lain! Silahkan pilih lokasi lain:<");
                     }
                 }
             } else if(o.equals("Change Sim")){

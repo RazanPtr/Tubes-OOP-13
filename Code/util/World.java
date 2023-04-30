@@ -50,8 +50,16 @@ public class World {
     public boolean isRumahAvailable(int lokX, int lokY){
         for(Rumah rumah : perumahan){
             if(lokX == rumah.getLokRumah().getX() && lokY == rumah.getLokRumah().getY()){
+                System.out.println("Lokasi tersebut telah terisi oleh rumah lain");
+                System.out.println("Silahkan masukkan koordinat lokasi rumah kembali");
                 return false;
             }
+        }
+        if(lokX > 64 || lokY > 64 || lokX <= 0 || lokY <= 0){
+            System.out.println("lokasi tersebut tidak tersedia pada World");
+            System.out.println("Lokasi yang dapat digunakan adalah lokasi dengan rentang antara (1,1) hingga (64, 64)");
+            System.out.println("Silahkan masukkan koordinat lokasi rumah kembali");
+            return false;
         }
         return true;
     }
