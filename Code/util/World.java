@@ -68,4 +68,8 @@ public class World {
         }
         return null;
     }
+
+    public Time getTime(){
+        return t;
+    }
 }

@@ -145,5 +145,6 @@ public class Ruangan {
             System.out.println(obj.getNama());
             i++;
         }
+        return i;
     }
 }

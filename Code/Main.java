@@ -162,12 +162,15 @@ public class Main {
                     while (!valid1) {
                         System.out.println("Pilih objek yang ingin didatangi!");
                         System.out.println("Masukkan angka sesuai objek yang dipilih: ");
-                        int choice = sc.nextInt();
+                        int choice = scan.nextInt();
                         if (choice >= 1 && choice < temp) {
                             ObjectSim objTemp = currentSim.getLokRuang().getObjects().get(choice-1);
                             currentSim.setCurObject(objTemp);
                             System.out.println("Berhasil pindah ke Object " + objTemp.getNama());
                             //Bantuin set kode buat tampilin aksi si objek dong ges
+                            System.out.println("Berikut merupakan aksi yang dapat Anda lakukan terhadap objek:");
+                            Furniture f = (Furniture) currentSim.getCurObject(objTemp);
+                            f.displayListAksi();
                             valid1 = true;
                         } else {
                             System.out.println("Opsi tidak valid!");
@@ -183,7 +186,7 @@ public class Main {
                     System.out.println("2. Aksi Pasif (Time-Consuming)");
                     System.out.println("3. Aksi Instan");
                     System.out.println("4. Tutup Menu Aksi");
-                    int opsi = sc.nextInt();
+                    int opsi = scan.nextInt();
                     if (opsi==4) {
                         closed = true;
                     } else if (opsi<1 || opsi>4) {
