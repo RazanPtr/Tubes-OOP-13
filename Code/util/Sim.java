@@ -306,17 +306,17 @@ public class Sim implements Aksi{
                                     try {
                                             timeRemainingDelivery = new Random().nextInt(1, 5) * 30 * 1000;
                                             isItemInDelivery = true;
-                                            System.out.println("\nAnda telah membeli " + ((ObjectSim) object).getType() + " dengan harga " + object.getPrice() + ".");
+                                            System.out.println("\nAnda telah membeli " + ((ObjectSim) object).getNama() + " dengan harga " + object.getPrice() + ".");
                                             System.out.println("Mohon menunggu selama " + (float) timeRemainingDelivery / 60000 + " menit...");
                                             AksiSleep(activeDuration);
                                             int timeTemp = getTimeRemainingDelivery();
                                             timeRemainingDelivery -= activeDuration;
                                             if (timeRemainingDelivery < activeDuration) {
-                                                AksiSleep(timeTemp);
+                                                time.AksiSleep(timeTemp);
                                                 setUang(getUang()-object.getPrice() * amount);
                                                 Inventory.addItem((ObjectSim) object, amount);
                                                 System.out.println("\nItem anda sudah masuk ke inventory!");
-                                                System.out.println("Anda memiliki uang sebanyak " + getSimMoney() + ".");
+                                                System.out.println("Anda memiliki uang sebanyak " + getUang() + ".");
                                                 System.out.println();
                                                 isItemInDelivery = false;
                                             } 
@@ -344,11 +344,11 @@ public class Sim implements Aksi{
                                 int timeTemp = getTimeRemainingDelivery();
                                 timeRemainingDelivery -= activeDuration;
                                 if (timeRemainingDelivery < activeDuration) {
-                                    AksiSleep(timeTemp);
+                                    time.AksiSleep(timeTemp);
                                     setUang(getUang()-object.getPrice() * amount);
-                                    Inventory.addItem((SimplicityObject) object, amount);
+                                    Inventory.addItem((ObjectSim) object, amount);
                                     System.out.println("\nItem anda sudah masuk ke inventory!");
-                                    System.out.println("Anda memiliki uang sebanyak " + getSimMoney() + ".");
+                                    System.out.println("Anda memiliki uang sebanyak " + getUang() + ".");
                                     System.out.println();
                                     isItemInDelivery = false;
                                 } 
@@ -367,7 +367,7 @@ public class Sim implements Aksi{
                             }
                         }
                         else {
-                            System.out.println("Uang Anda tidak cukup untuk membeli " + ((ObjectSim) object).getType());
+                            System.out.println("Uang Anda tidak cukup untuk membeli " + ((ObjectSim) object).getNama());
                         }
                     }
                 });

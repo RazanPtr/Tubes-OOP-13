@@ -18,7 +18,7 @@ public interface Aksi {
 
     public void upgradeRumah();
 
-    public void beliBarang(int durasi, ObjectSim ob, int kuantitas);
+    public void beliBarang(Map<String, PurchasableObject> objectMap, String itemName, int amount);
 
     public void pindahRuangan(Lokasi lok);
 
