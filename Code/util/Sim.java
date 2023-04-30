@@ -108,11 +108,7 @@ public class Sim implements Aksi{
         if(durasi %120 != 120){
             throw new IllegalArgumentException("durasi kerja harus kelipatan 120 detik");
         }
-        try {
-            Thread.sleep(durasi * 1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        time.AksiSleep(durasi);
         this.setStatus("kerja");
         kesejahteraan.updateKekenyangan((-10)*(durasi/30));
         kesejahteraan.updateMood((-10)*(durasi/30));
@@ -128,11 +124,7 @@ public class Sim implements Aksi{
         if(durasi % 20 != 0){
             throw new IllegalArgumentException("durasi harus lebih dari 0 detik");
         }
-        try {
-            Thread.sleep(durasi * 1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        time.AksiSleep(durasi);
         this.setStatus("olahraga");
         kesejahteraan.updateKesehatan(5*(durasi/20));
         kesejahteraan.updateKekenyangan((-5)*(durasi/20));
@@ -143,11 +135,7 @@ public class Sim implements Aksi{
         if(durasi <= 0){
             throw new IllegalArgumentException("durasi harus lebih dari 0 detik");
         }
-        try {
-            Thread.sleep(durasi * 1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        time.AksiSleep(durasi);
         this.setStatus("tidur");
         durasiTidur += durasi;
         checkTidur();
@@ -181,11 +169,7 @@ public class Sim implements Aksi{
         if(ob instanceof Masakan){   
             Masakan m = (Masakan) ob; 
             if(inventory.getItem().contains(m)){
-                try {
-                    Thread.sleep(durasi * 1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                time.AksiSleep(durasi);
                 this.setStatus("Makan");
                 inventory.removeItem(m, 1);
                 kesejahteraan.updateKekenyangan((m.getTingkatKenyang())*(durasi/30));
@@ -208,6 +192,7 @@ public class Sim implements Aksi{
                 this.setStatus("memasak");
                 try {
                     Thread.sleep((3/2)*m.getTingkatKenyang()* 1000);
+                    time.updateTime((3/2)*m.getTingkatKenyang()* 1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -227,13 +212,14 @@ public class Sim implements Aksi{
                 + Math.pow(lokasiTujuan.getY() - lokSimRumah.getY(), 2));
 
         durasi += waktuKunjungan;
-
+        time.AksiSleep(durasi);
         kesejahteraan.updateMood(10 * (durasi / 30));
         kesejahteraan.updateKekenyangan(-10 * (durasi / 30));
     }
 
     public void buangAir(int durasi){
         //implementasi buangAir
+        time.AksiSleep(durasi);
         kesejahteraan.updateKekenyangan((-20)*(durasi/10));
         kesejahteraan.updateMood((10)*(durasi/10));
     }
@@ -255,13 +241,9 @@ public class Sim implements Aksi{
             if(uang-obj.getPrice()*kuantitas>=0){
                 uang-=obj.getPrice()*kuantitas;
                 Random rand = new Random();
-                int waktuPengiriman = rand.nextInt(4) * 30;
+                int waktuPengiriman = rand.nextInt(3/2) * 30;
                 System.out.println("Barang akan tiba dalam " + waktuPengiriman + " detik.");
-                try {
-                    Thread.sleep(waktuPengiriman * 1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                time.AksiSleep(durasi);
                 inventory.addItem(ob, kuantitas);
                 System.out.println("Barang telah masuk ke dalam inventory.");
                 }
@@ -274,13 +256,9 @@ public class Sim implements Aksi{
             if(uang-obj.getPrice()*kuantitas>=0){
                 uang-=obj.getPrice()*kuantitas;
                  Random rand = new Random();
-                int waktuPengiriman = rand.nextInt(4) * 30;
+                int waktuPengiriman = rand.nextInt(3/2) * 30;
                 System.out.println("Barang akan tiba dalam " + waktuPengiriman + " detik.");
-                try {
-                    Thread.sleep(waktuPengiriman * 1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                time.AksiSleep(durasi);
                 System.out.println("Barang telah masuk ke dalam inventory.");
                 }
             else{
@@ -298,6 +276,7 @@ public class Sim implements Aksi{
 
     public void karaoke(int durasi){
     //implementasi karaoke
+        time.AksiSleep(durasi);
         this.setStatus("karaoke");
         kesejahteraan.updateMood(10*(durasi/30));
         kesejahteraan.updateKekenyangan((-10)*(durasi/30));
@@ -306,6 +285,7 @@ public class Sim implements Aksi{
 
     public void melukis(int durasi){
     //implementasi untuk melukis
+        time.AksiSleep(durasi);
         this.setStatus("Melukis");
         kesejahteraan.updateMood(5*(durasi/20));
         kesejahteraan.updateKekenyangan(5*(durasi/20));
@@ -330,12 +310,14 @@ public class Sim implements Aksi{
 
     public void sholat(int durasi){
     //implementasi sholat
+        time.AksiSleep(durasi);
         this.setStatus("sholat");
         kesejahteraan.updateMood(30);
     }
 
     public void mandi(int durasi){
     //implementasi mandi
+        time.AksiSleep(durasi);
         this.setStatus("mandi");
         kesejahteraan.updateKesehatan(30);
         kesejahteraan.updateMood(10);
@@ -343,6 +325,7 @@ public class Sim implements Aksi{
 
     public void nontonNetflix(int durasi){
     //implementasi nontonNetflix
+        time.AksiSleep(durasi);
         this.setStatus("menonton netflix");
         kesejahteraan.updateMood(15*(durasi/40));
         kesejahteraan.updateKekenyangan((-10)*(durasi/40));
