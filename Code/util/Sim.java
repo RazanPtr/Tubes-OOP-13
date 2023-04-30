@@ -3,6 +3,7 @@ import java.util.Random;
 import java.util.*;
 import objek.*;
 import java.lang.Math;
+import java.lang.Exception;
 
 public class Sim implements Aksi{
     private String namaLengkap;

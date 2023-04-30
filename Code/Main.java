@@ -129,8 +129,24 @@ public class Main {
                         System.out.println("X X Opsi tersebut tidak tersedia X X");
                     }
                 }else if(o.equals("Add Sim")){
+                    boolean namaValid = false;
                     System.out.println("Siapa nama sim baru?");
                     String nama = scan.nextLine();
+                    while(!namaValid){
+                        for(Sim s : pemain){
+                            if(s.getNamaLengkap().equals(nama)){
+                                namaValid = false;
+                                break;
+                            } else {
+                                namaValid = true;
+                            }
+                        }
+                        if(!namaValid){
+                            System.out.println("Sim dengan nama tersebut telah tersedia. Silahkan masukkan nama lain");
+                            System.out.println("Siapa nama sim baru?");
+                            nama = scan.nextLine();
+                        }
+                    }
                     boolean rumahValid = false;
                     while(!rumahValid){
                         System.out.println("Dimana lokasi rumah yang diinginkan? (x, y) ");
@@ -252,6 +268,22 @@ public class Main {
                         System.out.println("Tidak ada Sim lain pada permainan ini. Silahkan menambahkan Sim baru!");
                         System.out.println("Siapa nama sim baru?");
                         String nama = scan.nextLine();
+                        boolean namaValid = false;
+                        while(!namaValid){
+                            for(Sim s : pemain){
+                                if(s.getNamaLengkap().equals(nama)){
+                                    namaValid = false;
+                                    break;
+                                } else {
+                                    namaValid = true;
+                                }
+                            }
+                            if(!namaValid){
+                                System.out.println("Sim dengan nama tersebut telah tersedia. Silahkan masukkan nama lain");
+                                System.out.println("Siapa nama sim baru?");
+                                nama = scan.nextLine();
+                            }
+                        }
                         boolean rumahValid = false;
                         while(!rumahValid){
                             System.out.println("Dimana lokasi rumah yang diinginkan? (x, y) ");
