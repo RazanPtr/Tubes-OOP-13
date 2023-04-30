@@ -2,6 +2,7 @@ package util;
 import java.util.Random;
 import java.util.*;
 import objek.*;
+import java.lang.Math;
 
 public class Sim implements Aksi{
     private String namaLengkap;
@@ -17,6 +18,7 @@ public class Sim implements Aksi{
     private int awalKerja;
     private int lamaKerja;
     private int durasiTidur;
+    private int durasiTidakBuangAir;
     private boolean sudahTidur;
     private boolean sudahMakan;
     private boolean sudahBuangAir;
@@ -122,6 +124,8 @@ public class Sim implements Aksi{
         if(durasi >= (4*60)){
             this.uang += getPekerjaan().getJob().getPayRate();
         }
+        //Untuk selalu nambahin durasi gak buang air
+        durasiTidakBuangAir += durasi;
     }
 
     public void olahraga(int durasi){
@@ -136,6 +140,9 @@ public class Sim implements Aksi{
         kesejahteraan.updateKesehatan(5*(durasi/20));
         kesejahteraan.updateKekenyangan((-5)*(durasi/20));
         kesejahteraan.updateMood(10*(durasi/20));
+
+        //Untuk selalu nambahin durasi gak buang air
+        durasiTidakBuangAir += durasi;
     }
 
     public void tidur(int durasi){
@@ -146,6 +153,9 @@ public class Sim implements Aksi{
         this.setStatus("tidur");
         durasiTidur += durasi;
         checkTidur();
+
+        //Untuk selalu nambahin durasi gak buang air
+        durasiTidakBuangAir += durasi;
     }
 
     public void checkTidur(){
@@ -183,6 +193,7 @@ public class Sim implements Aksi{
                 inventory.removeItem(m, 1);
                 kesejahteraan.updateKekenyangan((m.getTingkatKenyang())*(durasi/30));
                 sudahMakan = true;
+                durasiTidakBuangAir = 0;
             }
         }
     }
@@ -212,9 +223,15 @@ public class Sim implements Aksi{
                 }
                 inventory.addItem(ob, 1);
                 kesejahteraan.updateMood(10);
-                //double durasiMasak = (1.5) * m.getTingkatKenyang();
+                double durasiMasak = (1.5) * m.getTingkatKenyang();
+                
+                //Untuk selalu nambahin durasi gak buang air
+                int durasiMasakInt ;
+                durasiMasakInt = (int) Math.floor(durasiMasak);
+                durasiTidakBuangAir += durasiMasakInt;
             }
         }
+        
     }
     
     public void berkunjung(int durasi, Lokasi lokasiTujuan) { // perlu cek rumah yang dituju tuh ada di world (dalem perumahan) apa ngga gasi(??)
@@ -225,6 +242,9 @@ public class Sim implements Aksi{
         time.AksiSleep(durasi);
         kesejahteraan.updateMood(10 * (durasi / 30));
         kesejahteraan.updateKekenyangan(-10 * (durasi / 30));
+        
+        //Untuk selalu nambahin durasi gak buang air
+        durasiTidakBuangAir += durasi;
     }
 
     //public void 
