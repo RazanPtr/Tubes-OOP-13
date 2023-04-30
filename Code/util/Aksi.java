@@ -1,5 +1,6 @@
 package util;
 import objek.*;
+import java.util.Map;
 
 public interface Aksi {
     public void kerja(int durasi);
