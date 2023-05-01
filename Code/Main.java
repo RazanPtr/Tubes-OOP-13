@@ -176,12 +176,12 @@ public class Main {
                         System.out.println("Ruangan tersebut tidak tersedia di dalam posisi rumah saat ini");
                     }
                 } else if(o.equals("Edit Room")){
-                    System.out.println("Opsi edit rumah apa yang ingin Anda lakukan? (Pilih dengan angka)");
-                    System.out.println("1. Pembelian barang");
-                    System.out.println("2. Pemindahan barang");
-                    System.out.print(">> ");
-                    int opsi = scan.nextInt();
                     if(currentSim.getLokSimRumah() == currentSim.getRumah().getLokRumah()){
+                        System.out.println("Opsi edit rumah apa yang ingin Anda lakukan? (Pilih dengan angka)");
+                        System.out.println("1. Pembelian barang");
+                        System.out.println("2. Pemindahan barang");
+                        System.out.print(">> ");
+                        int opsi = scan.nextInt();
                         if(opsi == 1){
                             System.out.println("Barang apa yang ingin anda beli?");
                             Scanner scanBarang = new Scanner(System.in);
