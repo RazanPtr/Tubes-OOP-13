@@ -177,7 +177,9 @@ public class Main {
                     int opsi = scan.nextInt();
                     if(opsi == 1){
                         System.out.println("Barang apa yang ingin anda beli?");
-                        //currentSim.beliBarang(opsi, null, opsi);
+                        String inputBarang = scan.nextLine();
+                        int inputJumlahBarang = scan.nextInt();
+                        currentSim.beliBarang(purchasableMap, inputBarang, inputJumlahBarang);
                     } else if(opsi == 2){
 
                     } else {
