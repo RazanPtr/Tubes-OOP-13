@@ -18,10 +18,10 @@ public class Sim implements Aksi{
     private int awalKerja;
     private int lamaKerja;
     private int durasiTidur;
-    private int durasiTidakBuangAir;
+    public int durasiTidakBuangAir;
     private boolean sudahTidur;
     private boolean sudahMakan;
-    private boolean sudahBuangAir;
+    public boolean sudahBuangAir;
     private int activeDuration;
     private int timeRemainingDelivery;
     private boolean isItemInDelivery = false;
@@ -280,8 +280,10 @@ public class Sim implements Aksi{
     public void tidakBuangAir(){
         //implementasi tidak buangAir
         // nanti di main selalu ngecek durasiTidakBuangAir aja
+        System.out.println("Sim belum buang air 4 menit setelah makan!");
         kesejahteraan.updateKesehatan(-5);
         kesejahteraan.updateMood(-5);
+        durasiTidakBuangAir = 0;
 
     }
 

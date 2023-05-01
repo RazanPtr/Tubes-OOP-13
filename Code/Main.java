@@ -73,6 +73,9 @@ public class Main {
         
         while(started && (!finished) && !currentSim.getKesejahteraan().getIsMati()){
             while(!currentSim.getKesejahteraan().getIsMati()){
+                if (currentSim.durasiTidakBuangAir >= 4 && currentSim.sudahBuangAir){
+                    currentSim.tidakBuangAir();
+                } 
                 System.out.print(">> ");
                 String o;
                 o = scan.nextLine();
@@ -105,7 +108,7 @@ public class Main {
                         //int tempx = scan.nextInt();
                         //int tempy = scan.nextInt();
                         currentSim.upgradeRumah();
-                        
+
                     }
                 } else if(o.equals("Move Room")){
                     System.out.println("Ruangan apakah yang ingin kamu tuju?");
