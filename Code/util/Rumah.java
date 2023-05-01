@@ -33,9 +33,9 @@ public class Rumah {
 
     public boolean isAddRoomAvailable(Ruangan ruangan){
         if(ruangan.getUp()==null || ruangan.getDown()== null || ruangan.getLeft()==null || ruangan.getRight()==null){
-            return false;
-        } else {
             return true;
+        } else {
+            return false;
         }
     }
     
