@@ -101,10 +101,11 @@ public class Main {
                     currentSim.lihatInventory();
                 } else if(o.equals("Upgrade House")){
                     if(currentSim.getLokSimRumah() == currentSim.getRumah().getLokRumah()){
-                        String namaRbaru = scan.nextLine();
-                        int tempx = scan.nextInt();
-                        int tempy = scan.nextInt();
+                        //String namaRbaru = scan.nextLine();
+                        //int tempx = scan.nextInt();
+                        //int tempy = scan.nextInt();
                         currentSim.upgradeRumah();
+                        
                     }
                 } else if(o.equals("Move Room")){
                     System.out.println("Ruangan apakah yang ingin kamu tuju?");
