@@ -181,28 +181,33 @@ public class Main {
                     System.out.println("2. Pemindahan barang");
                     System.out.print(">> ");
                     int opsi = scan.nextInt();
-                    if(opsi == 1){
-                        System.out.println("Barang apa yang ingin anda beli?");
-                        Scanner scanBarang = new Scanner(System.in);
-                        String inputBarang = scanBarang.nextLine();
-                        int inputJumlahBarang = scanBarang.nextInt();
-                        scan.nextLine();
-                        try{
-                            currentSim.beliBarang(purchasableMap, inputBarang, inputJumlahBarang);
-                        }
-                        catch (invalidMultitudeNumber n){
-                            System.out.println(n.getMessage());
-                        }
-                        catch (negativeParameterException e){
-                            System.out.println(e.getMessage());
-                        }
-                        catch (InterruptedException p){
-                            System.out.println(p.getMessage());
-                        }
-                    } else if(opsi == 2){
+                    if(currentSim.getLokSimRumah() == currentSim.getRumah().getLokRumah()){
+                        if(opsi == 1){
+                            System.out.println("Barang apa yang ingin anda beli?");
+                            Scanner scanBarang = new Scanner(System.in);
+                            String inputBarang = scanBarang.nextLine();
+                            int inputJumlahBarang = scanBarang.nextInt();
+                            scan.nextLine();
+                            try{
+                                currentSim.beliBarang(purchasableMap, inputBarang, inputJumlahBarang);
+                            }
+                            catch (invalidMultitudeNumber n){
+                                System.out.println(n.getMessage());
+                            }
+                            catch (negativeParameterException e){
+                                System.out.println(e.getMessage());
+                            }
+                            catch (InterruptedException p){
+                                System.out.println(p.getMessage());
+                            }
+                        } else if(opsi == 2){
 
-                    } else {
-                        System.out.println("X X Opsi tersebut tidak tersedia X X");
+                        } else {
+                            System.out.println("X X Opsi tersebut tidak tersedia X X");
+                        }
+                    }
+                    else{
+                        System.out.println("Anda sedang berada di rumah Sim lain. Anda tidak dapat melakukan edit terhadap rumah ini.");
                     }
                 }else if(o.equals("Add Sim")){
                     boolean namaValid = false;
