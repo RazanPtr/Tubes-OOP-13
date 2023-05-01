@@ -96,7 +96,7 @@ public class Sim implements Aksi{
         curObject = obj;
     }
 
-    public ObjectSim getCurObject(ObjectSim obj) {
+    public ObjectSim getCurObject() {
         return curObject;
     }
     

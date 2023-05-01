@@ -205,7 +205,7 @@ public class Main {
                                 System.out.println("Berhasil pindah ke Object " + objTemp.getNama());
                                 //Bantuin set kode buat tampilin aksi si objek dong ges
                                 System.out.println("Berikut merupakan aksi yang dapat Anda lakukan terhadap objek:");
-                                Furniture f = (Furniture) currentSim.getCurObject(objTemp);
+                                Furniture f = (Furniture) objTemp;
                                 f.displayListAksi();
                                 String temp1 = scan.nextLine();
                                 valid1 = true;
@@ -216,27 +216,11 @@ public class Main {
                         }
                     }
                 } else if(o.equals("Action")){
-                    Boolean closed = false;
-                    while (!closed) {
-                        System.out.println("Halo! Apa yang ingin kamu lakukan?");
-                        System.out.println("1. Aksi Aktif");
-                        System.out.println("2. Aksi Pasif (Time-Consuming)");
-                        System.out.println("3. Aksi Instan");
-                        System.out.println("4. Tutup Menu Aksi");
-                        int opsi = scan.nextInt();
-                        if (opsi==4) {
-                            closed = true;
-                        } else if (opsi<1 || opsi>4) {
-                            System.out.println("Mohon masukkan opsi yang valid");
-                        } else {
-                            if (opsi==1) {
-                                //kode aksi aktif
-                            } else if (opsi==2) {
-                                //kode aksi pasif
-                            } else {
-                                //kode aksi instan
-                            }
-                        }
+                    if (currentSim.getCurObject()==null) {
+                        System.out.println("Kamu sedang tidak berada di dekat objek apa-apa!");
+                    } else {
+                        Furniture f = (Furniture) currentSim.getCurObject();
+                        f.displayListAksi();
                     }
                 } else {
                     System.out.println("Command tersebut tidak tersedia");
