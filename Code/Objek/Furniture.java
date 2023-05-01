@@ -3,7 +3,6 @@ import util.Lokasi;
 import java.util.ArrayList;
 
 public class Furniture extends ObjectSim implements PurchasableObject{
-    private String nama;
     private int length;
     private int width;
     private int price;
@@ -18,10 +17,6 @@ public class Furniture extends ObjectSim implements PurchasableObject{
         lokDiRuangan = null;
         listAksi = new ArrayList<String>();
     } 
-
-    public String getNama(){
-        return nama;
-    }
 
     public Lokasi getLokDiRuangan() {
         return lokDiRuangan;
