@@ -30,113 +30,96 @@ public class Rumah {
     public Lokasi getLokRumah() {
         return lokRumah;
     }
-    
-    public boolean addRuangan (Ruangan ruangan) {
-        if (ruangan. getUp() == null || ruangan.getDown() == null || ruangan.getLeft() == null || ruangan.getRight() == null) {
-        
-            System.out.println("Mau tambah ruangan di sisi mana?");
-            System.out.println("Opsi:");
-            if (ruangan.getUp()==null) {
-                System.out.println("Atas");
-            }
-            if (ruangan.getDown()==null) {
-                System.out.println("Bawah");
-            }
-            if (ruangan.getLeft()==null) {
-                System.out.println("Kiri");
-            }
-            if (ruangan.getRight()==null) {
-                System.out.println("Kanan");
-            }
 
-            Scanner sc = new Scanner(System.in);
-            String input = sc.nextLine();
-            Boolean valid = false;
-            
-            while (!valid) {
-                if (input.equals("Atas")) {
-                    if (ruangan.getUp()==null) {
-                        System.out.println("Akan dibuat ruangan baru di atas ruangan ini!");
-                        System.out.println("Beri nama untuk ruangan baru:");
-                        String nama = sc.nextLine();
-                        Ruangan rbaru = new Ruangan(nama);
-                        ruangan.setUp(rbaru);
-                        rbaru.setDown(ruangan);
-                        rooms.add(rbaru);
-                        System.out.println("Ruang berhasil ditambahkan!");
-                        valid = true;
-                        return true;
-                    } else {
-                        System.out.println("Maaf, sudah terdapat ruangan di atas ruangan ini!");
-                        valid = true;
-                        return false;
-                    }
-                    
-                    
-                } else if (input.equals("Bawah")) {
-                    if (ruangan.getDown()==null) {
-                        System.out.println("Akan dibuat ruangan baru di bawah ruangan ini!");
-                        System.out.println("Beri nama untuk ruangan baru:");
-                        String nama = sc.nextLine();
-                        Ruangan rbaru = new Ruangan(nama);
-                        ruangan.setDown(rbaru);
-                        rbaru.setUp(ruangan);
-                        rooms.add(rbaru);
-                        System.out.println("Ruang berhasil ditambahkan!");
-                        valid = true;
-                        return true;
-                    } else {
-                        System.out.println("Maaf, sudah terdapat ruangan di bawah ruangan ini!");
-                        valid = true;
-                        return false;
-                    }
-                    
-                    
-                } else if (input.equals("Kiri")) {
-                    if (ruangan.getLeft()==null) {
-                        System.out.println("Akan dibuat ruangan baru di kiri ruangan ini!");
-                        System.out.println("Beri nama untuk ruangan baru:");
-                        String nama = sc.nextLine();
-                        Ruangan rbaru = new Ruangan(nama);
-                        ruangan.setLeft(rbaru);
-                        rbaru.setRight(ruangan);
-                        rooms.add(rbaru);
-                        System.out.println("Ruang berhasil ditambahkan!");
-                        valid = true;
-                        return true;
-                    } else {
-                        System.out.println("Maaf, sudah terdapat ruangan di kiri ruangan ini!");
-                        valid = true;
-                        return false;
-                    }
-                    
-                } else if (input.equals("Kanan")) {
-                    if (ruangan.getRight()==null) {
-                        System.out.println("Akan dibuat ruangan baru di kanan ruangan ini!");
-                        System.out.println("Beri nama untuk ruangan baru:");
-                        String nama = sc.nextLine();
-                        Ruangan rbaru = new Ruangan(nama);
-                        ruangan.setRight(rbaru);
-                        rbaru.setLeft(ruangan);
-                        rooms.add(rbaru);
-                        System.out.println("Ruang berhasil ditambahkan!");
-                        valid = true;
-                        return true;
-                    } else {
-                        System.out.println("Maaf, sudah terdapat ruangan di kanan ruangan ini!");
-                        valid = true;
-                        return false;
-                    }
-                
-                } else {
-                    System.out.println("Opsi yang dimasukkan tidak sesuai pilihan yang ada");
-                    System.out.println("Masukkan kembali pilihan yang diinginkan");
-                }
-            }
-        }
-        else{
-            System.out.println("Ruangan ini sudah terhubung dengan ruangan lain di keempat sisinya!");
+    public boolean isAddRoomAvailable(Ruangan ruangan){
+        if(ruangan.getUp()==null || ruangan.getDown()== null || ruangan.getLeft()==null || ruangan.getRight()==null){
             return false;
+        } else {
+            return true;
+        }
+    }
+    
+    public void addRuangan (Ruangan ruangan) {
+        System.out.println("Mau tambah ruangan di sisi mana?");
+        System.out.println("Opsi:");
+        if (ruangan.getUp()==null) {
+            System.out.println("Atas");
+        }
+        if (ruangan.getDown()==null) {
+            System.out.println("Bawah");
+        }
+        if (ruangan.getLeft()==null) {
+            System.out.println("Kiri");
+        }
+        if (ruangan.getRight()==null) {
+            System.out.println("Kanan");
+        }
+
+        Scanner sc = new Scanner(System.in);
+        String input = sc.nextLine();
+        Boolean valid = false;
+        
+        while (!valid) {
+            if (input.equals("Atas")) {
+                if (ruangan.getUp()==null) {
+                    System.out.println("Akan dibuat ruangan baru di atas ruangan ini!");
+                    System.out.println("Beri nama untuk ruangan baru:");
+                    String nama = sc.nextLine();
+                    Ruangan rbaru = new Ruangan(nama);
+                    ruangan.setUp(rbaru);
+                    rbaru.setDown(ruangan);
+                    rooms.add(rbaru);
+                    System.out.println("Ruang berhasil ditambahkan!");
+                } else {
+                    System.out.println("Maaf, sudah terdapat ruangan di atas ruangan ini!");
+                }
+                valid = true;
+            } else if (input.equals("Bawah")) {
+                if (ruangan.getDown()==null) {
+                    System.out.println("Akan dibuat ruangan baru di bawah ruangan ini!");
+                    System.out.println("Beri nama untuk ruangan baru:");
+                    String nama = sc.nextLine();
+                    Ruangan rbaru = new Ruangan(nama);
+                    ruangan.setDown(rbaru);
+                    rbaru.setUp(ruangan);
+                    rooms.add(rbaru);
+                    System.out.println("Ruang berhasil ditambahkan!");
+                } else {
+                    System.out.println("Maaf, sudah terdapat ruangan di bawah ruangan ini!");
+                }
+                valid = true;
+            } else if (input.equals("Kiri")) {
+                if (ruangan.getLeft()==null) {
+                    System.out.println("Akan dibuat ruangan baru di kiri ruangan ini!");
+                    System.out.println("Beri nama untuk ruangan baru:");
+                    String nama = sc.nextLine();
+                    Ruangan rbaru = new Ruangan(nama);
+                    ruangan.setLeft(rbaru);
+                    rbaru.setRight(ruangan);
+                    rooms.add(rbaru);
+                    System.out.println("Ruang berhasil ditambahkan!");
+                } else {
+                    System.out.println("Maaf, sudah terdapat ruangan di kiri ruangan ini!");
+                }
+                valid = true;
+            } else if (input.equals("Kanan")) {
+                if (ruangan.getRight()==null) {
+                    System.out.println("Akan dibuat ruangan baru di kanan ruangan ini!");
+                    System.out.println("Beri nama untuk ruangan baru:");
+                    String nama = sc.nextLine();
+                    Ruangan rbaru = new Ruangan(nama);
+                    ruangan.setRight(rbaru);
+                    rbaru.setLeft(ruangan);
+                    rooms.add(rbaru);
+                    System.out.println("Ruang berhasil ditambahkan!");
+                } else {
+                    System.out.println("Maaf, sudah terdapat ruangan di kanan ruangan ini!");
+                }
+                valid = true;
+            } else {
+                System.out.println("Opsi yang dimasukkan tidak sesuai pilihan yang ada");
+                System.out.println("Masukkan kembali pilihan yang diinginkan");
+            }
         }
     }
 

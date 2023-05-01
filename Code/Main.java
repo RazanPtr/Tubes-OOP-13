@@ -160,11 +160,12 @@ public class Main {
                         //int tempy = scan.nextInt();
                         if(currentSim.getUang() >= 1500){
                             currentSim.upgradeRumah();
-                            int temp = currentSim.getUang();
-                            temp -= 1500;
-                            currentSim.setUang(temp);
+                        } else {
+                            System.out.println("Saldo Simmu tidak mencukupi untuk melakukan upgrade rumah! silahkan bekerja terlebih dahulu");
                         }
-
+                    } else {
+                        System.out.println("Anda sedang berada di rumah Sim lain. Anda tidak dapat melakukan upgrade terhadap rumah ini.");
+                        System.out.println("Silahkan kembali ke rumah Anda terlebih dahulu untuk melakukan upgrade rumah");
                     }
                 } else if(o.equals("Move Room")){
                     System.out.println("Ruangan apakah yang ingin kamu tuju?");

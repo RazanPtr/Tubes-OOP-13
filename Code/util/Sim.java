@@ -305,7 +305,14 @@ public class Sim implements Aksi{
     }
 
     public void upgradeRumah(){
-        rumah.addRuangan(lokSimRuang);
+        if(rumah.isAddRoomAvailable(lokSimRuang)){
+            rumah.addRuangan(lokSimRuang);
+            uang -= 1500;
+        } else {
+            System.out.println("Upgrade rumah tidak dapat dilakukan karena sudah tersedia ruangan disekeliling ruangan saat ini.");
+            System.out.println("Silahkan pindah ke ruangan lain terlebih dahulu untuk melakukan upgrade rumah");
+        }
+        
     }
 
     public synchronized void beliBarang(Map<String, PurchasableObject> objectMap, String itemName, int amount) throws negativeParameterException, invalidMultitudeNumber, InterruptedException {
