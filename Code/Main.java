@@ -160,6 +160,9 @@ public class Main {
                         //int tempy = scan.nextInt();
                         if(currentSim.getUang() >= 1500){
                             currentSim.upgradeRumah();
+                            int temp = currentSim.getUang();
+                            temp -= 1500;
+                            currentSim.setUang(temp);
                         }
 
                     }
