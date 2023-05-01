@@ -207,6 +207,7 @@ public class Main {
                                 System.out.println("Berikut merupakan aksi yang dapat Anda lakukan terhadap objek:");
                                 Furniture f = (Furniture) currentSim.getCurObject(objTemp);
                                 f.displayListAksi();
+                                String temp1 = scan.nextLine();
                                 valid1 = true;
                             } else {
                                 System.out.println("Opsi tidak valid!");
