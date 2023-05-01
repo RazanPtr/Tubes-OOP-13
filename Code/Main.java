@@ -122,7 +122,7 @@ public class Main {
                     int opsi = scan.nextInt();
                     if(opsi == 1){
                         System.out.println("Barang apa yang ingin anda beli?");
-                        currentSim.beliBarang(opsi, null, opsi);
+                        //currentSim.beliBarang(opsi, null, opsi);
                     } else if(opsi == 2){
 
                     } else {

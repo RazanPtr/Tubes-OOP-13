@@ -3,7 +3,6 @@ import java.util.Random;
 import java.util.*;
 import objek.*;
 import java.lang.Math;
-import java.lang.Exception;
 
 public class Sim implements Aksi{
     private String namaLengkap;
@@ -290,7 +289,7 @@ public class Sim implements Aksi{
         rumah.addRuangan(lokSimRuang);
     }
 
-    public synchronized void beliBarang(Map<String, PurchasableObject> objectMap, String itemName, int amount) throws negativeParameterException, invalidMultitudeNumber {
+    public synchronized void beliBarang(Map<String, PurchasableObject> objectMap, String itemName, int amount) throws negativeParameterException, invalidMultitudeNumber, InterruptedException {
         if (amount < 0) {
             throw new negativeParameterException(amount);
         } else if (amount == 0) {
