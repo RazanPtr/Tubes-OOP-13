@@ -381,10 +381,6 @@ public class Sim implements Aksi{
         }
     }
 
-    public void pindahRuangan(Lokasi lok){
-    //implementasi pindahRuangan
-    }
-
     public void karaoke(int durasi){
     //implementasi karaoke
         time.AksiSleep(durasi);
