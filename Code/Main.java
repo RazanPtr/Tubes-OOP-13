@@ -158,7 +158,9 @@ public class Main {
                         //String namaRbaru = scan.nextLine();
                         //int tempx = scan.nextInt();
                         //int tempy = scan.nextInt();
-                        currentSim.upgradeRumah();
+                        if(currentSim.getUang() >= 1500){
+                            currentSim.upgradeRumah();
+                        }
 
                     }
                 } else if(o.equals("Move Room")){
