@@ -11,6 +11,57 @@ public class Main {
         boolean started = false;
         boolean finished = false;
         World w = null;
+
+        //Furniture
+        Jam jam = new Jam();
+        Kanvas kanvas = new Kanvas();
+        KasurKing kasurKing = new KasurKing();
+        KasurQueen kasurQueen = new KasurQueen();
+        KasurSingle kasurSingle = new KasurSingle();
+        KomporGas komporGas = new KomporGas();
+        KomporListrik komporListrik = new KomporListrik();
+        Laptop laptop = new Laptop();
+        MejaKursi mejaKursi = new MejaKursi();
+        Mic mic = new Mic();
+        Sajadah sajadah = new Sajadah();
+        Shower shower = new Shower();
+        Toilet toilet = new Toilet();
+
+        //Bahan Makanan
+        Ayam ayam = new Ayam();
+        Bayam bayam = new Bayam();
+        Kacang kacang = new Kacang();
+        Kentang kentang = new Kentang();
+        Nasi nasi = new Nasi();
+        Sapi sapi = new Sapi();
+        Susu susu = new Susu();
+        Wortel wortel = new Wortel();
+
+        //OBJECTS
+        Map<String, PurchasableObject> purchasableMap = new HashMap<String, PurchasableObject>(){{
+            put(jam.getNama(), jam);
+            put(kanvas.getNama(), kanvas);
+            put(kasurKing.getNama(), kasurKing);
+            put(kasurQueen.getNama(), kasurQueen);
+            put(kasurSingle.getNama(), kasurSingle);
+            put(komporGas.getNama(), komporGas);
+            put(komporListrik.getNama(), komporListrik);
+            put(laptop.getNama(), laptop);
+            put(mejaKursi.getNama(), mejaKursi);
+            put(mic.getNama(), mic);
+            put(sajadah.getNama(), sajadah);
+            put(shower.getNama(), shower);
+            put(toilet.getNama(), toilet);
+            put(ayam.getNama(), ayam);
+            put(bayam.getNama(), bayam);
+            put(kacang.getNama(), kacang);
+            put(kentang.getNama(), kentang);
+            put(nasi.getNama(), nasi);
+            put(sapi.getNama(), sapi);
+            put(susu.getNama(), susu);
+            put(wortel.getNama(), wortel);
+        }};
+
         while(!started && !finished){
             //Main Menu
             String title =  
