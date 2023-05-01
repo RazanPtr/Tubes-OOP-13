@@ -21,8 +21,6 @@ public interface Aksi {
 
     public void beliBarang(Map<String, PurchasableObject> objectMap, String itemName, int amount) throws negativeParameterException, invalidMultitudeNumber, InterruptedException;
 
-    public void pindahRuangan(Lokasi lok);
-
     public void karaoke(int durasi);
 
     public void melukis(int durasi);
