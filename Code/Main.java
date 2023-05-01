@@ -177,9 +177,22 @@ public class Main {
                     int opsi = scan.nextInt();
                     if(opsi == 1){
                         System.out.println("Barang apa yang ingin anda beli?");
-                        String inputBarang = scan.nextLine();
-                        int inputJumlahBarang = scan.nextInt();
-                        currentSim.beliBarang(purchasableMap, inputBarang, inputJumlahBarang);
+                        Scanner scanBarang = new Scanner(System.in);
+                        String inputBarang = scanBarang.nextLine();
+                        int inputJumlahBarang = scanBarang.nextInt();
+                        scan.nextLine();
+                        try{
+                            currentSim.beliBarang(purchasableMap, inputBarang, inputJumlahBarang);
+                        }
+                        catch (invalidMultitudeNumber n){
+                            System.out.println(n.getMessage());
+                        }
+                        catch (negativeParameterException e){
+                            System.out.println(e.getMessage());
+                        }
+                        catch (InterruptedException p){
+                            System.out.println(p.getMessage());
+                        }
                     } else if(opsi == 2){
 
                     } else {
