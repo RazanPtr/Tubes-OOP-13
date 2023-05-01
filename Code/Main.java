@@ -124,6 +124,9 @@ public class Main {
         
         while(started && (!finished) && !currentSim.getKesejahteraan().getIsMati()){
             while(!currentSim.getKesejahteraan().getIsMati()){
+                if (currentSim.durasiTidakBuangAir >= 4 && currentSim.sudahBuangAir){
+                    currentSim.tidakBuangAir();
+                } 
                 System.out.print(">> ");
                 String o;
                 o = scan.nextLine();
@@ -152,10 +155,11 @@ public class Main {
                     currentSim.lihatInventory();
                 } else if(o.equals("Upgrade House")){
                     if(currentSim.getLokSimRumah() == currentSim.getRumah().getLokRumah()){
-                        String namaRbaru = scan.nextLine();
-                        int tempx = scan.nextInt();
-                        int tempy = scan.nextInt();
+                        //String namaRbaru = scan.nextLine();
+                        //int tempx = scan.nextInt();
+                        //int tempy = scan.nextInt();
                         currentSim.upgradeRumah();
+
                     }
                 } else if(o.equals("Move Room")){
                     System.out.println("Ruangan apakah yang ingin kamu tuju?");
@@ -257,6 +261,7 @@ public class Main {
                                 System.out.println("Berikut merupakan aksi yang dapat Anda lakukan terhadap objek:");
                                 Furniture f = (Furniture) currentSim.getCurObject(objTemp);
                                 f.displayListAksi();
+                                String temp1 = scan.nextLine();
                                 valid1 = true;
                             } else {
                                 System.out.println("Opsi tidak valid!");

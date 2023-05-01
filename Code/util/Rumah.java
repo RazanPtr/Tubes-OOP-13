@@ -52,7 +52,7 @@ public class Rumah {
         Boolean valid = false;
         
         while (!valid) {
-            if (input.equals("Up")) {
+            if (input.equals("Atas")) {
                 if (ruangan.getUp()==null) {
                     System.out.println("Akan dibuat ruangan baru di atas ruangan ini!");
                     System.out.println("Beri nama untuk ruangan baru:");
@@ -66,7 +66,7 @@ public class Rumah {
                     System.out.println("Maaf, sudah terdapat ruangan di atas ruangan ini!");
                 }
                 valid = true;
-            } else if (input.equals("Down")) {
+            } else if (input.equals("Bawah")) {
                 if (ruangan.getDown()==null) {
                     System.out.println("Akan dibuat ruangan baru di bawah ruangan ini!");
                     System.out.println("Beri nama untuk ruangan baru:");
@@ -80,7 +80,7 @@ public class Rumah {
                     System.out.println("Maaf, sudah terdapat ruangan di bawah ruangan ini!");
                 }
                 valid = true;
-            } else if (input.equals("Left")) {
+            } else if (input.equals("Kiri")) {
                 if (ruangan.getLeft()==null) {
                     System.out.println("Akan dibuat ruangan baru di kiri ruangan ini!");
                     System.out.println("Beri nama untuk ruangan baru:");
@@ -94,7 +94,7 @@ public class Rumah {
                     System.out.println("Maaf, sudah terdapat ruangan di kiri ruangan ini!");
                 }
                 valid = true;
-            } else if (input.equals("Right")) {
+            } else if (input.equals("Kanan")) {
                 if (ruangan.getRight()==null) {
                     System.out.println("Akan dibuat ruangan baru di kanan ruangan ini!");
                     System.out.println("Beri nama untuk ruangan baru:");
