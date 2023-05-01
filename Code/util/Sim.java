@@ -71,7 +71,7 @@ public class Sim implements Aksi{
     }
 
     public void setActiveDuration(int amount){
-        activeDuration = amount;
+        activeDuration = amount*1000;
     }
 
     public void updateUang(int uang){
@@ -157,6 +157,7 @@ public class Sim implements Aksi{
         if(durasi % 20 != 0){
             throw new IllegalArgumentException("durasi harus lebih dari 0 detik");
         }
+        setActiveDuration(durasi);
         AksiSleep(durasi);
         this.setStatus("olahraga");
         kesejahteraan.updateKesehatan(5*(durasi/20));
