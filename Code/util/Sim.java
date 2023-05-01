@@ -71,7 +71,7 @@ public class Sim implements Aksi{
     }
 
     public void setActiveDuration(int amount){
-        activeDuration = amount*1000;
+        activeDuration = amount;
     }
 
     public void updateUang(int uang){
