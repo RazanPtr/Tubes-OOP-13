@@ -325,11 +325,11 @@ public class Sim implements Aksi{
                 }
             }
         } else if (obj.getNama().equals("Shower")) {
-            System.out.println("Apakah kamu ingin nonton mandi? (Y/N)");
+            System.out.println("Apakah kamu ingin mandi? (Y/N)");
             while (!valops) {
                 String ops = scan.nextLine();
                 if (ops.equals("Y")) {
-                    System.out.println("Berapa lama kamu ingin nonton mandi? (Dalam Detik)");
+                    System.out.println("Berapa lama kamu ingin mandi? (Dalam Detik)");
                     int dur = scan.nextInt();
                     String temp = scan.nextLine();
                     mandi(dur);
