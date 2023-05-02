@@ -388,7 +388,7 @@ public class Sim implements Aksi{
             throw new IllegalArgumentException("durasi kerja harus kelipatan 120 detik");
         }
         setActiveDuration(durasi);
-        
+        time.AksiSleep(durasi);
         this.setStatus("kerja");
         kesejahteraan.updateKekenyangan((-10)*(durasi/30));
         kesejahteraan.updateMood((-10)*(durasi/30));
@@ -407,7 +407,7 @@ public class Sim implements Aksi{
             throw new IllegalArgumentException("durasi harus kelipatan 20 detik");
         }
         setActiveDuration(durasi);
-        
+        time.AksiSleep(durasi);
         this.setStatus("olahraga");
         kesejahteraan.updateKesehatan(5*(durasi/20));
         kesejahteraan.updateKekenyangan((-5)*(durasi/20));
@@ -421,7 +421,7 @@ public class Sim implements Aksi{
         if(durasi <= 0){
             throw new IllegalArgumentException("durasi harus lebih dari 0 detik");
         }
-        
+        time.AksiSleep(durasi);
         this.setStatus("tidur");
         setActiveDuration(durasi);
         durasiTidur += durasi;
@@ -462,7 +462,7 @@ public class Sim implements Aksi{
             Masakan m = (Masakan) ob; 
             if(inventory.getItem().contains(m)){
                 setActiveDuration(durasi);
-                
+                time.AksiSleep(durasi);
                 this.setStatus("Makan");
                 inventory.removeItem(m, 1);
                 kesejahteraan.updateKekenyangan((m.getTingkatKenyang())*(durasi/30));
@@ -540,7 +540,7 @@ public class Sim implements Aksi{
         }
         if(sudahMakan){
             setActiveDuration(durasi);
-            
+            time.AksiSleep(durasi);
             kesejahteraan.updateKekenyangan((-20)*(durasi/10));
             kesejahteraan.updateMood((10)*(durasi/10));
             sudahBuangAir = true;
@@ -649,7 +649,7 @@ public class Sim implements Aksi{
             throw new IllegalArgumentException("durasi tidak sesuai");
         }
         setActiveDuration(durasi);
-        
+        time.AksiSleep(durasi);
         this.setStatus("karaoke");
         kesejahteraan.updateMood(10*(durasi/30));
         kesejahteraan.updateKekenyangan((-10)*(durasi/30));
@@ -664,7 +664,7 @@ public class Sim implements Aksi{
             throw new IllegalArgumentException("durasi tidak sesuai");
         }
         setActiveDuration(durasi);
-        
+        time.AksiSleep(durasi);
         this.setStatus("Melukis");
         kesejahteraan.updateMood(5*(durasi/20));
         kesejahteraan.updateKekenyangan(5*(durasi/20));
@@ -695,7 +695,7 @@ public class Sim implements Aksi{
             throw new IllegalArgumentException("durasi tidak sesuai");
         }
         setActiveDuration(durasi);
-        
+        time.AksiSleep(durasi);
         this.setStatus("sholat");
         kesejahteraan.updateMood(30);
          //Untuk selalu nambahin durasi gak buang air
@@ -708,7 +708,7 @@ public class Sim implements Aksi{
             throw new IllegalArgumentException("durasi tidak sesuai");
         }
         setActiveDuration(durasi);
-        
+        time.AksiSleep(durasi);
         this.setStatus("mandi");
         kesejahteraan.updateKesehatan(30);
         kesejahteraan.updateMood(10);
@@ -722,7 +722,7 @@ public class Sim implements Aksi{
             throw new IllegalArgumentException("durasi tidak sesuai");
         }
         setActiveDuration(durasi);
-        
+        time.AksiSleep(durasi);
         this.setStatus("menonton netflix");
         kesejahteraan.updateMood(15*(durasi/40));
         kesejahteraan.updateKekenyangan((-10)*(durasi/40));
