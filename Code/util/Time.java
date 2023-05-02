@@ -66,7 +66,7 @@ public class Time {
     }
 
     public void CetakWaktu(){
-        System.out.println("Hari ini adalah hari ke-" + getDay() + " dan saat ini waktu menunjukkan pukul " + getMin()+":" + getSec() +" WBS (Waktu Bagian Simplicity)");
+        System.out.println("Hari ini adalah hari ke-" + getDay() + " dan saat ini waktu menunjukkan pukul " + getMin()+" menit " + getSec() +" detik WBS (Waktu Bagian Simplicity)");
     }
 
     public void CetakSisaWaktu(){
