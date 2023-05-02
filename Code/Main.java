@@ -181,9 +181,13 @@ public class Main {
                         System.out.println("Opsi edit rumah apa yang ingin Anda lakukan? (Pilih dengan angka)");
                         System.out.println("1. Pembelian barang");
                         System.out.println("2. Pemindahan barang");
+                        System.out.println("3. Pemasangan Barang");
+                        System.out.println("4. Penyimpanan Barang");
                         System.out.print(">> ");
                         int opsi = scan.nextInt();
+                        String tempp = scan.nextLine();
                         if(opsi == 1){
+                            //tampilin
                             System.out.println("Barang apa yang ingin anda beli?");
                             Scanner scanBarang = new Scanner(System.in);
                             String inputBarang = scanBarang.nextLine();
@@ -201,10 +205,14 @@ public class Main {
                             catch (InterruptedException p){
                                 System.out.println(p.getMessage());
                             }
-                        } else if(opsi == 2){
-
+                        } else if (opsi==2) {
+                            //kode
+                        } else if (opsi==3) {
+                            //kode
+                        } else if (opsi==4) {
+                            //kode
                         } else {
-                            System.out.println("X X Opsi tersebut tidak tersedia X X");
+                            System.out.println("Opsi tidak valid!");
                         }
                     }
                     else{
