@@ -84,7 +84,7 @@ public class Main {
                 System.out.println("3. Exit             : keluar dari permainan\n");
             System.out.print(">> ");
             String op = scan.nextLine();
-            if(op.equals("Start Game")){
+            if(op.equalsIgnoreCase("Start Game")){
                 w = World.getInstance();
                 System.out.print("Permainan dimulai!! Selamat bermain^^\nSiapa nama simmu? ");
                 String namaLengkap = scan.nextLine();
@@ -107,14 +107,14 @@ public class Main {
                     }
                 }
                 System.out.println("Sim dengan nama "+ currentSim.getNamaLengkap() + " telah siap dimainkan!");
-            } else if(op.equals("Help")){
+            } else if(op.equalsIgnoreCase("Help")){
                 System.out.println("Selamat datang di permainan Simplicity!");
                 System.out.println("permainan ini merupakan permainan karakter virtual yaitu Sim yang dapat anda jalankan kegiatannya.");
                 System.out.println("Terdapat beberapa command yang dapat Anda berikan sebelum permainan :");
                 System.out.println("1. Start Game       : memulai permainan");
                 System.out.println("2. Help             : bantuan dan petunjuk terkait permainan");
                 System.out.println("3. Exit             : keluar dari permainan");
-            } else if(op.equals("Exit")){
+            } else if(op.equalsIgnoreCase("Exit")){
                 System.out.println("Game akan berakhir.. Terimakasih telah bermain!! ^^");
                 finished = true;
             } else {
