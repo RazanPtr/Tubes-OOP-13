@@ -67,6 +67,10 @@ public class Sim implements Aksi{
         this.uang = uang;
     }
 
+    public void setTimeDelivery(int amount){
+        timeRemainingDelivery = amount;
+    }
+
     public int getActiveDuration(){
         return activeDuration;
     }
@@ -355,7 +359,7 @@ public class Sim implements Aksi{
         if(durasi <= 0){
             throw new IllegalArgumentException("durasi harus lebih dari 0 detik");
         }
-        if(durasi %120 != 120){
+        if(durasi %120 != 0){
             throw new IllegalArgumentException("durasi kerja harus kelipatan 120 detik");
         }
         setActiveDuration(durasi);
@@ -532,44 +536,57 @@ public class Sim implements Aksi{
         
     }
 
-    public synchronized void beliBarang(Map<String, PurchasableObject> objectMap, String itemName, int amount) throws negativeParameterException, invalidMultitudeNumber, InterruptedException {
+    public void  beliBarang(Map<String, PurchasableObject> objectMap, String itemName, int amount) throws negativeParameterException, invalidMultitudeNumber, InterruptedException {
         if (amount < 0) {
             throw new negativeParameterException(amount);
         } else if (amount == 0) {
             throw new invalidMultitudeNumber(amount);
         } else {
             PurchasableObject object = objectMap.get(itemName);
-
             if (object != null) {
                 Thread thread = new Thread(new Runnable() {
-                    public synchronized void run(){
-
-                        if (object.getPrice() * amount <= getUang() && !getIsItemInDelivery()) {
-                            timeRemainingDelivery = new Random().nextInt(1, 5) * 30 * 1000;
-                                    try {
-                                            timeRemainingDelivery = new Random().nextInt(1, 5) * 30 * 1000;
+                    public void run(){
+                        if (object.getPrice() * amount <= getUang()) {
+                                    try {  
+                                            Thread.sleep(300); 
+                                            while (getStatus().equals("Idle")) {
+                                                Thread.sleep(1);
+                                            }
+                                            setTimeDelivery(new Random().nextInt(1, 6) * 30 * 1000);
                                             isItemInDelivery = true;
                                             System.out.println("\nAnda telah membeli " + ((ObjectSim) object).getNama() + " dengan harga " + object.getPrice() + ".");
-                                            System.out.println("Mohon menunggu selama " + (float) timeRemainingDelivery / 60000 + " menit...");
-                                            time.AksiSleep(activeDuration);
-                                            int timeTemp = getTimeRemainingDelivery();
-                                            timeRemainingDelivery -= activeDuration;
-                                            if (timeRemainingDelivery < activeDuration) {
-                                                time.AksiSleep(timeTemp);
+                                            System.out.println("Mohon menunggu selama " + timeRemainingDelivery / 1000 + " detik");
+                                            if (timeRemainingDelivery < getActiveDuration()) {
+                                                Thread.sleep(timeRemainingDelivery);
                                                 setUang(getUang()-object.getPrice() * amount);
                                                 inventory.addItem((ObjectSim) object, amount);
-                                                System.out.println("\nItem anda sudah masuk ke inventory!");
-                                                System.out.println("Anda memiliki uang sebanyak " + getUang() + ".");
+                                                System.out.println("\nItem Anda sudah sampai!");
+                                                System.out.println("Kamu memiliki uang sebanyak " + getUang() + ".");
                                                 System.out.println();
                                                 isItemInDelivery = false;
                                             } 
                                             else {
-                                                try{beliBarang(objectMap, itemName, amount);}
-                                                catch(negativeParameterException n){
-                                                    System.out.println(n.getMessage());
-                                                }
-                                                catch(invalidMultitudeNumber i){
-                                                    System.out.println(i.getMessage());
+                                                int tempActiveDuration = getActiveDuration();
+                                                while(timeRemainingDelivery > 0 && isItemInDelivery) {
+                                                    Thread.sleep(200); 
+                                                    tempActiveDuration = getActiveDuration();
+                                                    if(timeRemainingDelivery < tempActiveDuration){
+                                                        System.out.println("\n///Proses pengiriman barang///");
+                                                        Thread.sleep(timeRemainingDelivery);
+                                                        setUang(getUang()-object.getPrice() * amount);
+                                                        inventory.addItem((ObjectSim) object, amount);
+                                                        System.out.println("\nItem Anda sudah sampai!");
+                                                        System.out.println("Kamu memiliki uang sebanyak " + getUang() + ".");
+                                                        isItemInDelivery = false;
+                                                    }
+                                                    else{
+                                                        System.out.println("\n///Proses pengiriman barang///");
+                                                        Thread.sleep(tempActiveDuration + 100);
+                                                        timeRemainingDelivery -= tempActiveDuration;
+                                                    }
+                                                    while (getStatus().equals("Idle")) {
+                                                        Thread.sleep(1);
+                                                    }
                                                 }
                                             } 
                                     }
@@ -577,47 +594,16 @@ public class Sim implements Aksi{
                                         System.out.println(e.getMessage());
                                     }
                         }
-                        else if(object.getPrice() * amount <= getUang() && getIsItemInDelivery()){
-                            try {
-                                System.out.println("\n\n###BARANG SEDANG DIKIRIM###");
-                                System.out.println("Anda masih memiliki barang yang sedang dikirim, silahkan menunggu");
-                                System.out.println("Mohon menunggu selama " + (float) timeRemainingDelivery / 60000 + " menit...");
-                                System.out.println("###BARANG SEDANG DIKIRIM###\n");
-                                time.AksiSleep(activeDuration);
-                                int timeTemp = getTimeRemainingDelivery();
-                                timeRemainingDelivery -= activeDuration;
-                                if (timeRemainingDelivery < activeDuration) {
-                                    time.AksiSleep(timeTemp);
-                                    setUang(getUang()-object.getPrice() * amount);
-                                    inventory.addItem((ObjectSim) object, amount);
-                                    System.out.println("\nItem anda sudah masuk ke inventory!");
-                                    System.out.println("Anda memiliki uang sebanyak " + getUang() + ".");
-                                    System.out.println();
-                                    isItemInDelivery = false;
-                                } 
-                                else {
-                                    try{beliBarang(objectMap, itemName, amount);}
-                                    catch(negativeParameterException n){
-                                        System.out.println(n.getMessage());
-                                    }
-                                    catch(invalidMultitudeNumber i){
-                                        System.out.println(i.getMessage());
-                                    }
-                                } 
-                            }
-                            catch (InterruptedException e) {
-                                System.out.println(e.getMessage());
-                            }
-                        }
                         else {
-                            System.out.println("Uang Anda tidak cukup untuk membeli " + ((ObjectSim) object).getNama());
+                            System.out.println("Anda tidak memiliki cukup uang untuk membeli " + ((ObjectSim) object).getNama());
                         }
                     }
                 });
 
             thread.start();   
-            } else {
-                System.out.println("Item tidak ditemukan!");
+            } 
+            else {
+                System.out.println("Item tidak ditemukan");
             }
         }
     }
