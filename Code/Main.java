@@ -279,30 +279,12 @@ public class Main {
                             System.out.println("Pilih objek yang ingin didatangi!");
                             System.out.println("Masukkan angka sesuai objek yang dipilih: ");
                             int choice = scan.nextInt();
+                            String tempstr = scan.nextLine();
                             if (choice >= 1 && choice < temp) {
                                 ObjectSim objTemp = currentSim.getLokRuang().getObjects().get(choice-1);
-                                //Kasus dia udah ada di situ
-                                if (objTemp==currentSim.getCurObject()) {
-                                    System.out.println("Kamu sudah berada di objek tersebut! Pilih command Action untuk melakukan Aksi");
-                                    valid1 = true;
-                                } else {
-                                currentSim.setCurObject(objTemp);
+                                currentSim.move(objTemp);
                                 System.out.println("Berhasil pindah ke Object " + objTemp.getNama());
-                                //Bantuin set kode buat tampilin aksi si objek dong ges
-                                System.out.println("Berikut merupakan aksi yang dapat Anda lakukan terhadap objek:");
-                                Furniture f = (Furniture) objTemp;
-                                f.displayListAksi();
-                                String temp1 = scan.nextLine();
-                                System.out.println("Apakah kamu ingin melakukan aksi di objek ini? (Y/N)");
-                                String temp2 = scan.nextLine();
-                                if (temp2=="Y") {
-                                    //teks
-                                } else if (temp2=="N") {
-                                    //teks
-                                } else {
-                                    //command tidak valid
-                                }
-                                }
+                                valid1 = true;
                             } else {
                                 System.out.println("Opsi tidak valid!");
                                 System.out.println("");

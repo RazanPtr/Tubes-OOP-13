@@ -130,6 +130,225 @@ public class Sim implements Aksi{
         return isItemInDelivery;
     }
 
+    public void move(ObjectSim obj) {
+        curObject = obj;
+        Boolean valops = false;
+        Scanner scan = new Scanner(System.in);
+        if (obj.getNama().equals("Kasur Single")||obj.getNama().equals("Kasur Queen Size")||obj.getNama().equals("Kasur King Size")) {
+            System.out.println("Apakah kamu mau tidur? (Y/N)");
+            while (!valops) {
+                String ops = scan.nextLine();
+                if (ops.equals("Y")) {
+                    System.out.println("Berapa lama kamu ingin tidur? (Dalam Detik)");
+                    int dur = scan.nextInt();
+                    String temp = scan.nextLine();
+                    try {
+                        tidur(dur);
+                        valops = true;
+                    } catch (IllegalArgumentException e) {
+                        System.out.println(e.getMessage());
+                        System.out.println("Silahkan masukkan durasi yang valid");
+                    }
+                } else if (ops.equals("N")){
+                    System.out.println("Baik. Jangan lupa untuk tidur secukupnya!");
+                    valops = true;
+                } else {
+                    System.out.println("Tolong masukkan opsi yang tepat!");
+                }
+            }
+        } else if (obj.getNama().equals("Toilet")) {
+            System.out.println("Apakah kamu mau buang air? (Y/N)");
+            while (!valops) {
+                String ops = scan.nextLine();
+                if (ops.equals("Y")) {
+                    System.out.println("Berapa lama kamu ingin buang air? (Dalam Detik)");
+                    int dur = scan.nextInt();
+                    String temp = scan.nextLine();
+                    try {
+                        buangAir(dur);
+                        valops = true;
+                    } catch (IllegalArgumentException e) {
+                        System.out.println(e.getMessage());
+                        System.out.println("Silahkan masukkan durasi yang valid");
+                    }
+                } else if (ops.equals("N")){
+                    System.out.println("Baik. Jangan lupa untuk buang air setelah makan!");
+                    valops = true;
+                } else {
+                    System.out.println("Tolong masukkan opsi yang tepat!");
+                }
+            }
+        } else if (obj.getNama().equals("Kompor Gas")||obj.getNama().equals("Kompor Listrik")) {
+            System.out.println("Apakah kamu mau memasak? (Y/N)");
+            while (!valops) {
+                String ops = scan.nextLine();
+                if (ops.equals("Y")) {
+                    System.out.println("Apa yang ingin kau masak? Berikut adalah masakan yang dapat dibuat:");
+                    System.out.println("1. Nasi Ayam");
+                    System.out.println("2. Nasi Kari");
+                    System.out.println("3. Susu Kacang");
+                    System.out.println("4. Tumis Sayur");
+                    System.out.println("5. Bistik");
+                    System.out.println("");
+                    Boolean valmenu = false;
+                    while (!valmenu) {
+                        System.out.println("Pilihlah menu dengan memasukkan nomor menu (1/2/3/4/5!)");
+                        int menu = scan.nextInt();
+                        String tempnext = scan.nextLine();
+                        if (menu==1) {
+                            System.out.println("Kamu memilih Nasi Ayam!");
+                            memasak(new NasiAyam());
+                            valmenu = true;
+                        } else if (menu==2) {
+                            System.out.println("Kamu memilih Nasi Kari!");
+                            memasak(new NasiKari());
+                            valmenu = true;
+                        } else if (menu==3) {
+                            System.out.println("Kamu memilih Susu Kacang!");
+                            memasak(new SusuKacang());
+                            valmenu = true;
+                        } else if (menu==4) {
+                            System.out.println("Kamu memilih Tumis Sayur!");
+                            memasak(new TumisSayur());
+                            valmenu = true;
+                        } else if (menu==5) {
+                            System.out.println("Kamu memilih Bistik!");
+                            memasak(new Bistik());
+                            valmenu = true;
+                        } else {
+                            System.out.println("Tolong masukkan opsi yang valid!");
+                        }
+                    }
+                    valops = true;
+                } else if (ops.equals("N")){
+                    System.out.println("Baik. Kunjungi lagi kompor apabila ingin memasak!");
+                    valops = true;
+                } else {
+                    System.out.println("Tolong masukkan opsi yang tepat!");
+                } 
+            }
+        } else if (obj.getNama().equals("Meja dan Kursi")) {
+            System.out.println("Apakah kamu mau makan? (Y/N)");
+            while (!valops) {
+                String ops = scan.nextLine();
+                if (ops.equals("Y")) {
+                    System.out.println("Apa yang ingin kamu makan?");
+                    //kode
+                } else if (ops.equals("N")){
+                    System.out.println("Baik. Jangan lupa untuk makan secukupnya!");
+                    valops = true;
+                } else {
+                    System.out.println("Tolong masukkan opsi yang tepat!");
+                }
+            }
+        } else if (obj.getNama().equals("Jam")) {
+            System.out.println("Apakah kamu mau melihat waktu? (Y/N)");
+            while (!valops) {
+                String ops = scan.nextLine();
+                if (ops.equals("Y")) {
+                    System.out.println("Waktu sekarang adalah sebagai berikut:");
+                    lihatWaktu();
+                    valops = true;
+                } else if (ops.equals("N")){
+                    System.out.println("Baik. Kunjungi lagi jam jika ingin melihat waktu!");
+                    valops = true;
+                } else {
+                    System.out.println("Tolong masukkan opsi yang tepat!");
+                }
+            }
+        } else if (obj.getNama().equals("Sajadah")) {
+            System.out.println("Apakah kamu ingin Shalat? (Y/N)");
+            while (!valops) {
+                String ops = scan.nextLine();
+                if (ops.equals("Y")) {
+                    System.out.println("Berapa lama kamu ingin Shalat? (Dalam Detik)");
+                    int dur = scan.nextInt();
+                    String temp = scan.nextLine();
+                    sholat(dur);
+                    valops = true;
+                } else if (ops.equals("N")){
+                    System.out.println("Baik. Jangan lupa Shalat!");
+                    valops = true;
+                } else {
+                    System.out.println("Tolong masukkan opsi yang tepat!");
+                }
+            }
+        } else if (obj.getNama().equals("Kanvas")) {
+            System.out.println("Apakah kamu ingin melukis? (Y/N)");
+            while (!valops) {
+                String ops = scan.nextLine();
+                if (ops.equals("Y")) {
+                    System.out.println("Berapa lama kamu ingin melukis? (Dalam Detik)");
+                    int dur = scan.nextInt();
+                    String temp = scan.nextLine();
+                    melukis(dur);
+                    valops = true;
+                } else if (ops.equals("N")){
+                    System.out.println("Baik. Jika ingin melukis, kunjungi lagi kanvas!");
+                    valops = true;
+                } else {
+                    System.out.println("Tolong masukkan opsi yang tepat!");
+                }
+            }
+        } else if (obj.getNama().equals("Mic")) {
+            System.out.println("Apakah kamu ingin karaoke? (Y/N)");
+            while (!valops) {
+                String ops = scan.nextLine();
+                if (ops.equals("Y")) {
+                    System.out.println("Berapa lama kamu ingin karaoke? (Dalam Detik)");
+                    int dur = scan.nextInt();
+                    String temp = scan.nextLine();
+                    karaoke(dur);
+                    valops = true;
+                } else if (ops.equals("N")){
+                    System.out.println("Baik. Jika ingin karaoke, kunjungi lagi mic!");
+                    valops = true;
+                } else {
+                    System.out.println("Tolong masukkan opsi yang tepat!");
+                }
+            }
+        } else if (obj.getNama().equals("Laptop")) {
+            System.out.println("Apakah kamu ingin nonton netflix? (Y/N)");
+            while (!valops) {
+                String ops = scan.nextLine();
+                if (ops.equals("Y")) {
+                    System.out.println("Berapa lama kamu ingin nonton netflix? (Dalam Detik)");
+                    int dur = scan.nextInt();
+                    String temp = scan.nextLine();
+                    nontonNetflix(dur);
+                    valops = true;
+                } else if (ops.equals("N")){
+                    System.out.println("Baik. Jika ingin nonton netflix, kunjungi lagi laptop!");
+                    valops = true;
+                } else {
+                    System.out.println("Tolong masukkan opsi yang tepat!");
+                }
+            }
+        } else if (obj.getNama().equals("Shower")) {
+            System.out.println("Apakah kamu ingin nonton mandi? (Y/N)");
+            while (!valops) {
+                String ops = scan.nextLine();
+                if (ops.equals("Y")) {
+                    System.out.println("Berapa lama kamu ingin nonton mandi? (Dalam Detik)");
+                    int dur = scan.nextInt();
+                    String temp = scan.nextLine();
+                    mandi(dur);
+                    valops = true;
+                } else if (ops.equals("N")){
+                    System.out.println("Baik. Jangan lupa mandi supaya higienis selalu!");
+                    valops = true;
+                } else {
+                    System.out.println("Tolong masukkan opsi yang tepat!");
+                }
+            }
+        } else {
+            System.out.println("Objek tidak valid!");
+            valops = true;
+        }
+
+    }
+    
+
     public void kerja(int durasi){
         awalKerja = time.getTimeInSec();
         if(durasi <= 0){
@@ -287,8 +506,7 @@ public class Sim implements Aksi{
             kesejahteraan.updateKekenyangan((-20)*(durasi/10));
             kesejahteraan.updateMood((10)*(durasi/10));
             sudahBuangAir = true;
-        }
-        else{
+        } else {
             System.out.println("Sim belum makan pada hari ini");
         }
             
@@ -452,7 +670,7 @@ public class Sim implements Aksi{
         this.setStatus("sholat");
         kesejahteraan.updateMood(30);
          //Untuk selalu nambahin durasi gak buang air
-         durasiTidakBuangAir += durasi;
+        durasiTidakBuangAir += durasi;
     }
 
     public void mandi(int durasi){
