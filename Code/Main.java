@@ -169,6 +169,7 @@ public class Main {
                     }
                 } else if(o.equals("Move Room")){
                     System.out.println("Ruangan apakah yang ingin kamu tuju?");
+                    // display list ruangan
                     String ruang = scan.nextLine();
                     if(w.getRumah(currentSim.getLokSimRumah()).getRoom(ruang) != null){
                         currentSim.setLokSimRuang(w.getRumah(currentSim.getLokSimRumah()).getRoom(ruang));
@@ -209,7 +210,7 @@ public class Main {
                     else{
                         System.out.println("Anda sedang berada di rumah Sim lain. Anda tidak dapat melakukan edit terhadap rumah ini.");
                     }
-                }else if(o.equals("Add Sim")){
+                } else if(o.equals("Add Sim")) {
                     boolean namaValid = false;
                     System.out.println("Siapa nama sim baru?");
                     String nama = scan.nextLine();
@@ -292,12 +293,97 @@ public class Main {
                         }
                     }
                 } else if(o.equals("Action")){
-                    if (currentSim.getCurObject()==null) {
-                        System.out.println("Kamu sedang tidak berada di dekat objek apa-apa!");
-                    } else {
-                        Furniture f = (Furniture) currentSim.getCurObject();
-                        f.displayListAksi();
+                    System.out.println("Berikut adalah aksi yang dapat kamu lakukan di game ini!");
+                    System.out.println("1. Kerja");
+                    System.out.println("2. Olahraga");
+                    System.out.println("3. Tidur");
+                    System.out.println("4. Makan");
+                    System.out.println("5. Memasak");
+                    System.out.println("6. Berkunjung");
+                    System.out.println("7. Buang Air");
+                    System.out.println("8. Melihat Waktu");
+                    System.out.println("9. Mandi");
+                    System.out.println("10. Sholat");
+                    System.out.println("11. Karaoke");
+                    System.out.println("12. Nonton Netflix");
+                    System.out.println("13. Melukis");
+
+                    int ops=0;
+
+                    Boolean validasi = false;
+                    while (!validasi) {
+                        System.out.println("");
+                        System.out.println("Masukkan aksi yang ingin kamu lakukan dalam opsi ANGKA (1-13)");
+                        int num = scan.nextInt();
+                        String tempp = scan.nextLine();
+                        if (num>=1 && num<14) {
+                            ops = num;
+                            validasi = true;
+                        }
                     }
+                    
+                    if (ops==1) {
+                        System.out.println("Sim akan bekerja!");
+                        System.out.println("Berapa lama anda ingin Sim bekerja? (Input dalam detik)");
+                        int dur = scan.nextInt();
+                        String tempp = scan.nextLine();
+                        currentSim.kerja(dur);
+                    } else if (ops==2) {
+                        System.out.println("Sim akan berolahraga!");
+                        System.out.println("Berapa lama anda ingin Sim berolahraga? (Input dalam detik)");
+                        int dur = scan.nextInt();
+                        String tempp = scan.nextLine();
+                        currentSim.olahraga(dur);
+                    } else if (ops==3) {
+                        System.out.println("Kunjungi objek Kasur!");
+                    } else if (ops==4) {
+                        System.out.println("Kunjungi objek Meja dan Kursi!");
+                    } else if (ops==5) {
+                        System.out.println("Kunjungi objek Kompor!");
+                    } else if (ops==6) {
+                        if (pemain.size()==1) {
+                            System.out.println("Hanya terdapat 1 Sim di dunia ini :( Coba add Sim lain supaya Sim mu tidak kesepian!");
+                        } else {
+                            System.out.println("Kamu ingin mengunjungi rumah siapa?");
+                            int j = 1;
+                            for (Sim sim : pemain) {
+                                System.out.println(j+". "+sim.getNamaLengkap());
+                                j++;
+                            }
+
+                            int opsi = 0;
+
+                            Boolean validasii = false;
+                            while (!validasii) {
+                                System.out.println("Masukkan pilihanmu dengan ANGKA");
+                                opsi = scan.nextInt();
+                                String tempi = scan.nextLine();
+                                if (opsi>=1 && opsi<=pemain.size()) {
+                                    validasii=true;
+                                }
+                            }
+
+                            Lokasi lokSimKunjung = pemain.get(opsi-1).getLokSimRumah();
+                            System.out.println("Berapa lama ingin mengunjungi rumah "+pemain.get(opsi-1).getNamaLengkap()+"?");
+                            int dura = scan.nextInt();
+                            String tempii = scan.nextLine();
+                            currentSim.berkunjung(dura,lokSimKunjung);
+                        }
+                    } else if (ops==7) {
+                        System.out.println("Kunjungi objek Toilet!");
+                    } else if (ops==8) {
+                        System.out.println("Kunjungi objek Jam!");
+                    } else if (ops==9) {
+                        System.out.println("Kunjungi objek Shower!");
+                    } else if (ops==10) {
+                        System.out.println("Kunjungi objek Sajadah!");
+                    } else if (ops==11) {
+                        System.out.println("Kunjungi objek Mic!");
+                    } else if (ops==12) {
+                        System.out.println("Kunjungi objek Laptop!");
+                    } else { //ops==13
+                        System.out.println("Kunjungi objek Kanvas!");
+                    } 
                 } else {
                     System.out.println("Command tersebut tidak tersedia");
                 }
