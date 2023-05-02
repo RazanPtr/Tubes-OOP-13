@@ -374,7 +374,7 @@ public class Sim implements Aksi{
             throw new IllegalArgumentException("durasi harus lebih dari 0 detik");
         }
         if(durasi % 20 != 0){
-            throw new IllegalArgumentException("durasi harus lebih dari 0 detik");
+            throw new IllegalArgumentException("durasi harus kelipatan 20 detik");
         }
         setActiveDuration(durasi);
         time.AksiSleep(durasi);
@@ -497,8 +497,8 @@ public class Sim implements Aksi{
 
     public void buangAir(int durasi){
         //implementasi buangAir
-        if(durasi <= 0){
-            throw new IllegalArgumentException("durasi harus lebih dari 0 detik");
+        if(durasi <= 0 && durasi % 10 != 0){
+            throw new IllegalArgumentException("durasi tidak sesuai");
         }
         if(sudahMakan){
             setActiveDuration(durasi);
@@ -625,6 +625,9 @@ public class Sim implements Aksi{
 
     public void karaoke(int durasi){
     //implementasi karaoke
+        if(durasi <= 0 && durasi % 30 != 0){
+            throw new IllegalArgumentException("durasi tidak sesuai");
+        }
         setActiveDuration(durasi);
         time.AksiSleep(durasi);
         this.setStatus("karaoke");
@@ -637,6 +640,9 @@ public class Sim implements Aksi{
 
     public void melukis(int durasi){
     //implementasi untuk melukis
+        if(durasi <= 0 && durasi % 20 != 0){
+            throw new IllegalArgumentException("durasi tidak sesuai");
+        }
         setActiveDuration(durasi);
         time.AksiSleep(durasi);
         this.setStatus("Melukis");
@@ -665,6 +671,9 @@ public class Sim implements Aksi{
 
     public void sholat(int durasi){
     //implementasi sholat
+        if(durasi <= 0){
+            throw new IllegalArgumentException("durasi tidak sesuai");
+        }
         setActiveDuration(durasi);
         time.AksiSleep(durasi);
         this.setStatus("sholat");
@@ -675,6 +684,9 @@ public class Sim implements Aksi{
 
     public void mandi(int durasi){
     //implementasi mandi
+        if(durasi <= 0){
+            throw new IllegalArgumentException("durasi tidak sesuai");
+        }
         setActiveDuration(durasi);
         time.AksiSleep(durasi);
         this.setStatus("mandi");
@@ -686,6 +698,9 @@ public class Sim implements Aksi{
 
     public void nontonNetflix(int durasi){
     //implementasi nontonNetflix
+        if(durasi <= 0 && durasi % 40 != 0){
+            throw new IllegalArgumentException("durasi tidak sesuai");
+        }
         setActiveDuration(durasi);
         time.AksiSleep(durasi);
         this.setStatus("menonton netflix");
