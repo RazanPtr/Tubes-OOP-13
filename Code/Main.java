@@ -192,7 +192,6 @@ public class Main {
                             Scanner scanBarang = new Scanner(System.in);
                             String inputBarang = scanBarang.nextLine();
                             int inputJumlahBarang = scanBarang.nextInt();
-                            scan.nextLine();
                             try{
                                 currentSim.beliBarang(purchasableMap, inputBarang, inputJumlahBarang);
                             }
