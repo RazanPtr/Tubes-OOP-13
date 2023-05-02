@@ -132,4 +132,11 @@ public class Rumah {
         }
         return temp;
     }
+
+    public void displayListRuangan() {
+        int i = 1;
+        for (Ruangan ruang: rooms) {
+            System.out.println(i+". "+ruang.getNamaRuangan());
+        }
+    }
 }

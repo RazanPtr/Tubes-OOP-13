@@ -169,7 +169,7 @@ public class Main {
                     }
                 } else if(o.equals("Move Room")){
                     System.out.println("Ruangan apakah yang ingin kamu tuju?");
-                    // display list ruangan
+                    w.getRumah(currentSim.getLokSimRumah()).displayListRuangan();
                     String ruang = scan.nextLine();
                     if(w.getRumah(currentSim.getLokSimRumah()).getRoom(ruang) != null){
                         currentSim.setLokSimRuang(w.getRumah(currentSim.getLokSimRumah()).getRoom(ruang));
