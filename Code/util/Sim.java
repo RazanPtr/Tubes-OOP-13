@@ -448,10 +448,12 @@ public class Sim implements Aksi{
         if(ob instanceof Masakan){
             Masakan m = (Masakan) ob;
             ArrayList<BahanMakanan> listResep = new ArrayList<BahanMakanan>(m.getBahan());
+            ArrayList<String> yangKurang = new ArrayList<>();
             boolean bisa = true;
             for(BahanMakanan bm : listResep){
                 if(!inventory.getItem().contains(bm)){
                     bisa = false;
+                    yangKurang.add(bm.getNama());
                 }
             }
             if(bisa){
@@ -475,6 +477,14 @@ public class Sim implements Aksi{
                 int durasiMasakInt ;
                 durasiMasakInt = (int) Math.floor(durasiMasak);
                 durasiTidakBuangAir += durasiMasakInt;
+            } else {
+                System.out.println("Maaf, bahannya tidak lengkap!");
+                System.out.println("Kamu kekurangan bahan berikut:");
+                int i = 1;
+                for (String s: yangKurang) {
+                    System.out.println(i+". "+s);
+                }
+                System.out.println("");
             }
         }
         
