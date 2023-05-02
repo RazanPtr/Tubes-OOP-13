@@ -47,6 +47,7 @@ public class Sim implements Aksi{
         inventory.addItem(new KomporGas(), 1);
         inventory.addItem(new Jam(), 1);
         inventory.addItem(new MejaKursi(), 1);
+        time = new Time();
     }
 
     public String getNamaLengkap(){
