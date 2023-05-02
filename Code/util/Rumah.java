@@ -65,6 +65,10 @@ public class Rumah {
                     System.out.println("Akan dibuat ruangan baru di atas ruangan ini!");
                     System.out.println("Beri nama untuk ruangan baru:");
                     String nama = sc.nextLine();
+                    while (!isNamaValid(nama)) {
+                        System.out.println("Nama sudah terpakai! Beri nama ruangan yang baru:");
+                        nama = sc.nextLine();
+                    }
                     Ruangan rbaru = new Ruangan(nama);
                     ruangan.setUp(rbaru);
                     rbaru.setDown(ruangan);
@@ -79,6 +83,10 @@ public class Rumah {
                     System.out.println("Akan dibuat ruangan baru di bawah ruangan ini!");
                     System.out.println("Beri nama untuk ruangan baru:");
                     String nama = sc.nextLine();
+                    while (!isNamaValid(nama)) {
+                        System.out.println("Nama sudah terpakai! Beri nama ruangan yang baru:");
+                        nama = sc.nextLine();
+                    }
                     Ruangan rbaru = new Ruangan(nama);
                     ruangan.setDown(rbaru);
                     rbaru.setUp(ruangan);
@@ -93,6 +101,10 @@ public class Rumah {
                     System.out.println("Akan dibuat ruangan baru di kiri ruangan ini!");
                     System.out.println("Beri nama untuk ruangan baru:");
                     String nama = sc.nextLine();
+                    while (!isNamaValid(nama)) {
+                        System.out.println("Nama sudah terpakai! Beri nama ruangan yang baru:");
+                        nama = sc.nextLine();
+                    }
                     Ruangan rbaru = new Ruangan(nama);
                     ruangan.setLeft(rbaru);
                     rbaru.setRight(ruangan);
@@ -107,6 +119,10 @@ public class Rumah {
                     System.out.println("Akan dibuat ruangan baru di kanan ruangan ini!");
                     System.out.println("Beri nama untuk ruangan baru:");
                     String nama = sc.nextLine();
+                    while (!isNamaValid(nama)) {
+                        System.out.println("Nama sudah terpakai! Beri nama ruangan yang baru:");
+                        nama = sc.nextLine();
+                    }
                     Ruangan rbaru = new Ruangan(nama);
                     ruangan.setRight(rbaru);
                     rbaru.setLeft(ruangan);
@@ -138,5 +154,15 @@ public class Rumah {
         for (Ruangan ruang: rooms) {
             System.out.println(i+". "+ruang.getNamaRuangan());
         }
+    }
+
+    public boolean isNamaValid(String nama) {
+        Boolean valid = true;
+        for (Ruangan ruang : rooms) {
+            if (ruang.getNamaRuangan().equals(nama)) {
+                valid = false;
+            }
+        }
+        return valid;
     }
 }
