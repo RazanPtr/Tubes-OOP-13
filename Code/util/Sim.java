@@ -515,7 +515,7 @@ public class Sim implements Aksi{
     public void tidakBuangAir(){
         //implementasi tidak buangAir
         // nanti di main selalu ngecek durasiTidakBuangAir aja
-        System.out.println("Sim belum buang air 4 menit setelah makan!");
+        System.out.println("Sim belum buang air setelah makan!");
         kesejahteraan.updateKesehatan(-5);
         kesejahteraan.updateMood(-5);
         durasiTidakBuangAir = 0;
