@@ -55,7 +55,7 @@ public class World {
                 return false;
             }
         }
-        if(lokX > 64 || lokY > 64 || lokX <= 0 || lokY <= 0){
+        if(lokX > 63 || lokY > 63 || lokX < 0 || lokY < 0){
             System.out.println("lokasi tersebut tidak tersedia pada World");
             System.out.println("Lokasi yang dapat digunakan adalah lokasi dengan rentang antara (1,1) hingga (64, 64)");
             System.out.println("Silahkan masukkan koordinat lokasi rumah kembali");
