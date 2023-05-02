@@ -458,6 +458,18 @@ public class Main {
                             }
                         } 
                     }
+                } else if (currentSim.getStatus().equals("Berkunjung")){
+                    Sim dikunjungi = null;
+                    for (Sim player : pemain) {
+                        if (player.getRumah()==w.getRumah(currentSim.getLokSimRumah())) {
+                            dikunjungi = player;
+                        }
+                    }
+                    if (dikunjungi.getKesejahteraan().getIsMati()) {
+                        System.out.println("Sim yang sedang kau kunjungi sudah mati. Kembali ke rumahmu...");
+                        currentSim.setLokSimRumah(currentSim.getRumah().getLokRumah());
+                        currentSim.setLokSimRuang(currentSim.getRumah().getRoom("Kamar"));
+                    }
                 } else {
                     finished = true;
                 }
