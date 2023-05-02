@@ -84,7 +84,7 @@ public class Main {
                 System.out.println("3. Exit             : keluar dari permainan\n");
             System.out.print(">> ");
             String op = scan.nextLine();
-            if(op.equals("Start Game")){
+            if(op.equalsIgnoreCase("Start Game")){
                 w = World.getInstance();
                 System.out.print("Permainan dimulai!! Selamat bermain^^\nSiapa nama simmu? ");
                 String namaLengkap = scan.nextLine();
@@ -107,14 +107,14 @@ public class Main {
                     }
                 }
                 System.out.println("Sim dengan nama "+ currentSim.getNamaLengkap() + " telah siap dimainkan!");
-            } else if(op.equals("Help")){
+            } else if(op.equalsIgnoreCase("Help")){
                 System.out.println("Selamat datang di permainan Simplicity!");
                 System.out.println("permainan ini merupakan permainan karakter virtual yaitu Sim yang dapat anda jalankan kegiatannya.");
                 System.out.println("Terdapat beberapa command yang dapat Anda berikan sebelum permainan :");
                 System.out.println("1. Start Game       : memulai permainan");
                 System.out.println("2. Help             : bantuan dan petunjuk terkait permainan");
                 System.out.println("3. Exit             : keluar dari permainan");
-            } else if(op.equals("Exit")){
+            } else if(op.equalsIgnoreCase("Exit")){
                 System.out.println("Game akan berakhir.. Terimakasih telah bermain!! ^^");
                 finished = true;
             } else {
@@ -169,7 +169,7 @@ public class Main {
                     }
                 } else if(o.equals("Move Room")){
                     System.out.println("Ruangan apakah yang ingin kamu tuju?");
-                    // display list ruangan
+                    w.getRumah(currentSim.getLokSimRumah()).displayListRuangan();
                     String ruang = scan.nextLine();
                     if(w.getRumah(currentSim.getLokSimRumah()).getRoom(ruang) != null){
                         currentSim.setLokSimRuang(w.getRumah(currentSim.getLokSimRumah()).getRoom(ruang));
@@ -181,9 +181,13 @@ public class Main {
                         System.out.println("Opsi edit rumah apa yang ingin Anda lakukan? (Pilih dengan angka)");
                         System.out.println("1. Pembelian barang");
                         System.out.println("2. Pemindahan barang");
+                        System.out.println("3. Pemasangan Barang");
+                        System.out.println("4. Penyimpanan Barang");
                         System.out.print(">> ");
                         int opsi = scan.nextInt();
+                        String tempp = scan.nextLine();
                         if(opsi == 1){
+                            //tampilin
                             System.out.println("Barang apa yang ingin anda beli?");
                             Scanner scanBarang = new Scanner(System.in);
                             String inputBarang = scanBarang.nextLine();
@@ -201,10 +205,14 @@ public class Main {
                             catch (InterruptedException p){
                                 System.out.println(p.getMessage());
                             }
-                        } else if(opsi == 2){
-
+                        } else if (opsi==2) {
+                            //kode
+                        } else if (opsi==3) {
+                            //kode
+                        } else if (opsi==4) {
+                            //kode
                         } else {
-                            System.out.println("X X Opsi tersebut tidak tersedia X X");
+                            System.out.println("Opsi tidak valid!");
                         }
                     }
                     else{

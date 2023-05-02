@@ -119,7 +119,7 @@ public class Ruangan {
         return true; // Aman untuk diletakkan
     }
 
-    public void displayRuangan(){
+    /*public void displayRuangan(){
         for(int i = 0; i < 6; i++){
             if(i == 0){
                 System.out.println("----------------------------------");
@@ -137,12 +137,43 @@ public class Ruangan {
                         }
                     }
                 } else {
-                    System.out.print(" XXX |");
+                    System.out.print("     |");
                 }
             }
             System.out.print("\n----------------------------------\n");
         }
+    }*/
+
+    public void displayRuangan() {
+        for (int i = 0; i < 6; i++) {
+            if (i == 0) {
+                System.out.println("-------------------------------------");
+            }
+            for (int j = 0; j < 6; j++) {
+                if (j == 0) {
+                    System.out.print("|");
+                }
+                boolean hasFurniture = false;
+                for (Furniture furni : objects) {
+                    int x = furni.getLokDiRuangan().getX();
+                    int y = furni.getLokDiRuangan().getY();
+                    int length = furni.getLength();
+                    int width = furni.getWidth();
+                    if (x <= j && j < x + length && y <= i && i < y + width) {
+                        System.out.print(" " + furni.getCode() + " |");
+                        hasFurniture = true;
+                        break;
+                    }
+                }
+                if (!hasFurniture) {
+                    System.out.print("     |");
+                }
+            }
+            System.out.print("\n-------------------------------------\n");
+        }
     }
+    
+    
 
     public int displayObjects() {
         System.out.println("Berikut adalah objek-objek yang terletak di ruangan ini:");

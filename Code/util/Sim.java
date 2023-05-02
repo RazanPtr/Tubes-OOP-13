@@ -269,8 +269,13 @@ public class Sim implements Aksi{
                     System.out.println("Berapa lama kamu ingin Shalat? (Dalam Detik)");
                     int dur = scan.nextInt();
                     String temp = scan.nextLine();
-                    sholat(dur);
-                    valops = true;
+                    try {
+                        sholat(dur);
+                        valops = true;
+                    } catch (IllegalArgumentException e) {
+                        System.out.println(e.getMessage());
+                        System.out.println("Silahkan masukkan durasi yang valid");
+                    }
                 } else if (ops.equals("N")){
                     System.out.println("Baik. Jangan lupa Shalat!");
                     valops = true;
@@ -286,8 +291,13 @@ public class Sim implements Aksi{
                     System.out.println("Berapa lama kamu ingin melukis? (Dalam Detik)");
                     int dur = scan.nextInt();
                     String temp = scan.nextLine();
-                    melukis(dur);
-                    valops = true;
+                    try {
+                        melukis(dur);
+                        valops = true;
+                    } catch (IllegalArgumentException e) {
+                        System.out.println(e.getMessage());
+                        System.out.println("Silahkan masukkan durasi yang valid");
+                    }
                 } else if (ops.equals("N")){
                     System.out.println("Baik. Jika ingin melukis, kunjungi lagi kanvas!");
                     valops = true;
@@ -303,8 +313,13 @@ public class Sim implements Aksi{
                     System.out.println("Berapa lama kamu ingin karaoke? (Dalam Detik)");
                     int dur = scan.nextInt();
                     String temp = scan.nextLine();
-                    karaoke(dur);
-                    valops = true;
+                    try {
+                        karaoke(dur);
+                        valops = true;
+                    } catch (IllegalArgumentException e) {
+                        System.out.println(e.getMessage());
+                        System.out.println("Silahkan masukkan durasi yang valid");
+                    }
                 } else if (ops.equals("N")){
                     System.out.println("Baik. Jika ingin karaoke, kunjungi lagi mic!");
                     valops = true;
@@ -320,8 +335,13 @@ public class Sim implements Aksi{
                     System.out.println("Berapa lama kamu ingin nonton netflix? (Dalam Detik)");
                     int dur = scan.nextInt();
                     String temp = scan.nextLine();
-                    nontonNetflix(dur);
-                    valops = true;
+                    try {
+                        nontonNetflix(dur);
+                        valops = true;
+                    } catch (IllegalArgumentException e) {
+                        System.out.println(e.getMessage());
+                        System.out.println("Silahkan masukkan durasi yang valid");
+                    }
                 } else if (ops.equals("N")){
                     System.out.println("Baik. Jika ingin nonton netflix, kunjungi lagi laptop!");
                     valops = true;
@@ -337,8 +357,13 @@ public class Sim implements Aksi{
                     System.out.println("Berapa lama kamu ingin mandi? (Dalam Detik)");
                     int dur = scan.nextInt();
                     String temp = scan.nextLine();
-                    mandi(dur);
-                    valops = true;
+                    try {
+                        mandi(dur);
+                        valops = true;
+                    } catch (IllegalArgumentException e) {
+                        System.out.println(e.getMessage());
+                        System.out.println("Silahkan masukkan durasi yang valid");
+                    }
                 } else if (ops.equals("N")){
                     System.out.println("Baik. Jangan lupa mandi supaya higienis selalu!");
                     valops = true;
@@ -452,10 +477,12 @@ public class Sim implements Aksi{
         if(ob instanceof Masakan){
             Masakan m = (Masakan) ob;
             ArrayList<BahanMakanan> listResep = new ArrayList<BahanMakanan>(m.getBahan());
+            ArrayList<String> yangKurang = new ArrayList<>();
             boolean bisa = true;
             for(BahanMakanan bm : listResep){
                 if(!inventory.getItem().contains(bm)){
                     bisa = false;
+                    yangKurang.add(bm.getNama());
                 }
             }
             if(bisa){
@@ -479,6 +506,14 @@ public class Sim implements Aksi{
                 int durasiMasakInt ;
                 durasiMasakInt = (int) Math.floor(durasiMasak);
                 durasiTidakBuangAir += durasiMasakInt;
+            } else {
+                System.out.println("Maaf, bahannya tidak lengkap!");
+                System.out.println("Kamu kekurangan bahan berikut:");
+                int i = 1;
+                for (String s: yangKurang) {
+                    System.out.println(i+". "+s);
+                }
+                System.out.println("");
             }
         }
         
