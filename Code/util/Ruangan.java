@@ -122,19 +122,25 @@ public class Ruangan {
     public void displayRuangan(){
         for(int i = 0; i < 6; i++){
             if(i == 0){
-                System.out.println("--------------------------");
+                System.out.println("----------------------------------");
             }
             for(int j = 0; j < 6; j++){
                 if(j == 0){
                     System.out.print("|");
                 }
+                //kalo true, berati ada objek
                 if(grid[j][i]){
-                    System.out.print(" X |");
+                    for(Furniture furni : objects){
+                        if((furni.getLokDiRuangan().getX() == i && furni.getLokDiRuangan().getY() == j) && (furni.getLength() > i && furni.getWidth() > j)){
+                            System.out.print(" " + furni.getCode() + " |");
+                            break;
+                        }
+                    }
                 } else {
-                    System.out.print(" V |");
+                    System.out.print(" XXX |");
                 }
             }
-            System.out.print("\n-------------------------\n");
+            System.out.print("\n----------------------------------\n");
         }
     }
 
