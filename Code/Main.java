@@ -329,6 +329,7 @@ public class Main {
                     System.out.println("11. Karaoke");
                     System.out.println("12. Nonton Netflix");
                     System.out.println("13. Melukis");
+                    System.out.println("14. Exit Menu Action");
 
                     int ops=0;
 
@@ -403,9 +404,11 @@ public class Main {
                         System.out.println("Kunjungi objek Mic!");
                     } else if (ops==12) {
                         System.out.println("Kunjungi objek Laptop!");
-                    } else { //ops==13
+                    } else if (ops==13) { //ops==13
                         System.out.println("Kunjungi objek Kanvas!");
-                    } 
+                    } else {
+                        System.out.println("Kamu sudah keluar dari menu action!");
+                    }
                 } else {
                     System.out.println("Command tersebut tidak tersedia");
                 }
