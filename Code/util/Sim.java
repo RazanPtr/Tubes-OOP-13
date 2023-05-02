@@ -599,7 +599,7 @@ public class Sim implements Aksi{
                                                 System.out.println("Kamu memiliki uang sebanyak " + getUang() + ".");
                                                 System.out.println();
                                                 isItemInDelivery = false;
-                                            } 
+                                            }
                                             else {
                                                 int tempActiveDuration = getActiveDuration();
                                                 while(timeRemainingDelivery > 0 && isItemInDelivery) {
