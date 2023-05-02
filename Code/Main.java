@@ -142,6 +142,28 @@ public class Main {
                 if (currentSim.durasiTidakBuangAir % 240 == 0 && currentSim.sudahBuangAir){
                     currentSim.tidakBuangAir();
                 } 
+                for(Sim s : pemain){
+                    if(s.getKesejahteraan().getIsMati()){
+                        System.out.println("Ooops... " + s.getKesejahteraan().getStatusMati());
+                        pemain.remove(s);
+                        w.getPerumahan().remove(s.getRumah());
+                    }
+                }
+
+                if (currentSim.getStatus().equals("Berkunjung")){
+                    Sim dikunjungi = null;
+                    for (Sim player : pemain) {
+                        if (player.getRumah()==w.getRumah(currentSim.getLokSimRumah())) {
+                            dikunjungi = player;
+                        }
+                    }
+                    if (dikunjungi.getKesejahteraan().getIsMati()) {
+                        System.out.println("Sim yang sedang kau kunjungi sudah mati. Kembali ke rumahmu...");
+                        currentSim.setLokSimRumah(currentSim.getRumah().getLokRumah());
+                        currentSim.setLokSimRuang(currentSim.getRumah().getRoom("Kamar"));
+                    }
+                }
+
                 System.out.print(">> ");
                 String o;
                 o = scan.nextLine();
@@ -440,8 +462,11 @@ public class Main {
                     } else {
                         System.out.println("Tidak ada Sim lain pada permainan ini. Silahkan menambahkan Sim baru!");
                         System.out.println("Siapa nama sim baru?");
-                        String nama = scan.nextLine();
+                        String nama = scan.next();
                         boolean namaValid = false;
+                        if(pemain.size() <=0){
+                            namaValid = true;
+                        } 
                         while(!namaValid){
                             for(Sim s : pemain){
                                 if(s.getNamaLengkap().equals(nama)){
@@ -456,7 +481,9 @@ public class Main {
                                 System.out.println("Siapa nama sim baru?");
                                 nama = scan.nextLine();
                             }
+                            
                         }
+                        System.out.println(namaValid);
                         boolean rumahValid = false;
                         while(!rumahValid){
                             System.out.println("Dimana lokasi rumah yang diinginkan? (x, y) ");
@@ -477,20 +504,6 @@ public class Main {
                     }
                 } else {
                     finished = true;
-                }
-            } else {
-                if (currentSim.getStatus().equals("Berkunjung")){
-                Sim dikunjungi = null;
-                for (Sim player : pemain) {
-                    if (player.getRumah()==w.getRumah(currentSim.getLokSimRumah())) {
-                        dikunjungi = player;
-                    }
-                }
-                if (dikunjungi.getKesejahteraan().getIsMati()) {
-                    System.out.println("Sim yang sedang kau kunjungi sudah mati. Kembali ke rumahmu...");
-                    currentSim.setLokSimRumah(currentSim.getRumah().getLokRumah());
-                    currentSim.setLokSimRuang(currentSim.getRumah().getRoom("Kamar"));
-                }
                 } 
             }
         }

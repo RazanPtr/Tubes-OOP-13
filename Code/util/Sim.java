@@ -810,7 +810,7 @@ public class Sim implements Aksi{
             this.kesehatan += kesehatan;
             if(this.kesehatan > 100){
                 this.kesehatan = 100;
-            }  else if(this.mood <= 0){
+            }  else if(this.kesehatan <= 0){
                 isMati = true;
                 statusMati = "Sim mati karena sakit :<";
             }
@@ -820,7 +820,7 @@ public class Sim implements Aksi{
             this.kekenyangan += kekenyangan;
             if(this.kekenyangan > 100){
                 this.kekenyangan = 100;
-            }  else if(this.mood <= 0){
+            }  else if(this.kekenyangan <= 0){
                 isMati = true;
                 statusMati = "Sim mati karena kelaparan :<";
             }
