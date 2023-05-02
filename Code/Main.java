@@ -122,7 +122,7 @@ public class Main {
             }
         }
         
-        while(started && (!finished) && !currentSim.getKesejahteraan().getIsMati()){
+        while(started && (!finished)){
             while(!currentSim.getKesejahteraan().getIsMati()){
                 if (currentSim.durasiTidakBuangAir % 240 == 0 && currentSim.sudahBuangAir){
                     currentSim.tidakBuangAir();
