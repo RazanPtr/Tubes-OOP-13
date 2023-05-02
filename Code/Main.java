@@ -472,7 +472,8 @@ public class Main {
                             }
                         } 
                     }
-                } else if (currentSim.getStatus().equals("Berkunjung")){
+                } else {
+                    if (currentSim.getStatus().equals("Berkunjung")){
                     Sim dikunjungi = null;
                     for (Sim player : pemain) {
                         if (player.getRumah()==w.getRumah(currentSim.getLokSimRumah())) {
@@ -484,10 +485,10 @@ public class Main {
                         currentSim.setLokSimRumah(currentSim.getRumah().getLokRumah());
                         currentSim.setLokSimRuang(currentSim.getRumah().getRoom("Kamar"));
                     }
-                } else {
-                    finished = true;
+                    } else {
+                        finished = true;
+                    }
                 }
-            }
         }
         
         // World w = new World();
