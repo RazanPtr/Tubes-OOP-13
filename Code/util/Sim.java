@@ -480,7 +480,7 @@ public class Sim implements Aksi{
         
     }
     
-    public void berkunjung(int durasi, Lokasi lokasiTujuan) { // perlu cek rumah yang dituju tuh ada di world (dalem perumahan) apa ngga gasi(??)
+    public void berkunjung(int durasi, Lokasi lokasiTujuan) { // cek rumah yang dituju ada di main
         double waktuKunjungan = Math.sqrt(Math.pow(lokasiTujuan.getX() - lokSimRumah.getX(), 2) + Math.pow(lokasiTujuan.getY() - lokSimRumah.getY(), 2));
         durasi += waktuKunjungan;
         setActiveDuration(durasi);
