@@ -124,6 +124,21 @@ public class Main {
         
         while(started && (!finished)){
             while(!currentSim.getKesejahteraan().getIsMati()){
+                System.out.println("");
+                System.out.println("---MAIN MENU---");
+                System.out.println("Untuk info lanjut, pilih help!");
+                System.out.println("1.  View Sim Info");
+                    System.out.println("2.  View Current Location");
+                    System.out.println("3.  View Inventory");
+                    System.out.println("4.  Upgrade House");
+                    System.out.println("5.  Move Room");
+                    System.out.println("6.  Edit Room");
+                    System.out.println("7.  Add Sim");
+                    System.out.println("8.  Change Sim");
+                    System.out.println("9.  List Object");
+                    System.out.println("10. Go To Object");
+                    System.out.println("11. Action");
+                    System.out.println("12. Exit");
                 if (currentSim.durasiTidakBuangAir % 240 == 0 && currentSim.sudahBuangAir){
                     currentSim.tidakBuangAir();
                 } 
