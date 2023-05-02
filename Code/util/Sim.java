@@ -498,19 +498,24 @@ public class Sim implements Aksi{
 
     public void buangAir(int durasi){
         //implementasi buangAir
-        if(durasi <= 0 && durasi % 10 != 0){
-            throw new IllegalArgumentException("durasi tidak sesuai");
-        }
-        if(sudahMakan){
-            setActiveDuration(durasi);
-            time.AksiSleep(durasi);
-            kesejahteraan.updateKekenyangan((-20)*(durasi/10));
-            kesejahteraan.updateMood((10)*(durasi/10));
-            sudahBuangAir = true;
-        } else {
-            System.out.println("Sim belum makan pada hari ini");
-        }
+        try {
+            if(durasi <= 0 && durasi % 10 != 0){
+                if(sudahMakan){
+                setActiveDuration(durasi);
+                time.AksiSleep(durasi);
+                kesejahteraan.updateKekenyangan((-20)*(durasi/10));
+                kesejahteraan.updateMood((10)*(durasi/10));
+                sudahBuangAir = true;
+                } else {
+                    System.out.println("Sim belum makan pada hari ini");}
+            }   
             
+            
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            System.out.println("Silahkan masukkan durasi yang valid");
+        }
+        
     }
 
     public void tidakBuangAir(){

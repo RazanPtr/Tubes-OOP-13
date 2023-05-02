@@ -6,14 +6,16 @@ public class Furniture extends ObjectSim implements PurchasableObject{
     private int length;
     private int width;
     private int price;
+    private String code;
     private Lokasi lokDiRuangan;
     private ArrayList<String> listAksi;
 
-    public Furniture(String nama, int length, int width, int price){
+    public Furniture(String nama, int length, int width, int price, String code){
         super(nama);
         this.length = length;
         this.width = width;
         this.price = price;
+        this.code = code;
         lokDiRuangan = null;
         listAksi = new ArrayList<String>();
     } 
@@ -48,6 +50,10 @@ public class Furniture extends ObjectSim implements PurchasableObject{
 
     public ArrayList<String> getListAksi(){
         return listAksi;
+    }
+
+    public String getCode(){
+        return code;
     }
 
     public void addListAksi(String aksi){
