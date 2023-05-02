@@ -265,8 +265,13 @@ public class Sim implements Aksi{
                     System.out.println("Berapa lama kamu ingin Shalat? (Dalam Detik)");
                     int dur = scan.nextInt();
                     String temp = scan.nextLine();
-                    sholat(dur);
-                    valops = true;
+                    try {
+                        sholat(dur);
+                        valops = true;
+                    } catch (IllegalArgumentException e) {
+                        System.out.println(e.getMessage());
+                        System.out.println("Silahkan masukkan durasi yang valid");
+                    }
                 } else if (ops.equals("N")){
                     System.out.println("Baik. Jangan lupa Shalat!");
                     valops = true;
@@ -282,8 +287,13 @@ public class Sim implements Aksi{
                     System.out.println("Berapa lama kamu ingin melukis? (Dalam Detik)");
                     int dur = scan.nextInt();
                     String temp = scan.nextLine();
-                    melukis(dur);
-                    valops = true;
+                    try {
+                        melukis(dur);
+                        valops = true;
+                    } catch (IllegalArgumentException e) {
+                        System.out.println(e.getMessage());
+                        System.out.println("Silahkan masukkan durasi yang valid");
+                    }
                 } else if (ops.equals("N")){
                     System.out.println("Baik. Jika ingin melukis, kunjungi lagi kanvas!");
                     valops = true;
@@ -299,8 +309,13 @@ public class Sim implements Aksi{
                     System.out.println("Berapa lama kamu ingin karaoke? (Dalam Detik)");
                     int dur = scan.nextInt();
                     String temp = scan.nextLine();
-                    karaoke(dur);
-                    valops = true;
+                    try {
+                        karaoke(dur);
+                        valops = true;
+                    } catch (IllegalArgumentException e) {
+                        System.out.println(e.getMessage());
+                        System.out.println("Silahkan masukkan durasi yang valid");
+                    }
                 } else if (ops.equals("N")){
                     System.out.println("Baik. Jika ingin karaoke, kunjungi lagi mic!");
                     valops = true;
@@ -316,8 +331,13 @@ public class Sim implements Aksi{
                     System.out.println("Berapa lama kamu ingin nonton netflix? (Dalam Detik)");
                     int dur = scan.nextInt();
                     String temp = scan.nextLine();
-                    nontonNetflix(dur);
-                    valops = true;
+                    try {
+                        nontonNetflix(dur);
+                        valops = true;
+                    } catch (IllegalArgumentException e) {
+                        System.out.println(e.getMessage());
+                        System.out.println("Silahkan masukkan durasi yang valid");
+                    }
                 } else if (ops.equals("N")){
                     System.out.println("Baik. Jika ingin nonton netflix, kunjungi lagi laptop!");
                     valops = true;
@@ -333,8 +353,13 @@ public class Sim implements Aksi{
                     System.out.println("Berapa lama kamu ingin mandi? (Dalam Detik)");
                     int dur = scan.nextInt();
                     String temp = scan.nextLine();
-                    mandi(dur);
-                    valops = true;
+                    try {
+                        mandi(dur);
+                        valops = true;
+                    } catch (IllegalArgumentException e) {
+                        System.out.println(e.getMessage());
+                        System.out.println("Silahkan masukkan durasi yang valid");
+                    }
                 } else if (ops.equals("N")){
                     System.out.println("Baik. Jangan lupa mandi supaya higienis selalu!");
                     valops = true;
