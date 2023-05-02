@@ -33,7 +33,7 @@ public class Sim implements Aksi{
         uang = 100;
         inventory = new Inventory<ObjectSim>();
         kesejahteraan = new Kesejahteraan();
-        status = null;
+        status = "Idle";
         rumah = new Rumah(x,y);
         curObject = null;
         lokSimRuang = rumah.getRoom("Kamar"); 
