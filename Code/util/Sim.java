@@ -410,7 +410,7 @@ public class Sim implements Aksi{
         time.AksiSleep(durasi);
         this.setStatus("olahraga");
         kesejahteraan.updateKesehatan(5*(durasi/20));
-        kesejahteraan.updateKekenyangan((-10)*(durasi/20));
+        kesejahteraan.updateKekenyangan((-5)*(durasi/20));
         kesejahteraan.updateMood(10*(durasi/20));
 
         //Untuk selalu nambahin durasi gak buang air
