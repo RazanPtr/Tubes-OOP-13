@@ -283,8 +283,8 @@ public class Main {
                             String tempstr = scan.nextLine();
                             if (choice >= 1 && choice < temp) {
                                 ObjectSim objTemp = currentSim.getLokRuang().getObjects().get(choice-1);
-                                currentSim.move(objTemp);
                                 System.out.println("Berhasil pindah ke Object " + objTemp.getNama());
+                                currentSim.move(objTemp);
                                 valid1 = true;
                             } else {
                                 System.out.println("Opsi tidak valid!");
