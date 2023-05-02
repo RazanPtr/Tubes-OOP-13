@@ -481,9 +481,7 @@ public class Sim implements Aksi{
     }
     
     public void berkunjung(int durasi, Lokasi lokasiTujuan) { // perlu cek rumah yang dituju tuh ada di world (dalem perumahan) apa ngga gasi(??)
-        double waktuKunjungan = Math.sqrt(Math.pow(lokasiTujuan.getX() - lokSimRumah.getX(), 2)
-                + Math.pow(lokasiTujuan.getY() - lokSimRumah.getY(), 2));
-
+        double waktuKunjungan = Math.sqrt(Math.pow(lokasiTujuan.getX() - lokSimRumah.getX(), 2) + Math.pow(lokasiTujuan.getY() - lokSimRumah.getY(), 2));
         durasi += waktuKunjungan;
         setActiveDuration(durasi);
         time.AksiSleep(durasi);
@@ -498,24 +496,19 @@ public class Sim implements Aksi{
 
     public void buangAir(int durasi){
         //implementasi buangAir
-        try {
-            if(durasi <= 0 && durasi % 10 != 0){
-                if(sudahMakan){
-                setActiveDuration(durasi);
-                time.AksiSleep(durasi);
-                kesejahteraan.updateKekenyangan((-20)*(durasi/10));
-                kesejahteraan.updateMood((10)*(durasi/10));
-                sudahBuangAir = true;
-                } else {
-                    System.out.println("Sim belum makan pada hari ini");}
-            }   
-            
-            
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            System.out.println("Silahkan masukkan durasi yang valid");
+        if(durasi <= 0 && durasi % 10 != 0){
+            throw new IllegalArgumentException("durasi tidak sesuai");
         }
-        
+        if(sudahMakan){
+            setActiveDuration(durasi);
+            time.AksiSleep(durasi);
+            kesejahteraan.updateKekenyangan((-20)*(durasi/10));
+            kesejahteraan.updateMood((10)*(durasi/10));
+            sudahBuangAir = true;
+        } else {
+            System.out.println("Sim belum makan pada hari ini");
+        }
+            
     }
 
     public void tidakBuangAir(){
