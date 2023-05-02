@@ -137,7 +137,7 @@ public class Ruangan {
                         }
                     }
                 } else {
-                    System.out.print(" XXX |");
+                    System.out.print("     |");
                 }
             }
             System.out.print("\n----------------------------------\n");
