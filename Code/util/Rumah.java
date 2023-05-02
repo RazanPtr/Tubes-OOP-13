@@ -11,12 +11,12 @@ public class Rumah {
         this.lokRumah = new Lokasi(x, y);
         rooms.add(new Ruangan("Kamar")); // initially add a room
 
-        //ini buat trial List Object
+        /*ini buat trial List Object
         getRoom("Kamar").placeObject(new Lokasi(0, 0), new KasurSingle());
         getRoom("Kamar").placeObject(new Lokasi(0, 1), new Toilet());
         getRoom("Kamar").placeObject(new Lokasi(4, 0), new KomporGas());
         getRoom("Kamar").placeObject(new Lokasi(5, 1), new Jam());
-        getRoom("Kamar").placeObject(new Lokasi(0, 3), new MejaKursi());
+        getRoom("Kamar").placeObject(new Lokasi(0, 3), new MejaKursi());*/
     }
     
     public int getArea() {
