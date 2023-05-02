@@ -462,7 +462,6 @@ public class Sim implements Aksi{
             Masakan m = (Masakan) ob; 
             if(inventory.getItem().contains(m)){
                 setActiveDuration(durasi);
-                
                 this.setStatus("Makan");
                 inventory.removeItem(m, 1);
                 kesejahteraan.updateKekenyangan((m.getTingkatKenyang())*(durasi/30));
@@ -486,7 +485,7 @@ public class Sim implements Aksi{
                 }
             }
             if(bisa){
-                this.setStatus("memasak");
+                this.setStatus("Memasak");
                 try {
                     Thread.sleep((3/2)*m.getTingkatKenyang()* 1000);
                     time.updateTime((3/2)*m.getTingkatKenyang()* 1000);
@@ -523,7 +522,7 @@ public class Sim implements Aksi{
         double waktuKunjungan = Math.sqrt(Math.pow(lokasiTujuan.getX() - lokSimRumah.getX(), 2) + Math.pow(lokasiTujuan.getY() - lokSimRumah.getY(), 2));
         durasi += waktuKunjungan;
         setActiveDuration(durasi);
-        
+        this.setStatus("Berkunjung");
         kesejahteraan.updateMood(10 * (durasi / 30));
         kesejahteraan.updateKekenyangan(-10 * (durasi / 30));
         
@@ -539,8 +538,8 @@ public class Sim implements Aksi{
             throw new IllegalArgumentException("durasi tidak sesuai");
         }
         if(sudahMakan){
+            this.setStatus("Buang Air");
             setActiveDuration(durasi);
-            
             kesejahteraan.updateKekenyangan((-20)*(durasi/10));
             kesejahteraan.updateMood((10)*(durasi/10));
             sudahBuangAir = true;
@@ -650,7 +649,7 @@ public class Sim implements Aksi{
         }
         setActiveDuration(durasi);
         
-        this.setStatus("karaoke");
+        this.setStatus("Karaoke");
         kesejahteraan.updateMood(10*(durasi/30));
         kesejahteraan.updateKekenyangan((-10)*(durasi/30));
         System.out.println("baby shark dudurudduduuu");
@@ -675,7 +674,7 @@ public class Sim implements Aksi{
     public void simpanBarang(String lok, ObjectSim ob){
     //implementasi simpanBarang
         if(ob instanceof Furniture){
-            this.setStatus("simpan barang");
+            this.setStatus("Simpan barang");
             if(rumah.getRoom(lok) != null){
                 rumah.getRoom(lok).getObjects().remove(ob);
             }
@@ -696,7 +695,7 @@ public class Sim implements Aksi{
         }
         setActiveDuration(durasi);
         
-        this.setStatus("sholat");
+        this.setStatus("Sholat");
         kesejahteraan.updateMood(30);
          //Untuk selalu nambahin durasi gak buang air
         durasiTidakBuangAir += durasi;
@@ -709,7 +708,7 @@ public class Sim implements Aksi{
         }
         setActiveDuration(durasi);
         
-        this.setStatus("mandi");
+        this.setStatus("Mandi");
         kesejahteraan.updateKesehatan(30);
         kesejahteraan.updateMood(10);
          //Untuk selalu nambahin durasi gak buang air
@@ -723,7 +722,7 @@ public class Sim implements Aksi{
         }
         setActiveDuration(durasi);
         
-        this.setStatus("menonton netflix");
+        this.setStatus("Menonton netflix");
         kesejahteraan.updateMood(15*(durasi/40));
         kesejahteraan.updateKekenyangan((-10)*(durasi/40));
         kesejahteraan.updateKesehatan((-2)*(durasi/40));
@@ -738,7 +737,7 @@ public class Sim implements Aksi{
 
     public void pasangBarang(String lokRuang, ObjectSim ob, Lokasi lokBarang){
     //implementasi pasangBarang
-        this.setStatus("memasang barang");
+        this.setStatus("Memasang barang");
         if(ob instanceof Furniture){
             Furniture f = (Furniture) ob;
             boolean can = rumah.getRoom(lokRuang).canPlaceObj(lokBarang, f);
