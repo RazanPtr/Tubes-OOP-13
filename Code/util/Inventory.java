@@ -14,9 +14,13 @@ public class Inventory<T> {
         if (quantity <= 0) {
             throw new IllegalArgumentException("Quantity harus lebih besar dari 0");
         }
-
-        int currQuantity = items.getOrDefault(item, 0);
-        items.put(item, currQuantity + quantity);
+        if (items.containsKey(item)) {
+            items.put(item, items.get(item) + quantity);
+        } else {
+            items.put(item, quantity);
+        }
+        //int currQuantity = items.getOrDefault(item, 0);
+        //items.put(item, currQuantity + quantity);
     }
 
     public void removeItem(T item, int quantity) {
