@@ -15,7 +15,7 @@ public class Inventory<T> {
             throw new IllegalArgumentException("Quantity harus lebih besar dari 0");
         }
         if (items.containsKey(item)) {
-            items.put(item, items.get(item) + quantity);
+            items.replace(item, items.get(item) + quantity);
         } else {
             items.put(item, quantity);
         }
