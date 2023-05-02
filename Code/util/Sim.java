@@ -410,7 +410,7 @@ public class Sim implements Aksi{
         time.AksiSleep(durasi);
         this.setStatus("olahraga");
         kesejahteraan.updateKesehatan(5*(durasi/20));
-        kesejahteraan.updateKekenyangan((-5)*(durasi/20));
+        kesejahteraan.updateKekenyangan((-10)*(durasi/20));
         kesejahteraan.updateMood(10*(durasi/20));
 
         //Untuk selalu nambahin durasi gak buang air
@@ -812,7 +812,7 @@ public class Sim implements Aksi{
                 this.kesehatan = 100;
             }  else if(this.kesehatan <= 0){
                 isMati = true;
-                statusMati = "Sim mati karena sakit :<";
+                statusMati = "mati karena sakit :<";
             }
         }
 
@@ -822,7 +822,7 @@ public class Sim implements Aksi{
                 this.kekenyangan = 100;
             }  else if(this.kekenyangan <= 0){
                 isMati = true;
-                statusMati = "Sim mati karena kelaparan :<";
+                statusMati = "mati karena kelaparan :<";
             }
         }
 
@@ -832,7 +832,7 @@ public class Sim implements Aksi{
                 this.mood = 100;
             } else if(this.mood <= 0){
                 isMati = true;
-                statusMati = "Sim mati karena mengalami depresi :<";
+                statusMati = "mati karena mengalami depresi :<";
             }
         }
 

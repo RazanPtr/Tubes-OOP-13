@@ -144,7 +144,7 @@ public class Main {
                 } 
                 for(Sim s : pemain){
                     if(s.getKesejahteraan().getIsMati()){
-                        System.out.println("Ooops... " + s.getKesejahteraan().getStatusMati());
+                        System.out.println("Ooops... Sim bernama " + s.getNamaLengkap() + " " + s.getKesejahteraan().getStatusMati());
                         pemain.remove(s);
                         w.getPerumahan().remove(s.getRumah());
                     }
@@ -436,75 +436,83 @@ public class Main {
                 }
             }
             if(currentSim.getKesejahteraan().getIsMati()){
-                System.out.println("Ooops... " + currentSim.getKesejahteraan().getStatusMati());
+                System.out.println("Ooops... Sim bernama " + currentSim.getNamaLengkap() + " " + currentSim.getKesejahteraan().getStatusMati());
                 pemain.remove(currentSim);
                 w.getPerumahan().remove(currentSim.getRumah());
                 currentSim = null;
                 System.out.println("Apakah masih ingin melanjutkan permainan? (Yes/No)");
-                String pil = scan.next();
-                if(pil.equals("Yes")){
-                    if(pemain.size() > 1){
-                        System.out.println("Silahkan pilih Sim lain yang ingin dimainkan: ");
-                        int i = 1;
-                        for(Sim s : pemain){
-                            System.out.println(i + ". " + s.getNamaLengkap());
-                            i++;
-                        }
-                        String nama = scan.nextLine();
-                        for(Sim s : pemain){
-                            if(s.getNamaLengkap().equals(nama)){
-                                currentSim = s;
+                String pil = scan.nextLine();
+                boolean opvalid = false;
+                while(!opvalid){
+                    if(pil.equals("Yes")){
+                        if(pemain.size() > 1){
+                            System.out.println("Silahkan pilih Sim lain yang ingin dimainkan: ");
+                            int i = 1;
+                            for(Sim s : pemain){
+                                System.out.println(i + ". " + s.getNamaLengkap());
+                                i++;
                             }
-                        }
-                        if(currentSim == null || (!currentSim.getNamaLengkap().equals(nama))){
-                            System.out.println("Sim tersebut belum terdaftar pada permainan Simplicity");
-                        }
-                    } else {
-                        System.out.println("Tidak ada Sim lain pada permainan ini. Silahkan menambahkan Sim baru!");
-                        System.out.println("Siapa nama sim baru?");
-                        String nama = scan.next();
-                        boolean namaValid = false;
-                        if(pemain.size() <=0){
-                            namaValid = true;
-                        } 
-                        while(!namaValid){
+                            String nama = scan.nextLine();
                             for(Sim s : pemain){
                                 if(s.getNamaLengkap().equals(nama)){
-                                    namaValid = false;
-                                    break;
-                                } else {
-                                    namaValid = true;
+                                    currentSim = s;
                                 }
                             }
-                            if(!namaValid){
-                                System.out.println("Sim dengan nama tersebut telah tersedia. Silahkan masukkan nama lain");
-                                System.out.println("Siapa nama sim baru?");
-                                nama = scan.nextLine();
+                            if(currentSim == null || (!currentSim.getNamaLengkap().equals(nama))){
+                                System.out.println("Sim tersebut belum terdaftar pada permainan Simplicity");
                             }
-                            
+                        } else {
+                            System.out.println("Tidak ada Sim lain pada permainan ini. Silahkan menambahkan Sim baru!");
+                            System.out.println("Siapa nama sim baru?");
+                            String nama = scan.nextLine();
+                            boolean namaValid = false;
+                            if(pemain.size() <=0){
+                                namaValid = true;
+                            } 
+                            while(!namaValid){
+                                for(Sim s : pemain){
+                                    if(s.getNamaLengkap().equals(nama)){
+                                        namaValid = false;
+                                        break;
+                                    } else {
+                                        namaValid = true;
+                                    }
+                                }
+                                if(!namaValid){
+                                    System.out.println("Sim dengan nama tersebut telah tersedia. Silahkan masukkan nama lain");
+                                    System.out.println("Siapa nama sim baru?");
+                                    nama = scan.nextLine();
+                                }
+                                
+                            }
+                            boolean rumahValid = false;
+                            while(!rumahValid){
+                                System.out.println("Dimana lokasi rumah yang diinginkan? (x, y) ");
+                                System.out.print("x: ");
+                                int x = scan.nextInt();
+                                System.out.print("y: ");
+                                int y = scan.nextInt();
+                                String temp = scan.nextLine();
+                                if(w.isRumahAvailable(x, y)){
+                                    rumahValid = true;
+                                    Sim s = new Sim(nama, x, y);
+                                    pemain.add(s);
+                                    w.addRumah(s.getRumah());
+                                    currentSim = s; 
+                                    System.out.println("Sim telah berhasil dibuat!");
+                                }
+                            } 
                         }
-                        System.out.println(namaValid);
-                        boolean rumahValid = false;
-                        while(!rumahValid){
-                            System.out.println("Dimana lokasi rumah yang diinginkan? (x, y) ");
-                            System.out.print("x: ");
-                            int x = scan.nextInt();
-                            System.out.print("y: ");
-                            int y = scan.nextInt();
-                            String temp = scan.nextLine();
-                            if(w.isRumahAvailable(x, y)){
-                                rumahValid = true;
-                                Sim s = new Sim(nama, x, y);
-                                pemain.add(s);
-                                w.addRumah(s.getRumah());
-                                currentSim = s; 
-                                System.out.println("Sim telah berhasil dibuat!");
-                            }
-                        } 
+                        opvalid = true;
+                    } else if(pil.equals("No")) {
+                        finished = true;
+                        opvalid = true;
+                    } else {
+                        System.out.println("Opsi yang dipilih tidak valid!");
+                        System.out.println("Silahkan pilih antara kedua opsi berikut : (Yes/No)");
+                        pil = scan.nextLine();
                     }
-                } else {
-                    finished = true;
-                } 
+                }
             }
         }
         
