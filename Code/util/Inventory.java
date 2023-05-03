@@ -36,6 +36,17 @@ public class Inventory<T> {
         } else {
             items.put(item, newQuantity);
         }
+        //if (items.containsKey(item)) {
+        //    if (items.get(item) > 1) {
+        //        items.put(item, items.get(item) - 1);
+        //    } else {
+        //        items.remove(item);
+        //    }
+        //    return item;
+        //} else {
+        //    System.out.println("Item tidak ada di inventory");
+        //    return null;
+        //}
     }
 
     public int getQuantity(T item) {
