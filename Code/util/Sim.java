@@ -14,7 +14,7 @@ public class Sim implements Aksi{
     private Lokasi lokSimRumah;
     private Ruangan lokSimRuang;
     private ObjectSim curObject;
-    private Time time;
+    protected static Time time;
     private int awalKerja;
     private int lamaKerja;
     private int durasiTidur;
@@ -47,7 +47,6 @@ public class Sim implements Aksi{
         inventory.addItem(new KomporGas(), 1);
         inventory.addItem(new Jam(), 1);
         inventory.addItem(new MejaKursi(), 1);
-        time = new Time();
     }
 
     public String getNamaLengkap(){
