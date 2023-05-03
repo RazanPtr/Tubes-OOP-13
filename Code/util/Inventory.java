@@ -2,10 +2,11 @@ package util;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Set;
+import objek.*;
 
 public class Inventory<T> {
     private Map<T, Integer> items;
-
+    //private Map<Integer, ObjectSim> data;
     public Inventory() {
         this.items = new HashMap<>();
     }
@@ -14,13 +15,23 @@ public class Inventory<T> {
         if (quantity <= 0) {
             throw new IllegalArgumentException("Quantity harus lebih besar dari 0");
         }
-        if (items.containsKey(item)) {
+        if (isContain(item)) {
             items.replace(item, items.get(item) + quantity);
         } else {
             items.put(item, quantity);
         }
         //int currQuantity = items.getOrDefault(item, 0);
         //items.put(item, currQuantity + quantity);
+    }
+    public boolean isContain(T obj){
+        boolean found = false;
+
+        for (T item : items.keySet()) {
+            if (item.equals(obj)) {
+                found = true;
+            }
+        }
+        return found;
     }
 
     public void removeItem(T item, int quantity) {
@@ -81,5 +92,16 @@ public class Inventory<T> {
             System.out.println("+-----------------+---------------+");
             System.out.println("inventorymu kosong saat ini");
         }
+    }
+    public static void main(String[] args){
+        Inventory<String> items = new Inventory<>();
+        KasurKing kasur = new KasurKing();
+        //items.addItem(kasur, 1);
+        items.addItem("kasur", 1);
+        
+        
+        
+        items.showInventory();
+
     }
 }
