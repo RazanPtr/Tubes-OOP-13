@@ -15,23 +15,24 @@ public class Inventory<T> {
         if (quantity <= 0) {
             throw new IllegalArgumentException("Quantity harus lebih besar dari 0");
         }
-        if (isContain(item)) {
-            items.replace(item, items.get(item) + quantity);
+
+        if (isContain(item) != null) {
+            T temp = isContain(item);
+            items.replace(temp, items.get(temp) + quantity);
         } else {
             items.put(item, quantity);
         }
         //int currQuantity = items.getOrDefault(item, 0);
         //items.put(item, currQuantity + quantity);
     }
-    public boolean isContain(T obj){
-        boolean found = false;
 
+    public T isContain(T obj){
         for (T item : items.keySet()) {
-            if (item.equals(obj)) {
-                found = true;
+            if (item.getClass().getSimpleName().equals(obj.getClass().getSimpleName())) {
+                return item;
             }
         }
-        return found;
+        return null;
     }
 
     public void removeItem(T item, int quantity) {
@@ -93,15 +94,15 @@ public class Inventory<T> {
             System.out.println("inventorymu kosong saat ini");
         }
     }
-    public static void main(String[] args){
-        Inventory<String> items = new Inventory<>();
-        KasurKing kasur = new KasurKing();
-        //items.addItem(kasur, 1);
-        items.addItem("kasur", 1);
+    // public static void main(String[] args){
+    //     Inventory<String> items = new Inventory<>();
+    //     KasurKing kasur = new KasurKing();
+    //     //items.addItem(kasur, 1);
+    //     items.addItem("kasur", 1);
         
         
         
-        items.showInventory();
+    //     items.showInventory();
 
-    }
+    // }
 }
