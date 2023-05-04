@@ -32,7 +32,7 @@ public class Sim implements Aksi{
     public Sim(String name, int x, int y){
         this.namaLengkap = name;
         pekerjaan = new WorkObject();
-        uang = 100000;
+        uang = 100;
         inventory = new Inventory<ObjectSim>();
         kesejahteraan = new Kesejahteraan();
         status = "Idle";
@@ -643,7 +643,7 @@ public class Sim implements Aksi{
                                             }
                                             setTimeDelivery(new Random().nextInt(1, 6) * 30 * 1000);
                                             isItemInDelivery = true;
-                                            System.out.println("\nAnda telah membeli " + ((ObjectSim) object).getNama() + " dengan harga " + object.getPrice() + ".");
+                                            System.out.println("\nAnda telah membeli " + ((ObjectSim) object).getNama() + " dengan harga " + object.getPrice()*amount + ".");
                                             System.out.println("Mohon menunggu selama " + timeRemainingDelivery / 1000 + " detik");
                                             if (timeRemainingDelivery < getActiveDuration()) {
                                                 Thread.sleep(timeRemainingDelivery);
@@ -844,9 +844,9 @@ public class Sim implements Aksi{
         private String statusMati;
 
         public Kesejahteraan() {
-            mood = 80000;
-            kekenyangan = 80000;
-            kesehatan = 80000;
+            mood = 80;
+            kekenyangan = 80;
+            kesehatan = 80;
         }
 
         public int getMood(){
