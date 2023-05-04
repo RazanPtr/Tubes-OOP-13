@@ -837,10 +837,13 @@ public class Sim implements Aksi{
         }
     }
 
-    public void pindahBarang(String lokAwal, ObjectSim ob, Lokasi lokAkhir, String lokRuang){
-    //implementasi pindhBarang
-        // simpanBarang(lokAwal, ob, itemName);
-        // pasangBarang(lokRuang, ob, lokAkhir);
+    public void pindahBarang(Map<String, PurchasableObject> objectMap, String lokRuang, Lokasi lokAkhir, String itemName){
+    //implementasi pindahBarang
+    
+        simpanBarang(lokRuang, objectMap, itemName);
+        pasangBarang(objectMap, lokRuang, itemName, lokAkhir);
+        //boolean can = rumah.getRoom(lokRuang).canPlaceObj(lokAkhir, dariRooms);
+    
     }
 
     public void sholat(int durasi){
@@ -908,14 +911,15 @@ public class Sim implements Aksi{
                     
                 }
                 if (f1 != null){
-                    boolean can = rumah.getRoom(lokRuang).canPlaceObj(lokBarang, f);
+                    boolean can = rumah.getRoom(lokRuang).canPlaceObj(lokBarang, f1);
                     if(can){
-                        rumah.getRoom(lokRuang).getObjects().add(f);
-                        inventory.removeItem(f,1);
+                        f1.setLokDiRuangan(lokBarang);
+                        rumah.getRoom(lokRuang).getObjects().add(f1);
+                        inventory.removeItem(f1,1);
                         System.out.println("Benda berhasil dipasang di ruangan " + lokRuang);
                     }
                     else{
-                    System.out.println("Tidak dapat memasang barang di lokasi tersebut. Coba rotate barang atau pindahkan ke ruangan lain.");
+                    System.out.println("Tidak dapat memasang barang di lokasi tersebut. Coba rotate barang atau pindahkan ke lokasi lain.");
                     }
                 }
                 else{

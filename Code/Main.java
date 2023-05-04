@@ -168,7 +168,7 @@ public class Main {
                     System.out.println("");
                 
                 //Tidak buang air
-                if (currentSim.durasiTidakBuangAir % 240 == 0 && !currentSim.sudahBuangAir && !currentSim.sudahMakan){
+                if (currentSim.durasiTidakBuangAir % 240 == 0 && currentSim.sudahBuangAir && currentSim.sudahMakan){
                     currentSim.tidakBuangAir();
                 } 
 
@@ -286,9 +286,7 @@ public class Main {
                             System.out.print("y: ");
                             int lokY = scanBarang.nextInt();
                             Lokasi lokTemp = new Lokasi(lokX, lokY);
-                            
-                            
-                            //currentSim.pasangBarang(inputRuang, inputBarang, lokTemp);
+                            currentSim.pasangBarang(purchasableMap, inputRuang, inputBarang, lokTemp);
                             
                         } else if (opsi==4) {
                             //kode
