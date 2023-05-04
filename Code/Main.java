@@ -189,11 +189,7 @@ public class Main {
                         //String namaRbaru = scan.nextLine();
                         //int tempx = scan.nextInt();
                         //int tempy = scan.nextInt();
-                        if(currentSim.getUang() >= 1500){
-                            currentSim.upgradeRumah();
-                        } else {
-                            System.out.println("Saldo Simmu tidak mencukupi untuk melakukan upgrade rumah! silahkan bekerja terlebih dahulu");
-                        }
+                        currentSim.upgradeRumah();
                     } else {
                         System.out.println("Anda sedang berada di rumah Sim lain. Anda tidak dapat melakukan upgrade terhadap rumah ini.");
                         System.out.println("Silahkan kembali ke rumah Anda terlebih dahulu untuk melakukan upgrade rumah");
