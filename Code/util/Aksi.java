@@ -27,7 +27,7 @@ public interface Aksi {
 
     public void simpanBarang(String lok, Map<String, PurchasableObject> objectMap, String itemName);
 
-    public void pindahBarang(String lokAwal, ObjectSim ob, Lokasi lokAkhir, String lokRuang);
+    public void pindahBarang(Map<String, PurchasableObject> objectMap, String lokRuang, Lokasi lokAkhir, String itemName);
 
     public void sholat(int durasi);
 
@@ -38,6 +38,6 @@ public interface Aksi {
     public void lihatInventory();
     
     public void pasangBarang(Map<String, PurchasableObject> objectMap, String lokRuang, String itemName, Lokasi lokBarang);
-    
+
     public void lihatWaktu();
 }
