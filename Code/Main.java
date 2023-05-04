@@ -486,12 +486,14 @@ public class Main {
                 System.out.println("");
                 System.out.println("Ketik BACK untuk kembali ke Main Menu");
                 Boolean cekBalik = false;
+                String inp;
                     while (!cekBalik) {
-                        String inp = scan.nextLine();
+                        inp = scan.nextLine();
                         if (inp.equalsIgnoreCase("BACK")) {
                             cekBalik = true;
                         } else {
                             System.out.println("Periksa kembali input stringnya!");
+                            inp = scan.nextLine();
                         }
                     }
             }

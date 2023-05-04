@@ -82,15 +82,15 @@ public class Rumah {
                     System.out.println("Beri kode untuk ruangan baru (3 huruf kapital):");
                     String code = sc.nextLine();
                     while (!isCodeValid(code)) {
-                        System.out.println("Nama sudah terpakai! Beri nama ruangan yang baru:");
-                        nama = sc.nextLine();
+                        System.out.println("Code sudah terpakai! Beri kode ruangan yang baru:");
+                        code = sc.nextLine();
                     }
                     Ruangan rbaru = new Ruangan(nama,code);
                     ruangan.setUp(rbaru);
                     rbaru.setDown(ruangan);
                     rooms.add(rbaru);
                     System.out.println("Ruang berhasil ditambahkan!");
-                    layout[ruangan.getX()][ruangan.getY()+1] = rbaru;
+                    layout[ruangan.getX()+1][ruangan.getY()] = rbaru;
                 } else {
                     System.out.println("Maaf, sudah terdapat ruangan di atas ruangan ini!");
                 }
@@ -107,15 +107,15 @@ public class Rumah {
                     System.out.println("Beri kode untuk ruangan baru (3 huruf kapital):");
                     String code = sc.nextLine();
                     while (!isCodeValid(code)) {
-                        System.out.println("Nama sudah terpakai! Beri nama ruangan yang baru:");
-                        nama = sc.nextLine();
+                        System.out.println("Code sudah terpakai! Beri kode ruangan yang baru:");
+                        code = sc.nextLine();
                     }
                     Ruangan rbaru = new Ruangan(nama,code);
                     ruangan.setDown(rbaru);
                     rbaru.setUp(ruangan);
                     rooms.add(rbaru);
                     System.out.println("Ruang berhasil ditambahkan!");
-                    layout[ruangan.getX()][ruangan.getY()-1] = rbaru;
+                    layout[ruangan.getX()-1][ruangan.getY()] = rbaru;
                 } else {
                     System.out.println("Maaf, sudah terdapat ruangan di bawah ruangan ini!");
                 }
@@ -132,15 +132,15 @@ public class Rumah {
                     System.out.println("Beri kode untuk ruangan baru (3 huruf kapital):");
                     String code = sc.nextLine();
                     while (!isCodeValid(code)) {
-                        System.out.println("Nama sudah terpakai! Beri nama ruangan yang baru:");
-                        nama = sc.nextLine();
+                        System.out.println("Code sudah terpakai! Beri kode ruangan yang baru:");
+                        code = sc.nextLine();
                     }
                     Ruangan rbaru = new Ruangan(nama,code);
                     ruangan.setLeft(rbaru);
                     rbaru.setRight(ruangan);
                     rooms.add(rbaru);
                     System.out.println("Ruang berhasil ditambahkan!");
-                    layout[ruangan.getX()-1][ruangan.getY()] = rbaru;
+                    layout[ruangan.getX()][ruangan.getY()-1] = rbaru;
                 } else {
                     System.out.println("Maaf, sudah terdapat ruangan di kiri ruangan ini!");
                 }
@@ -157,15 +157,15 @@ public class Rumah {
                     System.out.println("Beri kode untuk ruangan baru (3 huruf kapital):");
                     String code = sc.nextLine();
                     while (!isCodeValid(code)) {
-                        System.out.println("Nama sudah terpakai! Beri nama ruangan yang baru:");
-                        nama = sc.nextLine();
+                        System.out.println("Code sudah terpakai! Beri kode ruangan yang baru:");
+                        code = sc.nextLine();
                     }
                     Ruangan rbaru = new Ruangan(nama,code);
                     ruangan.setRight(rbaru);
                     rbaru.setLeft(ruangan);
                     rooms.add(rbaru);
                     System.out.println("Ruang berhasil ditambahkan!");
-                    layout[ruangan.getX()+1][ruangan.getY()] = rbaru;
+                    layout[ruangan.getX()][ruangan.getY()+1] = rbaru;
                 } else {
                     System.out.println("Maaf, sudah terdapat ruangan di kanan ruangan ini!");
                 }
