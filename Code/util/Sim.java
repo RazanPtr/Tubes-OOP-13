@@ -834,23 +834,42 @@ public class Sim implements Aksi{
         inventory.showInventory();
     }
 
-    public void pasangBarang(String lokRuang, ObjectSim ob, Lokasi lokBarang){
-    //implementasi pasangBarang
-        this.setStatus("Memasang barang");
-        if(ob instanceof Furniture){
-            Furniture f = (Furniture) ob;
-            boolean can = rumah.getRoom(lokRuang).canPlaceObj(lokBarang, f);
-            if(can){
-                rumah.getRoom(lokRuang).getObjects().add(f);
-                inventory.addItem(ob, -1);
+    public void pasangBarang(Map<String, PurchasableObject> objectMap, String lokRuang, String itemName, Lokasi lokBarang){
+        //implementasi pasangBarang
+            this.setStatus("Memasang barang");
+            PurchasableObject pob = objectMap.get(itemName);
+            ObjectSim obs = (ObjectSim) pob;
+    
+            if(obs instanceof Furniture){
+                Furniture f = (Furniture) obs;
+                Furniture f1 = null;
+                Set<ObjectSim> listInventory = inventory.getItem();
+                for (ObjectSim item : listInventory) {
+                    if (item.getClass().getSimpleName().equals(obs.getNama())) {
+                        f1 = (Furniture) item;
+                        break;
+                    }
+                    
+                }
+                if (f1 != null){
+                    boolean can = rumah.getRoom(lokRuang).canPlaceObj(lokBarang, f);
+                    if(can){
+                        rumah.getRoom(lokRuang).getObjects().add(f);
+                        inventory.removeItem(f,1);
+                        System.out.println("Benda berhasil dipasang di ruangan " + lokRuang);
+                    }
+                    else{
+                    System.out.println("Tidak dapat memasang barang di lokasi tersebut. Coba rotate barang atau pindahkan ke ruangan lain.");
+                    }
+                }
+                else{
+                    System.out.println("Anda tidak memiliki barang tersebut");
+                }
+                
             }
-            else{
-                System.out.println("Tidak dapat memasang barang di lokasi tersebut. Coba rotate barang atau pindahkan ke ruangan lain.");
-            }
+            
+            
         }
-        
-        
-    }
 
     public void lihatWaktu(){
     //implementasi lihatWaktu

@@ -36,17 +36,17 @@ public class Inventory<T> {
     }
 
     public void removeItem(T item, int quantity) {
+        T temp = isContain(item);
         if (quantity <= 0) {
             throw new IllegalArgumentException("Quantity harus lebih besar dari 0");
         }
-
-        int currQuantity = items.getOrDefault(item, 0);
-        int newQuantity = currQuantity - quantity;
-
-        if (newQuantity <= 0) {
-            items.remove(item);
+        if (quantity > items.get(temp)) {
+            throw new IllegalArgumentException("Quantity tidak boleh lebih besar dari jumlah item yang ada");
+        }
+        if (quantity == items.get(temp)) {
+            items.remove(temp);
         } else {
-            items.put(item, newQuantity);
+            items.replace(temp, items.get(temp) - quantity);
         }
         //if (items.containsKey(item)) {
         //    if (items.get(item) > 1) {
