@@ -852,10 +852,11 @@ public class Sim implements Aksi{
                     
                 }
                 if (f1 != null){
-                    boolean can = rumah.getRoom(lokRuang).canPlaceObj(lokBarang, f);
+                    boolean can = rumah.getRoom(lokRuang).canPlaceObj(lokBarang, f1);
                     if(can){
-                        rumah.getRoom(lokRuang).getObjects().add(f);
-                        inventory.removeItem(f,1);
+                        f1.setLokDiRuangan(lokBarang);
+                        rumah.getRoom(lokRuang).getObjects().add(f1);
+                        inventory.removeItem(f1,1);
                         System.out.println("Benda berhasil dipasang di ruangan " + lokRuang);
                     }
                     else{
