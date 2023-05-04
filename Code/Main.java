@@ -168,7 +168,7 @@ public class Main {
                     System.out.println("");
                 
                 //Tidak buang air
-                if (currentSim.durasiTidakBuangAir % 240 == 0 && currentSim.sudahBuangAir){
+                if (currentSim.durasiTidakBuangAir % 240 == 0 && !currentSim.sudahBuangAir && !currentSim.sudahMakan){
                     currentSim.tidakBuangAir();
                 } 
 

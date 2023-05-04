@@ -20,7 +20,7 @@ public class Sim implements Aksi{
     private int durasiTidur;
     public int durasiTidakBuangAir;
     private boolean sudahTidur;
-    private boolean sudahMakan;
+    public boolean sudahMakan;
     public boolean sudahBuangAir;
     private int durasiAksiAktif;
     private int waktuSisaPengiriman;
