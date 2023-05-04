@@ -25,7 +25,7 @@ public interface Aksi {
 
     public void melukis(int durasi);
 
-    public void simpanBarang(String lok, ObjectSim ob);
+    public void simpanBarang(String lok, Map<String, PurchasableObject> objectMap, String itemName);
 
     public void pindahBarang(String lokAwal, ObjectSim ob, Lokasi lokAkhir, String lokRuang);
 

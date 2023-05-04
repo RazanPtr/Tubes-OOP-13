@@ -726,21 +726,65 @@ public class Sim implements Aksi{
          durasiTidakBuangAir += durasi;
     }
 
-    public void simpanBarang(String lok, ObjectSim ob){
+    public void simpanBarang(String lok, Map<String, PurchasableObject> objectMap, String itemName){
     //implementasi simpanBarang
-        if(ob instanceof Furniture){
+        Scanner scan = new Scanner(System.in);
+        PurchasableObject object = objectMap.get(itemName);
+        if(object instanceof Furniture){
             this.setStatus("Simpan barang");
             if(rumah.getRoom(lok) != null){
-                rumah.getRoom(lok).getObjects().remove(ob);
+                ObjectSim os = (ObjectSim) object;
+                ObjectSim temp = null;
+                int count = 0;
+                ArrayList<Furniture> daftarObj = rumah.getRoom(lok).getObjects();
+                for (ObjectSim item : daftarObj) {
+                    if (item.getClass().getSimpleName().equals(os.getNama())) {
+                        count++;
+                    }
+                }
+                if(count > 1){
+                    System.out.println("Objek " + itemName + " ada lebih dari satu pada ruangan ini.");
+                    System.out.println("Pilih " + itemName +" pada lokasi mana yang ingin kamu simpan!");
+                    for (ObjectSim item : daftarObj) {
+                        int i = 1;
+                        if (item.getClass().getSimpleName().equals(os.getNama())) {
+                            System.out.println(i + ". " + item.getNama() + " (" + ((Furniture)item).getLokDiRuangan().getX() + "," + ((Furniture)item).getLokDiRuangan().getY() + ")");
+                        }
+                    }
+                    int x = scan.nextInt();
+                    int y = scan.nextInt();
+                    String temps = scan.nextLine();
+                    ObjectSim dariRooms = null;
+                    
+                    for (ObjectSim item : daftarObj) {
+                        if (item.getClass().getSimpleName().equals(os.getNama())) {
+                            if(((Furniture)item).getLokDiRuangan() == new Lokasi(x, y)){
+                                dariRooms = item;
+                                daftarObj.remove(item);
+                                break;
+                            }
+                        }
+                    }
+                    inventory.addItem(dariRooms, 1);
+                } else {
+                    ObjectSim dariRooms = null;
+                    for (ObjectSim item : daftarObj) {
+                        if (item.getClass().getSimpleName().equals(os.getNama())) {
+                            dariRooms = item;   
+                            daftarObj.remove(item);
+                            break;                          
+                        }
+                    }
+                    inventory.addItem(dariRooms, 1);   
+                }
             }
-            inventory.addItem(ob, 1);
         }
     }
 
     public void pindahBarang(String lokAwal, ObjectSim ob, Lokasi lokAkhir, String lokRuang){
     //implementasi pindhBarang
-        simpanBarang(lokAwal, ob);
-        pasangBarang(lokRuang, ob, lokAkhir);
+        // simpanBarang(lokAwal, ob, itemName);
+        // pasangBarang(lokRuang, ob, lokAkhir);
     }
 
     public void sholat(int durasi){
