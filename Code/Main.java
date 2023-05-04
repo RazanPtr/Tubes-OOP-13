@@ -2,6 +2,7 @@ import java.util.Scanner;
 import util.*;
 import objek.*;
 import java.util.*;
+import display.*;
 
 public class Main {
     public static void main(String[] args){
@@ -11,6 +12,7 @@ public class Main {
         boolean started = false;
         boolean finished = false;
         World w = null;
+
 
         //Furniture
         Jam jam = new Jam();
@@ -36,6 +38,9 @@ public class Main {
         Sapi sapi = new Sapi();
         Susu susu = new Susu();
         Wortel wortel = new Wortel();
+
+        //Display
+        Ascii display = new Ascii();
 
         //OBJECTS
         Map<String, PurchasableObject> purchasableMap = new HashMap<String, PurchasableObject>(){{
@@ -64,18 +69,7 @@ public class Main {
 
         while(!started && !finished){
             //Main Menu
-            String title =  
-"░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n" +
-"░           ░   ░░░░   ░         ░░░░░░░░░      ░░░   ░   ░░░░░░░   ░        ░░░   ░░░░░░░░   ░░░░░   ░░░░   ░           ░   ░░░░░░   \n" +
-"▒▒▒▒▒   ▒▒▒▒▒   ▒▒▒▒   ▒   ▒▒▒▒▒▒▒▒▒▒▒▒▒   ▒▒▒▒   ▒   ▒  ▒   ▒▒▒    ▒   ▒▒▒▒   ▒   ▒▒▒▒▒▒▒▒   ▒▒   ▒▒▒   ▒   ▒▒▒▒▒   ▒▒▒▒▒▒   ▒▒▒▒   ▒\n" +
-"▒▒▒▒▒   ▒▒▒▒▒   ▒▒▒▒   ▒   ▒▒▒▒▒▒▒▒▒▒▒▒▒▒   ▒▒▒▒▒▒▒   ▒   ▒   ▒ ▒   ▒   ▒▒▒▒   ▒   ▒▒▒▒▒▒▒▒   ▒   ▒▒▒▒▒▒▒▒   ▒▒▒▒▒   ▒▒▒▒▒▒▒   ▒   ▒▒▒\n" +
-"▓▓▓▓▓   ▓▓▓▓▓          ▓       ▓▓▓▓▓▓▓▓▓▓▓▓   ▓▓▓▓▓   ▓   ▓▓   ▓▓   ▓        ▓▓▓   ▓▓▓▓▓▓▓▓   ▓   ▓▓▓▓▓▓▓▓   ▓▓▓▓▓   ▓▓▓▓▓▓▓▓▓   ▓▓▓▓▓\n" +
-"▓▓▓▓▓   ▓▓▓▓▓   ▓▓▓▓   ▓   ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓   ▓▓   ▓   ▓▓▓  ▓▓   ▓   ▓▓▓▓▓▓▓▓   ▓▓▓▓▓▓▓▓   ▓   ▓▓▓▓▓▓▓▓   ▓▓▓▓▓   ▓▓▓▓▓▓▓▓▓   ▓▓▓▓▓\n" +
-"▓▓▓▓▓   ▓▓▓▓▓   ▓▓▓▓   ▓   ▓▓▓▓▓▓▓▓▓▓▓▓▓   ▓▓▓▓   ▓   ▓   ▓▓▓▓▓▓▓   ▓   ▓▓▓▓▓▓▓▓   ▓▓▓▓▓▓▓▓   ▓▓   ▓▓▓   ▓   ▓▓▓▓▓   ▓▓▓▓▓▓▓▓▓   ▓▓▓▓▓\n" +
-"█████   █████   ████   █         █████████      ███   █   ███████   █   ████████          █   ████     ███   █████   █████████   █████\n" +
-"██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████\n";
-                             
-            System.out.println(title);
+            display.title();
             System.out.println("Selamat datang di permainan The Simplicity!");
                 System.out.println("Permainan ini merupakan permainan karakter virtual yaitu Sim yang dapat anda jalankan kegiatannya.");
                 System.out.println("Terdapat beberapa command yang dapat Anda berikan sebelum permainan :");
