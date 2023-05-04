@@ -173,6 +173,7 @@ public class Rumah {
             } else {
                 System.out.println("Opsi yang dimasukkan tidak sesuai pilihan yang ada");
                 System.out.println("Masukkan kembali pilihan yang diinginkan");
+                input = sc.nextLine();
             }
         }
     }
@@ -191,6 +192,7 @@ public class Rumah {
         int i = 1;
         for (Ruangan ruang: rooms) {
             System.out.println(i+". "+ruang.getNamaRuangan());
+            i++;
         }
     }
 

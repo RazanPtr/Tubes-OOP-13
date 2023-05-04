@@ -22,17 +22,17 @@ public class Sim implements Aksi{
     private boolean sudahTidur;
     private boolean sudahMakan;
     public boolean sudahBuangAir;
-    private int activeDuration;
-    private int timeRemainingDelivery;
-    private int timeRemainingUpgrade;
-    private boolean isItemInDelivery = false;
-    private boolean isHouseBeingUpgraded = false;
+    private int durasiAksiAktif;
+    private int waktuSisaPengiriman;
+    private int waktuSisaUpgrade;
+    private boolean itemSedangDikirim = false;
+    private boolean rumahSedangDiupgrade = false;
     Kesejahteraan kesejahteraan;
 
     public Sim(String name, int x, int y){
         this.namaLengkap = name;
         pekerjaan = new WorkObject();
-        uang = 100000;
+        uang = 100;
         inventory = new Inventory<ObjectSim>();
         kesejahteraan = new Kesejahteraan();
         status = "Idle";
@@ -42,8 +42,8 @@ public class Sim implements Aksi{
         lokSimRumah = rumah.getLokRumah(); //ini lokasi awal rumahnya input dari pengguna kan?!
         durasiTidur = 0;
         sudahTidur = false;
-        timeRemainingDelivery = 0;
-        isItemInDelivery = false;
+        waktuSisaPengiriman = 0;
+        itemSedangDikirim = false;
         inventory.addItem(new KasurSingle(), 1);
         inventory.addItem(new Toilet(), 1);
         inventory.addItem(new KomporGas(), 1);
@@ -68,20 +68,20 @@ public class Sim implements Aksi{
         this.uang = uang;
     }
 
-    public void setTimeDelivery(int amount){
-        timeRemainingDelivery = amount;
+    public void setWaktuPengiriman(int amount){
+        waktuSisaPengiriman = amount;
     }
 
-    public void setTimeUpgrade(int amount){
-        timeRemainingUpgrade = amount;
+    public void setWaktuUpgrade(int amount){
+        waktuSisaUpgrade = amount;
     }
 
-    public int getActiveDuration(){
-        return activeDuration;
+    public int getdurasiAksiAktif(){
+        return durasiAksiAktif;
     }
 
-    public void setActiveDuration(int amount){
-        activeDuration = amount*1000;
+    public void setdurasiAksiAktif(int amount){
+        durasiAksiAktif = amount*1000;
     }
 
     public void updateUang(int uang){
@@ -132,20 +132,20 @@ public class Sim implements Aksi{
         this.lokSimRuang = r;
     }
 
-    public int getTimeRemainingDelivery() { 
-        return timeRemainingDelivery;
+    public int getwaktuSisaPengiriman() { 
+        return waktuSisaPengiriman;
     }
 
-    public boolean getIsItemInDelivery() { 
-        return isItemInDelivery;
+    public boolean getitemSedangDikirim() { 
+        return itemSedangDikirim;
     }
 
-    public int getTimeRemainingUpgrade() { 
-        return timeRemainingUpgrade;
+    public int getwaktuSisaUpgrade() { 
+        return waktuSisaUpgrade;
     }
 
-    public boolean getIsHouseBeingUpgraded() { 
-        return isHouseBeingUpgraded;
+    public boolean getrumahSedangDiupgrade() { 
+        return rumahSedangDiupgrade;
     }
 
     public void move(ObjectSim obj) {
@@ -400,7 +400,7 @@ public class Sim implements Aksi{
         if(durasi %120 != 0){
             throw new IllegalArgumentException("durasi kerja harus kelipatan 120 detik");
         }
-        setActiveDuration(durasi);
+        setdurasiAksiAktif(durasi);
         time.AksiSleep(durasi);
         this.setStatus("kerja");
         kesejahteraan.updateKekenyangan((-10)*(durasi/30));
@@ -419,7 +419,7 @@ public class Sim implements Aksi{
         if(durasi % 20 != 0){
             throw new IllegalArgumentException("durasi harus kelipatan 20 detik");
         }
-        setActiveDuration(durasi);
+        setdurasiAksiAktif(durasi);
         time.AksiSleep(durasi);
         this.setStatus("olahraga");
         kesejahteraan.updateKesehatan(5*(durasi/20));
@@ -436,7 +436,7 @@ public class Sim implements Aksi{
         }
         time.AksiSleep(durasi);
         this.setStatus("tidur");
-        setActiveDuration(durasi);
+        setdurasiAksiAktif(durasi);
         durasiTidur += durasi;
         checkTidur();
 
@@ -474,7 +474,7 @@ public class Sim implements Aksi{
         if(ob instanceof Masakan){   
             Masakan m = (Masakan) ob; 
             if(inventory.getItem().contains(m)){
-                setActiveDuration(durasi);
+                setdurasiAksiAktif(durasi);
                 this.setStatus("Makan");
                 inventory.removeItem(m, 1);
                 kesejahteraan.updateKekenyangan((m.getTingkatKenyang())*(durasi/30));
@@ -502,7 +502,7 @@ public class Sim implements Aksi{
                 try {
                     Thread.sleep((3/2)*m.getTingkatKenyang()* 1000);
                     time.updateTime((3/2)*m.getTingkatKenyang()* 1000);
-                    setActiveDuration((3/2)*m.getTingkatKenyang()* 1000);
+                    setdurasiAksiAktif((3/2)*m.getTingkatKenyang()* 1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -534,7 +534,7 @@ public class Sim implements Aksi{
     public void berkunjung(int durasi, Lokasi lokasiTujuan) { // cek rumah yang dituju ada di main
         double waktuKunjungan = Math.sqrt(Math.pow(lokasiTujuan.getX() - lokSimRumah.getX(), 2) + Math.pow(lokasiTujuan.getY() - lokSimRumah.getY(), 2));
         durasi += waktuKunjungan;
-        setActiveDuration(durasi);
+        setdurasiAksiAktif(durasi);
         this.setStatus("Berkunjung");
         kesejahteraan.updateMood(10 * (durasi / 30));
         kesejahteraan.updateKekenyangan(-10 * (durasi / 30));
@@ -552,7 +552,7 @@ public class Sim implements Aksi{
         }
         if(sudahMakan){
             this.setStatus("Buang Air");
-            setActiveDuration(durasi);
+            setdurasiAksiAktif(durasi);
             kesejahteraan.updateKekenyangan((-20)*(durasi/10));
             kesejahteraan.updateMood((10)*(durasi/10));
             sudahBuangAir = true;
@@ -587,27 +587,27 @@ public class Sim implements Aksi{
                             }  
                             if(rumah.isAddRoomAvailable(lokSimRuang)){
                                 uang -= 1500;
-                                setTimeUpgrade(18*60*1000);
-                                isHouseBeingUpgraded = true;
+                                setWaktuUpgrade(18*60*1000);
+                                rumahSedangDiupgrade = true;
                                 System.out.println("\nKamu telah upgrade rumah dengan biaya " + upgradeCost + ".");
-                                int tempActiveDuration = getActiveDuration();
-                                while(timeRemainingUpgrade > 0 && isHouseBeingUpgraded) {
+                                int tempdurasiAksiAktif = getdurasiAksiAktif();
+                                while(waktuSisaUpgrade > 0 && rumahSedangDiupgrade) {
                                     Thread.sleep(200); 
-                                    tempActiveDuration = getActiveDuration();
-                                    if(timeRemainingUpgrade < tempActiveDuration){
+                                    tempdurasiAksiAktif = getdurasiAksiAktif();
+                                    if(waktuSisaUpgrade < tempdurasiAksiAktif){
                                         System.out.println("\n///Proses upgrade///");
-                                        Thread.sleep(timeRemainingUpgrade);
+                                        Thread.sleep(waktuSisaUpgrade);
                                         // Tambahkan ruangan ke dalam rumah
                                         rumah.addRuangan(lokSimRuang);
                                         System.out.println("\nRumah kamu selesai diupgrade!");
-                                        isHouseBeingUpgraded = false;
+                                        rumahSedangDiupgrade = false;
                                     }
                                     else{
                                         System.out.println("\n///Proses upgrade///");
-                                        System.out.println("Mohon menunggu selama " + String.format("%.2f",(float) timeRemainingUpgrade / 60000)  + " menit...");
+                                        System.out.println("Mohon menunggu selama " + String.format("%.2f",(float) waktuSisaUpgrade / 60000)  + " menit...");
                                         System.out.println("///Proses upgrade///");
-                                        Thread.sleep(tempActiveDuration + 100);
-                                        timeRemainingUpgrade -= tempActiveDuration;
+                                        Thread.sleep(tempdurasiAksiAktif + 100);
+                                        waktuSisaUpgrade -= tempdurasiAksiAktif;
                                     }
                                     while (getStatus().equals("Idle")) {
                                         Thread.sleep(1);
@@ -641,37 +641,37 @@ public class Sim implements Aksi{
                                             while (getStatus().equals("Idle")) {
                                                 Thread.sleep(1);
                                             }
-                                            setTimeDelivery(new Random().nextInt(1, 6) * 30 * 1000);
-                                            isItemInDelivery = true;
-                                            System.out.println("\nAnda telah membeli " + ((ObjectSim) object).getNama() + " dengan harga " + object.getPrice() + ".");
-                                            System.out.println("Mohon menunggu selama " + timeRemainingDelivery / 1000 + " detik");
-                                            if (timeRemainingDelivery < getActiveDuration()) {
-                                                Thread.sleep(timeRemainingDelivery);
+                                            setWaktuPengiriman(new Random().nextInt(1, 6) * 30 * 1000);
+                                            itemSedangDikirim = true;
+                                            System.out.println("\nAnda telah membeli " + ((ObjectSim) object).getNama() + " dengan harga " + object.getPrice()*amount + ".");
+                                            System.out.println("Mohon menunggu selama " + waktuSisaPengiriman / 1000 + " detik");
+                                            if (waktuSisaPengiriman < getdurasiAksiAktif()) {
+                                                Thread.sleep(waktuSisaPengiriman);
                                                 setUang(getUang()-object.getPrice() * amount);
                                                 inventory.addItem((ObjectSim) object, amount);
                                                 System.out.println("\nItem Anda sudah sampai!");
                                                 System.out.println("Kamu memiliki uang sebanyak " + getUang() + ".");
                                                 System.out.println();
-                                                isItemInDelivery = false;
+                                                itemSedangDikirim = false;
                                             }
                                             else {
-                                                int tempActiveDuration = getActiveDuration();
-                                                while(timeRemainingDelivery > 0 && isItemInDelivery) {
+                                                int tempdurasiAksiAktif = getdurasiAksiAktif();
+                                                while(waktuSisaPengiriman > 0 && itemSedangDikirim) {
                                                     Thread.sleep(200); 
-                                                    tempActiveDuration = getActiveDuration();
-                                                    if(timeRemainingDelivery < tempActiveDuration){
+                                                    tempdurasiAksiAktif = getdurasiAksiAktif();
+                                                    if(waktuSisaPengiriman < tempdurasiAksiAktif){
                                                         System.out.println("\n///Proses pengiriman barang///");
-                                                        Thread.sleep(timeRemainingDelivery);
+                                                        Thread.sleep(waktuSisaPengiriman);
                                                         setUang(getUang()-object.getPrice() * amount);
                                                         inventory.addItem((ObjectSim) object, amount);
                                                         System.out.println("\nItem Anda sudah sampai!");
                                                         System.out.println("Kamu memiliki uang sebanyak " + getUang() + ".");
-                                                        isItemInDelivery = false;
+                                                        itemSedangDikirim = false;
                                                     }
                                                     else{
                                                         System.out.println("\n///Proses pengiriman barang///");
-                                                        Thread.sleep(tempActiveDuration + 100);
-                                                        timeRemainingDelivery -= tempActiveDuration;
+                                                        Thread.sleep(tempdurasiAksiAktif + 100);
+                                                        waktuSisaPengiriman -= tempdurasiAksiAktif;
                                                     }
                                                     while (getStatus().equals("Idle")) {
                                                         Thread.sleep(1);
@@ -702,7 +702,7 @@ public class Sim implements Aksi{
         if(durasi <= 0 && durasi % 30 != 0){
             throw new IllegalArgumentException("durasi tidak sesuai");
         }
-        setActiveDuration(durasi);
+        setdurasiAksiAktif(durasi);
         
         this.setStatus("Karaoke");
         kesejahteraan.updateMood(10*(durasi/30));
@@ -717,7 +717,7 @@ public class Sim implements Aksi{
         if(durasi <= 0 && durasi % 20 != 0){
             throw new IllegalArgumentException("durasi tidak sesuai");
         }
-        setActiveDuration(durasi);
+        setdurasiAksiAktif(durasi);
         time.AksiSleep(durasi);
         this.setStatus("Melukis");
         kesejahteraan.updateMood(5*(durasi/20));
@@ -792,7 +792,7 @@ public class Sim implements Aksi{
         if(durasi <= 0){
             throw new IllegalArgumentException("durasi tidak sesuai");
         }
-        setActiveDuration(durasi);
+        setdurasiAksiAktif(durasi);
         
         this.setStatus("Sholat");
         kesejahteraan.updateMood(30);
@@ -805,7 +805,7 @@ public class Sim implements Aksi{
         if(durasi <= 0){
             throw new IllegalArgumentException("durasi tidak sesuai");
         }
-        setActiveDuration(durasi);
+        setdurasiAksiAktif(durasi);
         
         this.setStatus("Mandi");
         kesejahteraan.updateKesehatan(30);
@@ -819,7 +819,7 @@ public class Sim implements Aksi{
         if(durasi <= 0 && durasi % 40 != 0){
             throw new IllegalArgumentException("durasi tidak sesuai");
         }
-        setActiveDuration(durasi);
+        setdurasiAksiAktif(durasi);
         
         this.setStatus("Menonton netflix");
         kesejahteraan.updateMood(15*(durasi/40));
@@ -834,23 +834,42 @@ public class Sim implements Aksi{
         inventory.showInventory();
     }
 
-    public void pasangBarang(String lokRuang, ObjectSim ob, Lokasi lokBarang){
-    //implementasi pasangBarang
-        this.setStatus("Memasang barang");
-        if(ob instanceof Furniture){
-            Furniture f = (Furniture) ob;
-            boolean can = rumah.getRoom(lokRuang).canPlaceObj(lokBarang, f);
-            if(can){
-                rumah.getRoom(lokRuang).getObjects().add(f);
-                inventory.addItem(ob, -1);
+    public void pasangBarang(Map<String, PurchasableObject> objectMap, String lokRuang, String itemName, Lokasi lokBarang){
+        //implementasi pasangBarang
+            this.setStatus("Memasang barang");
+            PurchasableObject pob = objectMap.get(itemName);
+            ObjectSim obs = (ObjectSim) pob;
+    
+            if(obs instanceof Furniture){
+                Furniture f = (Furniture) obs;
+                Furniture f1 = null;
+                Set<ObjectSim> listInventory = inventory.getItem();
+                for (ObjectSim item : listInventory) {
+                    if (item.getClass().getSimpleName().equals(obs.getNama())) {
+                        f1 = (Furniture) item;
+                        break;
+                    }
+                    
+                }
+                if (f1 != null){
+                    boolean can = rumah.getRoom(lokRuang).canPlaceObj(lokBarang, f);
+                    if(can){
+                        rumah.getRoom(lokRuang).getObjects().add(f);
+                        inventory.removeItem(f,1);
+                        System.out.println("Benda berhasil dipasang di ruangan " + lokRuang);
+                    }
+                    else{
+                    System.out.println("Tidak dapat memasang barang di lokasi tersebut. Coba rotate barang atau pindahkan ke ruangan lain.");
+                    }
+                }
+                else{
+                    System.out.println("Anda tidak memiliki barang tersebut");
+                }
+                
             }
-            else{
-                System.out.println("Tidak dapat memasang barang di lokasi tersebut. Coba rotate barang atau pindahkan ke ruangan lain.");
-            }
+            
+            
         }
-        
-        
-    }
 
     public void lihatWaktu(){
     //implementasi lihatWaktu
@@ -888,9 +907,9 @@ public class Sim implements Aksi{
         private String statusMati;
 
         public Kesejahteraan() {
-            mood = 80000;
-            kekenyangan = 80000;
-            kesehatan = 80000;
+            mood = 80;
+            kekenyangan = 80;
+            kesehatan = 80;
         }
 
         public int getMood(){
