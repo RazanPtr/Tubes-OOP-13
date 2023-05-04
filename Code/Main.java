@@ -242,9 +242,27 @@ public class Main {
                                 System.out.println(p.getMessage());
                             }
                         } else if (opsi==2) {
-                            //kode
+                            //kode                            
                         } else if (opsi==3) {
                             //kode
+                            System.out.println("Barang apa yang ingin anda pasang?");
+                            Scanner scanBarang = new Scanner(System.in);
+                            String inputBarang = scanBarang.nextLine();
+                            System.out.println("Di Ruang apa anda ingin memasang barang tersebut?");
+                            String inputRuang = scanBarang.nextLine();
+                            System.out.println("Di posisi berapa anda ingin memasang barang tersebut?");
+                            System.out.print("x: ");
+                            int lokX = scanBarang.nextInt();
+                            System.out.print("y: ");
+                            int lokY = scanBarang.nextInt();
+                            Lokasi lokTemp = new Lokasi(lokX, lokY);
+                            
+                            
+                            //currentSim.pasangBarang(inputRuang, inputBarang, lokTemp);
+                            
+                        
+
+                        
                         } else if (opsi==4) {
                             //kode
                         } else {
