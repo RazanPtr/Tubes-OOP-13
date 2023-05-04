@@ -89,8 +89,7 @@ public class Rumah {
                     ruangan.setUp(rbaru);
                     rbaru.setDown(ruangan);
                     rooms.add(rbaru);
-                    System.out.println("Ruang berhasil ditambahkan!");
-                    layout[ruangan.getX()+1][ruangan.getY()] = rbaru;
+                    layout[ruangan.getX()-1][ruangan.getY()] = rbaru;
                 } else {
                     System.out.println("Maaf, sudah terdapat ruangan di atas ruangan ini!");
                 }
@@ -114,8 +113,7 @@ public class Rumah {
                     ruangan.setDown(rbaru);
                     rbaru.setUp(ruangan);
                     rooms.add(rbaru);
-                    System.out.println("Ruang berhasil ditambahkan!");
-                    layout[ruangan.getX()-1][ruangan.getY()] = rbaru;
+                    layout[ruangan.getX()+1][ruangan.getY()] = rbaru;
                 } else {
                     System.out.println("Maaf, sudah terdapat ruangan di bawah ruangan ini!");
                 }
@@ -139,7 +137,6 @@ public class Rumah {
                     ruangan.setLeft(rbaru);
                     rbaru.setRight(ruangan);
                     rooms.add(rbaru);
-                    System.out.println("Ruang berhasil ditambahkan!");
                     layout[ruangan.getX()][ruangan.getY()-1] = rbaru;
                 } else {
                     System.out.println("Maaf, sudah terdapat ruangan di kiri ruangan ini!");
@@ -164,7 +161,6 @@ public class Rumah {
                     ruangan.setRight(rbaru);
                     rbaru.setLeft(ruangan);
                     rooms.add(rbaru);
-                    System.out.println("Ruang berhasil ditambahkan!");
                     layout[ruangan.getX()][ruangan.getY()+1] = rbaru;
                 } else {
                     System.out.println("Maaf, sudah terdapat ruangan di kanan ruangan ini!");

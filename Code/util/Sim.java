@@ -572,6 +572,60 @@ public class Sim implements Aksi{
 
     }
 
+    /*public void upgradeRumah() {
+        int upgradeCost = 1500;
+        if (getUang() < upgradeCost) {
+            System.out.println("Saldo Simmu tidak mencukupi untuk melakukan upgrade rumah! silahkan bekerja terlebih dahulu.");
+            return;
+        }
+        Thread thread = new Thread(new Runnable() {
+            public void run(){
+                        try {
+                            Thread.sleep(300); 
+                            while (getStatus().equals("Idle")) {
+                                Thread.sleep(1);
+                            }  
+                            if(rumah.isAddRoomAvailable(lokSimRuang)){
+                                uang -= 1500;
+                                setWaktuUpgrade(18*1000);
+                                rumahSedangDiupgrade = true;
+                                System.out.println("\nKamu telah upgrade rumah dengan biaya " + upgradeCost + ".");
+                                int tempdurasiAksiAktif = getdurasiAksiAktif();
+                                while(waktuSisaUpgrade > 0 && rumahSedangDiupgrade) {
+                                    Thread.sleep(200); 
+                                    tempdurasiAksiAktif = getdurasiAksiAktif();
+                                    if(waktuSisaUpgrade < tempdurasiAksiAktif){
+                                        System.out.println("\n///Proses upgrade///");
+                                        Thread.sleep(waktuSisaUpgrade);
+                                        // Tambahkan ruangan ke dalam rumah
+                                        rumah.addRuangan(lokSimRuang);
+                                        System.out.println("\nRumah kamu selesai diupgrade!");
+                                        rumahSedangDiupgrade = false;
+                                    }
+                                    else{
+                                        System.out.println("\n///Proses upgrade///");
+                                        System.out.println("Mohon menunggu selama " + String.format("%.2f",(float) waktuSisaUpgrade / 60000)  + " menit...");
+                                        System.out.println("///Proses upgrade///");
+                                        Thread.sleep(tempdurasiAksiAktif + 100);
+                                        waktuSisaUpgrade -= tempdurasiAksiAktif;
+                                    }
+                                    while (getStatus().equals("Idle")) {
+                                        Thread.sleep(1);
+                                    }
+                                }
+                            } else {
+                                System.out.println("Upgrade rumah tidak dapat dilakukan karena sudah tersedia ruangan disekeliling ruangan saat ini.");
+                                System.out.println("Silahkan pindah ke ruangan lain terlebih dahulu untuk melakukan upgrade rumah");
+                            }
+                            }
+                            catch (InterruptedException e) {
+                                System.out.println(e.getMessage());
+                        }
+            }
+        });
+        thread.start();
+    }*/
+
     public void upgradeRumah() {
         int upgradeCost = 1500;
         if (getUang() < upgradeCost) {
@@ -625,6 +679,8 @@ public class Sim implements Aksi{
         });
         thread.start();
     }
+    
+
     public void  beliBarang(Map<String, PurchasableObject> objectMap, String itemName, int amount) throws negativeParameterException, invalidMultitudeNumber, InterruptedException {
         if (amount < 0) {
             throw new negativeParameterException(amount);
