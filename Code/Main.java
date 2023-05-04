@@ -2,6 +2,7 @@ import java.util.Scanner;
 import util.*;
 import objek.*;
 import java.util.*;
+import display.*;
 
 public class Main {
     public static void main(String[] args){
@@ -11,6 +12,7 @@ public class Main {
         boolean started = false;
         boolean finished = false;
         World w = null;
+
 
         //Furniture
         Jam jam = new Jam();
@@ -36,6 +38,9 @@ public class Main {
         Sapi sapi = new Sapi();
         Susu susu = new Susu();
         Wortel wortel = new Wortel();
+
+        //Display
+        Ascii display = new Ascii();
 
         //OBJECTS
         Map<String, PurchasableObject> purchasableMap = new HashMap<String, PurchasableObject>(){{
@@ -63,35 +68,39 @@ public class Main {
         }};
 
         while(!started && !finished){
-            //Main Menu
-            String title =  
-"░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n" +
-"░           ░   ░░░░   ░         ░░░░░░░░░      ░░░   ░   ░░░░░░░   ░        ░░░   ░░░░░░░░   ░░░░░   ░░░░   ░           ░   ░░░░░░   \n" +
-"▒▒▒▒▒   ▒▒▒▒▒   ▒▒▒▒   ▒   ▒▒▒▒▒▒▒▒▒▒▒▒▒   ▒▒▒▒   ▒   ▒  ▒   ▒▒▒    ▒   ▒▒▒▒   ▒   ▒▒▒▒▒▒▒▒   ▒▒   ▒▒▒   ▒   ▒▒▒▒▒   ▒▒▒▒▒▒   ▒▒▒▒   ▒\n" +
-"▒▒▒▒▒   ▒▒▒▒▒   ▒▒▒▒   ▒   ▒▒▒▒▒▒▒▒▒▒▒▒▒▒   ▒▒▒▒▒▒▒   ▒   ▒   ▒ ▒   ▒   ▒▒▒▒   ▒   ▒▒▒▒▒▒▒▒   ▒   ▒▒▒▒▒▒▒▒   ▒▒▒▒▒   ▒▒▒▒▒▒▒   ▒   ▒▒▒\n" +
-"▓▓▓▓▓   ▓▓▓▓▓          ▓       ▓▓▓▓▓▓▓▓▓▓▓▓   ▓▓▓▓▓   ▓   ▓▓   ▓▓   ▓        ▓▓▓   ▓▓▓▓▓▓▓▓   ▓   ▓▓▓▓▓▓▓▓   ▓▓▓▓▓   ▓▓▓▓▓▓▓▓▓   ▓▓▓▓▓\n" +
-"▓▓▓▓▓   ▓▓▓▓▓   ▓▓▓▓   ▓   ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓   ▓▓   ▓   ▓▓▓  ▓▓   ▓   ▓▓▓▓▓▓▓▓   ▓▓▓▓▓▓▓▓   ▓   ▓▓▓▓▓▓▓▓   ▓▓▓▓▓   ▓▓▓▓▓▓▓▓▓   ▓▓▓▓▓\n" +
-"▓▓▓▓▓   ▓▓▓▓▓   ▓▓▓▓   ▓   ▓▓▓▓▓▓▓▓▓▓▓▓▓   ▓▓▓▓   ▓   ▓   ▓▓▓▓▓▓▓   ▓   ▓▓▓▓▓▓▓▓   ▓▓▓▓▓▓▓▓   ▓▓   ▓▓▓   ▓   ▓▓▓▓▓   ▓▓▓▓▓▓▓▓▓   ▓▓▓▓▓\n" +
-"█████   █████   ████   █         █████████      ███   █   ███████   █   ████████          █   ████     ███   █████   █████████   █████\n" +
-"██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████\n";
-                             
-            System.out.println(title);
-            System.out.println("Selamat datang di permainan The Simplicity!");
-                System.out.println("Permainan ini merupakan permainan karakter virtual yaitu Sim yang dapat anda jalankan kegiatannya.");
+
+            //STARTING MENU
+            display.title();
+            System.out.println("Selamat datang di permainan The Simplicity! (ﾉ´ヮ`)ﾉ*: ･ﾟ");
+                System.out.println("Permainan ini merupakan permainan karakter virtual yaitu Sim yang dapat anda jalankan kegiatannya!");
                 System.out.println("Terdapat beberapa command yang dapat Anda berikan sebelum permainan :");
-                System.out.println("1. Start Game       : memulai permainan");
-                System.out.println("2. Help             : bantuan dan petunjuk terkait permainan");
-                System.out.println("3. Exit             : keluar dari permainan\n");
+                System.out.println("1. Start Game       : Memulai permainan");
+                System.out.println("2. Help             : Bantuan dan petunjuk terkait permainan");
+                System.out.println("3. Exit             : Keluar dari permainan\n");
+            System.out.println("Ketikkan commandmu dalam bentuk String! (Contoh: Start Game)");
             System.out.print(">> ");
             String op = scan.nextLine();
+
+            //Option Handling
             if(op.equalsIgnoreCase("Start Game")){
                 w = World.getInstance();
-                System.out.print("Permainan dimulai!! Selamat bermain^^\nSiapa nama simmu? ");
+                System.out.println("");
+                System.out.println("CREATING WORLD....( ´ ▿ ` )");
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException ex){
+                    ex.printStackTrace();
+                }
+                System.out.println("");
+                System.out.print("Permainan dimulai! Selamat bermain ^^\nKetikkan nama Sim-mu! ");
                 String namaLengkap = scan.nextLine();
             
+                //Sim Creation
                 boolean rumahValid = false;
                 while(!rumahValid){
-                    System.out.println("Tentukan lokasi rumah Sim (x, y)");
+                    System.out.println("");
+                    System.out.println("Tentukan lokasi rumah Sim dalam koordinat(x,y)");
+                    System.out.println("Lokasi koordinat minimum adalah (0,0) dan maksimum adalah (63,63)");
                     System.out.print("x: ");
                     int lokRx = scan.nextInt();
                     System.out.print("y: ");
@@ -106,7 +115,23 @@ public class Main {
                         started = true;
                     }
                 }
-                System.out.println("Sim dengan nama "+ currentSim.getNamaLengkap() + " telah siap dimainkan!");
+                System.out.println("CREATING SIM....( ´ ▿ ` )");
+                System.out.println("");
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException ex){
+                    ex.printStackTrace();
+                }
+                System.out.println("Sim dengan nama "+ currentSim.getNamaLengkap() + " telah siap dimainkan! ＼(＾▽＾)／");
+                System.out.println("");
+                System.out.println("LOADING MAIN MENU....( ´ ▿ ` )");
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException ex){
+                    ex.printStackTrace();
+                }
+                System.out.println("");
+
             } else if(op.equalsIgnoreCase("Help")){
                 System.out.println("Selamat datang di permainan Simplicity!");
                 System.out.println("permainan ini merupakan permainan karakter virtual yaitu Sim yang dapat anda jalankan kegiatannya.");
@@ -118,14 +143,14 @@ public class Main {
                 System.out.println("Game akan berakhir.. Terimakasih telah bermain!! ^^");
                 finished = true;
             } else {
-                System.out.println("Command tersebut belum dapat diakses karena anda belum memulai permainan");
+                System.out.println("Command tersebut belum dapat diakses karena anda belum memulai permainan!");
             }
         }
         
         while(started && (!finished)){
             while(!currentSim.getKesejahteraan().getIsMati()){
                 System.out.println("");
-                System.out.println("---MAIN MENU---");
+                display.menu();
                 System.out.println("Untuk info lanjut, pilih help!");
                 System.out.println("1.  View Sim Info");
                     System.out.println("2.  View Current Location");
@@ -139,9 +164,14 @@ public class Main {
                     System.out.println("10. Go To Object");
                     System.out.println("11. Action");
                     System.out.println("12. Exit");
+                    System.out.println("");
+                
+                //Tidak buang air
                 if (currentSim.durasiTidakBuangAir % 240 == 0 && currentSim.sudahBuangAir){
                     currentSim.tidakBuangAir();
                 } 
+
+                //Cek Kematian yang dimainkan
                 for(Sim s : pemain){
                     if(s.getKesejahteraan().getIsMati()){
                         System.out.println("Ooops... Sim bernama " + s.getNamaLengkap() + " " + s.getKesejahteraan().getStatusMati());
@@ -149,7 +179,8 @@ public class Main {
                         w.getPerumahan().remove(s.getRumah());
                     }
                 }
-
+            
+                //Cek Kematian yang dikunjungi
                 if (currentSim.getStatus().equals("Berkunjung")){
                     Sim dikunjungi = null;
                     for (Sim player : pemain) {
@@ -163,7 +194,7 @@ public class Main {
                         currentSim.setLokSimRuang(currentSim.getRumah().getRoom("Kamar"));
                     }
                 }
-
+            
                 System.out.print(">> ");
                 String o;
                 o = scan.nextLine();
@@ -195,11 +226,7 @@ public class Main {
                         //String namaRbaru = scan.nextLine();
                         //int tempx = scan.nextInt();
                         //int tempy = scan.nextInt();
-                        if(currentSim.getUang() >= 1500){
-                            currentSim.upgradeRumah();
-                        } else {
-                            System.out.println("Saldo Simmu tidak mencukupi untuk melakukan upgrade rumah! silahkan bekerja terlebih dahulu");
-                        }
+                        currentSim.upgradeRumah();
                     } else {
                         System.out.println("Anda sedang berada di rumah Sim lain. Anda tidak dapat melakukan upgrade terhadap rumah ini.");
                         System.out.println("Silahkan kembali ke rumah Anda terlebih dahulu untuk melakukan upgrade rumah");
@@ -260,9 +287,6 @@ public class Main {
                             
                             //currentSim.pasangBarang(inputRuang, inputBarang, lokTemp);
                             
-                        
-
-                        
                         } else if (opsi==4) {
                             //kode
                         } else {
@@ -452,6 +476,17 @@ public class Main {
                 } else {
                     System.out.println("Command tersebut tidak tersedia");
                 }
+                System.out.println("");
+                System.out.println("Ketik BACK untuk kembali ke Main Menu");
+                Boolean cekBalik = false;
+                    while (!cekBalik) {
+                        String inp = scan.nextLine();
+                        if (inp.equalsIgnoreCase("BACK")) {
+                            cekBalik = true;
+                        } else {
+                            System.out.println("Periksa kembali input stringnya!");
+                        }
+                    }
             }
             if(currentSim.getKesejahteraan().getIsMati()){
                 System.out.println("Ooops... Sim bernama " + currentSim.getNamaLengkap() + " " + currentSim.getKesejahteraan().getStatusMati());
