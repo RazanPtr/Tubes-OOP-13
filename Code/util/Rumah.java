@@ -4,12 +4,22 @@ import objek.*;
 
 public class Rumah {
     private ArrayList<Ruangan> rooms;
+    private Ruangan[][] layout;
     private Lokasi lokRumah;
     
     public Rumah(int x, int y) {
         this.rooms = new ArrayList<Ruangan>();
         this.lokRumah = new Lokasi(x, y);
-        rooms.add(new Ruangan("Kamar")); // initially add a room
+        rooms.add(new Ruangan("Kamar","KMR")); // initially add a room
+        this.layout = new Ruangan[7][7];
+        for (int i = 0; i < layout.length; i++) {
+            for (int j = 0; j < layout[i].length; j++) {
+                layout[i][j] = null;
+            }
+        }
+        layout[3][3] = getRoom("Kamar");
+        getRoom("Kamar").setX(3);
+        getRoom("Kamar").setY(3);
 
         //ini buat trial List Object
         getRoom("Kamar").placeObject(new Lokasi(0, 0), new KasurSingle());
@@ -69,11 +79,18 @@ public class Rumah {
                         System.out.println("Nama sudah terpakai! Beri nama ruangan yang baru:");
                         nama = sc.nextLine();
                     }
-                    Ruangan rbaru = new Ruangan(nama);
+                    System.out.println("Beri kode untuk ruangan baru (3 huruf kapital):");
+                    String code = sc.nextLine();
+                    while (!isCodeValid(code)) {
+                        System.out.println("Nama sudah terpakai! Beri nama ruangan yang baru:");
+                        nama = sc.nextLine();
+                    }
+                    Ruangan rbaru = new Ruangan(nama,code);
                     ruangan.setUp(rbaru);
                     rbaru.setDown(ruangan);
                     rooms.add(rbaru);
                     System.out.println("Ruang berhasil ditambahkan!");
+                    layout[ruangan.getX()][ruangan.getY()+1] = rbaru;
                 } else {
                     System.out.println("Maaf, sudah terdapat ruangan di atas ruangan ini!");
                 }
@@ -87,11 +104,18 @@ public class Rumah {
                         System.out.println("Nama sudah terpakai! Beri nama ruangan yang baru:");
                         nama = sc.nextLine();
                     }
-                    Ruangan rbaru = new Ruangan(nama);
+                    System.out.println("Beri kode untuk ruangan baru (3 huruf kapital):");
+                    String code = sc.nextLine();
+                    while (!isCodeValid(code)) {
+                        System.out.println("Nama sudah terpakai! Beri nama ruangan yang baru:");
+                        nama = sc.nextLine();
+                    }
+                    Ruangan rbaru = new Ruangan(nama,code);
                     ruangan.setDown(rbaru);
                     rbaru.setUp(ruangan);
                     rooms.add(rbaru);
                     System.out.println("Ruang berhasil ditambahkan!");
+                    layout[ruangan.getX()][ruangan.getY()-1] = rbaru;
                 } else {
                     System.out.println("Maaf, sudah terdapat ruangan di bawah ruangan ini!");
                 }
@@ -105,11 +129,18 @@ public class Rumah {
                         System.out.println("Nama sudah terpakai! Beri nama ruangan yang baru:");
                         nama = sc.nextLine();
                     }
-                    Ruangan rbaru = new Ruangan(nama);
+                    System.out.println("Beri kode untuk ruangan baru (3 huruf kapital):");
+                    String code = sc.nextLine();
+                    while (!isCodeValid(code)) {
+                        System.out.println("Nama sudah terpakai! Beri nama ruangan yang baru:");
+                        nama = sc.nextLine();
+                    }
+                    Ruangan rbaru = new Ruangan(nama,code);
                     ruangan.setLeft(rbaru);
                     rbaru.setRight(ruangan);
                     rooms.add(rbaru);
                     System.out.println("Ruang berhasil ditambahkan!");
+                    layout[ruangan.getX()-1][ruangan.getY()] = rbaru;
                 } else {
                     System.out.println("Maaf, sudah terdapat ruangan di kiri ruangan ini!");
                 }
@@ -123,11 +154,18 @@ public class Rumah {
                         System.out.println("Nama sudah terpakai! Beri nama ruangan yang baru:");
                         nama = sc.nextLine();
                     }
-                    Ruangan rbaru = new Ruangan(nama);
+                    System.out.println("Beri kode untuk ruangan baru (3 huruf kapital):");
+                    String code = sc.nextLine();
+                    while (!isCodeValid(code)) {
+                        System.out.println("Nama sudah terpakai! Beri nama ruangan yang baru:");
+                        nama = sc.nextLine();
+                    }
+                    Ruangan rbaru = new Ruangan(nama,code);
                     ruangan.setRight(rbaru);
                     rbaru.setLeft(ruangan);
                     rooms.add(rbaru);
                     System.out.println("Ruang berhasil ditambahkan!");
+                    layout[ruangan.getX()+1][ruangan.getY()] = rbaru;
                 } else {
                     System.out.println("Maaf, sudah terdapat ruangan di kanan ruangan ini!");
                 }
@@ -165,4 +203,30 @@ public class Rumah {
         }
         return valid;
     }
+
+    public boolean isCodeValid(String code) {
+        Boolean valid = true;
+        for (Ruangan ruang : rooms) {
+            if (ruang.getCode().equals(code)) {
+                valid = false;
+            }
+        }
+        return valid;
+    }
+
+    public void displayRumah() {
+        System.out.println("\n+-----+-----+-----+-----+-----+-----+-----+");
+        for (int i = 0; i < layout.length; i++) {
+            System.out.print("|");
+            for (int j = 0; j < layout[i].length; j++) {
+                if (layout[i][j] != null) {
+                    System.out.print(" " + layout[i][j].getCode() + " |");
+                } else {
+                    System.out.print("     |");
+                }
+            }
+            System.out.println("\n+-----+-----+-----+-----+-----+-----+-----+");
+        }
+    }
+    
 }

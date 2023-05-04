@@ -156,14 +156,15 @@ public class Main {
                     System.out.println("2.  View Current Location");
                     System.out.println("3.  View Inventory");
                     System.out.println("4.  Upgrade House");
-                    System.out.println("5.  Move Room");
-                    System.out.println("6.  Edit Room");
-                    System.out.println("7.  Add Sim");
-                    System.out.println("8.  Change Sim");
-                    System.out.println("9.  List Object");
-                    System.out.println("10. Go To Object");
-                    System.out.println("11. Action");
-                    System.out.println("12. Exit");
+                    System.out.println("5.  View House");
+                    System.out.println("6.  Move Room");
+                    System.out.println("7.  Edit Room");
+                    System.out.println("8.  Add Sim");
+                    System.out.println("9.  Change Sim");
+                    System.out.println("10.  List Object");
+                    System.out.println("11. Go To Object");
+                    System.out.println("12. Action");
+                    System.out.println("13. Exit");
                     System.out.println("");
                 
                 //Tidak buang air
@@ -231,6 +232,8 @@ public class Main {
                         System.out.println("Anda sedang berada di rumah Sim lain. Anda tidak dapat melakukan upgrade terhadap rumah ini.");
                         System.out.println("Silahkan kembali ke rumah Anda terlebih dahulu untuk melakukan upgrade rumah");
                     }
+                } else if(o.equals("View House")){
+                    currentSim.getRumah().displayRumah();
                 } else if(o.equals("Move Room")){
                     System.out.println("Ruangan apakah yang ingin kamu tuju?");
                     w.getRumah(currentSim.getLokSimRumah()).displayListRuangan();

@@ -4,6 +4,7 @@ import objek.*;
 
 public class Ruangan {
     private String nama;
+    private String code;
     private static int width = 6;
     private static int length = 6;
     private ArrayList<Furniture> objects;
@@ -12,19 +13,48 @@ public class Ruangan {
     private Ruangan down;
     private Ruangan left;
     private Ruangan right;
+    private int x;
+    private int y;
 
-    public Ruangan(String nama){
+    public Ruangan(String nama, String code){
         this.nama = nama;
+        this.code = code;
         this.objects = new ArrayList<>();
         this.grid = new boolean[width][length];
         up = null;
         down = null;
         left = null;
         right = null;
+        x=0;
+        y=0;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 
     public void changeNama(String nama) {
         this.nama = nama;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public Ruangan getRuangan(){
