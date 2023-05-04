@@ -289,6 +289,10 @@ public class Main {
                             
                         } else if (opsi==4) {
                             //kode
+                            System.out.println("Barang apa yang ingin anda simpan?");
+                            Scanner scanBarang = new Scanner(System.in);
+                            String inputBarang = scanBarang.nextLine();
+                            currentSim.simpanBarang(currentSim.getLokRuang().getNamaRuangan(), purchasableMap, inputBarang);
                         } else {
                             System.out.println("Opsi tidak valid!");
                         }
