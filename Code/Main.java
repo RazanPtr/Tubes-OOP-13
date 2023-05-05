@@ -175,19 +175,20 @@ public class Main {
                 } 
 
                 // ini tidur blm bener
-                if(w.getTime().getCheck() == 2){
+                if(Sim.time.getCheck() == 2){
                     for(Sim s : pemain){
                         s.resetHarian();
                     }
                     cTidakTidur = false;
-                    w.getTime().setCheck(1);
+                    Sim.time.setCheck(1);
                 }
 
                 // ini tidur kalo kaya gini kalo misal menit ke 10nya ke skip gmn cara ngeceknya?!
                 //System.out.println((Sim.time.getMin()*60)+ Sim.time.getSec()); //ini walaupun uda di jalanin aksi apapun, hasilnya ttp 0
-                if((((Sim.time.getMin()*60)+ Sim.time.getSec()) >= 600) && (!cTidakTidur)){
+                if((((w.getTime().getMin()*60)+ w.getTime().getSec() >= 600)) && (!cTidakTidur)){
+                    //System.out.println("tes123");
                     for(Sim s : pemain){
-                        System.out.println(s.sudahTidur);
+                        //System.out.println(s.sudahTidur);
                         if(!s.sudahTidur){
                             s.tidakTidur();
                             System.out.println(s.getNamaLengkap() + " belum tidur setelah 10 menit, kesehatan akan berkurang");
