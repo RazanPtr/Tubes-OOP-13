@@ -429,7 +429,7 @@ public class Main {
                                     validInput2 = true;
                                 } catch (Exception e) {
                                     System.out.println("Input harus berupa angka, silakan coba lagi.");
-                                    scan.nextLine(); // membersihkan input yang salah agar tidak terus terbaca
+                                    scan.nextLine();
                                 }
                             }
                             String tempstr = scan.nextLine();
