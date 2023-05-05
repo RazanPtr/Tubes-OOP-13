@@ -447,7 +447,7 @@ public class Main {
                         System.out.println("Masukkan aksi yang ingin kamu lakukan dalam opsi ANGKA (1-13)");
                         int num = scan.nextInt();
                         String tempp = scan.nextLine();
-                        if (num>=1 && num<14) {
+                        if (num>=1 && num<=14) {
                             ops = num;
                             validasi = true;
                         }
