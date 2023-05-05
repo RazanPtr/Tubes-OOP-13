@@ -321,8 +321,12 @@ public class Main {
                             int lokX = scanBarang.nextInt();
                             System.out.print("y: ");
                             int lokY = scanBarang.nextInt();
+                            String temp = scanBarang.nextLine();
                             Lokasi lokTemp = new Lokasi(lokX, lokY);
-                            currentSim.pasangBarang(purchasableMap, inputRuang, inputBarang, lokTemp);
+                            System.out.println("Tentukan kondisi vertikal/horizontal barang tersebut (v/h)");
+                            String inputKondisi = scanBarang.nextLine();
+                        
+                            currentSim.pasangBarang(purchasableMap, inputRuang, inputBarang, lokTemp, inputKondisi);
                             
                         } else if (opsi==4) {
                             //kode

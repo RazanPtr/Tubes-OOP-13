@@ -932,7 +932,7 @@ public class Sim implements Aksi{
     //implementasi pindahBarang
     
         simpanBarang(lokRuang, objectMap, itemName);
-        pasangBarang(objectMap, lokRuang, itemName, lokAkhir);
+        //pasangBarang(objectMap, lokRuang, itemName, lokAkhir);
         //boolean can = rumah.getRoom(lokRuang).canPlaceObj(lokAkhir, dariRooms);
     
     }
@@ -984,7 +984,7 @@ public class Sim implements Aksi{
         inventory.showInventory();
     }
 
-    public void pasangBarang(Map<String, PurchasableObject> objectMap, String lokRuang, String itemName, Lokasi lokBarang){
+    public void pasangBarang(Map<String, PurchasableObject> objectMap, String lokRuang, String itemName, Lokasi lokBarang, String posisi){
         //implementasi pasangBarang
             this.setStatus("Memasang barang");
             PurchasableObject pob = objectMap.get(itemName);
@@ -1004,6 +1004,9 @@ public class Sim implements Aksi{
                             break;
                         }
                         
+                    }
+                    if (posisi.equals("v")){
+                        f1.rotate();
                     }
                     if (f1 != null){
                         boolean can = rumah.getRoom(lokRuang).canPlaceObj(lokBarang, f1);
