@@ -59,6 +59,12 @@ public class Furniture extends ObjectSim implements PurchasableObject{
     public void addListAksi(String aksi){
         listAksi.add(aksi);
     }
+    
+    public void rotate(){
+        int temp = length;
+        length = width;
+        width = temp;
+    }
 
     public void displayListAksi(){
         int i = 1;

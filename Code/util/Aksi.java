@@ -37,7 +37,7 @@ public interface Aksi {
 
     public void lihatInventory();
     
-    public void pasangBarang(Map<String, PurchasableObject> objectMap, String lokRuang, String itemName, Lokasi lokBarang);
+    public void pasangBarang(Map<String, PurchasableObject> objectMap, String lokRuang, String itemName, Lokasi lokBarang, String posisi);
 
     public void lihatWaktu();
 }

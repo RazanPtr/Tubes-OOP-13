@@ -4,6 +4,7 @@ import java.util.*;
 import objek.*;
 import java.lang.Math;
 import display.*;
+import java.lang.reflect.Constructor;
 
 public class Sim implements Aksi{
     private String namaLengkap;
@@ -22,8 +23,8 @@ public class Sim implements Aksi{
     private Time terakhirTidur;
     public int durasiTidakBuangAir;
     private boolean sudahTidur;
-    public boolean sudahMakan;
-    public boolean sudahBuangAir;
+    public boolean sudahMakan = false;
+    public boolean sudahBuangAir = false;
     private int durasiAksiAktif;
     private int waktuSisaPengiriman;
     private int waktuSisaUpgrade;
@@ -55,6 +56,7 @@ public class Sim implements Aksi{
         // buat coba makan n masak
         inventory.addItem(new Nasi(), 1);
         inventory.addItem(new Ayam(), 1);
+        inventory.addItem(new NasiAyam(), 1);
         //display
         display = new Ascii();
     }
@@ -456,6 +458,7 @@ public class Sim implements Aksi{
         this.setStatus("olahraga");
         kesejahteraan.updateKesehatan(5*(durasi/20));
         kesejahteraan.updateKekenyangan((-5)*(durasi/20));
+        System.out.println("kekenyangan berkurang karena olahraga");
         kesejahteraan.updateMood(10*(durasi/20));
         System.out.println("Olahraga telah selesaii, kamu terlihat semakin sehat!!");
         //Untuk selalu nambahin durasi gak buang air
@@ -472,13 +475,8 @@ public class Sim implements Aksi{
         durasiTidur += durasi;
         //terakhirTidur = t;
         checkTidur();
-
         //Untuk selalu nambahin durasi gak buang air
         durasiTidakBuangAir += durasi;
-    }
-
-    public Time getTerakhirTidur(){
-        return terakhirTidur;
     }
 
     public void checkTidur(){
@@ -506,6 +504,7 @@ public class Sim implements Aksi{
     public void tidakTidur(){
         kesejahteraan.updateKesehatan(-5);
         kesejahteraan.updateMood(-5);
+        System.out.println("kena efek tidur");
     }
 
     public void makan(int durasi, String namaMasakan){
@@ -865,46 +864,68 @@ public class Sim implements Aksi{
                 int count = 0;
                 ArrayList<Furniture> daftarObj = rumah.getRoom(lok).getObjects();
                 for (ObjectSim item : daftarObj) {
-                    if (item.getClass().getSimpleName().equals(os.getNama())) {
+                    if (item.getNama().equals(os.getNama())) {
                         count++;
                     }
                 }
                 if(count > 1){
                     System.out.println("Objek " + itemName + " ada lebih dari satu pada ruangan ini.");
                     System.out.println("Pilih " + itemName +" pada lokasi mana yang ingin kamu simpan!");
+                    int i = 1;
                     for (ObjectSim item : daftarObj) {
-                        int i = 1;
-                        if (item.getClass().getSimpleName().equals(os.getNama())) {
+                        if (item.getNama().equals(os.getNama())) {
                             System.out.println(i + ". " + item.getNama() + " (" + ((Furniture)item).getLokDiRuangan().getX() + "," + ((Furniture)item).getLokDiRuangan().getY() + ")");
+                            i++;
                         }
                     }
+                    System.out.print("x: ");
                     int x = scan.nextInt();
+                    System.out.print("y: ");
                     int y = scan.nextInt();
                     String temps = scan.nextLine();
                     ObjectSim dariRooms = null;
                     
                     for (ObjectSim item : daftarObj) {
-                        if (item.getClass().getSimpleName().equals(os.getNama())) {
-                            if(((Furniture)item).getLokDiRuangan() == new Lokasi(x, y)){
+                        if (item.getNama().equals(os.getNama())) {
+                            Furniture it = (Furniture) item;
+                            if(it.getLokDiRuangan().getX() == x && it.getLokDiRuangan().getY() == y){
                                 dariRooms = item;
-                                daftarObj.remove(item);
                                 break;
                             }
                         }
                     }
-                    inventory.addItem(dariRooms, 1);
+                    if(dariRooms != null){
+                        rumah.getRoom(lok).removeObj(dariRooms);
+                        Furniture f = (Furniture) dariRooms;
+                        f.setLokDiRuangan(null);
+                        inventory.addItem(f, 1);
+                        System.out.println(dariRooms.getNama() + " berhasil disimpan ke dalam inventory!");
+                    } else {
+                        System.out.println("Barang tidak tersedia di dalam ruangan");
+                    }
+                    
                 } else {
                     ObjectSim dariRooms = null;
                     for (ObjectSim item : daftarObj) {
-                        if (item.getClass().getSimpleName().equals(os.getNama())) {
+                        if (item.getNama().equals(os.getNama())) {
                             dariRooms = item;   
-                            daftarObj.remove(item);
                             break;                          
                         }
                     }
-                    inventory.addItem(dariRooms, 1);   
+                    if(dariRooms != null){
+                        rumah.getRoom(lok).removeObj(dariRooms);
+                        Furniture f = (Furniture) dariRooms;
+                        f.setLokDiRuangan(null);
+                        inventory.addItem(f, 1); 
+                        System.out.println(dariRooms.getNama() + " berhasil disimpan ke dalam inventory!");
+                    } else {
+                        System.out.println("Barang tidak berhasil disimpan");
+                    }
+                    
                 }
             }
+        } else {
+            System.out.println("Nama barang yang anda input tidak valid!");
         }
     }
 
@@ -912,7 +933,7 @@ public class Sim implements Aksi{
     //implementasi pindahBarang
     
         simpanBarang(lokRuang, objectMap, itemName);
-        pasangBarang(objectMap, lokRuang, itemName, lokAkhir);
+        //pasangBarang(objectMap, lokRuang, itemName, lokAkhir);
         //boolean can = rumah.getRoom(lokRuang).canPlaceObj(lokAkhir, dariRooms);
     
     }
@@ -964,41 +985,65 @@ public class Sim implements Aksi{
         inventory.showInventory();
     }
 
-    public void pasangBarang(Map<String, PurchasableObject> objectMap, String lokRuang, String itemName, Lokasi lokBarang){
+    public void pasangBarang(Map<String, PurchasableObject> objectMap, String lokRuang, String itemName, Lokasi lokBarang, String posisi){
         //implementasi pasangBarang
             this.setStatus("Memasang barang");
             PurchasableObject pob = objectMap.get(itemName);
             ObjectSim obs = (ObjectSim) pob;
-    
-            if(obs instanceof Furniture){
-                Furniture f = (Furniture) obs;
-                Furniture f1 = null;
-                Set<ObjectSim> listInventory = inventory.getItem();
-                for (ObjectSim item : listInventory) {
-                    if (item.getClass().getSimpleName().equals(obs.getNama())) {
-                        f1 = (Furniture) item;
-                        break;
+            if(obs == null){
+                System.out.println("Barang yang ingin anda pasang tidak valid!");
+            } else if(rumah.getRoom(lokRuang) == null){
+                System.out.println("Ruangan " + lokRuang + " tidak tersedia di rumah ini!");
+            } else {
+                if(obs instanceof Furniture){
+                    Furniture f = (Furniture) obs;
+                    Furniture f1 = null;
+                    Set<ObjectSim> listInventory = inventory.getItem();
+                    for (ObjectSim item : listInventory) {
+                        if (item.getNama().equals(obs.getNama())) {
+                            f1 = (Furniture) item;
+                            break;
+                        }
+                        
                     }
-                    
-                }
-                if (f1 != null){
-                    boolean can = rumah.getRoom(lokRuang).canPlaceObj(lokBarang, f1);
-                    if(can){
-                        f1.setLokDiRuangan(lokBarang);
-                        rumah.getRoom(lokRuang).getObjects().add(f1);
-                        inventory.removeItem(f1,1);
-                        System.out.println("Benda berhasil dipasang di ruangan " + lokRuang);
+                    if (posisi.equals("v")){
+                        f1.rotate();
+                    }
+                    if (f1 != null){
+                        boolean can = rumah.getRoom(lokRuang).canPlaceObj(lokBarang, f1);
+                        if(can){
+                            // //Class c = f1.getClass();
+                            
+                            // try{
+                            //     Constructor<ObjectSim>
+                            // }
+                            // catch(Exception e){
+                            //     e.;
+                            // }
+                            f1.setLokDiRuangan(lokBarang);
+                            rumah.getRoom(lokRuang).getObjects().add(f1);
+                            inventory.removeItem(f1,1);
+                            for (ObjectSim item : listInventory) {
+                                if (item.getNama().equals(f1.getNama())) {
+                                    if(((Furniture)item).getLokDiRuangan() != null){
+                                        System.out.println(((Furniture)item).getLokDiRuangan().getX() + " " + ((Furniture)item).getLokDiRuangan().getY());
+                                    }
+                                }
+                                
+                            }
+                            System.out.println("Benda berhasil dipasang di ruangan " + lokRuang);
+                        }
+                        else{
+                        System.out.println("Tidak dapat memasang barang di lokasi tersebut. Coba rotate barang atau pindahkan ke lokasi lain.");
+                        }
                     }
                     else{
-                    System.out.println("Tidak dapat memasang barang di lokasi tersebut. Coba rotate barang atau pindahkan ke lokasi lain.");
-                    }
+                        System.out.println("Anda tidak memiliki barang tersebut");
+                    }    
+                } else {
+                    System.out.println(obs.getNama() + " tidak dapat dipasang pada ruangan (bukan furniture)");
                 }
-                else{
-                    System.out.println("Anda tidak memiliki barang tersebut");
-                }
-                
-            }
-            
+            }         
             
         }
 
@@ -1048,9 +1093,9 @@ public class Sim implements Aksi{
         private String statusMati;
 
         public Kesejahteraan() {
-            mood = 80;
-            kekenyangan = 80;
-            kesehatan = 80;
+            mood = 8000;
+            kekenyangan = 8000;
+            kesehatan = 8000;
         }
 
         public int getMood(){
@@ -1067,8 +1112,8 @@ public class Sim implements Aksi{
 
         public void updateKesehatan(int kesehatan){
             this.kesehatan += kesehatan;
-            if(this.kesehatan > 100){
-                this.kesehatan = 100;
+            if(this.kesehatan > 8000){
+                this.kesehatan = 8000;
             }  else if(this.kesehatan <= 0){
                 isMati = true;
                 statusMati = "mati karena sakit :<";
@@ -1077,8 +1122,8 @@ public class Sim implements Aksi{
 
         public void updateKekenyangan(int kekenyangan){
             this.kekenyangan += kekenyangan;
-            if(this.kekenyangan > 100){
-                this.kekenyangan = 100;
+            if(this.kekenyangan > 8000){
+                this.kekenyangan = 8000;
             }  else if(this.kekenyangan <= 0){
                 isMati = true;
                 statusMati = "mati karena kelaparan :<";
@@ -1087,8 +1132,8 @@ public class Sim implements Aksi{
 
         public void updateMood(int mood){
             this.mood += mood;
-            if(this.mood > 100){
-                this.mood = 100;
+            if(this.mood > 8000){
+                this.mood = 8000;
             } else if(this.mood <= 0){
                 isMati = true;
                 statusMati = "mati karena mengalami depresi :<";
