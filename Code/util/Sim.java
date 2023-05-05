@@ -32,7 +32,7 @@ public class Sim implements Aksi{
     public Sim(String name, int x, int y){
         this.namaLengkap = name;
         pekerjaan = new WorkObject();
-        uang = 100;
+        uang = 10000;
         inventory = new Inventory<ObjectSim>();
         kesejahteraan = new Kesejahteraan();
         status = "Idle";
@@ -659,6 +659,8 @@ public class Sim implements Aksi{
             System.out.println("Saldo Simmu tidak mencukupi untuk melakukan upgrade rumah! silahkan bekerja terlebih dahulu.");
             return;
         }
+        else if(getUang() >= upgradeCost) {
+        rumah.addRuangan(lokSimRuang);
         Thread thread = new Thread(new Runnable() {
             public void run(){
                         try {
@@ -668,18 +670,18 @@ public class Sim implements Aksi{
                             }  
                             if(rumah.isAddRoomAvailable(lokSimRuang)){
                                 uang -= 1500;
-                                setWaktuUpgrade(18*60*1000);
+                                setWaktuUpgrade(18*1000);
                                 rumahSedangDiupgrade = true;
                                 System.out.println("\nKamu telah upgrade rumah dengan biaya " + upgradeCost + ".");
                                 int tempdurasiAksiAktif = getdurasiAksiAktif();
                                 while(waktuSisaUpgrade > 0 && rumahSedangDiupgrade) {
-                                    Thread.sleep(200); 
+                                    Thread.sleep(200);
                                     tempdurasiAksiAktif = getdurasiAksiAktif();
                                     if(waktuSisaUpgrade < tempdurasiAksiAktif){
                                         System.out.println("\n///Proses upgrade///");
                                         Thread.sleep(waktuSisaUpgrade);
                                         // Tambahkan ruangan ke dalam rumah
-                                        rumah.addRuangan(lokSimRuang);
+                                        rumah.tambahRuangan(lokSimRuang);
                                         System.out.println("\nRumah kamu selesai diupgrade!");
                                         rumahSedangDiupgrade = false;
                                     }
@@ -705,7 +707,7 @@ public class Sim implements Aksi{
             }
         });
         thread.start();
-    }
+    }}
     
 
     public void  beliBarang(Map<String, PurchasableObject> objectMap, String itemName, int amount) throws negativeParameterException, invalidMultitudeNumber, InterruptedException {
@@ -994,9 +996,9 @@ public class Sim implements Aksi{
         private String statusMati;
 
         public Kesejahteraan() {
-            mood = 80;
-            kekenyangan = 80;
-            kesehatan = 80;
+            mood = 8000;
+            kekenyangan = 8000;
+            kesehatan = 8000;
         }
 
         public int getMood(){

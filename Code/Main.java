@@ -481,13 +481,13 @@ public class Main {
                 } else {
                     System.out.println("Command tersebut tidak tersedia");
                 }
-                /*System.out.println("");
+                System.out.println("");
                 System.out.println("Ketik BACK untuk kembali ke Main Menu");
                 String inp1 = scan.nextLine();
                     while (!inp1.equalsIgnoreCase("BACK")) {
                         System.out.println("Periksa kembali input stringnya!");
                         inp1 = scan.nextLine();
-                    }*/
+                    }
             }
             if(currentSim.getKesejahteraan().getIsMati()){
                 System.out.println("Ooops... Sim bernama " + currentSim.getNamaLengkap() + " " + currentSim.getKesejahteraan().getStatusMati());

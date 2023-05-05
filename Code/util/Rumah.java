@@ -6,6 +6,12 @@ public class Rumah {
     private ArrayList<Ruangan> rooms;
     private Ruangan[][] layout;
     private Lokasi lokRumah;
+    private Boolean atas = false;
+    private Boolean kanan = false;
+    private Boolean kiri = false;
+    private Boolean bawah = false;
+    private String nama;
+    private String code;
     
     public Rumah(int x, int y) {
         this.rooms = new ArrayList<Ruangan>();
@@ -74,22 +80,23 @@ public class Rumah {
                 if (ruangan.getUp()==null) {
                     System.out.println("Akan dibuat ruangan baru di atas ruangan ini!");
                     System.out.println("Beri nama untuk ruangan baru:");
-                    String nama = sc.nextLine();
+                    nama = sc.nextLine();
                     while (!isNamaValid(nama)) {
                         System.out.println("Nama sudah terpakai! Beri nama ruangan yang baru:");
                         nama = sc.nextLine();
                     }
                     System.out.println("Beri kode untuk ruangan baru (3 huruf kapital):");
-                    String code = sc.nextLine();
+                    code = sc.nextLine();
                     while (!isCodeValid(code)) {
                         System.out.println("Code sudah terpakai! Beri kode ruangan yang baru:");
                         code = sc.nextLine();
                     }
-                    Ruangan rbaru = new Ruangan(nama,code);
-                    ruangan.setUp(rbaru);
-                    rbaru.setDown(ruangan);
-                    rooms.add(rbaru);
-                    layout[ruangan.getX()-1][ruangan.getY()] = rbaru;
+                    atas = true;
+                    // Ruangan rbaru = new Ruangan(nama,code);
+                    // ruangan.setUp(rbaru);
+                    // rbaru.setDown(ruangan);
+                    // rooms.add(rbaru);
+                    // layout[ruangan.getX()-1][ruangan.getY()] = rbaru;
                 } else {
                     System.out.println("Maaf, sudah terdapat ruangan di atas ruangan ini!");
                 }
@@ -98,22 +105,23 @@ public class Rumah {
                 if (ruangan.getDown()==null) {
                     System.out.println("Akan dibuat ruangan baru di bawah ruangan ini!");
                     System.out.println("Beri nama untuk ruangan baru:");
-                    String nama = sc.nextLine();
+                    nama = sc.nextLine();
                     while (!isNamaValid(nama)) {
                         System.out.println("Nama sudah terpakai! Beri nama ruangan yang baru:");
                         nama = sc.nextLine();
                     }
                     System.out.println("Beri kode untuk ruangan baru (3 huruf kapital):");
-                    String code = sc.nextLine();
+                    code = sc.nextLine();
                     while (!isCodeValid(code)) {
                         System.out.println("Code sudah terpakai! Beri kode ruangan yang baru:");
                         code = sc.nextLine();
                     }
-                    Ruangan rbaru = new Ruangan(nama,code);
-                    ruangan.setDown(rbaru);
-                    rbaru.setUp(ruangan);
-                    rooms.add(rbaru);
-                    layout[ruangan.getX()+1][ruangan.getY()] = rbaru;
+                    bawah = true;
+                    // Ruangan rbaru = new Ruangan(nama,code);
+                    // ruangan.setDown(rbaru);
+                    // rbaru.setUp(ruangan);
+                    // rooms.add(rbaru);
+                    // layout[ruangan.getX()+1][ruangan.getY()] = rbaru;
                 } else {
                     System.out.println("Maaf, sudah terdapat ruangan di bawah ruangan ini!");
                 }
@@ -122,22 +130,23 @@ public class Rumah {
                 if (ruangan.getLeft()==null) {
                     System.out.println("Akan dibuat ruangan baru di kiri ruangan ini!");
                     System.out.println("Beri nama untuk ruangan baru:");
-                    String nama = sc.nextLine();
+                    nama = sc.nextLine();
                     while (!isNamaValid(nama)) {
                         System.out.println("Nama sudah terpakai! Beri nama ruangan yang baru:");
                         nama = sc.nextLine();
                     }
                     System.out.println("Beri kode untuk ruangan baru (3 huruf kapital):");
-                    String code = sc.nextLine();
+                    code = sc.nextLine();
                     while (!isCodeValid(code)) {
                         System.out.println("Code sudah terpakai! Beri kode ruangan yang baru:");
                         code = sc.nextLine();
                     }
-                    Ruangan rbaru = new Ruangan(nama,code);
-                    ruangan.setLeft(rbaru);
-                    rbaru.setRight(ruangan);
-                    rooms.add(rbaru);
-                    layout[ruangan.getX()][ruangan.getY()-1] = rbaru;
+                    kiri = true;
+                    // Ruangan rbaru = new Ruangan(nama,code);
+                    // ruangan.setLeft(rbaru);
+                    // rbaru.setRight(ruangan);
+                    // rooms.add(rbaru);
+                    // layout[ruangan.getX()][ruangan.getY()-1] = rbaru;
                 } else {
                     System.out.println("Maaf, sudah terdapat ruangan di kiri ruangan ini!");
                 }
@@ -146,22 +155,23 @@ public class Rumah {
                 if (ruangan.getRight()==null) {
                     System.out.println("Akan dibuat ruangan baru di kanan ruangan ini!");
                     System.out.println("Beri nama untuk ruangan baru:");
-                    String nama = sc.nextLine();
+                    nama = sc.nextLine();
                     while (!isNamaValid(nama)) {
                         System.out.println("Nama sudah terpakai! Beri nama ruangan yang baru:");
                         nama = sc.nextLine();
                     }
                     System.out.println("Beri kode untuk ruangan baru (3 huruf kapital):");
-                    String code = sc.nextLine();
+                    code = sc.nextLine();
                     while (!isCodeValid(code)) {
                         System.out.println("Code sudah terpakai! Beri kode ruangan yang baru:");
                         code = sc.nextLine();
                     }
-                    Ruangan rbaru = new Ruangan(nama,code);
-                    ruangan.setRight(rbaru);
-                    rbaru.setLeft(ruangan);
-                    rooms.add(rbaru);
-                    layout[ruangan.getX()][ruangan.getY()+1] = rbaru;
+                    kanan = true;
+                    // Ruangan rbaru = new Ruangan(nama,code);
+                    // ruangan.setRight(rbaru);
+                    // rbaru.setLeft(ruangan);
+                    // rooms.add(rbaru);
+                    // layout[ruangan.getX()][ruangan.getY()+1] = rbaru;
                 } else {
                     System.out.println("Maaf, sudah terdapat ruangan di kanan ruangan ini!");
                 }
@@ -171,6 +181,31 @@ public class Rumah {
                 System.out.println("Masukkan kembali pilihan yang diinginkan");
                 input = sc.nextLine();
             }
+        }
+    }
+
+    public void tambahRuangan(Ruangan ruangan){
+        Ruangan rbaru = new Ruangan(nama,code);
+        if(atas==true){
+            ruangan.setUp(rbaru);
+            rbaru.setDown(ruangan);
+            rooms.add(rbaru);
+            layout[ruangan.getX()-1][ruangan.getY()] = rbaru;
+        } else if(kanan==true){
+            ruangan.setRight(rbaru);
+            rbaru.setLeft(ruangan);
+            rooms.add(rbaru);
+            layout[ruangan.getX()][ruangan.getY()+1] = rbaru;
+        } else if(kiri==true){
+            ruangan.setLeft(rbaru);
+            rbaru.setRight(ruangan);
+            rooms.add(rbaru);
+            layout[ruangan.getX()][ruangan.getY()-1] = rbaru;
+        } else if(bawah==true){
+            ruangan.setDown(rbaru);
+            rbaru.setUp(ruangan);
+            rooms.add(rbaru);
+            layout[ruangan.getX()+1][ruangan.getY()] = rbaru;
         }
     }
 
