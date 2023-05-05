@@ -18,6 +18,7 @@ public class Sim implements Aksi{
     private int awalKerja;
     private int lamaKerja;
     private int durasiTidur;
+    private Time terakhirTidur;
     public int durasiTidakBuangAir;
     private boolean sudahTidur;
     public boolean sudahMakan;
@@ -49,6 +50,9 @@ public class Sim implements Aksi{
         inventory.addItem(new KomporGas(), 1);
         inventory.addItem(new Jam(), 1);
         inventory.addItem(new MejaKursi(), 1);
+        // buat coba makan n masak
+        inventory.addItem(new Nasi(), 1);
+        inventory.addItem(new Ayam(), 1);
     }
 
     public String getNamaLengkap(){
@@ -210,7 +214,7 @@ public class Sim implements Aksi{
                     System.out.println("");
                     Boolean valmenu = false;
                     while (!valmenu) {
-                        System.out.println("Pilihlah menu dengan memasukkan nomor menu (1/2/3/4/5!)");
+                        System.out.println("Pilihlah menu dengan memasukkan nomor menu (1/2/3/4/5)!");
                         int menu = scan.nextInt();
                         String tempnext = scan.nextLine();
                         if (menu==1) {
@@ -444,10 +448,15 @@ public class Sim implements Aksi{
         this.setStatus("tidur");
         setdurasiAksiAktif(durasi);
         durasiTidur += durasi;
+        //terakhirTidur = t;
         checkTidur();
 
         //Untuk selalu nambahin durasi gak buang air
         durasiTidakBuangAir += durasi;
+    }
+
+    public Time getTerakhirTidur(){
+        return terakhirTidur;
     }
 
     public void checkTidur(){
@@ -456,7 +465,9 @@ public class Sim implements Aksi{
             kesejahteraan.updateMood(30*(durasiTidur/(4*60)));
             durasiTidur -= (durasiTidur/(4*60));
             sudahTidur = true;
-        } 
+        } if(durasiTidur >=(3*60)){
+            sudahTidur = true;
+        }
     }
 
     public boolean getTidur(){
@@ -519,13 +530,14 @@ public class Sim implements Aksi{
             ArrayList<String> yangKurang = new ArrayList<>();
             boolean bisa = true;
             for(BahanMakanan bm : listResep){
-                if(!inventory.getItem().contains(bm)){
+                if(inventory.isContain((ObjectSim)bm) == null) {
                     bisa = false;
                     yangKurang.add(bm.getNama());
                 }
             }
             if(bisa){
                 this.setStatus("Memasak");
+                System.out.println(ob.getNama() +" sedang dalam proses masak!");
                 try {
                     Thread.sleep((3/2)*m.getTingkatKenyang()* 1000);
                     time.updateTime((3/2)*m.getTingkatKenyang()* 1000);
@@ -534,7 +546,7 @@ public class Sim implements Aksi{
                     e.printStackTrace();
                 }
                 for(BahanMakanan bm : listResep){
-                    inventory.removeItem(ob, 1);
+                    inventory.removeItem(bm, 1);
                     uang -= bm.getPrice();
                 }
                 inventory.addItem(ob, 1);
@@ -545,6 +557,7 @@ public class Sim implements Aksi{
                 int durasiMasakInt ;
                 durasiMasakInt = (int) Math.floor(durasiMasak);
                 durasiTidakBuangAir += durasiMasakInt;
+                System.out.println(ob.getNama() + " sudah matang dan tersedia di inventory!");
             } else {
                 System.out.println("Maaf, bahannya tidak lengkap!");
                 System.out.println("Kamu kekurangan bahan berikut:");

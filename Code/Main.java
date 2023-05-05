@@ -172,6 +172,22 @@ public class Main {
                     currentSim.tidakBuangAir();
                 } 
 
+                // ini tidur blm bener
+                if(w.getTime().getMin() == 0 && w.getTime().getSec() == 0){
+                    for(Sim s : pemain){
+                        s.resetHarian();
+                    }
+                }
+
+                // ini tidur kalo kaya gini kalo misal menit ke 10nya ke skip gmn cara ngeceknya?!
+                if(w.getTime().getMin() == 10 && w.getTime().getMin() == 0){
+                    for(Sim s : pemain){
+                        if(!s.getTidur()){
+                            s.tidakTidur();
+                        }
+                    }
+                }
+
                 //Cek Kematian yang dimainkan
                 for(Sim s : pemain){
                     if(s.getKesejahteraan().getIsMati()){
@@ -319,7 +335,7 @@ public class Main {
                     }
                 } else if(o.equals("Add Sim")) {
                     boolean namaValid = false;
-                    System.out.println("Add a new friend for your Sim(s) °˖✧◝(⁰▿⁰)◜✧˖°")
+                    System.out.println("Add a new friend for your Sim(s) °˖✧◝(⁰▿⁰)◜✧˖°");
                     System.out.println("Siapa nama sim baru? Inputkan Stringnya!");
                     String nama = scan.nextLine();
                     System.out.println("");
