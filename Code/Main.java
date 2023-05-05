@@ -465,7 +465,7 @@ public class Main {
                     Boolean validasi = false;
                     while (!validasi) {
                         Boolean validInput1=false;
-                        System.out.println("Masukkan aksi yang ingin kamu lakukan dalam opsi ANGKA (1-13)");
+                        System.out.println("Masukkan aksi yang ingin kamu lakukan dalam opsi ANGKA (1-14)");
                         int num=0;
                         while (!validInput1) {
                             try {
