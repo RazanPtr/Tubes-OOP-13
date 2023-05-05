@@ -169,8 +169,9 @@ public class Main {
                     System.out.println("");
                 
                 //Tidak buang air
-                if (currentSim.durasiTidakBuangAir >= 240 && currentSim.sudahBuangAir && currentSim.sudahMakan){
+                if (currentSim.durasiTidakBuangAir >= 240 && !currentSim.sudahBuangAir && currentSim.sudahMakan){
                     currentSim.tidakBuangAir();
+                    System.out.println(currentSim.getNamaLengkap() + " tidak buang air selama 4 menit, kesejahteraan berkurang");
                 } 
 
                 // ini tidur blm bener

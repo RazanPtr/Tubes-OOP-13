@@ -23,8 +23,8 @@ public class Sim implements Aksi{
     private Time terakhirTidur;
     public int durasiTidakBuangAir;
     private boolean sudahTidur;
-    public boolean sudahMakan;
-    public boolean sudahBuangAir;
+    public boolean sudahMakan = false;
+    public boolean sudahBuangAir = false;
     private int durasiAksiAktif;
     private int waktuSisaPengiriman;
     private int waktuSisaUpgrade;
@@ -56,6 +56,7 @@ public class Sim implements Aksi{
         // buat coba makan n masak
         inventory.addItem(new Nasi(), 1);
         inventory.addItem(new Ayam(), 1);
+        inventory.addItem(new NasiAyam(), 1);
         //display
         display = new Ascii();
     }
@@ -1111,8 +1112,8 @@ public class Sim implements Aksi{
 
         public void updateKesehatan(int kesehatan){
             this.kesehatan += kesehatan;
-            if(this.kesehatan > 100){
-                this.kesehatan = 100;
+            if(this.kesehatan > 8000){
+                this.kesehatan = 8000;
             }  else if(this.kesehatan <= 0){
                 isMati = true;
                 statusMati = "mati karena sakit :<";
@@ -1121,8 +1122,8 @@ public class Sim implements Aksi{
 
         public void updateKekenyangan(int kekenyangan){
             this.kekenyangan += kekenyangan;
-            if(this.kekenyangan > 100){
-                this.kekenyangan = 100;
+            if(this.kekenyangan > 8000){
+                this.kekenyangan = 8000;
             }  else if(this.kekenyangan <= 0){
                 isMati = true;
                 statusMati = "mati karena kelaparan :<";
@@ -1131,8 +1132,8 @@ public class Sim implements Aksi{
 
         public void updateMood(int mood){
             this.mood += mood;
-            if(this.mood > 100){
-                this.mood = 100;
+            if(this.mood > 8000){
+                this.mood = 8000;
             } else if(this.mood <= 0){
                 isMati = true;
                 statusMati = "mati karena mengalami depresi :<";
