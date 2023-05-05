@@ -563,8 +563,10 @@ public class Sim implements Aksi{
             if(bisa){
                 this.setStatus("Memasak");
                 System.out.println(ob.getNama() +" sedang dalam proses masak!");
-                time.updateTime((3/2)*m.getTingkatKenyang());
-                setdurasiAksiAktif((3/2)*m.getTingkatKenyang());
+                double ttime = 1.5*m.getTingkatKenyang();
+                int tttime = (int) ttime;
+                time.AksiSleep(tttime);
+                setdurasiAksiAktif(tttime);
                 for(BahanMakanan bm : listResep){
                     inventory.removeItem(bm, 1);
                     uang -= bm.getPrice();
