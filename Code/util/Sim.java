@@ -186,7 +186,7 @@ public class Sim implements Aksi{
             System.out.println("Apakah kamu mau buang air? (Y/N)");
             while (!valops) {
                 String ops = scan.nextLine();
-                if (ops.equals("Y")) {
+                if (ops.equalsIgnoreCase("Y")) {
                     System.out.println("Berapa lama kamu ingin buang air? (Dalam Detik)");
                     int dur = scan.nextInt();
                     String temp = scan.nextLine();
@@ -197,7 +197,7 @@ public class Sim implements Aksi{
                         System.out.println(e.getMessage());
                         System.out.println("Silahkan masukkan durasi yang valid");
                     }
-                } else if (ops.equals("N")){
+                } else if (ops.equalsIgnoreCase("N")){
                     System.out.println("Baik. Jangan lupa untuk buang air setelah makan!");
                     valops = true;
                 } else {
@@ -208,7 +208,7 @@ public class Sim implements Aksi{
             System.out.println("Apakah kamu mau memasak? (Y/N)");
             while (!valops) {
                 String ops = scan.nextLine();
-                if (ops.equals("Y")) {
+                if (ops.equalsIgnoreCase("Y")) {
                     System.out.println("Apa yang ingin kau masak? Berikut adalah masakan yang dapat dibuat:");
                     System.out.println("1. Nasi Ayam");
                     System.out.println("2. Nasi Kari");
@@ -246,7 +246,7 @@ public class Sim implements Aksi{
                         }
                     }
                     valops = true;
-                } else if (ops.equals("N")){
+                } else if (ops.equalsIgnoreCase("N")){
                     System.out.println("Baik. Kunjungi lagi kompor apabila ingin memasak!");
                     valops = true;
                 } else {
@@ -257,7 +257,7 @@ public class Sim implements Aksi{
             System.out.println("Apakah kamu mau makan? (Y/N)");
             while (!valops) {
                 String ops = scan.nextLine();
-                if (ops.equals("Y")) {
+                if (ops.equalsIgnoreCase("Y")) {
                     System.out.println("Berapa lama kamu ingin makan? (Dalam Detik)");
                     int dur = scan.nextInt();
                     String temp = scan.nextLine();
@@ -280,7 +280,7 @@ public class Sim implements Aksi{
                     
                     //kode
                     valops = true;
-                } else if (ops.equals("N")){
+                } else if (ops.equalsIgnoreCase("N")){
                     System.out.println("Baik. Jangan lupa untuk makan secukupnya!");
                     valops = true;
                 } else {
@@ -291,11 +291,11 @@ public class Sim implements Aksi{
             System.out.println("Apakah kamu mau melihat waktu? (Y/N)");
             while (!valops) {
                 String ops = scan.nextLine();
-                if (ops.equals("Y")) {
+                if (ops.equalsIgnoreCase("Y")) {
                     System.out.println("Waktu sekarang adalah sebagai berikut:");
                     lihatWaktu();
                     valops = true;
-                } else if (ops.equals("N")){
+                } else if (ops.equalsIgnoreCase("N")){
                     System.out.println("Baik. Kunjungi lagi jam jika ingin melihat waktu!");
                     valops = true;
                 } else {
@@ -306,7 +306,7 @@ public class Sim implements Aksi{
             System.out.println("Apakah kamu ingin Shalat? (Y/N)");
             while (!valops) {
                 String ops = scan.nextLine();
-                if (ops.equals("Y")) {
+                if (ops.equalsIgnoreCase("Y")) {
                     System.out.println("Berapa lama kamu ingin Shalat? (Dalam Detik)");
                     int dur = scan.nextInt();
                     String temp = scan.nextLine();
@@ -317,7 +317,7 @@ public class Sim implements Aksi{
                         System.out.println(e.getMessage());
                         System.out.println("Silahkan masukkan durasi yang valid");
                     }
-                } else if (ops.equals("N")){
+                } else if (ops.equalsIgnoreCase("N")){
                     System.out.println("Baik. Jangan lupa Shalat!");
                     valops = true;
                 } else {
@@ -328,7 +328,7 @@ public class Sim implements Aksi{
             System.out.println("Apakah kamu ingin melukis? (Y/N)");
             while (!valops) {
                 String ops = scan.nextLine();
-                if (ops.equals("Y")) {
+                if (ops.equalsIgnoreCase("Y")) {
                     System.out.println("Berapa lama kamu ingin melukis? (Dalam Detik)");
                     int dur = scan.nextInt();
                     String temp = scan.nextLine();
@@ -339,7 +339,7 @@ public class Sim implements Aksi{
                         System.out.println(e.getMessage());
                         System.out.println("Silahkan masukkan durasi yang valid");
                     }
-                } else if (ops.equals("N")){
+                } else if (ops.equalsIgnoreCase("N")){
                     System.out.println("Baik. Jika ingin melukis, kunjungi lagi kanvas!");
                     valops = true;
                 } else {
@@ -350,7 +350,7 @@ public class Sim implements Aksi{
             System.out.println("Apakah kamu ingin karaoke? (Y/N)");
             while (!valops) {
                 String ops = scan.nextLine();
-                if (ops.equals("Y")) {
+                if (ops.equalsIgnoreCase("Y")) {
                     System.out.println("Berapa lama kamu ingin karaoke? (Dalam Detik)");
                     int dur = scan.nextInt();
                     String temp = scan.nextLine();
@@ -361,7 +361,7 @@ public class Sim implements Aksi{
                         System.out.println(e.getMessage());
                         System.out.println("Silahkan masukkan durasi yang valid");
                     }
-                } else if (ops.equals("N")){
+                } else if (ops.equalsIgnoreCase("N")){
                     System.out.println("Baik. Jika ingin karaoke, kunjungi lagi mic!");
                     valops = true;
                 } else {
@@ -372,7 +372,7 @@ public class Sim implements Aksi{
             System.out.println("Apakah kamu ingin nonton netflix? (Y/N)");
             while (!valops) {
                 String ops = scan.nextLine();
-                if (ops.equals("Y")) {
+                if (ops.equalsIgnoreCase("Y")) {
                     System.out.println("Berapa lama kamu ingin nonton netflix? (Dalam Detik)");
                     int dur = scan.nextInt();
                     String temp = scan.nextLine();
@@ -383,7 +383,7 @@ public class Sim implements Aksi{
                         System.out.println(e.getMessage());
                         System.out.println("Silahkan masukkan durasi yang valid");
                     }
-                } else if (ops.equals("N")){
+                } else if (ops.equalsIgnoreCase("N")){
                     System.out.println("Baik. Jika ingin nonton netflix, kunjungi lagi laptop!");
                     valops = true;
                 } else {
@@ -394,7 +394,7 @@ public class Sim implements Aksi{
             System.out.println("Apakah kamu ingin mandi? (Y/N)");
             while (!valops) {
                 String ops = scan.nextLine();
-                if (ops.equals("Y")) {
+                if (ops.equalsIgnoreCase("Y")) {
                     System.out.println("Berapa lama kamu ingin mandi? (Dalam Detik)");
                     int dur = scan.nextInt();
                     String temp = scan.nextLine();
@@ -405,7 +405,7 @@ public class Sim implements Aksi{
                         System.out.println(e.getMessage());
                         System.out.println("Silahkan masukkan durasi yang valid");
                     }
-                } else if (ops.equals("N")){
+                } else if (ops.equalsIgnoreCase("N")){
                     System.out.println("Baik. Jangan lupa mandi supaya higienis selalu!");
                     valops = true;
                 } else {
