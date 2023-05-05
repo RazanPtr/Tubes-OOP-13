@@ -131,6 +131,16 @@ public class Ruangan {
         }
     }
 
+    public void removeObj(ObjectSim obj){
+        objects.remove(obj);
+        Furniture f = (Furniture) obj;
+        for (int i = f.getLokDiRuangan().getX(); i < f.getLokDiRuangan().getX() + f.getLength(); i++) {
+            for (int j = f.getLokDiRuangan().getY(); j <f.getLokDiRuangan().getY() + f.getWidth(); j++) {
+                grid[i][j] = false;
+            }
+        }
+    }
+
     public boolean canPlaceObj(Lokasi lok, Furniture obj){
         // Periksa apakah ukuran objek cukup di ruangan
         if (lok.getX() + obj.getLength() > length || lok.getY() + obj.getWidth() > width) {

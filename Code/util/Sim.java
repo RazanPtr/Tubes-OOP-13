@@ -896,13 +896,13 @@ public class Sim implements Aksi{
                         }
                     }
                     if(dariRooms != null){
+                        rumah.getRoom(lok).removeObj(dariRooms);
                         Furniture f = (Furniture) dariRooms;
                         f.setLokDiRuangan(null);
                         inventory.addItem(f, 1);
-                        daftarObj.remove(dariRooms);
                         System.out.println(dariRooms.getNama() + " berhasil disimpan ke dalam inventory!");
                     } else {
-                        System.out.println("Barang tidak berhasil disimpan");
+                        System.out.println("Barang tidak tersedia di dalam ruangan");
                     }
                     
                 } else {
@@ -914,10 +914,10 @@ public class Sim implements Aksi{
                         }
                     }
                     if(dariRooms != null){
+                        rumah.getRoom(lok).removeObj(dariRooms);
                         Furniture f = (Furniture) dariRooms;
                         f.setLokDiRuangan(null);
-                        inventory.addItem(f, 1);
-                        daftarObj.remove(dariRooms);   
+                        inventory.addItem(f, 1); 
                         System.out.println(dariRooms.getNama() + " berhasil disimpan ke dalam inventory!");
                     } else {
                         System.out.println("Barang tidak berhasil disimpan");
@@ -925,6 +925,8 @@ public class Sim implements Aksi{
                     
                 }
             }
+        } else {
+            System.out.println("Nama barang yang anda input tidak valid!");
         }
     }
 
