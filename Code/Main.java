@@ -413,10 +413,20 @@ public class Main {
                         System.out.println("Tidak ada barang di ruangan ini!");
                     } else {
                         Boolean valid1 = false;
+                        Boolean validInput2 = false;
                         while (!valid1) {
                             System.out.println("Pilih objek yang ingin didatangi!");
                             System.out.println("Masukkan angka sesuai objek yang dipilih: ");
-                            int choice = scan.nextInt();
+                            int choice = 0;
+                            while (!validInput) {
+                                try {
+                                    choice = scan.nextInt();
+                                    validInput2 = true;
+                                } catch (Exception e) {
+                                    System.out.println("Input harus berupa angka, silakan coba lagi.");
+                                    scanner.nextLine(); // membersihkan input yang salah agar tidak terus terbaca
+                                }
+                            }
                             String tempstr = scan.nextLine();
                             if (choice >= 1 && choice < temp) {
                                 ObjectSim objTemp = currentSim.getLokRuang().getObjects().get(choice-1);
@@ -452,11 +462,21 @@ public class Main {
 
                     Boolean validasi = false;
                     while (!validasi) {
-                        System.out.println("");
+                        Boolean validInput1=false;
                         System.out.println("Masukkan aksi yang ingin kamu lakukan dalam opsi ANGKA (1-13)");
-                        int num = scan.nextInt();
+                        int num=0;
+                        while (!validInput1) {
+                            try {
+                                num = scan.nextInt();
+                                System.out.println();
+                                validInput1 = true;
+                            } catch (Exception e) {
+                                System.out.println("Input harus berupa angka, silakan coba lagi.");
+                                scan.nextLine(); // membersihkan input yang salah agar tidak terus terbaca
+                            }
+                        }
                         String tempp = scan.nextLine();
-                        if (num>=1 && num<14) {
+                        if (num>=1 && num<=14) {
                             ops = num;
                             validasi = true;
                         }
