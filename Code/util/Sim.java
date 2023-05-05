@@ -164,7 +164,7 @@ public class Sim implements Aksi{
             System.out.println("Apakah kamu mau tidur? (Y/N)");
             while (!valops) {
                 String ops = scan.nextLine();
-                if (ops.equals("Y")) {
+                if (ops.equalsIgnoreCase("Y")) {
                     System.out.println("Berapa lama kamu ingin tidur? (Dalam Detik)");
                     int dur = scan.nextInt();
                     String temp = scan.nextLine();
@@ -175,7 +175,7 @@ public class Sim implements Aksi{
                         System.out.println(e.getMessage());
                         System.out.println("Silahkan masukkan durasi yang valid");
                     }
-                } else if (ops.equals("N")){
+                } else if (ops.equalsIgnoreCase("N")){
                     System.out.println("Baik. Jangan lupa untuk tidur secukupnya!");
                     valops = true;
                 } else {
