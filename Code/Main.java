@@ -317,6 +317,8 @@ public class Main {
                             String inputBarang = scanBarang.nextLine();
                             System.out.println("Di Ruang apa anda ingin memasang barang tersebut?");
                             String inputRuang = scanBarang.nextLine();
+                            System.out.println("Berikut adalah display ruangan "+inputRuang);
+                            currentSim.getRumah().getRoom(inputRuang).displayRuangan();
                             System.out.println("Di posisi berapa anda ingin memasang barang tersebut?");
                             System.out.print("x: ");
                             int lokX = scanBarang.nextInt();
