@@ -184,10 +184,14 @@ public class Main {
                 }
 
                 // ini tidur kalo kaya gini kalo misal menit ke 10nya ke skip gmn cara ngeceknya?!
-                if(w.getTime().getTimeInSec() >= 600 && (!cTidakTidur)){
+                System.out.println((w.getTime().getMin()*60)+ w.getTime().getSec()); //ini walaupun uda di jalanin aksi apapun, hasilnya ttp 0
+                if(((w.getTime().getMin()*60)+ w.getTime().getSec() >= 600) && (!cTidakTidur)){
+                    System.out.println("tes123");
                     for(Sim s : pemain){
-                        if(!s.getTidur()){
+                        System.out.println(s.sudahTidur);
+                        if(!s.sudahTidur){
                             s.tidakTidur();
+                            System.out.println(s.getNamaLengkap() + " belum tidur setelah 10 menit, kesehatan akan berkurang");
                         }
                     }
                     cTidakTidur = true;

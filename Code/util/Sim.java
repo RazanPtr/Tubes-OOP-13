@@ -4,7 +4,6 @@ import java.util.*;
 import objek.*;
 import java.lang.Math;
 import display.*;
-import java.lang.reflect.Constructor;
 
 public class Sim implements Aksi{
     private String namaLengkap;
@@ -20,9 +19,8 @@ public class Sim implements Aksi{
     private int awalKerja;
     private int lamaKerja;
     private int durasiTidur;
-    private Time terakhirTidur;
     public int durasiTidakBuangAir;
-    private boolean sudahTidur;
+    public boolean sudahTidur = false;
     public boolean sudahMakan = false;
     public boolean sudahBuangAir = false;
     private int durasiAksiAktif;
@@ -473,7 +471,7 @@ public class Sim implements Aksi{
             kesejahteraan.updateMood(30*(durasiTidur/(4*60)));
             durasiTidur -= (durasiTidur/(4*60));
             sudahTidur = true;
-        } if(durasiTidur >=(3*60)){
+        } else if(durasiTidur >=(3*60)){
             sudahTidur = true;
         }
     }
@@ -492,7 +490,6 @@ public class Sim implements Aksi{
     public void tidakTidur(){
         kesejahteraan.updateKesehatan(-5);
         kesejahteraan.updateMood(-5);
-        System.out.println("kena efek tidur");
     }
 
     public void makan(int durasi, String namaMasakan){
