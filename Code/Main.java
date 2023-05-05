@@ -184,9 +184,8 @@ public class Main {
                 }
 
                 // ini tidur kalo kaya gini kalo misal menit ke 10nya ke skip gmn cara ngeceknya?!
-                System.out.println((Sim.time.getMin()*60)+ Sim.time.getSec()); //ini walaupun uda di jalanin aksi apapun, hasilnya ttp 0
-                if(((w.getTime().getMin()*60)+ w.getTime().getSec() >= 600) && (!cTidakTidur)){
-                    System.out.println("tes123");
+                //System.out.println((Sim.time.getMin()*60)+ Sim.time.getSec()); //ini walaupun uda di jalanin aksi apapun, hasilnya ttp 0
+                if((((Sim.time.getMin()*60)+ Sim.time.getSec()) >= 600) && (!cTidakTidur)){
                     for(Sim s : pemain){
                         System.out.println(s.sudahTidur);
                         if(!s.sudahTidur){
@@ -478,7 +477,7 @@ public class Main {
                                 validInput1 = true;
                             } catch (Exception e) {
                                 System.out.println("Input harus berupa angka, silakan coba lagi.");
-                                scan.nextLine(); // membersihkan input yang salah agar tidak terus terbaca
+                                scan.nextLine();
                             }
                         }
                         String tempp = scan.nextLine();
@@ -496,6 +495,7 @@ public class Main {
                         while (!validInput3) {
                             try {
                                 dur = scan.nextInt();
+                                scan.nextLine();
                                 if(dur <= 0){
                                     throw new IllegalArgumentException("durasi harus lebih dari 0 detik");
                                 }
@@ -507,7 +507,6 @@ public class Main {
                             } catch (Exception e) {
                                 System.out.println();
                                 System.out.println("Input tidak valid, silakan masukan durasi dengan angka kelipatan 30 detik dan lebih dari 0");
-                                scan.nextLine(); // membersihkan input yang salah agar tidak terus terbaca
                             }
                         } currentSim.kerja(dur);
                     } else if (ops==2) {
@@ -518,6 +517,7 @@ public class Main {
                         while (!validInput3) {
                             try {
                                 dur = scan.nextInt();
+                                scan.nextLine();
                                 if(dur <= 0){
                                     throw new IllegalArgumentException("durasi harus lebih dari 0 detik");
                                 }
@@ -529,7 +529,6 @@ public class Main {
                             } catch (Exception e) {
                                 System.out.println();
                                 System.out.println("Input tidak valid, silakan masukan durasi dengan angka kelipatan 20 detik dan lebih dari 0");
-                                scan.nextLine(); // membersihkan input yang salah agar tidak terus terbaca
                             }
                         } currentSim.olahraga(dur);
                     } else if (ops==3) {
