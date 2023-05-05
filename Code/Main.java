@@ -558,12 +558,8 @@ public class Main {
                                     validasii=true;
                                 }
                             }
-
                             Lokasi lokSimKunjung = pemain.get(opsi-1).getLokSimRumah();
-                            System.out.println("Berapa lama ingin mengunjungi rumah "+pemain.get(opsi-1).getNamaLengkap()+"?");
-                            int dura = scan.nextInt();
-                            String tempii = scan.nextLine();
-                            currentSim.berkunjung(dura,lokSimKunjung);
+                            currentSim.berkunjung(lokSimKunjung);
                         }
                     } else if (ops==7) {
                         System.out.println("Kunjungi objek Toilet!");

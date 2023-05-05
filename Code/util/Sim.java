@@ -584,16 +584,20 @@ public class Sim implements Aksi{
         
     }
     
-    public void berkunjung(int durasi, Lokasi lokasiTujuan) { // cek rumah yang dituju ada di main
+    public void berkunjung(Lokasi lokasiTujuan) { // cek rumah yang dituju ada di main
         double waktuKunjungan = Math.sqrt(Math.pow(lokasiTujuan.getX() - lokSimRumah.getX(), 2) + Math.pow(lokasiTujuan.getY() - lokSimRumah.getY(), 2));
-        durasi += waktuKunjungan;
-        setdurasiAksiAktif(durasi);
+        int wktu = (int) waktuKunjungan;
+        System.out.println("Sedang berjalan ke lokasi tujuan...");
+        setLokSimRumah(lokasiTujuan);
+        setdurasiAksiAktif(wktu);
+        time.AksiSleep(wktu);
+        System.out.println("Kamu sudah sampai...");
         this.setStatus("Berkunjung");
-        kesejahteraan.updateMood(10 * (durasi / 30));
-        kesejahteraan.updateKekenyangan(-10 * (durasi / 30));
+        kesejahteraan.updateMood(10 * (wktu / 30));
+        kesejahteraan.updateKekenyangan(-10 * (wktu / 30));
         
         //Untuk selalu nambahin durasi gak buang air
-        durasiTidakBuangAir += durasi;
+        durasiTidakBuangAir += wktu;
     }
 
     //public void 
