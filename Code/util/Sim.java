@@ -33,7 +33,7 @@ public class Sim implements Aksi{
     public Sim(String name, int x, int y){
         this.namaLengkap = name;
         pekerjaan = new WorkObject();
-        uang = 10000;
+        uang = 100;
         inventory = new Inventory<ObjectSim>();
         kesejahteraan = new Kesejahteraan();
         status = "Idle";
@@ -563,13 +563,8 @@ public class Sim implements Aksi{
             if(bisa){
                 this.setStatus("Memasak");
                 System.out.println(ob.getNama() +" sedang dalam proses masak!");
-                try {
-                    Thread.sleep((3/2)*m.getTingkatKenyang()* 1000);
-                    time.updateTime((3/2)*m.getTingkatKenyang()* 1000);
-                    setdurasiAksiAktif((3/2)*m.getTingkatKenyang()* 1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                time.updateTime((3/2)*m.getTingkatKenyang());
+                setdurasiAksiAktif((3/2)*m.getTingkatKenyang());
                 for(BahanMakanan bm : listResep){
                     inventory.removeItem(bm, 1);
                     uang -= bm.getPrice();
@@ -708,7 +703,7 @@ public class Sim implements Aksi{
                             }  
                             if(rumah.isAddRoomAvailable(lokSimRuang)){
                                 uang -= 1500;
-                                setWaktuUpgrade(18*1000);
+                                setWaktuUpgrade(18*60*1000);
                                 rumahSedangDiupgrade = true;
                                 System.out.println("\nKamu telah upgrade rumah dengan biaya " + upgradeCost + ".");
                                 int tempdurasiAksiAktif = getdurasiAksiAktif();
@@ -1044,9 +1039,9 @@ public class Sim implements Aksi{
         private String statusMati;
 
         public Kesejahteraan() {
-            mood = 8000;
-            kekenyangan = 8000;
-            kesehatan = 8000;
+            mood = 80;
+            kekenyangan = 80;
+            kesehatan = 80;
         }
 
         public int getMood(){
