@@ -495,14 +495,14 @@ public class Main {
                                 if(dur <= 0){
                                     throw new IllegalArgumentException("durasi harus lebih dari 0 detik");
                                 }
-                                if(dur %120 != 0){
-                                    throw new IllegalArgumentException("durasi kerja harus kelipatan 120 detik");
+                                if(dur % 30 != 0){
+                                    throw new IllegalArgumentException("durasi kerja harus kelipatan 30 detik");
                                 } else {
                                 validInput3 = true;
                                 }
                             } catch (Exception e) {
                                 System.out.println();
-                                System.out.println("Input tidak valid, silakan masukan durasi dengan angka kelipatan 120 detik dan lebih dari 0");
+                                System.out.println("Input tidak valid, silakan masukan durasi dengan angka kelipatan 30 detik dan lebih dari 0");
                                 scan.nextLine(); // membersihkan input yang salah agar tidak terus terbaca
                             }
                         } currentSim.kerja(dur);
