@@ -243,18 +243,18 @@ public class Main {
                     System.out.println("10. Go To Object             : Sim berjalan menuju objek");
                     System.out.println("11. Action                   : Melakukan aksi pada suatu objek");
                     System.out.println("12. Exit                     : Keluar dari permainan");
-                } else if(o.equals("Exit")){
+                } else if(o.equalsIgnoreCase("Exit")){
                     finished = true;
-                } else if(o.equals("View Current Location")){
+                } else if(o.equalsIgnoreCase("View Current Location")){
                     String format = "+-----------------------+-----------------------+\n";
                     System.out.print(format);
                     System.out.printf("|%-23s|%-23s|\n", "Lokasi", "Ruang");
                     System.out.print(format);
                     System.out.printf("|%-23s|%-23s|\n", "(" + currentSim.getLokSimRumah().getX() + "," + currentSim.getLokSimRumah().getY() + ")", currentSim.getLokRuang().getNamaRuangan());
                     System.out.print(format);
-                } else if(o.equals("View Inventory")){
+                } else if(o.equalsIgnoreCase("View Inventory")){
                     currentSim.lihatInventory();
-                } else if(o.equals("Upgrade House")){
+                } else if(o.equalsIgnoreCase("Upgrade House")){
                     if(currentSim.getLokSimRumah() == currentSim.getRumah().getLokRumah()){
                         //String namaRbaru = scan.nextLine();
                         //int tempx = scan.nextInt();
@@ -264,12 +264,12 @@ public class Main {
                         System.out.println("Anda sedang berada di rumah Sim lain. Anda tidak dapat melakukan upgrade terhadap rumah ini.");
                         System.out.println("Silahkan kembali ke rumah Anda terlebih dahulu untuk melakukan upgrade rumah");
                     }
-                } else if(o.equals("View House")){
+                } else if(o.equalsIgnoreCase("View House")){
                     System.out.println("");
                     System.out.println(currentSim.getNamaLengkap()+"'s House");
                     System.out.println("");
                     currentSim.getRumah().displayRumah();
-                } else if(o.equals("Move Room")){
+                } else if(o.equalsIgnoreCase("Move Room")){
                     System.out.println("Ruangan apakah yang ingin kamu tuju? Ketik dalam string!");
                     w.getRumah(currentSim.getLokSimRumah()).displayListRuangan();
                     String ruang = scan.nextLine();
@@ -286,7 +286,7 @@ public class Main {
                     } else {
                         System.out.println("Ruangan tersebut tidak tersedia di dalam posisi rumah saat ini");
                     }
-                } else if(o.equals("Edit Room")){
+                } else if(o.equalsIgnoreCase("Edit Room")){
                     if(currentSim.getLokSimRumah() == currentSim.getRumah().getLokRumah()){
                         System.out.println("Opsi edit rumah apa yang ingin Anda lakukan? (Pilih dengan angka)");
                         System.out.println("1. Pembelian barang");
@@ -350,7 +350,7 @@ public class Main {
                     else{
                         System.out.println("Anda sedang berada di rumah Sim lain. Anda tidak dapat melakukan edit terhadap rumah ini.");
                     }
-                } else if(o.equals("Add Sim")) {
+                } else if(o.equalsIgnoreCase("Add Sim")) {
                     boolean namaValid = false;
                     System.out.println("Add a new friend for your Sim(s) °˖✧◝(⁰▿⁰)◜✧˖°");
                     System.out.println("Siapa nama sim baru? Inputkan Stringnya!");
@@ -389,7 +389,7 @@ public class Main {
                             System.out.println("Untuk memainkan Sim ini, ingat untuk memilih opsi Change Sim!");
                         }
                     }
-                } else if(o.equals("Change Sim")){
+                } else if(o.equalsIgnoreCase("Change Sim")){
                     int i = 1;
                     for(Sim s : pemain){
                         System.out.println(i + ". " + s.getNamaLengkap());
@@ -406,7 +406,7 @@ public class Main {
                     if(!currentSim.getNamaLengkap().equals(nama)){
                         System.out.println("Sim tersebut belum terdaftar pada permainan Simplicity");
                     }
-                } else if(o.equals("List Object")){
+                } else if(o.equalsIgnoreCase("List Object")){
                     Ruangan temp = w.getRumah(currentSim.getLokSimRumah()).getRoom(currentSim.getLokRuang().getNamaRuangan());//currentSim.getRumah().getRoom(currentSim.getLokRuang().getNamaRuangan());
                     temp.displayRuangan();
                     int i = 1;
@@ -415,7 +415,7 @@ public class Main {
                         System.out.println(i + ". " + ob.getNama());
                         i++;
                     }
-                } else if(o.equals("Go To Object")){
+                } else if(o.equalsIgnoreCase("Go To Object")){
                     int temp = currentSim.getLokRuang().displayObjects();
                     if (temp==1) {
                         System.out.println("Tidak ada barang di ruangan ini!");
@@ -443,7 +443,7 @@ public class Main {
                             }
                         } 
                     }
-                } else if(o.equals("Action")){
+                } else if(o.equalsIgnoreCase("Action")){
                     System.out.println("");
                     System.out.println("---A C T I O N---");
                     System.out.println("Berikut adalah aksi yang dapat kamu lakukan di game ini!");
