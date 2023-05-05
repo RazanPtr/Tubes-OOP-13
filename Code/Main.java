@@ -190,8 +190,10 @@ public class Main {
                     for(Sim s : pemain){
                         //System.out.println(s.sudahTidur);
                         if(!s.sudahTidur){
-                            s.tidakTidur();
-                            System.out.println(s.getNamaLengkap() + " belum tidur setelah 10 menit, kesehatan akan berkurang");
+                            int kel = ((Sim.time.getMin()*60)+ Sim.time.getSec())/600;
+                            s.tidakTidur(kel);
+                            System.out.println(s.getNamaLengkap() + " belum tidur setelah "+10*kel+" menit, kesehatan akan berkurang");
+                            System.out.println();
                         }
                     }
                     cTidakTidur = true;

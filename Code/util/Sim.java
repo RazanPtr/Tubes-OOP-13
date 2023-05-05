@@ -487,9 +487,9 @@ public class Sim implements Aksi{
         sudahMakan = false;
     }
 
-    public void tidakTidur(){
-        kesejahteraan.updateKesehatan(-5);
-        kesejahteraan.updateMood(-5);
+    public void tidakTidur(int kelipatan){
+        kesejahteraan.updateKesehatan(-5*kelipatan);
+        kesejahteraan.updateMood(-5*kelipatan);
     }
 
     public void makan(int durasi, String namaMasakan){
