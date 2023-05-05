@@ -420,13 +420,13 @@ public class Main {
                             System.out.println("Pilih objek yang ingin didatangi!");
                             System.out.println("Masukkan angka sesuai objek yang dipilih: ");
                             int choice = 0;
-                            while (!validInput) {
+                            while (!validInput2) {
                                 try {
                                     choice = scan.nextInt();
                                     validInput2 = true;
                                 } catch (Exception e) {
                                     System.out.println("Input harus berupa angka, silakan coba lagi.");
-                                    scanner.nextLine(); // membersihkan input yang salah agar tidak terus terbaca
+                                    scan.nextLine(); // membersihkan input yang salah agar tidak terus terbaca
                                 }
                             }
                             String tempstr = scan.nextLine();
