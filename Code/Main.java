@@ -368,7 +368,7 @@ public class Main {
                             pemain.add(s);
                             w.addRumah(s.getRumah());
                             System.out.println("");
-                            System.out.println("Sim dengan nama " + nama + "telah berhasil dibuat!");
+                            System.out.println("Sim dengan nama " + nama + " telah berhasil dibuat!");
                             System.out.println("Untuk memainkan Sim ini, ingat untuk memilih opsi Change Sim!");
                         }
                     }
@@ -383,6 +383,7 @@ public class Main {
                     for(Sim s : pemain){
                         if(s.getNamaLengkap().equals(nama)){
                             currentSim = s;
+                            System.out.println("Kamu akan bermain sebagai Sim "+currentSim.getNamaLengkap()+" !");
                         }
                     }
                     if(!currentSim.getNamaLengkap().equals(nama)){

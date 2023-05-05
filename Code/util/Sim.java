@@ -3,6 +3,7 @@ import java.util.Random;
 import java.util.*;
 import objek.*;
 import java.lang.Math;
+import display.*;
 
 public class Sim implements Aksi{
     private String namaLengkap;
@@ -28,6 +29,7 @@ public class Sim implements Aksi{
     private int waktuSisaUpgrade;
     private boolean itemSedangDikirim = false;
     private boolean rumahSedangDiupgrade = false;
+    private Ascii display;
     Kesejahteraan kesejahteraan;
 
     public Sim(String name, int x, int y){
@@ -53,6 +55,8 @@ public class Sim implements Aksi{
         // buat coba makan n masak
         inventory.addItem(new Nasi(), 1);
         inventory.addItem(new Ayam(), 1);
+        //display
+        display = new Ascii();
     }
 
     public String getNamaLengkap(){
@@ -410,6 +414,7 @@ public class Sim implements Aksi{
         if(durasi %120 != 0){
             throw new IllegalArgumentException("durasi kerja harus kelipatan 120 detik");
         }
+        display.working();
         setdurasiAksiAktif(durasi);
         time.AksiSleep(durasi);
         this.setStatus("kerja");
@@ -420,6 +425,8 @@ public class Sim implements Aksi{
         }
         //Untuk selalu nambahin durasi gak buang air
         durasiTidakBuangAir += durasi;
+        System.out.println("Sim sudah selesai bekerja!");
+        System.out.println("");
     }
 
     public void olahraga(int durasi){
