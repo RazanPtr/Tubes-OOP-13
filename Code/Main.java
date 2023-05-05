@@ -419,31 +419,27 @@ public class Main {
                         System.out.println("Tidak ada barang di ruangan ini!");
                     } else {
                         Boolean valid1 = false;
-                        Boolean validInput2 = false;
                         while (!valid1) {
-                            System.out.println("Pilih objek yang ingin didatangi!");
-                            System.out.println("Masukkan angka sesuai objek yang dipilih: ");
-                            int choice = 0;
-                            while (!validInput2) {
-                                try {
-                                    choice = scan.nextInt();
-                                    validInput2 = true;
-                                } catch (Exception e) {
-                                    System.out.println("Input harus berupa angka, silakan coba lagi.");
-                                    scan.nextLine();
+                            try{
+                                System.out.println("Pilih objek yang ingin didatangi!");
+                                System.out.println("Masukkan angka sesuai objek yang dipilih: ");
+                                int choice = scan.nextInt();
+                                scan.nextLine();
+                                if (choice >= 1 && choice < temp) {
+                                    ObjectSim objTemp = currentSim.getLokRuang().getObjects().get(choice-1);
+                                    System.out.println("Berhasil pindah ke Object " + objTemp.getNama());
+                                    currentSim.move(objTemp);
+                                    valid1 = true;
+                                } else {
+                                    System.out.println("Opsi tidak valid!");
+                                    System.out.println("");
                                 }
+                            } catch (Exception e) {
+                                System.out.println("Input harus berupa angka, silakan coba lagi.");
+                                System.out.println();
+                                scan.nextLine();
                             }
-                            String tempstr = scan.nextLine();
-                            if (choice >= 1 && choice < temp) {
-                                ObjectSim objTemp = currentSim.getLokRuang().getObjects().get(choice-1);
-                                System.out.println("Berhasil pindah ke Object " + objTemp.getNama());
-                                currentSim.move(objTemp);
-                                valid1 = true;
-                            } else {
-                                System.out.println("Opsi tidak valid!");
-                                System.out.println("");
-                            }
-                        }
+                        } 
                     }
                 } else if(o.equals("Action")){
                     System.out.println("");
