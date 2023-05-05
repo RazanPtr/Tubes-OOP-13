@@ -502,7 +502,7 @@ public class Main {
                                 }
                             } catch (Exception e) {
                                 System.out.println();
-                                System.out.println("Input tidak valid, silakan masukan durasi dengan angka kelipatan 120 detik!");
+                                System.out.println("Input tidak valid, silakan masukan durasi dengan angka kelipatan 120 detik dan lebih dari 0");
                                 scan.nextLine(); // membersihkan input yang salah agar tidak terus terbaca
                             }
                         } currentSim.kerja(dur);
@@ -524,7 +524,7 @@ public class Main {
                                 }
                             } catch (Exception e) {
                                 System.out.println();
-                                System.out.println("Input tidak valid, silakan masukan durasi dengan angka kelipatan 20 detik!");
+                                System.out.println("Input tidak valid, silakan masukan durasi dengan angka kelipatan 20 detik dan lebih dari 0");
                                 scan.nextLine(); // membersihkan input yang salah agar tidak terus terbaca
                             }
                         } currentSim.olahraga(dur);
