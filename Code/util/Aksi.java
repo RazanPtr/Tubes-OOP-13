@@ -9,7 +9,7 @@ public interface Aksi {
     
     public void tidur(int durasi);
 
-    public void makan(int durasi, ObjectSim ob);
+    public void makan(int durasi, String namaMasakan);
 
     public void memasak(ObjectSim ob);
 

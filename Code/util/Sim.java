@@ -250,8 +250,14 @@ public class Sim implements Aksi{
             while (!valops) {
                 String ops = scan.nextLine();
                 if (ops.equals("Y")) {
-                    System.out.println("Apa yang ingin kamu makan?");
+                    System.out.println("Berapa lama kamu ingin makan? (Dalam Detik)");
+                    int dur = scan.nextInt();
+                    String temp = scan.nextLine();
+                    System.out.println("Apa yang ingin kamu makan? (Masukkan nama masakan)");
+                    String namaMasakan = scan.nextLine();
+                    makan(dur, namaMasakan);
                     //kode
+
                 } else if (ops.equals("N")){
                     System.out.println("Baik. Jangan lupa untuk makan secukupnya!");
                     valops = true;
@@ -469,20 +475,41 @@ public class Sim implements Aksi{
         kesejahteraan.updateMood(-5);
     }
 
-    public void makan(int durasi, ObjectSim ob){
+    public void makan(int durasi, String namaMasakan){
     //implementasi makan
-        if(ob instanceof Masakan){   
-            Masakan m = (Masakan) ob; 
-            if(inventory.getItem().contains(m)){
-                setdurasiAksiAktif(durasi);
-                this.setStatus("Makan");
-                inventory.removeItem(m, 1);
-                kesejahteraan.updateKekenyangan((m.getTingkatKenyang())*(durasi/30));
-                sudahMakan = true;
-                durasiTidakBuangAir = 0;
+        Masakan m =null;
+        Scanner scan = new Scanner(System.in);
+        Set<ObjectSim> listInventory = inventory.getItem();
+        for (ObjectSim item : listInventory){
+            if (item.getClass().getSimpleName().equals(namaMasakan)){
+                m = (Masakan) item;
+                break;
             }
         }
+        if (m != null && m.getNama() == namaMasakan){
+            setdurasiAksiAktif(durasi);
+            this.setStatus("Makan");
+            inventory.removeItem(m, 1);
+            kesejahteraan.updateKekenyangan((m.getTingkatKenyang())*(durasi/30));
+            sudahMakan = true;
+            durasiTidakBuangAir = 0;
+        }
+        else{
+            System.out.println("Masakan tidak ada di inventory");
+        }
     }
+        // if(ob instanceof Masakan){   
+        //     Masakan m = (Masakan) ob; 
+        //     if(inventory.getItem().contains(m)){
+        //         setdurasiAksiAktif(durasi);
+        //         this.setStatus("Makan");
+        //         inventory.removeItem(m, 1);
+        //         kesejahteraan.updateKekenyangan((m.getTingkatKenyang())*(durasi/30));
+        //         sudahMakan = true;
+        //         durasiTidakBuangAir = 0;
+        //     }
+        // }
+    
 
     public void memasak(ObjectSim ob){ 
     //implementasi memasak
