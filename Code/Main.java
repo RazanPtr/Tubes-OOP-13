@@ -487,15 +487,47 @@ public class Main {
                     if (ops==1) {
                         System.out.println("Sim akan bekerja!");
                         System.out.println("Berapa lama anda ingin Sim bekerja? (Input dalam detik)");
-                        int dur = scan.nextInt();
-                        String tempp = scan.nextLine();
-                        currentSim.kerja(dur);
+                        Boolean validInput3 = false;
+                        int dur=0;
+                        while (!validInput3) {
+                            try {
+                                dur = scan.nextInt();
+                                if(dur <= 0){
+                                    throw new IllegalArgumentException("durasi harus lebih dari 0 detik");
+                                }
+                                if(dur %120 != 0){
+                                    throw new IllegalArgumentException("durasi kerja harus kelipatan 120 detik");
+                                } else {
+                                validInput3 = true;
+                                }
+                            } catch (Exception e) {
+                                System.out.println();
+                                System.out.println("Input tidak valid, silakan masukan durasi dengan angka kelipatan 120 detik!");
+                                scan.nextLine(); // membersihkan input yang salah agar tidak terus terbaca
+                            }
+                        } currentSim.kerja(dur);
                     } else if (ops==2) {
                         System.out.println("Sim akan berolahraga!");
                         System.out.println("Berapa lama anda ingin Sim berolahraga? (Input dalam detik)");
-                        int dur = scan.nextInt();
-                        String tempp = scan.nextLine();
-                        currentSim.olahraga(dur);
+                        Boolean validInput3 = false;
+                        int dur=0;
+                        while (!validInput3) {
+                            try {
+                                dur = scan.nextInt();
+                                if(dur <= 0){
+                                    throw new IllegalArgumentException("durasi harus lebih dari 0 detik");
+                                }
+                                else if(dur % 20 != 0){
+                                    throw new IllegalArgumentException("durasi harus kelipatan 20 detik");
+                                } else {
+                                validInput3 = true;
+                                }
+                            } catch (Exception e) {
+                                System.out.println();
+                                System.out.println("Input tidak valid, silakan masukan durasi dengan angka kelipatan 20 detik!");
+                                scan.nextLine(); // membersihkan input yang salah agar tidak terus terbaca
+                            }
+                        } currentSim.olahraga(dur);
                     } else if (ops==3) {
                         System.out.println("Kunjungi objek Kasur!");
                     } else if (ops==4) {

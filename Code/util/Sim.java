@@ -36,7 +36,7 @@ public class Sim implements Aksi{
     public Sim(String name, int x, int y){
         this.namaLengkap = name;
         pekerjaan = new WorkObject();
-        uang = 100;
+        uang = 10000;
         inventory = new Inventory<ObjectSim>();
         kesejahteraan = new Kesejahteraan();
         status = "Idle";
@@ -424,12 +424,6 @@ public class Sim implements Aksi{
 
     public void kerja(int durasi){
         awalKerja = time.getTimeInSec();
-        if(durasi <= 0){
-            throw new IllegalArgumentException("durasi harus lebih dari 0 detik");
-        }
-        if(durasi %120 != 0){
-            throw new IllegalArgumentException("durasi kerja harus kelipatan 120 detik");
-        }
         display.working();
         setdurasiAksiAktif(durasi);
         time.AksiSleep(durasi);
@@ -446,12 +440,6 @@ public class Sim implements Aksi{
     }
 
     public void olahraga(int durasi){
-        if(durasi <= 0){
-            throw new IllegalArgumentException("durasi harus lebih dari 0 detik");
-        }
-        if(durasi % 20 != 0){
-            throw new IllegalArgumentException("durasi harus kelipatan 20 detik");
-        }
         System.out.println("Selamat berolahragaa! yuu semangat! ^.^/");
         setdurasiAksiAktif(durasi);
         time.AksiSleep(durasi);
