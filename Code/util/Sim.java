@@ -257,9 +257,23 @@ public class Sim implements Aksi{
                     System.out.println("Berapa lama kamu ingin makan? (Dalam Detik)");
                     int dur = scan.nextInt();
                     String temp = scan.nextLine();
-                    System.out.println("Apa yang ingin kamu makan? (Masukkan nama masakan)");
-                    String namaMasakan = scan.nextLine();
-                    makan(dur, namaMasakan);
+                    System.out.println("Berikut merupakan daftar makanan yang dapat kamu makan!");
+                    int i = 0;
+                    for(ObjectSim ob : inventory.getItem()){
+                        if(ob instanceof Masakan){
+                            System.out.println((i+1) + ". " + ob.getNama());
+                            i++;
+                        }
+                    }
+                    if(i > 0){
+                        System.out.println("Apa yang ingin kamu makan? (Masukkan nama masakan)");
+                        String namaMasakan = scan.nextLine();
+                        makan(dur, namaMasakan);
+                    } else {
+                        System.out.println("1. -");
+                        System.out.println("Kamu belum memiliki makanan untuk dimakan:( Silahkan masak terlebih dahulu!");
+                    }
+                    
                     //kode
                     valops = true;
                 } else if (ops.equals("N")){
@@ -429,13 +443,14 @@ public class Sim implements Aksi{
         if(durasi % 20 != 0){
             throw new IllegalArgumentException("durasi harus kelipatan 20 detik");
         }
+        System.out.println("Selamat berolahragaa! yuu semangat! ^.^/");
         setdurasiAksiAktif(durasi);
         time.AksiSleep(durasi);
         this.setStatus("olahraga");
         kesejahteraan.updateKesehatan(5*(durasi/20));
         kesejahteraan.updateKekenyangan((-5)*(durasi/20));
         kesejahteraan.updateMood(10*(durasi/20));
-
+        System.out.println("Olahraga telah selesaii, kamu terlihat semakin sehat!!");
         //Untuk selalu nambahin durasi gak buang air
         durasiTidakBuangAir += durasi;
     }
@@ -490,15 +505,25 @@ public class Sim implements Aksi{
     //implementasi makan
         Masakan m =null;
         Scanner scan = new Scanner(System.in);
-        Set<ObjectSim> listInventory = inventory.getItem();
-        for (ObjectSim item : listInventory){
-            if (item.getClass().getSimpleName().equals(namaMasakan)){
-                m = (Masakan) item;
-                break;
+        // Set<ObjectSim> listInventory = inventory.getItem();
+        // for (ObjectSim item : listInventory){
+        //     if(item instanceof Masakan){
+        //         if (item.getNama().equals(namaMasakan)){
+        //             m = (Masakan) item;
+        //         }
+        //     }
+        // }
+        for(ObjectSim ob : inventory.getItem()){
+            if(ob instanceof Masakan){
+                if(ob.getNama().equals(namaMasakan)){
+                    m = (Masakan) ob;
+                }
             }
         }
-        if (m != null && m.getNama() == namaMasakan){
+        if (m != null){
+            System.out.println("Selamat menikmati " + m.getNama() + " yang lezat! >.<");
             setdurasiAksiAktif(durasi);
+            time.AksiSleep(durasi);
             this.setStatus("Makan");
             inventory.removeItem(m, 1);
             kesejahteraan.updateKekenyangan((m.getTingkatKenyang())*(durasi/30));
