@@ -4,6 +4,8 @@ public class Time {
     private int day;
     private int min;
     private int sec;
+    private int check = 1;
+    private int x = 1;
 
     public Time(){
         day = 1;
@@ -50,11 +52,23 @@ public class Time {
         temp += s;
         if(temp > 720){
             day += (temp/720);
-            temp %= 720;  
+            temp %= 720;
+            if(x != day){
+                check = 2;
+                x = day;
+            }  
         }
 
         min = temp/60;
         sec = temp%60;
+    }
+
+    public int getCheck(){
+        return check;
+    }
+
+    public void setCheck(int x){
+        check = x;
     }
 
     public int getSisaMenit(){

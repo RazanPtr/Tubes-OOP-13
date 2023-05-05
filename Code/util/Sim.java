@@ -4,6 +4,7 @@ import java.util.*;
 import objek.*;
 import java.lang.Math;
 import display.*;
+import java.lang.reflect.Constructor;
 
 public class Sim implements Aksi{
     private String namaLengkap;
@@ -456,6 +457,7 @@ public class Sim implements Aksi{
         this.setStatus("olahraga");
         kesejahteraan.updateKesehatan(5*(durasi/20));
         kesejahteraan.updateKekenyangan((-5)*(durasi/20));
+        System.out.println("kekenyangan berkurang karena olahraga");
         kesejahteraan.updateMood(10*(durasi/20));
         System.out.println("Olahraga telah selesaii, kamu terlihat semakin sehat!!");
         //Untuk selalu nambahin durasi gak buang air
@@ -472,13 +474,8 @@ public class Sim implements Aksi{
         durasiTidur += durasi;
         //terakhirTidur = t;
         checkTidur();
-
         //Untuk selalu nambahin durasi gak buang air
         durasiTidakBuangAir += durasi;
-    }
-
-    public Time getTerakhirTidur(){
-        return terakhirTidur;
     }
 
     public void checkTidur(){
@@ -506,6 +503,7 @@ public class Sim implements Aksi{
     public void tidakTidur(){
         kesejahteraan.updateKesehatan(-5);
         kesejahteraan.updateMood(-5);
+        System.out.println("kena efek tidur");
     }
 
     public void makan(int durasi, String namaMasakan){
@@ -1010,9 +1008,25 @@ public class Sim implements Aksi{
                     if (f1 != null){
                         boolean can = rumah.getRoom(lokRuang).canPlaceObj(lokBarang, f1);
                         if(can){
+                            // //Class c = f1.getClass();
+                            
+                            // try{
+                            //     Constructor<ObjectSim>
+                            // }
+                            // catch(Exception e){
+                            //     e.;
+                            // }
                             f1.setLokDiRuangan(lokBarang);
                             rumah.getRoom(lokRuang).getObjects().add(f1);
                             inventory.removeItem(f1,1);
+                            for (ObjectSim item : listInventory) {
+                                if (item.getNama().equals(f1.getNama())) {
+                                    if(((Furniture)item).getLokDiRuangan() != null){
+                                        System.out.println(((Furniture)item).getLokDiRuangan().getX() + " " + ((Furniture)item).getLokDiRuangan().getY());
+                                    }
+                                }
+                                
+                            }
                             System.out.println("Benda berhasil dipasang di ruangan " + lokRuang);
                         }
                         else{
@@ -1075,9 +1089,9 @@ public class Sim implements Aksi{
         private String statusMati;
 
         public Kesejahteraan() {
-            mood = 80;
-            kekenyangan = 80;
-            kesehatan = 80;
+            mood = 8000;
+            kekenyangan = 8000;
+            kesehatan = 8000;
         }
 
         public int getMood(){

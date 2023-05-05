@@ -12,6 +12,7 @@ public class Main {
         boolean started = false;
         boolean finished = false;
         World w = null;
+        boolean cTidakTidur = false;
 
 
         //Furniture
@@ -168,24 +169,27 @@ public class Main {
                     System.out.println("");
                 
                 //Tidak buang air
-                if (currentSim.durasiTidakBuangAir % 240 == 0 && currentSim.sudahBuangAir && currentSim.sudahMakan){
+                if (currentSim.durasiTidakBuangAir >= 240 && currentSim.sudahBuangAir && currentSim.sudahMakan){
                     currentSim.tidakBuangAir();
                 } 
 
                 // ini tidur blm bener
-                if(w.getTime().getMin() == 0 && w.getTime().getSec() == 0){
+                if(w.getTime().getCheck() == 2){
                     for(Sim s : pemain){
                         s.resetHarian();
                     }
+                    cTidakTidur = false;
+                    w.getTime().setCheck(1);
                 }
 
                 // ini tidur kalo kaya gini kalo misal menit ke 10nya ke skip gmn cara ngeceknya?!
-                if(w.getTime().getMin() == 10 && w.getTime().getMin() == 0){
+                if(w.getTime().getTimeInSec() >= 600 && (!cTidakTidur)){
                     for(Sim s : pemain){
                         if(!s.getTidur()){
                             s.tidakTidur();
                         }
                     }
+                    cTidakTidur = true;
                 }
 
                 //Cek Kematian yang dimainkan
