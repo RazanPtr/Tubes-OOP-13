@@ -975,14 +975,24 @@ public class Sim implements Aksi{
         }
     }
 
-    public void displayInfo(){
+    /*public void displayInfo(){
         System.out.println("Nama Lengkap          : " + namaLengkap);
         System.out.println("Pekerjaan             : "+ getPekerjaan().getJob().getTitle());
         System.out.println("Tingkat Kesehatan     : " + kesejahteraan.getKesehatan());
         System.out.println("Tingkat Kekenyangan   : " + kesejahteraan.getKekenyangan());
         System.out.println("Tingkat Mood          : " + kesejahteraan.getMood());
         System.out.println("Jumlah uang saat ini  :" + uang);
+    }*/
+
+    public void displayInfo() {
+        String format = "+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+\n";
+        System.out.print(format);
+        System.out.printf("|%-23s|%-23s|%-23s|%-23s|%-23s|%-23s|\n", "Nama Lengkap", "Pekerjaan", "Tingkat Kesehatan", "Tingkat Kekenyangan", "Tingkat Mood", "Jumlah uang saat ini");
+        System.out.print(format);
+        System.out.printf("|%-23s|%-23s|%-23s|%-23s|%-23s|%-23s|\n", namaLengkap, getPekerjaan().getJob().getTitle(), kesejahteraan.getKesehatan(), kesejahteraan.getKekenyangan(), kesejahteraan.getMood(), uang);
+        System.out.print(format);
     }
+    
 
     public Kesejahteraan getKesejahteraan(){
         return kesejahteraan;

@@ -70,7 +70,7 @@ public class Inventory<T> {
     }
 
     public void showInventory(){
-        System.out.println("Berikut merupakan isi inventory yang dimiliki oleh Sim");
+        System.out.println("Berikut merupakan isi inventory yang dimiliki oleh Sim!");
         System.out.println("+-----------------+---------------+");
         System.out.println("|   Nama Barang   |   Kuantitas   |");
         System.out.println("+-----------------+---------------+");
