@@ -175,6 +175,8 @@ public class Ruangan {
     }*/
 
     public void displayRuangan() {
+        System.out.println("(0,0) terletak pada pojok kiri atas");
+        System.out.println(".+:*+.+:*+. Ruang " + nama + " .+*:+.+*:+." );
         for (int i = 0; i < 6; i++) {
             if (i == 0) {
                 System.out.println("-------------------------------------");
