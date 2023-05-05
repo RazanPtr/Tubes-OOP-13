@@ -15,7 +15,7 @@ public class Sim implements Aksi{
     private Lokasi lokSimRumah;
     private Ruangan lokSimRuang;
     private ObjectSim curObject;
-    protected static Time time;
+    public static Time time;
     private int awalKerja;
     private int lamaKerja;
     private int durasiTidur;
