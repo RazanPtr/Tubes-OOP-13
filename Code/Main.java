@@ -161,7 +161,7 @@ public class Main {
                     System.out.println("7.  Edit Room");
                     System.out.println("8.  Add Sim");
                     System.out.println("9.  Change Sim");
-                    System.out.println("10.  List Object");
+                    System.out.println("10. List Object");
                     System.out.println("11. Go To Object");
                     System.out.println("12. Action");
                     System.out.println("13. Exit");

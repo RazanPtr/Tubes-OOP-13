@@ -175,7 +175,7 @@ public class Sim implements Aksi{
                     System.out.println("Baik. Jangan lupa untuk tidur secukupnya!");
                     valops = true;
                 } else {
-                    System.out.println("Tolong masukkan opsi yang tepat!");
+                    System.out.println("Tolong masukkan opsi yang tepat! (Y/N)");
                 }
             }
         } else if (obj.getNama().equals("Toilet")) {
@@ -197,7 +197,7 @@ public class Sim implements Aksi{
                     System.out.println("Baik. Jangan lupa untuk buang air setelah makan!");
                     valops = true;
                 } else {
-                    System.out.println("Tolong masukkan opsi yang tepat!");
+                    System.out.println("Tolong masukkan opsi yang tepat! (Y/N)");
                 }
             }
         } else if (obj.getNama().equals("Kompor Gas")||obj.getNama().equals("Kompor Listrik")) {
@@ -246,7 +246,7 @@ public class Sim implements Aksi{
                     System.out.println("Baik. Kunjungi lagi kompor apabila ingin memasak!");
                     valops = true;
                 } else {
-                    System.out.println("Tolong masukkan opsi yang tepat!");
+                    System.out.println("Tolong masukkan opsi yang tepat! (Y/N)");
                 } 
             }
         } else if (obj.getNama().equals("Meja dan Kursi")) {
@@ -261,12 +261,12 @@ public class Sim implements Aksi{
                     String namaMasakan = scan.nextLine();
                     makan(dur, namaMasakan);
                     //kode
-
+                    valops = true;
                 } else if (ops.equals("N")){
                     System.out.println("Baik. Jangan lupa untuk makan secukupnya!");
                     valops = true;
                 } else {
-                    System.out.println("Tolong masukkan opsi yang tepat!");
+                    System.out.println("Tolong masukkan opsi yang tepat! (Y/N)");
                 }
             }
         } else if (obj.getNama().equals("Jam")) {
@@ -281,7 +281,7 @@ public class Sim implements Aksi{
                     System.out.println("Baik. Kunjungi lagi jam jika ingin melihat waktu!");
                     valops = true;
                 } else {
-                    System.out.println("Tolong masukkan opsi yang tepat!");
+                    System.out.println("Tolong masukkan opsi yang tepat! (Y/N)");
                 }
             }
         } else if (obj.getNama().equals("Sajadah")) {
@@ -303,7 +303,7 @@ public class Sim implements Aksi{
                     System.out.println("Baik. Jangan lupa Shalat!");
                     valops = true;
                 } else {
-                    System.out.println("Tolong masukkan opsi yang tepat!");
+                    System.out.println("Tolong masukkan opsi yang tepat! (Y/N)");
                 }
             }
         } else if (obj.getNama().equals("Kanvas")) {
@@ -325,7 +325,7 @@ public class Sim implements Aksi{
                     System.out.println("Baik. Jika ingin melukis, kunjungi lagi kanvas!");
                     valops = true;
                 } else {
-                    System.out.println("Tolong masukkan opsi yang tepat!");
+                    System.out.println("Tolong masukkan opsi yang tepat! (Y/N)");
                 }
             }
         } else if (obj.getNama().equals("Mic")) {
@@ -347,7 +347,7 @@ public class Sim implements Aksi{
                     System.out.println("Baik. Jika ingin karaoke, kunjungi lagi mic!");
                     valops = true;
                 } else {
-                    System.out.println("Tolong masukkan opsi yang tepat!");
+                    System.out.println("Tolong masukkan opsi yang tepat! (Y/N)");
                 }
             }
         } else if (obj.getNama().equals("Laptop")) {
@@ -369,7 +369,7 @@ public class Sim implements Aksi{
                     System.out.println("Baik. Jika ingin nonton netflix, kunjungi lagi laptop!");
                     valops = true;
                 } else {
-                    System.out.println("Tolong masukkan opsi yang tepat!");
+                    System.out.println("Tolong masukkan opsi yang tepat! (Y/N)");
                 }
             }
         } else if (obj.getNama().equals("Shower")) {
@@ -391,7 +391,7 @@ public class Sim implements Aksi{
                     System.out.println("Baik. Jangan lupa mandi supaya higienis selalu!");
                     valops = true;
                 } else {
-                    System.out.println("Tolong masukkan opsi yang tepat!");
+                    System.out.println("Tolong masukkan opsi yang tepat! (Y/N)");
                 }
             }
         } else {

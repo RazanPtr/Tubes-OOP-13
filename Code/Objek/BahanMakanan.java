@@ -1,7 +1,6 @@
 package objek;
 
 public class BahanMakanan extends ObjectSim implements PurchasableObject{
-    private String nama;
     private int price;
     private int tingkatKenyang;
 
@@ -10,10 +9,6 @@ public class BahanMakanan extends ObjectSim implements PurchasableObject{
         this.price = price;
         this.tingkatKenyang = kekenyangan;
     } 
-
-    public String getNama(){
-        return nama;
-    }
 
     public int getPrice(){
         return price;
