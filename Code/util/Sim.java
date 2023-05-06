@@ -66,6 +66,7 @@ public class Sim implements Aksi{
         inventory.addItem(new Kentang(), 5);
         inventory.addItem(new Wortel(), 5);
         inventory.addItem(new Sapi(), 5);*/
+        inventory.addItem(new Sajadah(),1);
         //inventory.addItem(new NasiAyam(), 1);
         //display
         display = new Ascii();
@@ -219,13 +220,13 @@ public class Sim implements Aksi{
                     System.out.println("Berapa lama kamu ingin tidur? (Dalam Detik)");
                     System.out.println("Masukkan waktu minimal lebih dari 0 detik");
                     int dur = scan.nextInt();
-                    String temp = scan.nextLine();
                     try {
                         tidur(dur);
                         valops = true;
                     } catch (IllegalArgumentException e) {
                         System.out.println(e.getMessage());
                         System.out.println("Silahkan masukkan durasi yang valid");
+                        System.out.println();
                     }
                 } else if (ops.equalsIgnoreCase("N")){
                     System.out.println("Baik. Jangan lupa untuk tidur secukupnya!");
@@ -242,13 +243,13 @@ public class Sim implements Aksi{
                     System.out.println("Berapa lama kamu ingin buang air? (Dalam Detik)");
                     System.out.println("Masukkan durasi minimal lebih dari 0 detik, dan merupakan kelipatan 10 detik");
                     int dur = scan.nextInt();
-                    String temp = scan.nextLine();
                     try {
                         buangAir(dur);
                         valops = true;
                     } catch (IllegalArgumentException e) {
                         System.out.println(e.getMessage());
                         System.out.println("Silahkan masukkan durasi yang valid");
+                        System.out.println();
                     }
                 } else if (ops.equalsIgnoreCase("N")){
                     System.out.println("Baik. Jangan lupa untuk buang air setelah makan!");
@@ -364,13 +365,13 @@ public class Sim implements Aksi{
                     System.out.println("Berapa lama kamu ingin Shalat? (Dalam Detik)");
                     System.out.println("Masukkan durasi minimal lebih dari 0 detik");
                     int dur = scan.nextInt();
-                    String temp = scan.nextLine();
                     try {
                         sholat(dur);
                         valops = true;
                     } catch (IllegalArgumentException e) {
                         System.out.println(e.getMessage());
                         System.out.println("Silahkan masukkan durasi yang valid");
+                        System.out.println();
                     }
                 } else if (ops.equalsIgnoreCase("N")){
                     System.out.println("Baik. Jangan lupa Shalat!");
@@ -410,13 +411,13 @@ public class Sim implements Aksi{
                     System.out.println("Berapa lama kamu ingin karaoke? (Dalam Detik)");
                     System.out.println("Masukkan durasi minimal lebih dari 0 detik, dan merupakan kelipatan 30 detik");
                     int dur = scan.nextInt();
-                    String temp = scan.nextLine();
                     try {
                         karaoke(dur);
                         valops = true;
                     } catch (IllegalArgumentException e) {
                         System.out.println(e.getMessage());
                         System.out.println("Silahkan masukkan durasi yang valid");
+                        System.out.println();
                     }
                 } else if (ops.equalsIgnoreCase("N")){
                     System.out.println("Baik. Jika ingin karaoke, kunjungi lagi mic!");
@@ -433,13 +434,13 @@ public class Sim implements Aksi{
                     System.out.println("Berapa lama kamu ingin nonton netflix? (Dalam Detik)");
                     System.out.println("Masukkan durasi minimal lebih dari 0 detik, dan merupakan kelipatan 40 detik");
                     int dur = scan.nextInt();
-                    String temp = scan.nextLine();
                     try {
                         nontonNetflix(dur);
                         valops = true;
                     } catch (IllegalArgumentException e) {
                         System.out.println(e.getMessage());
                         System.out.println("Silahkan masukkan durasi yang valid");
+                        System.out.println();
                     }
                 } else if (ops.equalsIgnoreCase("N")){
                     System.out.println("Baik. Jika ingin nonton netflix, kunjungi lagi laptop!");
@@ -456,13 +457,13 @@ public class Sim implements Aksi{
                     System.out.println("Berapa lama kamu ingin mandi? (Dalam Detik)");
                     System.out.println("Masukkan durasi minimal lebih dari 0 detik");
                     int dur = scan.nextInt();
-                    String temp = scan.nextLine();
                     try {
                         mandi(dur);
                         valops = true;
                     } catch (IllegalArgumentException e) {
                         System.out.println(e.getMessage());
                         System.out.println("Silahkan masukkan durasi yang valid");
+                        System.out.println();
                     }
                 } else if (ops.equalsIgnoreCase("N")){
                     System.out.println("Baik. Jangan lupa mandi supaya higienis selalu!");
