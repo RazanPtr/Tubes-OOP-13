@@ -14,6 +14,13 @@ public class Main {
         World w = null;
         boolean cTidakTidur = false;
 
+        //Jobs
+        Job badut = new Job("Badut Sulap", 15);
+        Job koki = new Job("Koki", 30);
+        Job polisi = new Job("Polisi", 100);
+        Job programmer = new Job("Programmer", 40);
+        Job dokter = new Job("Dokter", 45);
+        Job[] allJobs = Job.getAllJobs(badut,koki,polisi,programmer,dokter);
 
         //Furniture
         Jam jam = new Jam();
@@ -109,7 +116,7 @@ public class Main {
                     String temp = scan.nextLine();
                     if(w.isRumahAvailable(lokRx, lokRy)){
                         rumahValid = true;
-                        Sim s = new Sim(namaLengkap, lokRx, lokRy);
+                        Sim s = new Sim(namaLengkap, allJobs, lokRx, lokRy);
                         currentSim = s;
                         pemain.add(s);
                         w.addRumah(currentSim.getRumah());
@@ -209,6 +216,10 @@ public class Main {
                     cTidakTidur = true;
                 }
 
+                if(Sim.time.getTimeInSec() - currentSim.awalGantiKerja > 60){
+                    currentSim.baruKerja=false;
+                }
+
                 //Cek Kematian yang dimainkan
                 for(Sim s : pemain){
                     if(s.getKesejahteraan().getIsMati()){
@@ -253,7 +264,7 @@ public class Main {
                     System.out.println("10. Go To Object             : Sim berjalan menuju objek");
                     System.out.println("11. Action                   : Melakukan aksi pada suatu objek");
                     System.out.println("12. Change Job               : Mengganti pekerjaan yang dimiliki oleh Sim");
-                    System.out.println("12. Exit                     : Keluar dari permainan");
+                    System.out.println("13. Exit                     : Keluar dari permainan");
                 } else if(o.equalsIgnoreCase("Exit")){
                     System.out.println("Game akan berakhir.. Terimakasih telah bermain!! ^^");
                     finished = true;
@@ -391,7 +402,7 @@ public class Main {
                             String temp = scan.nextLine();
                             if(w.isRumahAvailable(x, y)){
                                 rumahValid = true;
-                                Sim s = new Sim(nama, x, y);
+                                Sim s = new Sim(nama, allJobs, x, y);
                                 pemain.add(s);
                                 w.addRumah(s.getRumah());
                                 System.out.println("");
@@ -618,12 +629,12 @@ public class Main {
                         System.out.println("Kamu sudah keluar dari menu action!");
                     }
                 } else if(o.equalsIgnoreCase("Change Job")){ 
-                    System.out.println("Saat ini pekerjaanmu adalah " + currentSim.getPekerjaan().getJob().getTitle());
+                    System.out.println("Saat ini pekerjaanmu adalah " + currentSim.getPekerjaan().getTitle());
                     System.out.println("Berikut merupakan daftar pekerjaan yang ada :");
                     String[] jobs = {"Badut Sulap", "Koki", "Polisi", "Programmer", "Dokter"};
                     int j =1;
                     for(int i = 0; i < jobs.length ;i++ ){
-                        if(!jobs[i].equals(currentSim.getPekerjaan().getJob().getTitle())){
+                        if(!jobs[i].equals(currentSim.getPekerjaan().getTitle())){
                             System.out.println(j + ". " + jobs[i]);
                             j++;
                         }
@@ -636,8 +647,18 @@ public class Main {
                             jobValid = true;
                         }
                     }
-                    if(jobValid){
-                        
+                    if(jobValid==true){
+                        if(jobNew.equalsIgnoreCase("Badut Sulap")){
+                            currentSim.gantiPekerjaan(badut);
+                        } if(jobNew.equalsIgnoreCase("Koki")){
+                            currentSim.gantiPekerjaan(koki);
+                        } if(jobNew.equalsIgnoreCase("Polisi")){
+                            currentSim.gantiPekerjaan(polisi);
+                        } if(jobNew.equalsIgnoreCase("Programmer")){
+                            currentSim.gantiPekerjaan(programmer);
+                        } if(jobNew.equalsIgnoreCase("Dokter")){
+                            currentSim.gantiPekerjaan(dokter);
+                        }
                     } else {
                         System.out.println("Pekerjaan yang kamu pilih tidak valid");
                     }
@@ -715,7 +736,7 @@ public class Main {
                                 String temp = scan.nextLine();
                                 if(w.isRumahAvailable(x, y)){
                                     rumahValid = true;
-                                    Sim s = new Sim(nama, x, y);
+                                    Sim s = new Sim(nama, allJobs, x, y);
                                     pemain.add(s);
                                     w.addRumah(s.getRumah());
                                     currentSim = s; 

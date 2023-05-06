@@ -7,7 +7,7 @@ import display.*;
 
 public class Sim implements Aksi{
     private String namaLengkap;
-    private WorkObject pekerjaan;
+    private Job pekerjaan;
     private int uang;
     private Inventory<ObjectSim> inventory;
     private String status;
@@ -33,10 +33,16 @@ public class Sim implements Aksi{
     private Ascii display;
     Kesejahteraan kesejahteraan;
     public boolean baruKerja = false;
+    public int awalGantiKerja;
 
-    public Sim(String name, int x, int y){
+    public Job getRandomPekerjaan(Job[] array){
+        int random = new Random().nextInt(array.length);
+        return array[random];
+    }
+
+    public Sim(String name, Job[] jobList, int x, int y){
         this.namaLengkap = name;
-        pekerjaan = new WorkObject();
+        pekerjaan = getRandomPekerjaan(jobList);
         uang = 10000;
         inventory = new Inventory<ObjectSim>();
         kesejahteraan = new Kesejahteraan();
@@ -61,6 +67,7 @@ public class Sim implements Aksi{
         //display
         display = new Ascii();
         lamaKerja=0;
+        baruKerja = false;
     }
 
     public String getNamaLengkap(){
@@ -116,11 +123,11 @@ public class Sim implements Aksi{
         this.status = status;
     }
 
-    public WorkObject getPekerjaan(){
+    public Job getPekerjaan(){
         return pekerjaan;
     }
 
-    public void setPekerjaan(WorkObject p){
+    public void setPekerjaan(Job p){
         this.pekerjaan = p;
     }
 
@@ -472,7 +479,7 @@ public class Sim implements Aksi{
         kesejahteraan.updateMood((-10)*(durasi/30));
         System.out.println("Mood Sim berkurang sebesar " + (10*(durasi/30)) + " karena bekerja\n");
         if(durasi == (4*60)){
-            this.uang += getPekerjaan().getJob().getPayRate();
+            this.uang += getPekerjaan().getPayRate();
         }
         //Untuk selalu nambahin durasi gak buang air
         durasiTidakBuangAir += durasi;
@@ -1112,10 +1119,13 @@ public class Sim implements Aksi{
         time.CetakWaktu();
     }
 
-    public void gantiPekerjaan(WorkObject w){
-        if(lamaKerja > 12*60 && uang >= (1/2*w.getJob().getPayRate())){    
+    public void gantiPekerjaan(Job w){
+        if(lamaKerja > 60 && (double) uang >= (0.5*w.getPayRate())){    
+            System.out.println("Berhasil ganti pekerjaan menjadi "+w.getTitle());
             setPekerjaan(w);
-            uang -= 1/2*w.getJob().getPayRate();
+            baruKerja = true;
+            awalGantiKerja=time.getTimeInSec();
+            uang -= 1/2*w.getPayRate();
         } else{
             System.out.println("Lama bekerja belum 1 hari atau uang tidak mencukupi!");
         }
@@ -1135,7 +1145,7 @@ public class Sim implements Aksi{
         System.out.print(format);
         System.out.printf("|%-23s|%-23s|%-23s|%-23s|%-23s|%-23s|\n", "Nama Lengkap", "Pekerjaan", "Tingkat Kesehatan", "Tingkat Kekenyangan", "Tingkat Mood", "Jumlah uang saat ini");
         System.out.print(format);
-        System.out.printf("|%-23s|%-23s|%-23s|%-23s|%-23s|%-23s|\n", namaLengkap, getPekerjaan().getJob().getTitle(), kesejahteraan.getKesehatan(), kesejahteraan.getKekenyangan(), kesejahteraan.getMood(), uang);
+        System.out.printf("|%-23s|%-23s|%-23s|%-23s|%-23s|%-23s|\n", namaLengkap, getPekerjaan().getTitle(), kesejahteraan.getKesehatan(), kesejahteraan.getKekenyangan(), kesejahteraan.getMood(), uang);
         System.out.print(format);
     }
     

@@ -15,4 +15,8 @@ public class Job {
     public int getPayRate() {
         return payRate;
     }
+
+    public static Job[] getAllJobs(Job... jobs) {
+        return jobs;
+    }
 }

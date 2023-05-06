@@ -44,7 +44,7 @@ public class Time {
     }
 
     public int getTimeInSec(){
-        return((min*60)+sec);
+        return((day*720)+(min*60)+sec);
     }
 
     public void updateTime(int s){
