@@ -28,11 +28,11 @@ public class Rumah {
         getRoom("Kamar").setY(3);
 
         //ini buat trial List Object
-        getRoom("Kamar").placeObject(new Lokasi(0, 0), new KasurSingle());
-        getRoom("Kamar").placeObject(new Lokasi(0, 1), new Toilet());
-        getRoom("Kamar").placeObject(new Lokasi(4, 0), new KomporGas());
-        getRoom("Kamar").placeObject(new Lokasi(5, 1), new Jam());
-        getRoom("Kamar").placeObject(new Lokasi(0, 3), new MejaKursi());
+        // getRoom("Kamar").placeObject(new Lokasi(0, 0), new KasurSingle());
+        // getRoom("Kamar").placeObject(new Lokasi(0, 1), new Toilet());
+        // getRoom("Kamar").placeObject(new Lokasi(4, 0), new KomporGas());
+        // getRoom("Kamar").placeObject(new Lokasi(5, 1), new Jam());
+        // getRoom("Kamar").placeObject(new Lokasi(0, 3), new MejaKursi());
     }
     
     public int getArea() {
@@ -92,11 +92,6 @@ public class Rumah {
                         code = sc.nextLine();
                     }
                     atas = true;
-                    // Ruangan rbaru = new Ruangan(nama,code);
-                    // ruangan.setUp(rbaru);
-                    // rbaru.setDown(ruangan);
-                    // rooms.add(rbaru);
-                    // layout[ruangan.getX()-1][ruangan.getY()] = rbaru;
                 } else {
                     System.out.println("Maaf, sudah terdapat ruangan di atas ruangan ini!");
                 }
@@ -117,11 +112,7 @@ public class Rumah {
                         code = sc.nextLine();
                     }
                     bawah = true;
-                    // Ruangan rbaru = new Ruangan(nama,code);
-                    // ruangan.setDown(rbaru);
-                    // rbaru.setUp(ruangan);
-                    // rooms.add(rbaru);
-                    // layout[ruangan.getX()+1][ruangan.getY()] = rbaru;
+            
                 } else {
                     System.out.println("Maaf, sudah terdapat ruangan di bawah ruangan ini!");
                 }
@@ -142,11 +133,6 @@ public class Rumah {
                         code = sc.nextLine();
                     }
                     kiri = true;
-                    // Ruangan rbaru = new Ruangan(nama,code);
-                    // ruangan.setLeft(rbaru);
-                    // rbaru.setRight(ruangan);
-                    // rooms.add(rbaru);
-                    // layout[ruangan.getX()][ruangan.getY()-1] = rbaru;
                 } else {
                     System.out.println("Maaf, sudah terdapat ruangan di kiri ruangan ini!");
                 }
@@ -167,11 +153,6 @@ public class Rumah {
                         code = sc.nextLine();
                     }
                     kanan = true;
-                    // Ruangan rbaru = new Ruangan(nama,code);
-                    // ruangan.setRight(rbaru);
-                    // rbaru.setLeft(ruangan);
-                    // rooms.add(rbaru);
-                    // layout[ruangan.getX()][ruangan.getY()+1] = rbaru;
                 } else {
                     System.out.println("Maaf, sudah terdapat ruangan di kanan ruangan ini!");
                 }

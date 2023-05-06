@@ -27,8 +27,6 @@ public interface Aksi {
 
     public void simpanBarang(String lok, Map<String, PurchasableObject> objectMap, String itemName);
 
-    public void pindahBarang(Map<String, PurchasableObject> objectMap, String lokRuang, Lokasi lokAkhir, String itemName);
-
     public void sholat(int durasi);
 
     public void mandi(int durasi);

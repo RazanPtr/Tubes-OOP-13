@@ -183,12 +183,6 @@ public class Main {
                     System.out.println("14. Exit");
                     System.out.println("");
                 
-                //Tidak buang air
-                // if (currentSim.durasiTidakBuangAir >= 240 && !currentSim.sudahBuangAir && currentSim.sudahMakan){
-                //     currentSim.tidakBuangAir();
-                //     System.out.println(currentSim.getNamaLengkap() + " tidak buang air selama 4 menit, kesejahteraan berkurang");
-                // }
-                
                 for (Sim s : pemain){
                     if(s.sudahMakan){
                         if(Sim.time.getMin()*60 + Sim.time.getSec() - s.waktuTerakhirMakan >= 240 && !s.sudahBuangAir){
@@ -208,17 +202,11 @@ public class Main {
                     Sim.time.setCheck(1);
                 }
 
-                // ini tidur kalo kaya gini kalo misal menit ke 10nya ke skip gmn cara ngeceknya?!
-                //System.out.println((Sim.time.getMin()*60)+ Sim.time.getSec()); //ini walaupun uda di jalanin aksi apapun, hasilnya ttp 0
                 if((((Sim.time.getMin()*60)+ Sim.time.getSec() >= 600)) && (!cTidakTidur)){
-                    //System.out.println("tes123");
                     for(Sim s : pemain){
-                        //System.out.println(s.sudahTidur);
                         if(!s.sudahTidur){
                             int kel = ((Sim.time.getMin()*60)+ Sim.time.getSec())/600;
-                            s.tidakTidur(kel);
-                            //System.out.println(s.getNamaLengkap() + " belum tidur setelah "+10*kel+" menit, kesehatan akan berkurang");
-                            //System.out.println();
+                            s.tidakTidur(kel);   
                         }
                     }
                     cTidakTidur = true;
@@ -287,9 +275,6 @@ public class Main {
                     currentSim.lihatInventory();
                 } else if(o.equalsIgnoreCase("Upgrade House")){
                     if(currentSim.getLokSimRumah() == currentSim.getRumah().getLokRumah()){
-                        //String namaRbaru = scan.nextLine();
-                        //int tempx = scan.nextInt();
-                        //int tempy = scan.nextInt();
                         currentSim.upgradeRumah();
                     } else {
                         System.out.println("Anda sedang berada di rumah Sim lain. Anda tidak dapat melakukan upgrade terhadap rumah ini.");
@@ -348,31 +333,31 @@ public class Main {
                             String tempe = scan.nextLine();
                             if (opsie==1) {
                                 System.out.println("List of furnitures and objects you can buy here!:");
-                                System.out.println("1. Jam - 10");
-                                System.out.println("2. Kanvas - 60");
-                                System.out.println("3. Kasur King - 150");
-                                System.out.println("4. Kasur Queen - 100");
-                                System.out.println("5. Kasur Single - 50");
-                                System.out.println("6. Kompor Gas - 100");
+                                System.out.println("1. Jam            - 10");
+                                System.out.println("2. Kanvas         - 60");
+                                System.out.println("3. Kasur King     - 150");
+                                System.out.println("4. Kasur Queen    - 100");
+                                System.out.println("5. Kasur Single   - 50");
+                                System.out.println("6. Kompor Gas     - 100");
                                 System.out.println("7. Kompor Listrik - 200");
-                                System.out.println("8. Laptop - 85");
+                                System.out.println("8. Laptop         - 85");
                                 System.out.println("9. Meja dan Kursi - 50");
-                                System.out.println("10. Mic - 15");
-                                System.out.println("11. Sajadah - 20");
-                                System.out.println("12. Shower - 55");
-                                System.out.println("13. Toilet - 50");
+                                System.out.println("10. Mic           - 15");
+                                System.out.println("11. Sajadah       - 20");
+                                System.out.println("12. Shower        - 55");
+                                System.out.println("13. Toilet        - 50");
                                 System.out.println("Barang apa yang ingin kamu beli? Inputkan dalam string!");
                             } else if (opsie==2) {
                                 System.out.println("List of ingredients!");
                                 System.out.println("Barang apa yang ingin kamu beli? Inputkan dalam string!");
-                                System.out.println("1. Ayam - 10");
-                                System.out.println("2. Bayam - 3");
-                                System.out.println("3. Kacang - 2");
+                                System.out.println("1. Ayam    - 10");
+                                System.out.println("2. Bayam   - 3");
+                                System.out.println("3. Kacang  - 2");
                                 System.out.println("4. Kentang - 3");
-                                System.out.println("5. Nasi - 5");
-                                System.out.println("6. Sapi - 12");
-                                System.out.println("7. Susu - 2");
-                                System.out.println("8. Wortel - 3");
+                                System.out.println("5. Nasi    - 5");
+                                System.out.println("6. Sapi    - 12");
+                                System.out.println("7. Susu    - 2");
+                                System.out.println("8. Wortel  - 3");
                                 System.out.println("Bahan makanan apa yang ingin kamu beli? Inputkan dalam string!");
                             } else {
                                 System.out.println("Opsi tidak valid!");
@@ -830,22 +815,6 @@ public class Main {
                 }
             }
         }
-        
-        // World w = new World();
-        // System.out.print("Permainan dimulai\nSiapa nama simmu? ");
-        // String namaLengkap = scan.nextLine();
-        // System.out.print("Tentukan lokasi rumah Sim (x, y): ");
-        // int lokRx = scan.nextInt();
-        // int lokRy = scan.nextInt();
-        // Sim s = new Sim(namaLengkap, lokRx, lokRy);
-
-        // s.getRumah().getRoom("kamar").displayRuangan();
-        // s.olahraga(60);
-        // System.out.println(s.getNamaLengkap() + " sedang melakukan " + s.getStatus());
-        // s.kesejahteraan.displayKesejahteraan();
-        // s.displayInfo();
-        // s.beliBarang(200, new KomporGas(), 1);
-        // s.lihatInventory();
     }
 }
 
