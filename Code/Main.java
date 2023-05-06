@@ -5,7 +5,7 @@ import java.util.*;
 import display.*;
 
 public class Main {
-    public static void main(String[] args){
+    public static void main(String[] args) throws CloneNotSupportedException{
         Scanner scan = new Scanner(System.in);
         ArrayList<Sim> pemain = new ArrayList<Sim>();
         Sim currentSim = null;
@@ -335,9 +335,10 @@ public class Main {
                             }
                             catch (InterruptedException p){
                                 System.out.println(p.getMessage());
-                            }
+                            }                           
                         } else if (opsi==2) {
                             //kode
+                            currentSim.lihatInventory();
                             System.out.println("Barang apa yang ingin anda pasang?");
                             Scanner scanBarang = new Scanner(System.in);
                             String inputBarang = scanBarang.nextLine();
@@ -359,6 +360,14 @@ public class Main {
                             
                         } else if (opsi==3) {
                             //kode
+                            Ruangan temp = w.getRumah(currentSim.getLokSimRumah()).getRoom(currentSim.getLokRuang().getNamaRuangan());//currentSim.getRumah().getRoom(currentSim.getLokRuang().getNamaRuangan());
+                            temp.displayRuangan();
+                            int i = 1;
+                            System.out.println("Berikut merupakan daftar objek di dalam ruangan saat ini");
+                            for(ObjectSim ob : temp.getObjects()){
+                                System.out.println(i + ". " + ob.getNama());
+                                i++;
+                            }
                             System.out.println("Barang apa yang ingin anda simpan?");
                             Scanner scanBarang = new Scanner(System.in);
                             String inputBarang = scanBarang.nextLine();
@@ -512,7 +521,7 @@ public class Main {
                             }
                         }
                         String tempp = scan.nextLine();
-                        if (num>=1 && num<=14) {
+                        if (num>=1 && num<=15) {
                             ops = num;
                             validasi = true;
                         }
@@ -623,6 +632,7 @@ public class Main {
                         String namaItem = scan.nextLine();
                         System.out.println("Berapa jumlah yang ingin kamu jual?");
                         int jumlah = scan.nextInt();
+                        scan.nextLine();
                         currentSim.jualBarang(purchasableMap, namaItem, jumlah);
                     }
                     else {

@@ -2,7 +2,7 @@ package objek;
 import util.Lokasi;
 import java.util.ArrayList;
 
-public class Furniture extends ObjectSim implements PurchasableObject{
+public class Furniture extends ObjectSim implements PurchasableObject, Cloneable{
     private int length;
     private int width;
     private int price;
@@ -72,5 +72,9 @@ public class Furniture extends ObjectSim implements PurchasableObject{
             System.out.println(i + ". " + s);
             i++;
         }
+    }
+
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 }
