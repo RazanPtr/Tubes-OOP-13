@@ -510,7 +510,7 @@ public class Main {
                             }
                         }
                         String tempp = scan.nextLine();
-                        if (num>=1 && num<=14) {
+                        if (num>=1 && num<=15) {
                             ops = num;
                             validasi = true;
                         }
@@ -621,6 +621,7 @@ public class Main {
                         String namaItem = scan.nextLine();
                         System.out.println("Berapa jumlah yang ingin kamu jual?");
                         int jumlah = scan.nextInt();
+                        scan.nextLine();
                         currentSim.jualBarang(purchasableMap, namaItem, jumlah);
                     }
                     else {
