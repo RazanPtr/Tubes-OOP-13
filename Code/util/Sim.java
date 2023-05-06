@@ -42,7 +42,7 @@ public class Sim implements Aksi{
 
     public Sim(String name, Job[] jobList, int x, int y){
         this.namaLengkap = name;
-        pekerjaan = new WorkObject();
+        pekerjaan = getRandomPekerjaan(jobList);
         uang = 10000;
         inventory = new Inventory<ObjectSim>();
         kesejahteraan = new Kesejahteraan();
