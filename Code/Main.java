@@ -13,6 +13,7 @@ public class Main {
         boolean finished = false;
         World w = null;
         boolean cTidakTidur = false;
+        boolean isAddSim = false;
 
         //Jobs
         Job badut = new Job("Badut Sulap", 15);
@@ -203,6 +204,7 @@ public class Main {
                         s.resetHarian();
                     }
                     cTidakTidur = false;
+                    isAddSim = false;
                     Sim.time.setCheck(1);
                 }
 
@@ -222,7 +224,7 @@ public class Main {
                     cTidakTidur = true;
                 }
 
-                if(Sim.time.getTimeSec() - currentSim.awalGantiKerja > 60){
+                if(Sim.time.getTimeSec() - currentSim.awalGantiKerja > 720){
                     currentSim.baruKerja=false;
                 }
 
@@ -322,8 +324,18 @@ public class Main {
                         System.out.println("2. Pemasangan Barang");
                         System.out.println("3. Penyimpanan Barang");
                         System.out.print(">> ");
-                        int opsi = scan.nextInt();
-                        String tempp = scan.nextLine();
+                        Boolean validInput5=false;
+                        int opsi=0;
+                        while(!validInput5){
+                            try{
+                                opsi = scan.nextInt();
+                                String tempp = scan.nextLine();
+                                validInput5 = true;
+                            } catch(Exception e){
+                                System.out.println("Input harus berupa angka!!");
+                                scan.nextLine();
+                            }
+                        }
                         if(opsi == 1){
                             //tampilin
                             System.out.println("");
@@ -430,7 +442,7 @@ public class Main {
                         System.out.println("Anda sedang berada di rumah Sim lain. Anda tidak dapat melakukan edit terhadap rumah ini.");
                     }
                 } else if(o.equalsIgnoreCase("Add Sim")) {
-                    if (!currentSim.sudahAddSim){
+                    if (!isAddSim){
                         boolean namaValid = false;
                         System.out.println("Add a new friend for your Sim(s) °˖✧◝(⁰▿⁰)◜✧˖°");
                         System.out.println("Siapa nama sim baru? Inputkan Stringnya!");
@@ -469,7 +481,7 @@ public class Main {
                                 System.out.println("Untuk memainkan Sim ini, ingat untuk memilih opsi Change Sim!");
                             }
                         }
-                        currentSim.sudahAddSim = true;
+                        isAddSim = true;
                     }
                     else{
                         System.out.println("Hari ini anda sudah melakukan Add Sim. Kembali lagi besok yaa!");

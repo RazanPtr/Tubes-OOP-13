@@ -1116,7 +1116,7 @@ public class Sim implements Aksi{
     }
 
     public void gantiPekerjaan(Job w){
-        if(lamaKerja > 60 && (double) uang >= (0.5*w.getPayRate())){    
+        if(lamaKerja > 720 && (double) uang >= (0.5*w.getPayRate())){    
             System.out.println("Berhasil ganti pekerjaan menjadi "+w.getTitle());
             setPekerjaan(w);
             baruKerja = true;
