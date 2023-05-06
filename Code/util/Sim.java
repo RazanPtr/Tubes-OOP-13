@@ -432,7 +432,7 @@ public class Sim implements Aksi{
         System.out.println("\nKekenyangan Sim berkurang sebesar " + (10*(durasi/30)) + " karena bekerja");
         kesejahteraan.updateMood((-10)*(durasi/30));
         System.out.println("Mood Sim berkurang sebesar " + (10*(durasi/30)) + " karena bekerja\n");
-        if(durasi = (4*60)){
+        if(durasi == (4*60)){
             this.uang += getPekerjaan().getJob().getPayRate();
         }
         //Untuk selalu nambahin durasi gak buang air

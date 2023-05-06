@@ -517,7 +517,7 @@ public class Main {
                                 }
                             } 
                             currentSim.kerja(dur);
-                            sudahKerja = true;
+                            currentSim.sudahKerja = true;
                         } else {
                             System.out.println("Hari ini sudah bekerja, silahkan bekerja lagi besok.");
                         }
