@@ -441,7 +441,7 @@ public class Main {
                                 System.out.println("Untuk memainkan Sim ini, ingat untuk memilih opsi Change Sim!");
                             }
                         }
-                        currentSim.sudahAddSim = true;
+                        isAddSim = true;
                     }
                     else{
                         System.out.println("Hari ini anda sudah melakukan Add Sim. Kembali lagi besok yaa!");
