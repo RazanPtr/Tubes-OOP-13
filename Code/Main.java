@@ -226,9 +226,9 @@ public class Main {
                 System.out.print(">> ");
                 String o;
                 o = scan.nextLine();
-                if(o.equals("View Sim Info")){
+                if(o.equalsIgnoreCase("View Sim Info")){
                     currentSim.displayInfo();
-                } else if(o.equals("Help")){
+                } else if(o.equalsIgnoreCase("Help")){
                     System.out.println("permainan ini merupakan permainan karakter virtual yaitu Sim yang dapat anda jalankan kegiatannya.");
                     System.out.println("Terdapat beberapa command yang dapat Anda berikan setelah memulai permainan :");
                     System.out.println("1.  View Sim Info            : Melihat informasi kondisi Sim saat ini");
@@ -505,14 +505,14 @@ public class Main {
                                 if(dur <= 0){
                                     throw new IllegalArgumentException("durasi harus lebih dari 0 detik");
                                 }
-                                if(dur % 30 != 0){
-                                    throw new IllegalArgumentException("durasi kerja harus kelipatan 30 detik");
+                                if(dur % 120 != 0){
+                                    throw new IllegalArgumentException("durasi kerja harus kelipatan 120 detik");
                                 } else {
                                 validInput3 = true;
                                 }
                             } catch (Exception e) {
                                 System.out.println();
-                                System.out.println("Input tidak valid, silakan masukan durasi dengan angka kelipatan 30 detik dan lebih dari 0");
+                                System.out.println("Input tidak valid, silakan masukan durasi dengan angka kelipatan 120 detik dan lebih dari 0");
                             }
                         } currentSim.kerja(dur);
                     } else if (ops==2) {
