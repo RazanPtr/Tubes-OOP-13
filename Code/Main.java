@@ -326,9 +326,49 @@ public class Main {
                         String tempp = scan.nextLine();
                         if(opsi == 1){
                             //tampilin
-                            System.out.println("Barang apa yang ingin anda beli?");
+                            System.out.println("");
+                            display.olshop();
+                            System.out.println("Anda ingin memesan dari toko apa?");
+                            System.out.println("1. (ACA Hardware) Toko Furnitur");
+                            System.out.println("2. (Borme Dago) Toko Bahan Makanan");
+                            System.out.println("Masukkan opsi dalam ANGKA (1-2)");
+                            int opsie = scan.nextInt();
+                            String tempe = scan.nextLine();
+                            if (opsie==1) {
+                                System.out.println("List of furnitures and objects you can buy here!:");
+                                System.out.println("1. Jam - 10");
+                                System.out.println("2. Kanvas - 60");
+                                System.out.println("3. Kasur King - 150");
+                                System.out.println("4. Kasur Queen - 100");
+                                System.out.println("5. Kasur Single - 50");
+                                System.out.println("6. Kompor Gas - 100");
+                                System.out.println("7. Kompor Listrik - 200");
+                                System.out.println("8. Laptop - 85");
+                                System.out.println("9. Meja dan Kursi - 50");
+                                System.out.println("10. Mic - 15");
+                                System.out.println("11. Sajadah - 20");
+                                System.out.println("12. Shower - 55");
+                                System.out.println("13. Toilet - 50");
+                                System.out.println("Barang apa yang ingin kamu beli? Inputkan dalam string!");
+                            } else if (opsie==2) {
+                                System.out.println("List of ingredients!");
+                                System.out.println("Barang apa yang ingin kamu beli? Inputkan dalam string!");
+                                System.out.println("1. Ayam - 10");
+                                System.out.println("2. Bayam - 3");
+                                System.out.println("3. Kacang - 2");
+                                System.out.println("4. Kentang - 3");
+                                System.out.println("5. Nasi - 5");
+                                System.out.println("6. Sapi - 12");
+                                System.out.println("7. Susu - 2");
+                                System.out.println("8. Wortel - 3");
+                                System.out.println("Bahan makanan apa yang ingin kamu beli? Inputkan dalam string!");
+                            } else {
+                                System.out.println("Opsi tidak valid!");
+                            }
+
                             Scanner scanBarang = new Scanner(System.in);
                             String inputBarang = scanBarang.nextLine();
+                            System.out.println("Berapa banyak "+inputBarang+" yang ingin kamu beli?");
                             int inputJumlahBarang = scanBarang.nextInt();
                             try{
                                 currentSim.beliBarang(purchasableMap, inputBarang, inputJumlahBarang);
@@ -542,7 +582,7 @@ public class Main {
                             if(!currentSim.sudahKerja){
                                 System.out.println("Sim akan bekerja!");
                                 System.out.println("Berapa lama anda ingin Sim bekerja? (Input dalam detik)");
-                                System.out.println("Masukkan durasi minimal lebih dari 0 detik, dan merupakan kelipatan 30 detik");
+                                System.out.println("Masukkan durasi minimal lebih dari 0 detik, dan merupakan kelipatan 120 detik");
                                 Boolean validInput3 = false;
                                 int dur=0;
                                 while (!validInput3) {
