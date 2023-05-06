@@ -324,9 +324,10 @@ public class Main {
                             }
                             catch (InterruptedException p){
                                 System.out.println(p.getMessage());
-                            }
+                            }                           
                         } else if (opsi==2) {
                             //kode
+                            currentSim.lihatInventory();
                             System.out.println("Barang apa yang ingin anda pasang?");
                             Scanner scanBarang = new Scanner(System.in);
                             String inputBarang = scanBarang.nextLine();
@@ -348,6 +349,14 @@ public class Main {
                             
                         } else if (opsi==3) {
                             //kode
+                            Ruangan temp = w.getRumah(currentSim.getLokSimRumah()).getRoom(currentSim.getLokRuang().getNamaRuangan());//currentSim.getRumah().getRoom(currentSim.getLokRuang().getNamaRuangan());
+                            temp.displayRuangan();
+                            int i = 1;
+                            System.out.println("Berikut merupakan daftar objek di dalam ruangan saat ini");
+                            for(ObjectSim ob : temp.getObjects()){
+                                System.out.println(i + ". " + ob.getNama());
+                                i++;
+                            }
                             System.out.println("Barang apa yang ingin anda simpan?");
                             Scanner scanBarang = new Scanner(System.in);
                             String inputBarang = scanBarang.nextLine();
