@@ -1109,7 +1109,7 @@ public class Sim implements Aksi{
             System.out.println("Berhasil ganti pekerjaan menjadi "+w.getTitle());
             setPekerjaan(w);
             baruKerja = true;
-            awalGantiKerja=time.getTimeInSec();
+            awalGantiKerja=time.getTimeSec();
             uang -= 1/2*w.getPayRate();
         } else{
             System.out.println("Lama bekerja belum 1 hari atau uang tidak mencukupi!");

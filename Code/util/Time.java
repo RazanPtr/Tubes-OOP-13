@@ -44,6 +44,10 @@ public class Time {
     }
 
     public int getTimeInSec(){
+        return((min*60)+sec);
+    }
+
+    public int getTimeSec(){
         return((day*720)+(min*60)+sec);
     }
 
