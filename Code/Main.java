@@ -82,9 +82,9 @@ public class Main {
             System.out.println("Selamat datang di permainan The Simplicity! (ﾉ´ヮ`)ﾉ*: ･ﾟ");
                 System.out.println("Permainan ini merupakan permainan karakter virtual yaitu Sim yang dapat anda jalankan kegiatannya!");
                 System.out.println("Terdapat beberapa command yang dapat Anda berikan sebelum permainan :");
-                System.out.println("1. Start Game       : Memulai permainan");
-                System.out.println("2. Help             : Bantuan dan petunjuk terkait permainan");
-                System.out.println("3. Exit             : Keluar dari permainan\n");
+                System.out.println("1. Start Game");
+                System.out.println("2. Help");
+                System.out.println("3. Exit\n");
             System.out.println("Ketikkan commandmu dalam bentuk String! (Contoh: Start Game)");
             System.out.print(">> ");
             String op = scan.nextLine();
@@ -141,12 +141,18 @@ public class Main {
                 System.out.println("");
 
             } else if(op.equalsIgnoreCase("Help")){
-                System.out.println("Selamat datang di permainan Simplicity!");
-                System.out.println("permainan ini merupakan permainan karakter virtual yaitu Sim yang dapat anda jalankan kegiatannya.");
-                System.out.println("Terdapat beberapa command yang dapat Anda berikan sebelum permainan :");
+                System.out.println("");
+                display.help();
                 System.out.println("1. Start Game       : memulai permainan");
                 System.out.println("2. Help             : bantuan dan petunjuk terkait permainan");
                 System.out.println("3. Exit             : keluar dari permainan");
+                System.out.println("");
+                System.out.println("Ketik BACK untuk kembali ke Starting Page");
+                String inpback = scan.nextLine();
+                while (!inpback.equalsIgnoreCase("BACK")) {
+                    System.out.println("Periksa kembali input stringnya!");
+                    inpback = scan.nextLine();
+                }
             } else if(op.equalsIgnoreCase("Exit")){
                 System.out.println("Game akan berakhir.. Terimakasih telah bermain!! ^^");
                 finished = true;
@@ -339,12 +345,16 @@ public class Main {
                         } else if (opsi==2) {
                             //kode
                             currentSim.lihatInventory();
-                            System.out.println("Barang apa yang ingin anda pasang?");
+                            System.out.println("Barang apa yang ingin anda pasang? (Masukkan namanya dalam String)");
                             Scanner scanBarang = new Scanner(System.in);
                             String inputBarang = scanBarang.nextLine();
-                            System.out.println("Di Ruang apa anda ingin memasang barang tersebut?");
+                            System.out.println("Di Ruang apa anda ingin memasang barang tersebut? (Masukkan dalam String)");
+                            System.out.println("");
+                            currentSim.getRumah().displayRumah();
+                            currentSim.getRumah().displayListRuangan();
                             String inputRuang = scanBarang.nextLine();
                             System.out.println("Berikut adalah display ruangan "+inputRuang);
+                            System.out.println("");
                             currentSim.getRumah().getRoom(inputRuang).displayRuangan();
                             System.out.println("Di posisi berapa anda ingin memasang barang tersebut?");
                             System.out.print("x: ");
@@ -532,6 +542,7 @@ public class Main {
                             if(!currentSim.sudahKerja){
                                 System.out.println("Sim akan bekerja!");
                                 System.out.println("Berapa lama anda ingin Sim bekerja? (Input dalam detik)");
+                                System.out.println("Masukkan durasi minimal lebih dari 0 detik, dan merupakan kelipatan 30 detik");
                                 Boolean validInput3 = false;
                                 int dur=0;
                                 while (!validInput3) {
@@ -562,6 +573,7 @@ public class Main {
                     } else if (ops==2) {
                         System.out.println("Sim akan berolahraga!");
                         System.out.println("Berapa lama anda ingin Sim berolahraga? (Input dalam detik)");
+                        System.out.println("Masukkan durasi minimal lebih dari 0 detik, dan merupakan kelipatan 20 detik");
                         Boolean validInput3 = false;
                         int dur=0;
                         while (!validInput3) {
