@@ -642,8 +642,6 @@ public class Sim implements Aksi{
         time.AksiSleep(wktu);
         System.out.println("Kamu sudah sampai...");
         this.setStatus("Berkunjung");
-        kesejahteraan.updateMood(10 * (wktu / 30));
-        System.out.println("\nMood Sim bertambah sebesar " + (10*(wktu/30)) + " karena berkunjung");
         kesejahteraan.updateKekenyangan(-10 * (wktu / 30));
         System.out.println("Kekenyangan Sim berkurang sebesar " + (10*(wktu/30)) + " karena berkunjung\n");
         //Untuk selalu nambahin durasi gak buang air
