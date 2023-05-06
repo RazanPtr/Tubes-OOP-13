@@ -40,4 +40,6 @@ public interface Aksi {
     public void pasangBarang(Map<String, PurchasableObject> objectMap, String lokRuang, String itemName, Lokasi lokBarang, String posisi);
 
     public void lihatWaktu();
+
+    public void jualBarang(Map<String, PurchasableObject> objectMap,String namaItem, int jumlahJual);
 }

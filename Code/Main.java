@@ -482,7 +482,9 @@ public class Main {
                     System.out.println("11. Karaoke");
                     System.out.println("12. Nonton Netflix");
                     System.out.println("13. Melukis");
-                    System.out.println("14. Exit Menu Action");
+                    System.out.println("14. Menjual Furnitur");
+                    System.out.println("15. Exit Menu Action");
+
 
                     int ops=0;
 
@@ -603,7 +605,14 @@ public class Main {
                         System.out.println("Kunjungi objek Laptop!");
                     } else if (ops==13) { //ops==13
                         System.out.println("Kunjungi objek Kanvas!");
-                    } else {
+                    } else if (ops ==14){
+                        System.out.println("Furnitur apa yang ingin kamu jual?");
+                        String namaItem = scan.nextLine();
+                        System.out.println("Berapa jumlah yang ingin kamu jual?");
+                        int jumlah = scan.nextInt();
+                        currentSim.jualBarang(purchasableMap, namaItem, jumlah);
+                    }
+                    else {
                         System.out.println("Kamu sudah keluar dari menu action!");
                     }
                 } else if(o.equalsIgnoreCase("Change Job")){ 

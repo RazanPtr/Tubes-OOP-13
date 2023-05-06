@@ -159,6 +159,35 @@ public class Sim implements Aksi{
         return rumahSedangDiupgrade;
     }
 
+    public void jualBarang(Map<String, PurchasableObject> objectMap, String namaItem, int jumlahJual){
+        PurchasableObject pob = objectMap.get(namaItem);
+        ObjectSim obs = (ObjectSim) pob;
+        if (obs == null){
+            System.out.println("Barang yang anda ingin jual tidak terdapat pada inventory");
+        }
+        else{
+            if(obs instanceof Furniture){
+                Furniture f = (Furniture) obs;
+                Furniture f1 = null;
+                Set<ObjectSim> listInventory = inventory.getItem();
+                        for (ObjectSim item : listInventory) {
+                            if (item.getNama().equals(obs.getNama())) {
+                                f1 = (Furniture) item;
+                                break;
+                            }
+                            
+                        }
+                inventory.removeItem(f1,jumlahJual);
+                uang+= f1.getPrice();
+                System.out.println(jumlahJual + " buah "+ f1.getNama() + " berhasil dijual, dan uang sim bertambah menjadi " + uang);
+            }
+        
+            else{
+                System.out.println("Penjualan barang gagal");
+            }
+        }
+    }
+
     public void move(ObjectSim obj) {
         curObject = obj;
         Boolean valops = false;
