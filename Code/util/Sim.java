@@ -43,7 +43,7 @@ public class Sim implements Aksi{
     public Sim(String name, Job[] jobList, int x, int y){
         this.namaLengkap = name;
         pekerjaan = getRandomPekerjaan(jobList);
-        uang = 10000;
+        uang = 100;
         inventory = new Inventory<ObjectSim>();
         kesejahteraan = new Kesejahteraan();
         status = "Idle";
@@ -58,14 +58,14 @@ public class Sim implements Aksi{
         inventory.addItem(new KasurSingle(), 1);
         inventory.addItem(new Toilet(), 1);
         inventory.addItem(new KomporGas(), 1);
-        inventory.addItem(new Jam(), 2);
+        inventory.addItem(new Jam(), 1);
         inventory.addItem(new MejaKursi(), 1);
         // buat coba makan n masak
-        inventory.addItem(new Nasi(), 5);
+        /*inventory.addItem(new Nasi(), 5);
         inventory.addItem(new Ayam(), 5);
         inventory.addItem(new Kentang(), 5);
         inventory.addItem(new Wortel(), 5);
-        inventory.addItem(new Sapi(), 5);
+        inventory.addItem(new Sapi(), 5);*/
         //inventory.addItem(new NasiAyam(), 1);
         //display
         display = new Ascii();
@@ -1158,9 +1158,9 @@ public class Sim implements Aksi{
         private String statusMati;
 
         public Kesejahteraan() {
-            mood = 8000;
-            kekenyangan = 8000;
-            kesehatan = 8000;
+            mood = 80;
+            kekenyangan = 80;
+            kesehatan = 80;
         }
 
         public int getMood(){
@@ -1177,8 +1177,8 @@ public class Sim implements Aksi{
 
         public void updateKesehatan(int kesehatan){
             this.kesehatan += kesehatan;
-            if(this.kesehatan > 8000){
-                this.kesehatan = 8000;
+            if(this.kesehatan > 100){
+                this.kesehatan = 100;
             }  else if(this.kesehatan <= 0){
                 isMati = true;
                 statusMati = "mati karena sakit :<";
@@ -1187,8 +1187,8 @@ public class Sim implements Aksi{
 
         public void updateKekenyangan(int kekenyangan){
             this.kekenyangan += kekenyangan;
-            if(this.kekenyangan > 8000){
-                this.kekenyangan = 8000;
+            if(this.kekenyangan > 100){
+                this.kekenyangan = 100;
             }  else if(this.kekenyangan <= 0){
                 isMati = true;
                 statusMati = "mati karena kelaparan :<";
@@ -1197,8 +1197,8 @@ public class Sim implements Aksi{
 
         public void updateMood(int mood){
             this.mood += mood;
-            if(this.mood > 8000){
-                this.mood = 8000;
+            if(this.mood > 100){
+                this.mood = 100;
             } else if(this.mood <= 0){
                 isMati = true;
                 statusMati = "mati karena mengalami depresi :<";
