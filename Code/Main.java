@@ -511,32 +511,36 @@ public class Main {
                     }
                     
                     if (ops==1) {
-                        if(!currentSim.sudahKerja){
-                            System.out.println("Sim akan bekerja!");
-                            System.out.println("Berapa lama anda ingin Sim bekerja? (Input dalam detik)");
-                            Boolean validInput3 = false;
-                            int dur=0;
-                            while (!validInput3) {
-                                try {
-                                    dur = scan.nextInt();
-                                    scan.nextLine();
-                                    if(dur <= 0){
-                                        throw new IllegalArgumentException("durasi harus lebih dari 0 detik");
+                        if(currentSim.baruKerja == false){
+                            if(!currentSim.sudahKerja){
+                                System.out.println("Sim akan bekerja!");
+                                System.out.println("Berapa lama anda ingin Sim bekerja? (Input dalam detik)");
+                                Boolean validInput3 = false;
+                                int dur=0;
+                                while (!validInput3) {
+                                    try {
+                                        dur = scan.nextInt();
+                                        scan.nextLine();
+                                        if(dur <= 0){
+                                            throw new IllegalArgumentException("durasi harus lebih dari 0 detik");
+                                        }
+                                        if(dur != 120){
+                                            throw new IllegalArgumentException("durasi kerja harus 120 detik");
+                                        } else {
+                                        validInput3 = true;
+                                        }
+                                    } catch (Exception e) {
+                                        System.out.println();
+                                        System.out.println("Input tidak valid, silakan masukan durasi dengan angka kelipatan 120 detik dan lebih dari 0");
                                     }
-                                    if(dur != 120){
-                                        throw new IllegalArgumentException("durasi kerja harus 120 detik");
-                                    } else {
-                                    validInput3 = true;
-                                    }
-                                } catch (Exception e) {
-                                    System.out.println();
-                                    System.out.println("Input tidak valid, silakan masukan durasi dengan angka kelipatan 120 detik dan lebih dari 0");
-                                }
-                            } 
-                            currentSim.kerja(dur);
-                            currentSim.sudahKerja = true;
+                                } 
+                                currentSim.kerja(dur);
+                                currentSim.sudahKerja = true;
+                            } else {
+                                System.out.println("Hari ini sudah bekerja, silahkan bekerja lagi besok.");
+                            }
                         } else {
-                            System.out.println("Hari ini sudah bekerja, silahkan bekerja lagi besok.");
+                            System.out.println("Sim baru berganti pekerjaan dan baru bisa bekerja setelah 1 hari");
                         }
                     } else if (ops==2) {
                         System.out.println("Sim akan berolahraga!");

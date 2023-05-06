@@ -16,7 +16,6 @@ public class Sim implements Aksi{
     private Ruangan lokSimRuang;
     private ObjectSim curObject;
     public static Time time;
-    private int awalKerja;
     private int lamaKerja;
     private int durasiTidur;
     public int durasiTidakBuangAir;
@@ -33,6 +32,7 @@ public class Sim implements Aksi{
     private boolean rumahSedangDiupgrade = false;
     private Ascii display;
     Kesejahteraan kesejahteraan;
+    public boolean baruKerja = false;
 
     public Sim(String name, int x, int y){
         this.namaLengkap = name;
@@ -60,6 +60,7 @@ public class Sim implements Aksi{
         inventory.addItem(new NasiAyam(), 1);
         //display
         display = new Ascii();
+        lamaKerja=0;
     }
 
     public String getNamaLengkap(){
@@ -93,6 +94,14 @@ public class Sim implements Aksi{
 
     public void setdurasiAksiAktif(int amount){
         durasiAksiAktif = amount*1000;
+    }
+
+    public int getLamaKerja(){
+        return lamaKerja;
+    }
+
+    public void setLamaKerja(int durasi){
+        lamaKerja+=durasi;
     }
 
     public void updateUang(int uang){
@@ -453,7 +462,7 @@ public class Sim implements Aksi{
     
 
     public void kerja(int durasi){
-        awalKerja = time.getTimeInSec();
+        setLamaKerja(durasi);
         display.working();
         setdurasiAksiAktif(durasi);
         time.AksiSleep(durasi);
@@ -1104,7 +1113,6 @@ public class Sim implements Aksi{
     }
 
     public void gantiPekerjaan(WorkObject w){
-        lamaKerja = time.getTimeInSec()-awalKerja;
         if(lamaKerja > 12*60 && uang >= (1/2*w.getJob().getPayRate())){    
             setPekerjaan(w);
             uang -= 1/2*w.getJob().getPayRate();
