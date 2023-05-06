@@ -302,9 +302,8 @@ public class Main {
                     if(currentSim.getLokSimRumah() == currentSim.getRumah().getLokRumah()){
                         System.out.println("Opsi edit rumah apa yang ingin Anda lakukan? (Pilih dengan angka)");
                         System.out.println("1. Pembelian barang");
-                        System.out.println("2. Pemindahan barang");
-                        System.out.println("3. Pemasangan Barang");
-                        System.out.println("4. Penyimpanan Barang");
+                        System.out.println("2. Pemasangan Barang");
+                        System.out.println("3. Penyimpanan Barang");
                         System.out.print(">> ");
                         int opsi = scan.nextInt();
                         String tempp = scan.nextLine();
@@ -327,8 +326,6 @@ public class Main {
                                 System.out.println(p.getMessage());
                             }
                         } else if (opsi==2) {
-                            //kode                            
-                        } else if (opsi==3) {
                             //kode
                             System.out.println("Barang apa yang ingin anda pasang?");
                             Scanner scanBarang = new Scanner(System.in);
@@ -349,7 +346,7 @@ public class Main {
                         
                             currentSim.pasangBarang(purchasableMap, inputRuang, inputBarang, lokTemp, inputKondisi);
                             
-                        } else if (opsi==4) {
+                        } else if (opsi==3) {
                             //kode
                             System.out.println("Barang apa yang ingin anda simpan?");
                             Scanner scanBarang = new Scanner(System.in);
