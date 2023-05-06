@@ -66,7 +66,6 @@ public class Sim implements Aksi{
         inventory.addItem(new Kentang(), 5);
         inventory.addItem(new Wortel(), 5);
         inventory.addItem(new Sapi(), 5);*/
-        inventory.addItem(new Sajadah(),1);
         //inventory.addItem(new NasiAyam(), 1);
         //display
         display = new Ascii();
