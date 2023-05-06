@@ -16,6 +16,6 @@ Anggota Kelompok:
 
 Link Milestone 2: https://drive.google.com/drive/folders/1URf6nsQS6j3LqOHye8uIxDaQQl2-Wgqh?usp=sharing
 
-How to Compile : open terminal go to directory Tubes-OOP-13 then use command Code/compile.sh
+How to Compile : Open terminal go to directory Tubes-OOP-13 then use command Code/compile.sh
 
-How To Run :open terminal go to directory Tubes-OOP-13 then use command Code/run.sh
+How To Run : Open terminal go to directory Tubes-OOP-13 then use command Code/run.sh
