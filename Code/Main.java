@@ -169,9 +169,18 @@ public class Main {
                     System.out.println("");
                 
                 //Tidak buang air
-                if (currentSim.durasiTidakBuangAir >= 240 && !currentSim.sudahBuangAir && currentSim.sudahMakan){
-                    currentSim.tidakBuangAir();
-                    System.out.println(currentSim.getNamaLengkap() + " tidak buang air selama 4 menit, kesejahteraan berkurang");
+                // if (currentSim.durasiTidakBuangAir >= 240 && !currentSim.sudahBuangAir && currentSim.sudahMakan){
+                //     currentSim.tidakBuangAir();
+                //     System.out.println(currentSim.getNamaLengkap() + " tidak buang air selama 4 menit, kesejahteraan berkurang");
+                // }
+                
+                for (Sim s : pemain){
+                    if(s.sudahMakan){
+                        if(Sim.time.getMin()*60 + Sim.time.getSec() - s.waktuTerakhirMakan >= 240 && !s.sudahBuangAir){
+                            s.tidakBuangAir();
+                            System.out.println(s.getNamaLengkap()+ " sudah makan tetapi belum buang air dalam 4 menit");
+                        }
+                    }
                 } 
 
                 // ini reset harian
@@ -438,6 +447,9 @@ public class Main {
                                     ObjectSim objTemp = currentSim.getLokRuang().getObjects().get(choice-1);
                                     System.out.println("Berhasil pindah ke Object " + objTemp.getNama());
                                     currentSim.move(objTemp);
+                                    if (objTemp.getNama().equals("Meja dan Kursi")){
+                                        currentSim.waktuTerakhirMakan = currentSim.time.getMin()*60 + currentSim.time.getSec();
+                                    }
                                     valid1 = true;
                                 } else {
                                     System.out.println("Opsi tidak valid!");

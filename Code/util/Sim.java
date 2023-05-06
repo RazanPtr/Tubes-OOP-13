@@ -20,6 +20,7 @@ public class Sim implements Aksi{
     private int lamaKerja;
     private int durasiTidur;
     public int durasiTidakBuangAir;
+    public int waktuTerakhirMakan = 0;
     public boolean sudahTidur = false;
     public boolean sudahMakan = false;
     public boolean sudahBuangAir = false;
@@ -56,7 +57,7 @@ public class Sim implements Aksi{
         // buat coba makan n masak
         // inventory.addItem(new Nasi(), 1);
         // inventory.addItem(new Ayam(), 1);
-        // inventory.addItem(new NasiAyam(), 1);
+        inventory.addItem(new NasiAyam(), 1);
         //display
         display = new Ascii();
     }
@@ -645,6 +646,7 @@ public class Sim implements Aksi{
         kesejahteraan.updateKesehatan(-5);
         kesejahteraan.updateMood(-5);
         durasiTidakBuangAir = 0;
+        sudahMakan = false;
 
     }
 
