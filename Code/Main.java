@@ -322,8 +322,18 @@ public class Main {
                         System.out.println("2. Pemasangan Barang");
                         System.out.println("3. Penyimpanan Barang");
                         System.out.print(">> ");
-                        int opsi = scan.nextInt();
-                        String tempp = scan.nextLine();
+                        Boolean validInput5=false;
+                        int opsi=0;
+                        while(!validInput5){
+                            try{
+                                opsi = scan.nextInt();
+                                String tempp = scan.nextLine();
+                                validInput5 = true;
+                            } catch(Exception e){
+                                System.out.println("Input harus berupa angka!!");
+                                scan.nextLine();
+                            }
+                        }
                         if(opsi == 1){
                             //tampilin
                             System.out.println("Barang apa yang ingin anda beli?");
