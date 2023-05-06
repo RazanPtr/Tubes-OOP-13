@@ -5,7 +5,7 @@ import java.util.*;
 import display.*;
 
 public class Main {
-    public static void main(String[] args){
+    public static void main(String[] args) throws CloneNotSupportedException{
         Scanner scan = new Scanner(System.in);
         ArrayList<Sim> pemain = new ArrayList<Sim>();
         Sim currentSim = null;

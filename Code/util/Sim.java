@@ -37,7 +37,7 @@ public class Sim implements Aksi{
     public Sim(String name, int x, int y){
         this.namaLengkap = name;
         pekerjaan = new WorkObject();
-        uang = 10000;
+        uang = 100;
         inventory = new Inventory<ObjectSim>();
         kesejahteraan = new Kesejahteraan();
         status = "Idle";
@@ -52,12 +52,12 @@ public class Sim implements Aksi{
         inventory.addItem(new KasurSingle(), 1);
         inventory.addItem(new Toilet(), 1);
         inventory.addItem(new KomporGas(), 1);
-        inventory.addItem(new Jam(), 1);
+        inventory.addItem(new Jam(), 2);
         inventory.addItem(new MejaKursi(), 1);
         // buat coba makan n masak
         // inventory.addItem(new Nasi(), 1);
         // inventory.addItem(new Ayam(), 1);
-        inventory.addItem(new NasiAyam(), 1);
+        //inventory.addItem(new NasiAyam(), 1);
         //display
         display = new Ascii();
         lamaKerja=0;
@@ -1044,7 +1044,7 @@ public class Sim implements Aksi{
         inventory.showInventory();
     }
 
-    public void pasangBarang(Map<String, PurchasableObject> objectMap, String lokRuang, String itemName, Lokasi lokBarang, String posisi){
+    public void pasangBarang(Map<String, PurchasableObject> objectMap, String lokRuang, String itemName, Lokasi lokBarang, String posisi) throws CloneNotSupportedException{
         //implementasi pasangBarang
             this.setStatus("Memasang barang");
             PurchasableObject pob = objectMap.get(itemName);
@@ -1072,25 +1072,10 @@ public class Sim implements Aksi{
                     if (f1 != null){
                         boolean can = rumah.getRoom(lokRuang).canPlaceObj(lokBarang, f1);
                         if(can){
-                            // //Class c = f1.getClass();
-                            
-                            // try{
-                            //     Constructor<ObjectSim>
-                            // }
-                            // catch(Exception e){
-                            //     e.;
-                            // }
-                            f1.setLokDiRuangan(lokBarang);
-                            rumah.getRoom(lokRuang).getObjects().add(f1);
+                            Furniture f2 = (Furniture) f1.clone();
+                            f2.setLokDiRuangan(lokBarang);
+                            rumah.getRoom(lokRuang).getObjects().add(f2);
                             inventory.removeItem(f1,1);
-                            for (ObjectSim item : listInventory) {
-                                if (item.getNama().equals(f1.getNama())) {
-                                    if(((Furniture)item).getLokDiRuangan() != null){
-                                        System.out.println(((Furniture)item).getLokDiRuangan().getX() + " " + ((Furniture)item).getLokDiRuangan().getY());
-                                    }
-                                }
-                                
-                            }
                             System.out.println("Benda berhasil dipasang di ruangan " + lokRuang);
                         }
                         else{
