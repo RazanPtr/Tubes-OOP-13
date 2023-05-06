@@ -13,6 +13,7 @@ public class Main {
         boolean finished = false;
         World w = null;
         boolean cTidakTidur = false;
+        boolean isAddSim = false;
 
         //Jobs
         Job badut = new Job("Badut Sulap", 15);
@@ -203,6 +204,7 @@ public class Main {
                         s.resetHarian();
                     }
                     cTidakTidur = false;
+                    isAddSim = false;
                     Sim.time.setCheck(1);
                 }
 
@@ -400,7 +402,7 @@ public class Main {
                         System.out.println("Anda sedang berada di rumah Sim lain. Anda tidak dapat melakukan edit terhadap rumah ini.");
                     }
                 } else if(o.equalsIgnoreCase("Add Sim")) {
-                    if (!currentSim.sudahAddSim){
+                    if (!isAddSim){
                         boolean namaValid = false;
                         System.out.println("Add a new friend for your Sim(s) °˖✧◝(⁰▿⁰)◜✧˖°");
                         System.out.println("Siapa nama sim baru? Inputkan Stringnya!");
