@@ -222,7 +222,7 @@ public class Main {
                     cTidakTidur = true;
                 }
 
-                if(Sim.time.getTimeSec() - currentSim.awalGantiKerja > 60){
+                if(Sim.time.getTimeSec() - currentSim.awalGantiKerja > 720){
                     currentSim.baruKerja=false;
                 }
 
