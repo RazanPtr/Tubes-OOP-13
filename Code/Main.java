@@ -491,7 +491,7 @@ public class Main {
                     Boolean validasi = false;
                     while (!validasi) {
                         Boolean validInput1=false;
-                        System.out.println("Masukkan aksi yang ingin kamu lakukan dalam opsi ANGKA (1-14)");
+                        System.out.println("Masukkan aksi yang ingin kamu lakukan dalam opsi ANGKA (1-15)");
                         int num=0;
                         while (!validInput1) {
                             try {
@@ -606,6 +606,7 @@ public class Main {
                     } else if (ops==13) { //ops==13
                         System.out.println("Kunjungi objek Kanvas!");
                     } else if (ops ==14){
+                        currentSim.lihatInventory();
                         System.out.println("Furnitur apa yang ingin kamu jual?");
                         String namaItem = scan.nextLine();
                         System.out.println("Berapa jumlah yang ingin kamu jual?");
