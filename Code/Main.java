@@ -174,7 +174,7 @@ public class Main {
                     System.out.println(currentSim.getNamaLengkap() + " tidak buang air selama 4 menit, kesejahteraan berkurang");
                 } 
 
-                // ini tidur blm bener
+                // ini reset harian
                 if(Sim.time.getCheck() == 2){
                     for(Sim s : pemain){
                         s.resetHarian();
@@ -192,8 +192,8 @@ public class Main {
                         if(!s.sudahTidur){
                             int kel = ((Sim.time.getMin()*60)+ Sim.time.getSec())/600;
                             s.tidakTidur(kel);
-                            System.out.println(s.getNamaLengkap() + " belum tidur setelah "+10*kel+" menit, kesehatan akan berkurang");
-                            System.out.println();
+                            //System.out.println(s.getNamaLengkap() + " belum tidur setelah "+10*kel+" menit, kesehatan akan berkurang");
+                            //System.out.println();
                         }
                     }
                     cTidakTidur = true;
@@ -405,12 +405,12 @@ public class Main {
                     System.out.println("Siapa nama Sim yang ingin dimainkan? ");
                     String nama = scan.nextLine();
                     for(Sim s : pemain){
-                        if(s.getNamaLengkap().equals(nama)){
+                        if(s.getNamaLengkap().equalsIgnoreCase(nama)){
                             currentSim = s;
                             System.out.println("Kamu akan bermain sebagai Sim "+currentSim.getNamaLengkap()+" !");
                         }
                     }
-                    if(!currentSim.getNamaLengkap().equals(nama)){
+                    if(!currentSim.getNamaLengkap().equalsIgnoreCase(nama)){
                         System.out.println("Sim tersebut belum terdaftar pada permainan Simplicity");
                     }
                 } else if(o.equalsIgnoreCase("List Object")){
@@ -615,11 +615,11 @@ public class Main {
                             }
                             String nama = scan.nextLine();
                             for(Sim s : pemain){
-                                if(s.getNamaLengkap().equals(nama)){
+                                if(s.getNamaLengkap().equalsIgnoreCase(nama)){
                                     currentSim = s;
                                 }
                             }
-                            if(currentSim == null || (!currentSim.getNamaLengkap().equals(nama))){
+                            if(currentSim == null || (!currentSim.getNamaLengkap().equalsIgnoreCase(nama))){
                                 System.out.println("Sim tersebut belum terdaftar pada permainan Simplicity");
                             }
                         } else {
@@ -632,7 +632,7 @@ public class Main {
                             } 
                             while(!namaValid){
                                 for(Sim s : pemain){
-                                    if(s.getNamaLengkap().equals(nama)){
+                                    if(s.getNamaLengkap().equalsIgnoreCase(nama)){
                                         namaValid = false;
                                         break;
                                     } else {

@@ -53,9 +53,9 @@ public class Sim implements Aksi{
         inventory.addItem(new Jam(), 1);
         inventory.addItem(new MejaKursi(), 1);
         // buat coba makan n masak
-        inventory.addItem(new Nasi(), 1);
-        inventory.addItem(new Ayam(), 1);
-        inventory.addItem(new NasiAyam(), 1);
+        // inventory.addItem(new Nasi(), 1);
+        // inventory.addItem(new Ayam(), 1);
+        // inventory.addItem(new NasiAyam(), 1);
         //display
         display = new Ascii();
     }
@@ -428,7 +428,9 @@ public class Sim implements Aksi{
         time.AksiSleep(durasi);
         this.setStatus("kerja");
         kesejahteraan.updateKekenyangan((-10)*(durasi/30));
+        System.out.println("\nKekenyangan Sim berkurang sebesar " + (10*(durasi/30)) + " karena bekerja");
         kesejahteraan.updateMood((-10)*(durasi/30));
+        System.out.println("Mood Sim berkurang sebesar " + (10*(durasi/30)) + " karena bekerja\n");
         if(durasi >= (4*60)){
             this.uang += getPekerjaan().getJob().getPayRate();
         }
@@ -444,9 +446,11 @@ public class Sim implements Aksi{
         time.AksiSleep(durasi);
         this.setStatus("olahraga");
         kesejahteraan.updateKesehatan(5*(durasi/20));
+        System.out.println("\nKesehatan Sim bertambah sebesar " + (5*(durasi/20)) + " karena berolahraga");
         kesejahteraan.updateKekenyangan((-5)*(durasi/20));
-        System.out.println("kekenyangan berkurang karena olahraga");
+        System.out.println("Kekenyangan Sim berkurang sebesar " + (5*(durasi/20)) + " karena berolahraga");
         kesejahteraan.updateMood(10*(durasi/20));
+        System.out.println("Mood Sim bertambah sebesar " + (10*(durasi/20)) + " karena berolahraga\n");
         System.out.println("Olahraga telah selesaii, kamu terlihat semakin sehat!!");
         //Untuk selalu nambahin durasi gak buang air
         durasiTidakBuangAir += durasi;
@@ -469,7 +473,9 @@ public class Sim implements Aksi{
     public void checkTidur(){
         if(durasiTidur >= (4*60)){
             kesejahteraan.updateKesehatan(20*(durasiTidur/(4*60)));
+            System.out.println("\nKesehatan Sim bertambah sebesar " + (20*(durasiTidur/(4*60))) + " karena telah tidur lebih dari 4 menit");
             kesejahteraan.updateMood(30*(durasiTidur/(4*60)));
+            System.out.println("Mood Sim bertambah sebesar " + (30*(durasiTidur/(4*60))) + " karena telah tidur lebih dari 4 menit\n");
             durasiTidur -= (durasiTidur/(4*60));
             sudahTidur = true;
         } else if(durasiTidur >=(3*60)){
@@ -492,7 +498,9 @@ public class Sim implements Aksi{
 
     public void tidakTidur(int kelipatan){
         kesejahteraan.updateKesehatan(-5*kelipatan);
+        System.out.println("Kesehatan " + namaLengkap + " berkurang sebesar " + (5*kelipatan) + " karena belum tidur selama " + (10*kelipatan) + " menit");
         kesejahteraan.updateMood(-5*kelipatan);
+        System.out.println("Mood " + namaLengkap + " berkurang sebesar " + (5*kelipatan) + " karena belum tidur selama " + (10*kelipatan) + " menit\n");
     }
 
     public void makan(int durasi, String namaMasakan){
@@ -521,6 +529,7 @@ public class Sim implements Aksi{
             this.setStatus("Makan");
             inventory.removeItem(m, 1);
             kesejahteraan.updateKekenyangan((m.getTingkatKenyang())*(durasi/30));
+            System.out.println("\nKekenyangan Sim bertambah sebesar " + ((m.getTingkatKenyang())*(durasi/30)) + " karena makan\n");
             sudahMakan = true;
             durasiTidakBuangAir = 0;
         }
@@ -567,6 +576,7 @@ public class Sim implements Aksi{
                 }
                 inventory.addItem(ob, 1);
                 kesejahteraan.updateMood(10);
+                System.out.println("\nMood Sim bertambah sebesar " + (10) + " karena memasak\n");
                 double durasiMasak = (1.5) * m.getTingkatKenyang();
                 
                 //Untuk selalu nambahin durasi gak buang air
@@ -597,8 +607,9 @@ public class Sim implements Aksi{
         System.out.println("Kamu sudah sampai...");
         this.setStatus("Berkunjung");
         kesejahteraan.updateMood(10 * (wktu / 30));
+        System.out.println("\nMood Sim bertambah sebesar " + (10*(wktu/30)) + " karena berkunjung");
         kesejahteraan.updateKekenyangan(-10 * (wktu / 30));
-        
+        System.out.println("Kekenyangan Sim berkurang sebesar " + (10*(wktu/30)) + " karena berkunjung\n");
         //Untuk selalu nambahin durasi gak buang air
         durasiTidakBuangAir += wktu;
     }
@@ -614,7 +625,9 @@ public class Sim implements Aksi{
             this.setStatus("Buang Air");
             setdurasiAksiAktif(durasi);
             kesejahteraan.updateKekenyangan((-20)*(durasi/10));
+            System.out.println("\nKekenyangan Sim berkurang sebesar " + (20*(durasi/10)) + " karena buang air");
             kesejahteraan.updateMood((10)*(durasi/10));
+            System.out.println("Mood Sim bertambah sebesar " + (10*(durasi/10)) + " karena buang air\n");
             sudahBuangAir = true;
             durasiTidakBuangAir = 0;
         } else {
@@ -825,7 +838,9 @@ public class Sim implements Aksi{
         
         this.setStatus("Karaoke");
         kesejahteraan.updateMood(10*(durasi/30));
+        System.out.println("\nMood Sim bertambah sebesar " + (10*(durasi/30)) + " karena karaoke");
         kesejahteraan.updateKekenyangan((-10)*(durasi/30));
+        System.out.println("Kekenyangan Sim berkurang sebesar " + (10*(durasi/30)) + " karena karaoke\n");
         System.out.println("baby shark dudurudduduuu");
          //Untuk selalu nambahin durasi gak buang air
          durasiTidakBuangAir += durasi;
@@ -840,7 +855,9 @@ public class Sim implements Aksi{
         time.AksiSleep(durasi);
         this.setStatus("Melukis");
         kesejahteraan.updateMood(5*(durasi/20));
+        System.out.println("\nMood Sim bertambah sebesar " + (5*(durasi/20)) + " karena melukis");
         kesejahteraan.updateKekenyangan(5*(durasi/20));
+        System.out.println("Kekenyangan Sim bertambah sebesar " + (5*(durasi/20)) + " karena melukis\n");
          //Untuk selalu nambahin durasi gak buang air
          durasiTidakBuangAir += durasi;
     }
@@ -940,6 +957,7 @@ public class Sim implements Aksi{
         
         this.setStatus("Sholat");
         kesejahteraan.updateMood(30);
+        System.out.println("\nMood Sim bertambah sebesar " + (30) + " karena sholat\n");
          //Untuk selalu nambahin durasi gak buang air
         durasiTidakBuangAir += durasi;
     }
@@ -953,7 +971,9 @@ public class Sim implements Aksi{
         
         this.setStatus("Mandi");
         kesejahteraan.updateKesehatan(30);
+        System.out.println("\nKesehatan Sim bertambah sebesar " + (30) + " karena mandi");
         kesejahteraan.updateMood(10);
+        System.out.println("Mood Sim bertambah sebesar " + (10) + " karena mandi\n");
          //Untuk selalu nambahin durasi gak buang air
          durasiTidakBuangAir += durasi;
     }
@@ -967,8 +987,11 @@ public class Sim implements Aksi{
         
         this.setStatus("Menonton netflix");
         kesejahteraan.updateMood(15*(durasi/40));
+        System.out.println("\nMood Sim bertambah sebesar " + (15*(durasi/40)) + " karena menonton netflix");
         kesejahteraan.updateKekenyangan((-10)*(durasi/40));
+        System.out.println("Kekenyangan Sim berkurang sebesar " + (10*(durasi/40)) + " karena menonton netflix");
         kesejahteraan.updateKesehatan((-2)*(durasi/40));
+        System.out.println("Kesehatan Sim berkurang sebesar " + (2*(durasi/40)) + " karena menonton netflix\n");
          //Untuk selalu nambahin durasi gak buang air
          durasiTidakBuangAir += durasi;
     }
