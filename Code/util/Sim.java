@@ -895,14 +895,16 @@ public class Sim implements Aksi{
         if(durasi <= 0 && durasi % 30 != 0){
             throw new IllegalArgumentException("durasi tidak sesuai");
         }
+        System.out.println("baby shark dudurudduduuu...");
         setdurasiAksiAktif(durasi);
         
         this.setStatus("Karaoke");
         kesejahteraan.updateMood(10*(durasi/30));
+        System.out.println("Wooaah! Kamu cocok untuk daftar Indonesian idol!");
         System.out.println("\nMood Sim bertambah sebesar " + (10*(durasi/30)) + " karena karaoke");
         kesejahteraan.updateKekenyangan((-10)*(durasi/30));
         System.out.println("Kekenyangan Sim berkurang sebesar " + (10*(durasi/30)) + " karena karaoke\n");
-        System.out.println("baby shark dudurudduduuu");
+        
          //Untuk selalu nambahin durasi gak buang air
          durasiTidakBuangAir += durasi;
     }
@@ -912,9 +914,11 @@ public class Sim implements Aksi{
         if(durasi <= 0 && durasi % 20 != 0){
             throw new IllegalArgumentException("durasi tidak sesuai");
         }
+        System.out.println("Selamat menuangkan kreativitasmu!（＾＿＾）☆");
         setdurasiAksiAktif(durasi);
         time.AksiSleep(durasi);
         this.setStatus("Melukis");
+        System.out.println("Bagus sekalii! Kamu sangat berbakatt!");
         kesejahteraan.updateMood(5*(durasi/20));
         System.out.println("\nMood Sim bertambah sebesar " + (5*(durasi/20)) + " karena melukis");
         kesejahteraan.updateKekenyangan(5*(durasi/20));
@@ -1014,9 +1018,11 @@ public class Sim implements Aksi{
         if(durasi <= 0){
             throw new IllegalArgumentException("durasi tidak sesuai");
         }
+        System.out.println("Jangan lupa wudhu terlebih dahulu!");
         setdurasiAksiAktif(durasi);
         
         this.setStatus("Sholat");
+        System.out.println("jangan lupa berdoa~ doakan kami sehat sampai lulus :> ");
         kesejahteraan.updateMood(30);
         System.out.println("\nMood Sim bertambah sebesar " + (30) + " karena sholat\n");
          //Untuk selalu nambahin durasi gak buang air
@@ -1028,9 +1034,11 @@ public class Sim implements Aksi{
         if(durasi <= 0){
             throw new IllegalArgumentException("durasi tidak sesuai");
         }
+        System.out.println("ByaarRr.. BbyuurRrr..");
         setdurasiAksiAktif(durasi);
         
         this.setStatus("Mandi");
+        System.out.println("Kamu terlihat glowing!");
         kesejahteraan.updateKesehatan(30);
         System.out.println("\nKesehatan Sim bertambah sebesar " + (30) + " karena mandi");
         kesejahteraan.updateMood(10);
@@ -1044,9 +1052,11 @@ public class Sim implements Aksi{
         if(durasi <= 0 && durasi % 40 != 0){
             throw new IllegalArgumentException("durasi tidak sesuai");
         }
+        System.out.println("All..... Aroooundd.... Yoou.....");
         setdurasiAksiAktif(durasi);
         
         this.setStatus("Menonton netflix");
+        System.out.println("Jangan lupa tunggu after credit! ><");
         kesejahteraan.updateMood(15*(durasi/40));
         System.out.println("\nMood Sim bertambah sebesar " + (15*(durasi/40)) + " karena menonton netflix");
         kesejahteraan.updateKekenyangan((-10)*(durasi/40));
