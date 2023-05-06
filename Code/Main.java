@@ -148,8 +148,8 @@ public class Main {
             }
         }
         
-        while(started && (!finished)){
-            while(!currentSim.getKesejahteraan().getIsMati()){
+        while(started && !finished){
+            while(!currentSim.getKesejahteraan().getIsMati() && !finished){
                 System.out.println("");
                 display.menu();
                 System.out.println("Untuk info lanjut, pilih help!");
@@ -165,7 +165,8 @@ public class Main {
                     System.out.println("10. List Object");
                     System.out.println("11. Go To Object");
                     System.out.println("12. Action");
-                    System.out.println("13. Exit");
+                    System.out.println("13. Change Job");
+                    System.out.println("14. Exit");
                     System.out.println("");
                 
                 //Tidak buang air
@@ -251,8 +252,10 @@ public class Main {
                     System.out.println("9.  List Object              : Menampilkan daftar Objek di dalam ruangan");
                     System.out.println("10. Go To Object             : Sim berjalan menuju objek");
                     System.out.println("11. Action                   : Melakukan aksi pada suatu objek");
+                    System.out.println("12. Change Job               : Mengganti pekerjaan yang dimiliki oleh Sim");
                     System.out.println("12. Exit                     : Keluar dari permainan");
                 } else if(o.equalsIgnoreCase("Exit")){
+                    System.out.println("Game akan berakhir.. Terimakasih telah bermain!! ^^");
                     finished = true;
                 } else if(o.equalsIgnoreCase("View Current Location")){
                     String format = "+-----------------------+-----------------------+\n";
@@ -603,16 +606,43 @@ public class Main {
                     } else {
                         System.out.println("Kamu sudah keluar dari menu action!");
                     }
+                } else if(o.equalsIgnoreCase("Change Job")){ 
+                    System.out.println("Saat ini pekerjaanmu adalah " + currentSim.getPekerjaan().getJob().getTitle());
+                    System.out.println("Berikut merupakan daftar pekerjaan yang ada :");
+                    String[] jobs = {"Badut Sulap", "Koki", "Polisi", "Programmer", "Dokter"};
+                    int j =1;
+                    for(int i = 0; i < jobs.length ;i++ ){
+                        if(!jobs[i].equals(currentSim.getPekerjaan().getJob().getTitle())){
+                            System.out.println(j + ". " + jobs[i]);
+                            j++;
+                        }
+                    }
+                    System.out.println("Tentukan pekerjaan apa yang ingin kamu lakukan (nama pekerjaan): ");
+                    String jobNew = scan.nextLine();
+                    boolean jobValid = false;
+                    for(String s : jobs){
+                        if(jobNew.equalsIgnoreCase(s)){
+                            jobValid = true;
+                        }
+                    }
+                    if(jobValid){
+                        
+                    } else {
+                        System.out.println("Pekerjaan yang kamu pilih tidak valid");
+                    }
                 } else {
                     System.out.println("Command tersebut tidak tersedia");
                 }
-                System.out.println("");
-                System.out.println("Ketik BACK untuk kembali ke Main Menu");
-                String inp1 = scan.nextLine();
+                if(!finished){
+                    System.out.println("");
+                    System.out.println("Ketik BACK untuk kembali ke Main Menu");
+                    String inp1 = scan.nextLine();
                     while (!inp1.equalsIgnoreCase("BACK")) {
                         System.out.println("Periksa kembali input stringnya!");
                         inp1 = scan.nextLine();
                     }
+                }
+                
             }
             if(currentSim.getKesejahteraan().getIsMati()){
                 System.out.println("Ooops... Sim bernama " + currentSim.getNamaLengkap() + " " + currentSim.getKesejahteraan().getStatusMati());

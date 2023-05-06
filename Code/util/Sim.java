@@ -462,6 +462,7 @@ public class Sim implements Aksi{
         if(durasi <= 0){
             throw new IllegalArgumentException("durasi harus lebih dari 0 detik");
         }
+        System.out.println("Selamatt tiduur! mimpi indaah~  zzZZz..zZzZ..");
         time.AksiSleep(durasi);
         this.setStatus("tidur");
         setdurasiAksiAktif(durasi);
