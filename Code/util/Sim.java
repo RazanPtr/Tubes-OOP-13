@@ -214,6 +214,7 @@ public class Sim implements Aksi{
                 String ops = scan.nextLine();
                 if (ops.equalsIgnoreCase("Y")) {
                     System.out.println("Berapa lama kamu ingin tidur? (Dalam Detik)");
+                    System.out.println("Masukkan waktu minimal lebih dari 0 detik");
                     int dur = scan.nextInt();
                     String temp = scan.nextLine();
                     try {
@@ -236,6 +237,7 @@ public class Sim implements Aksi{
                 String ops = scan.nextLine();
                 if (ops.equalsIgnoreCase("Y")) {
                     System.out.println("Berapa lama kamu ingin buang air? (Dalam Detik)");
+                    System.out.println("Masukkan durasi minimal lebih dari 0 detik, dan merupakan kelipatan 10 detik");
                     int dur = scan.nextInt();
                     String temp = scan.nextLine();
                     try {
@@ -307,6 +309,7 @@ public class Sim implements Aksi{
                 String ops = scan.nextLine();
                 if (ops.equalsIgnoreCase("Y")) {
                     System.out.println("Berapa lama kamu ingin makan? (Dalam Detik)");
+                    System.out.println("Masukkan durasi minimal lebih dari 0 detik, dan merupakan kelipatan 30 detik");
                     int dur = scan.nextInt();
                     String temp = scan.nextLine();
                     System.out.println("Berikut merupakan daftar makanan yang dapat kamu makan!");
@@ -356,6 +359,7 @@ public class Sim implements Aksi{
                 String ops = scan.nextLine();
                 if (ops.equalsIgnoreCase("Y")) {
                     System.out.println("Berapa lama kamu ingin Shalat? (Dalam Detik)");
+                    System.out.println("Masukkan durasi minimal lebih dari 0 detik");
                     int dur = scan.nextInt();
                     String temp = scan.nextLine();
                     try {
@@ -378,6 +382,7 @@ public class Sim implements Aksi{
                 String ops = scan.nextLine();
                 if (ops.equalsIgnoreCase("Y")) {
                     System.out.println("Berapa lama kamu ingin melukis? (Dalam Detik)");
+                    System.out.println("Masukkan durasi minimal lebih dari 0 detik, dan merupakan kelipatan 20 detik");
                     int dur = scan.nextInt();
                     String temp = scan.nextLine();
                     try {
@@ -400,6 +405,7 @@ public class Sim implements Aksi{
                 String ops = scan.nextLine();
                 if (ops.equalsIgnoreCase("Y")) {
                     System.out.println("Berapa lama kamu ingin karaoke? (Dalam Detik)");
+                    System.out.println("Masukkan durasi minimal lebih dari 0 detik, dan merupakan kelipatan 30 detik");
                     int dur = scan.nextInt();
                     String temp = scan.nextLine();
                     try {
@@ -422,6 +428,7 @@ public class Sim implements Aksi{
                 String ops = scan.nextLine();
                 if (ops.equalsIgnoreCase("Y")) {
                     System.out.println("Berapa lama kamu ingin nonton netflix? (Dalam Detik)");
+                    System.out.println("Masukkan durasi minimal lebih dari 0 detik, dan merupakan kelipatan 40 detik");
                     int dur = scan.nextInt();
                     String temp = scan.nextLine();
                     try {
@@ -444,6 +451,7 @@ public class Sim implements Aksi{
                 String ops = scan.nextLine();
                 if (ops.equalsIgnoreCase("Y")) {
                     System.out.println("Berapa lama kamu ingin mandi? (Dalam Detik)");
+                    System.out.println("Masukkan durasi minimal lebih dari 0 detik");
                     int dur = scan.nextInt();
                     String temp = scan.nextLine();
                     try {
