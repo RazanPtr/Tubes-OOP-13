@@ -6,7 +6,7 @@ import objek.*;
 
 public class Inventory<T> {
     private Map<T, Integer> items;
-    //private Map<Integer, ObjectSim> data;
+    
     public Inventory() {
         this.items = new HashMap<>();
     }
@@ -22,8 +22,7 @@ public class Inventory<T> {
         } else {
             items.put(item, quantity);
         }
-        //int currQuantity = items.getOrDefault(item, 0);
-        //items.put(item, currQuantity + quantity);
+        
     }
 
     public T isContain(T obj){
@@ -48,17 +47,6 @@ public class Inventory<T> {
         } else {
             items.replace(temp, items.get(temp) - quantity);
         }
-        //if (items.containsKey(item)) {
-        //    if (items.get(item) > 1) {
-        //        items.put(item, items.get(item) - 1);
-        //    } else {
-        //        items.remove(item);
-        //    }
-        //    return item;
-        //} else {
-        //    System.out.println("Item tidak ada di inventory");
-        //    return null;
-        //}
     }
 
     public int getQuantity(T item) {
@@ -94,15 +82,4 @@ public class Inventory<T> {
             System.out.println("inventorymu kosong saat ini");
         }
     }
-    // public static void main(String[] args){
-    //     Inventory<String> items = new Inventory<>();
-    //     KasurKing kasur = new KasurKing();
-    //     //items.addItem(kasur, 1);
-    //     items.addItem("kasur", 1);
-        
-        
-        
-    //     items.showInventory();
-
-    // }
 }

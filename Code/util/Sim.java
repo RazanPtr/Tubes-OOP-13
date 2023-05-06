@@ -50,7 +50,7 @@ public class Sim implements Aksi{
         rumah = new Rumah(x,y);
         curObject = null;
         lokSimRuang = rumah.getRoom("Kamar"); 
-        lokSimRumah = rumah.getLokRumah(); //ini lokasi awal rumahnya input dari pengguna kan?!
+        lokSimRumah = rumah.getLokRumah();
         durasiTidur = 0;
         sudahTidur = false;
         waktuSisaPengiriman = 0;
@@ -60,13 +60,7 @@ public class Sim implements Aksi{
         inventory.addItem(new KomporGas(), 1);
         inventory.addItem(new Jam(), 1);
         inventory.addItem(new MejaKursi(), 1);
-        // buat coba makan n masak
-        /*inventory.addItem(new Nasi(), 5);
-        inventory.addItem(new Ayam(), 5);
-        inventory.addItem(new Kentang(), 5);
-        inventory.addItem(new Wortel(), 5);
-        inventory.addItem(new Sapi(), 5);*/
-        //inventory.addItem(new NasiAyam(), 1);
+        
         //display
         display = new Ascii();
         lamaKerja=0;
@@ -567,14 +561,7 @@ public class Sim implements Aksi{
     //implementasi makan
         Masakan m =null;
         Scanner scan = new Scanner(System.in);
-        // Set<ObjectSim> listInventory = inventory.getItem();
-        // for (ObjectSim item : listInventory){
-        //     if(item instanceof Masakan){
-        //         if (item.getNama().equals(namaMasakan)){
-        //             m = (Masakan) item;
-        //         }
-        //     }
-        // }
+        
         for(ObjectSim ob : inventory.getItem()){
             if(ob instanceof Masakan){
                 if(ob.getNama().equals(namaMasakan)){
@@ -597,17 +584,6 @@ public class Sim implements Aksi{
             System.out.println("Masakan tidak ada di inventory");
         }
     }
-        // if(ob instanceof Masakan){   
-        //     Masakan m = (Masakan) ob; 
-        //     if(inventory.getItem().contains(m)){
-        //         setdurasiAksiAktif(durasi);
-        //         this.setStatus("Makan");
-        //         inventory.removeItem(m, 1);
-        //         kesejahteraan.updateKekenyangan((m.getTingkatKenyang())*(durasi/30));
-        //         sudahMakan = true;
-        //         durasiTidakBuangAir = 0;
-        //     }
-        // }
     
 
     public void memasak(ObjectSim ob){ 
@@ -698,7 +674,7 @@ public class Sim implements Aksi{
 
     public void tidakBuangAir(){
         //implementasi tidak buangAir
-        // nanti di main selalu ngecek durasiTidakBuangAir aja
+        
         System.out.println("Sim belum buang air setelah makan!");
         kesejahteraan.updateKesehatan(-5);
         kesejahteraan.updateMood(-5);
@@ -706,60 +682,6 @@ public class Sim implements Aksi{
         sudahMakan = false;
 
     }
-
-    /*public void upgradeRumah() {
-        int upgradeCost = 1500;
-        if (getUang() < upgradeCost) {
-            System.out.println("Saldo Simmu tidak mencukupi untuk melakukan upgrade rumah! silahkan bekerja terlebih dahulu.");
-            return;
-        }
-        Thread thread = new Thread(new Runnable() {
-            public void run(){
-                        try {
-                            Thread.sleep(300); 
-                            while (getStatus().equals("Idle")) {
-                                Thread.sleep(1);
-                            }  
-                            if(rumah.isAddRoomAvailable(lokSimRuang)){
-                                uang -= 1500;
-                                setWaktuUpgrade(18*1000);
-                                rumahSedangDiupgrade = true;
-                                System.out.println("\nKamu telah upgrade rumah dengan biaya " + upgradeCost + ".");
-                                int tempdurasiAksiAktif = getdurasiAksiAktif();
-                                while(waktuSisaUpgrade > 0 && rumahSedangDiupgrade) {
-                                    Thread.sleep(200); 
-                                    tempdurasiAksiAktif = getdurasiAksiAktif();
-                                    if(waktuSisaUpgrade < tempdurasiAksiAktif){
-                                        System.out.println("\n///Proses upgrade///");
-                                        Thread.sleep(waktuSisaUpgrade);
-                                        // Tambahkan ruangan ke dalam rumah
-                                        rumah.addRuangan(lokSimRuang);
-                                        System.out.println("\nRumah kamu selesai diupgrade!");
-                                        rumahSedangDiupgrade = false;
-                                    }
-                                    else{
-                                        System.out.println("\n///Proses upgrade///");
-                                        System.out.println("Mohon menunggu selama " + String.format("%.2f",(float) waktuSisaUpgrade / 60000)  + " menit...");
-                                        System.out.println("///Proses upgrade///");
-                                        Thread.sleep(tempdurasiAksiAktif + 100);
-                                        waktuSisaUpgrade -= tempdurasiAksiAktif;
-                                    }
-                                    while (getStatus().equals("Idle")) {
-                                        Thread.sleep(1);
-                                    }
-                                }
-                            } else {
-                                System.out.println("Upgrade rumah tidak dapat dilakukan karena sudah tersedia ruangan disekeliling ruangan saat ini.");
-                                System.out.println("Silahkan pindah ke ruangan lain terlebih dahulu untuk melakukan upgrade rumah");
-                            }
-                            }
-                            catch (InterruptedException e) {
-                                System.out.println(e.getMessage());
-                        }
-            }
-        });
-        thread.start();
-    }*/
 
     public void upgradeRumah() {
         int upgradeCost = 1500;
@@ -1004,15 +926,6 @@ public class Sim implements Aksi{
         }
     }
 
-    public void pindahBarang(Map<String, PurchasableObject> objectMap, String lokRuang, Lokasi lokAkhir, String itemName){
-    //implementasi pindahBarang
-    
-        simpanBarang(lokRuang, objectMap, itemName);
-        //pasangBarang(objectMap, lokRuang, itemName, lokAkhir);
-        //boolean can = rumah.getRoom(lokRuang).canPlaceObj(lokAkhir, dariRooms);
-    
-    }
-
     public void sholat(int durasi){
     //implementasi sholat
         if(durasi <= 0){
@@ -1136,15 +1049,6 @@ public class Sim implements Aksi{
             System.out.println("Lama bekerja belum 1 hari atau uang tidak mencukupi!");
         }
     }
-
-    /*public void displayInfo(){
-        System.out.println("Nama Lengkap          : " + namaLengkap);
-        System.out.println("Pekerjaan             : "+ getPekerjaan().getJob().getTitle());
-        System.out.println("Tingkat Kesehatan     : " + kesejahteraan.getKesehatan());
-        System.out.println("Tingkat Kekenyangan   : " + kesejahteraan.getKekenyangan());
-        System.out.println("Tingkat Mood          : " + kesejahteraan.getMood());
-        System.out.println("Jumlah uang saat ini  :" + uang);
-    }*/
 
     public void displayInfo() {
         String format = "+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+\n";

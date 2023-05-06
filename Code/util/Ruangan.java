@@ -159,31 +159,6 @@ public class Ruangan {
         return true; // Aman untuk diletakkan
     }
 
-    /*public void displayRuangan(){
-        for(int i = 0; i < 6; i++){
-            if(i == 0){
-                System.out.println("----------------------------------");
-            }
-            for(int j = 0; j < 6; j++){
-                if(j == 0){
-                    System.out.print("|");
-                }
-                //kalo true, berati ada objek
-                if(grid[j][i]){
-                    for(Furniture furni : objects){
-                        if((furni.getLokDiRuangan().getX() == i && furni.getLokDiRuangan().getY() == j) && (furni.getLength() > i && furni.getWidth() > j)){
-                            System.out.print(" " + furni.getCode() + " |");
-                            break;
-                        }
-                    }
-                } else {
-                    System.out.print("     |");
-                }
-            }
-            System.out.print("\n----------------------------------\n");
-        }
-    }*/
-
     public void displayRuangan() {
         System.out.println("(0,0) terletak pada pojok kiri atas");
         System.out.println(".+:*+.+:*+. Ruang " + nama + " .+*:+.+*:+." );
