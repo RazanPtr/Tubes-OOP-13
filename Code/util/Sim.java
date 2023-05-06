@@ -23,6 +23,7 @@ public class Sim implements Aksi{
     public boolean sudahTidur = false;
     public boolean sudahMakan = false;
     public boolean sudahBuangAir = false;
+    public boolean sudahAddSim = false;
     private int durasiAksiAktif;
     private int waktuSisaPengiriman;
     private int waktuSisaUpgrade;
@@ -485,6 +486,8 @@ public class Sim implements Aksi{
         sudahTidur = false;
         sudahBuangAir = false;
         sudahMakan = false;
+        sudahAddSim = false;
+        durasiTidakBuangAir = 0;
     }
 
     public void tidakTidur(int kelipatan){
@@ -613,6 +616,7 @@ public class Sim implements Aksi{
             kesejahteraan.updateKekenyangan((-20)*(durasi/10));
             kesejahteraan.updateMood((10)*(durasi/10));
             sudahBuangAir = true;
+            durasiTidakBuangAir = 0;
         } else {
             System.out.println("Sim belum makan pada hari ini");
         }
@@ -995,6 +999,7 @@ public class Sim implements Aksi{
                         }
                         
                     }
+                    //cek apakah mau vertical atau horizontal
                     if (posisi.equals("v")){
                         f1.rotate();
                     }
